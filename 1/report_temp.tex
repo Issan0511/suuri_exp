@@ -1,0 +1,154 @@
+\documentclass[a4paper,11pt]{ltjsarticle}
+\usepackage{geometry}
+\geometry{top=25mm,bottom=25mm,left=25mm,right=25mm}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{hyperref}
+\usepackage{float}
+
+\title{数理工学実験レポート\\\vspace{5pt}\large 第X章（章タイトル）}
+\author{京都大学 工学部情報学科 数理工学コース\\学籍番号 1029366161\quad 中塚 一瑳}
+\date{\today}
+
+\begin{document}
+
+% 表紙（1ページ）
+\begin{titlepage}
+\centering
+{\Large 数理工学実験レポート\par}
+\vspace{4mm}
+{\large 第X章（章タイトル）\par}
+\vspace{15mm}
+{\large 京都大学 工学部情報学科 数理工学コース\par}
+{\large 学年：2回生\par}
+{\large 学籍番号：1029366161\quad 中塚 一瑳\par}
+\vspace{10mm}
+\begin{tabular}{@{}ll}
+科目名： & 数理工学実験 \\
+実験テーマ： & （記入） \\
+実験の実施年月日： & （記入） \\
+実験の実施場所： & （記入） \\
+レポート提出年月日： & \today \\
+\end{tabular}
+\vfill
+\end{titlepage}
+
+\section*{要旨（Abstract）}
+本実験の目的，扱う手法，主要な結果と結論を簡潔に述べる。
+
+\section{はじめに}
+本実験の目的と全体像を述べる。第2章では連立一次方程式と固有値問題に対する数値解法を扱う。
+
+% ===== 課題ごとの構成 =====
+\section{課題1：消去法}
+\subsection{原理・方法}
+ガウス消去法（主成分選択の有無を明記）。記号は初出で定義する。
+\subsection{結果}
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.62\linewidth]{fig_t1.pdf}
+  \caption{課題1の結果。横軸：（単位），縦軸：（単位）。}
+  \label{fig:t1}
+\end{figure}
+\subsection{考察}
+精度・計算量・安定性で評価。図\ref{fig:t1}参照。
+
+\section{課題2：LU分解}
+\subsection{原理・方法}
+$A=LU$ 分解。前進・後退代入。ピボット戦略の有無を明記。
+\subsection{結果}
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.62\linewidth]{fig_t2.pdf}
+  \caption{課題2の結果。横軸：（単位），縦軸：（単位）。}
+  \label{fig:t2}
+\end{figure}
+\subsection{考察}
+課題1と比較（速度・誤差）。条件数の影響。
+
+\section{課題3：LU分解による解法}
+\subsection{原理・方法}
+同じ右辺に対する複数回解法の効率。分解再利用。
+\subsection{結果}
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.62\linewidth]{fig_t3.pdf}
+  \caption{課題3の結果。横軸：（単位），縦軸：（単位）。}
+  \label{fig:t3}
+\end{figure}
+\subsection{考察}
+ガウス法との差。安定性と時間削減。
+
+\section{課題4：べき乗法}
+\subsection{原理・方法}
+最大固有値・固有ベクトルの反復。正規化と収束判定。
+\subsection{結果}
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.62\linewidth]{fig_t4.pdf}
+  \caption{課題4の結果。横軸：反復回数（回），縦軸：誤差（–）。}
+  \label{fig:t4}
+\end{figure}
+\subsection{考察}
+初期ベクトル依存性と収束率。真値との差。
+
+\section{課題5：逆反復法}
+\subsection{原理・方法}
+シフト$\mu$付き線形解法で固有ベクトルを精密化。正規化と収束条件。
+\subsection{結果}
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.62\linewidth]{fig_t5.pdf}
+  \caption{課題5の結果。横軸：反復回数（回），縦軸：誤差（–）。}
+  \label{fig:t5}
+\end{figure}
+\subsection{考察}
+シフト選択と収束性。べき乗法との比較。
+
+\section{課題6：QR分解}
+\subsection{原理・方法}
+ハウスホルダー／グラム–シュミットで $A=QR$。直交性検証手順。
+\subsection{結果}
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.62\linewidth]{fig_t6.pdf}
+  \caption{課題6の結果。横軸：サイズ（次元），縦軸：直交誤差 $\lVert Q^\mathsf{T}Q-I\rVert$（–）。}
+  \label{fig:t6}
+\end{figure}
+\subsection{考察}
+古典／改良GSとハウスホルダーの安定性差。
+
+\section{課題7：QR法}
+\subsection{原理・方法}
+$A_{k+1}=R_kQ_k$ の反復。シフト・ヘッセンベルク化の有無を明記。
+\subsection{結果}
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.62\linewidth]{fig_t7.pdf}
+  \caption{課題7の結果。横軸：反復回数（回），縦軸：$\max_{i\ne j}|(A_k)_{ij}|$（–）。}
+  \label{fig:t7}
+\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=0.62\linewidth]{fig_t7.pdf}
+%   \caption{課題7の結果。横軸：反復回数（回），縦軸：$\max_{i\ne j}|(A_k)_{ij}|$（–）。}
+%   \label{fig:t7}
+% \end{figure}
+\subsection{考察}
+シフト導入の効果。収束速度と計算コストのトレードオフ。
+
+\section{結論}
+主要な知見を要約。今後の改良点を簡潔に述べる。
+
+\section*{参考文献（References）}
+\begin{thebibliography}{99}
+\bibitem{exp2025} 数理工学実験（2025年度配布資料）.
+\end{thebibliography}
+
+\section*{付録（Appendix）}
+\begin{itemize}
+  \item 使用したソースコード（Julia/Python）
+  \item 追加ログ・出力データ
+\end{itemize}
+
+\end{document}

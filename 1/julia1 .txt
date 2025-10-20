@@ -9,7 +9,11 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
+      "\u001b[32m\u001b[1m    Updating\u001b[22m\u001b[39m registry at `C:\\Users\\issan\\.julia\\registries\\General.toml`\n",
       "\u001b[32m\u001b[1m   Resolving\u001b[22m\u001b[39m package versions...\n",
+      "\u001b[32m\u001b[1m   Resolving\u001b[22m\u001b[39m package versions...\n",
+      "\u001b[36m\u001b[1m     Project\u001b[22m\u001b[39m No packages added to or removed from `C:\\Users\\issan\\.julia\\environments\\v1.12\\Project.toml`\n",
+      "\u001b[36m\u001b[1m    Manifest\u001b[22m\u001b[39m No packages added to or removed from `C:\\Users\\issan\\.julia\\environments\\v1.12\\Manifest.toml`\n",
       "\u001b[36m\u001b[1m     Project\u001b[22m\u001b[39m No packages added to or removed from `C:\\Users\\issan\\.julia\\environments\\v1.12\\Project.toml`\n",
       "\u001b[36m\u001b[1m    Manifest\u001b[22m\u001b[39m No packages added to or removed from `C:\\Users\\issan\\.julia\\environments\\v1.12\\Manifest.toml`\n"
      ]
@@ -43,11 +47,14 @@
      "output_type": "display_data"
     },
     {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Hello, Julia!\n"
-     ]
+     "data": {
+      "text/plain": [
+       "\"graphs\""
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
     }
    ],
    "source": [
@@ -58,21 +65,22 @@
     "import Plots, PlotlyJS, Random\n",
     "Plots.plotlyjs()                          # バックエンド固定\n",
     "Base.Filesystem.mkpath(\"graphs\")\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
     "using LinearAlgebra, Statistics, Random\n",
-    "using Statistics, Printf\n",
-    "println(\"Hello, Julia!\")\n"
+    "using Statistics, Printf\n"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 2,
    "metadata": {
     "id": "7flWn22p53-A"
    },
@@ -85,10 +93,15 @@
       "=== Experiment 1: Gaussian Elimination ===\n",
       "     N | median_residual |        median_relerr | median_time(s)\n",
       "-----------------------------------------------------------------\n",
-      "   100 |    5.225459e-14 |         1.200046e-14 |     0.001442\n",
-      "   200 |    2.861823e-13 |         3.026425e-14 |     0.016579\n",
-      "   400 |    8.840553e-13 |         9.637127e-14 |     0.145998\n",
-      "   800 |    4.393739e-12 |         2.261064e-13 |     1.133426\n"
+      "   100 |    5.623688e-14 |         1.585626e-14 |     0.002255\n",
+      "   200 |    2.305625e-13 |         3.506670e-14 |     0.016082\n",
+      "   400 |    1.055894e-12 |         1.123654e-13 |     0.178846\n",
+      "   800 |    3.826177e-12 |         2.134062e-13 |     1.201175\n",
+      "-----------------------------------------------------------------\n",
+      "   100 |    5.623688e-14 |         1.585626e-14 |     0.002255\n",
+      "   200 |    2.305625e-13 |         3.506670e-14 |     0.016082\n",
+      "   400 |    1.055894e-12 |         1.123654e-13 |     0.178846\n",
+      "   800 |    3.826177e-12 |         2.134062e-13 |     1.201175\n"
      ]
     }
    ],
@@ -193,7 +206,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": null,
    "metadata": {
     "id": "SOVyO1B5S8L1"
    },
@@ -204,12 +217,12 @@
      "text": [
       "\n",
       "=== Experiment 2: LU Decomposition ===\n",
-      "     N | median_residual |        median_relerr | median_time(s)\n",
+      "     N |   mean_residual |          mean_relerr | mean_time(s)\n",
       "-----------------------------------------------------------------\n",
-      "   100 |    5.205127e-14 |         1.529887e-14 |     0.001794\n",
-      "   200 |    2.756364e-13 |         3.393142e-14 |     0.015501\n",
-      "   400 |    1.089504e-12 |         9.882761e-14 |     0.144592\n",
-      "   800 |    4.634570e-12 |         2.030939e-13 |     1.079949\n"
+      "   100 |    5.164309e-13 |         9.662916e-14 |     0.003669\n",
+      "   200 |    8.582994e-13 |         1.940446e-13 |     0.016455\n",
+      "   400 |    4.783407e-12 |         3.254845e-13 |     0.201206\n",
+      "   800 |    1.209820e-11 |         5.947384e-13 |     1.542728\n"
      ]
     }
    ],
@@ -273,7 +286,14 @@
     "    return L, U, p  # so that P*b == b[p]\n",
     "end\n",
     "\n",
-    "\n",
+    "# Solve A x = b using our LU with pivoting\n",
+    "function lu_solve(A, b)\n",
+    "    L, U, p = lu_pp(A)\n",
+    "    bp = b[p]               # apply permutation P to b\n",
+    "    y  = forward_sub(L, bp) # solve L y = P b\n",
+    "    x  = backward_sub(U, y) # solve U x = y\n",
+    "    return x\n",
+    "end\n",
     "\n",
     "# ===== Experiment 2 (manual LU) =====\n",
     "function exp2(N; num_trials=100)\n",
@@ -286,10 +306,7 @@
     "        xref = A \\ b  # reference by Julia solver\n",
     "\n",
     "        times[t] = @elapsed begin\n",
-    "            L, U, p = lu_pp(A)\n",
-    "            bp = b[p]\n",
-    "            y  = forward_sub(L, bp)\n",
-    "            xhat = backward_sub(U, y)\n",
+    "            xhat = lu_solve(A, b)\n",
     "            residuals[t] = norm(A*xhat - b)\n",
     "            relerrs[t]   = norm(xhat - xref) / norm(xref)\n",
     "        end\n",
@@ -351,7 +368,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": null,
    "metadata": {
     "id": "T0aTyPmHxMpn"
    },
@@ -362,12 +379,12 @@
      "text": [
       "\n",
       "=== Experiment 3: Power Iteration ===\n",
-      "     N | median_residual | median_relerr_lambda |      median_relerr_v | median_time(s) | median_iters\n",
+      "     N |   mean_residual |   mean_relerr_lambda |        mean_relerr_v | mean_time(s) | mean_iters\n",
       "-----------------------------------------------------------------------------------------------\n",
-      "    50 |    6.940758e-12 |         2.841677e-16 |         2.835499e-13 |     0.000009 |      13.00\n",
-      "   100 |    2.854269e-11 |         4.244357e-16 |         5.678769e-13 |     0.000022 |      11.00\n",
-      "   200 |    5.177798e-11 |         8.533491e-16 |         5.160495e-13 |     0.000070 |      10.00\n",
-      "   400 |    1.315162e-10 |         1.561217e-15 |         6.581612e-13 |     0.000354 |       9.00\n"
+      "    50 |    4.539834e-05 |         1.260439e+00 |         8.626725e-01 |     0.001079 |     496.35\n",
+      "   100 |    2.154136e-02 |         9.564959e-01 |         6.653471e-01 |     0.004730 |    1216.28\n",
+      "   200 |    8.754630e-02 |         1.011761e+00 |         7.065992e-01 |     0.023573 |    1830.74\n",
+      "   400 |    8.676567e-02 |         1.227463e+00 |         8.615130e-01 |     0.098008 |    1974.48\n"
      ]
     }
    ],
@@ -408,7 +425,7 @@
     "    itrs           = zeros(Int, num_trials)\n",
     "\n",
     "    for t in 1:num_trials\n",
-    "        A = rand(N,N)\n",
+    "        A = randn(N,N)\n",
     "        A = ( A + A' ) / 2\n",
     "        λref, vref = eigen(A).values[end], eigen(A).vectors[:, end]\n",
     "        times[t] = @elapsed begin\n",
@@ -496,74 +513,23 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
-   "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "invEigen (generic function with 3 methods)"
-      ]
-     },
-     "execution_count": 5,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "function invEigen(A, mu, max_iter=1000, tol=1e-12)\n",
-    "    n = size(A, 1)\n",
-    "    ε = 1e-6  # Increase shift to avoid near-singular matrices\n",
-    "    \n",
-    "    # Create shifted matrix and check for NaN/Inf\n",
-    "    A_shifted = A - (mu + ε) * I\n",
-    "    if any(isnan, A_shifted) || any(isinf, A_shifted)\n",
-    "        # If matrix is bad, return approximate eigenvector\n",
-    "        b_k = rand(n)\n",
-    "        b_k /= norm(b_k)\n",
-    "        λ = dot(b_k, A * b_k) / dot(b_k, b_k)\n",
-    "        return λ, b_k\n",
-    "    end\n",
-    "    \n",
-    "    # Try LU factorization with error handling\n",
-    "    try\n",
-    "        F = lu(A_shifted)\n",
-    "        b_k = rand(n)\n",
-    "        b_k /= norm(b_k)\n",
-    "        for _ in 1:max_iter\n",
-    "            y = F \\ b_k\n",
-    "            # Check for NaN/Inf in result\n",
-    "            if any(isnan, y) || any(isinf, y)\n",
-    "                break\n",
-    "            end\n",
-    "            y /= norm(y)\n",
-    "            if norm(y - b_k) < tol\n",
-    "                b_k = y\n",
-    "                break\n",
-    "            end\n",
-    "            b_k = y\n",
-    "        end\n",
-    "        λ = dot(b_k, A * b_k) / dot(b_k, b_k)\n",
-    "        return λ, b_k\n",
-    "    catch e\n",
-    "        # If LU fails, use a random vector as approximation\n",
-    "        b_k = rand(n)\n",
-    "        b_k /= norm(b_k)\n",
-    "        λ = dot(b_k, A * b_k) / dot(b_k, b_k)\n",
-    "        return λ, b_k\n",
-    "    end\n",
-    "end\n"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": null,
    "metadata": {},
    "outputs": [
     {
      "name": "stderr",
      "output_type": "stream",
      "text": [
+      "\u001b[33m\u001b[1m┌ \u001b[22m\u001b[39m\u001b[33m\u001b[1mWarning: \u001b[22m\u001b[39mNo strict ticks found\n",
+      "\u001b[33m\u001b[1m└ \u001b[22m\u001b[39m\u001b[90m@ PlotUtils C:\\Users\\issan\\.julia\\packages\\PlotUtils\\dVEMd\\src\\ticks.jl:194\u001b[39m\n",
+      "\u001b[33m\u001b[1m┌ \u001b[22m\u001b[39m\u001b[33m\u001b[1mWarning: \u001b[22m\u001b[39mNo strict ticks found\n",
+      "\u001b[33m\u001b[1m└ \u001b[22m\u001b[39m\u001b[90m@ PlotUtils C:\\Users\\issan\\.julia\\packages\\PlotUtils\\dVEMd\\src\\ticks.jl:194\u001b[39m\n",
+      "\u001b[33m\u001b[1m┌ \u001b[22m\u001b[39m\u001b[33m\u001b[1mWarning: \u001b[22m\u001b[39mNo strict ticks found\n",
+      "\u001b[33m\u001b[1m└ \u001b[22m\u001b[39m\u001b[90m@ PlotUtils C:\\Users\\issan\\.julia\\packages\\PlotUtils\\dVEMd\\src\\ticks.jl:194\u001b[39m\n",
+      "\u001b[33m\u001b[1m┌ \u001b[22m\u001b[39m\u001b[33m\u001b[1mWarning: \u001b[22m\u001b[39mNo strict ticks found\n",
+      "\u001b[33m\u001b[1m└ \u001b[22m\u001b[39m\u001b[90m@ PlotUtils C:\\Users\\issan\\.julia\\packages\\PlotUtils\\dVEMd\\src\\ticks.jl:194\u001b[39m\n",
+      "\u001b[33m\u001b[1m┌ \u001b[22m\u001b[39m\u001b[33m\u001b[1mWarning: \u001b[22m\u001b[39mNo strict ticks found\n",
+      "\u001b[33m\u001b[1m└ \u001b[22m\u001b[39m\u001b[90m@ PlotUtils C:\\Users\\issan\\.julia\\packages\\PlotUtils\\dVEMd\\src\\ticks.jl:194\u001b[39m\n",
       "\u001b[33m\u001b[1m┌ \u001b[22m\u001b[39m\u001b[33m\u001b[1mWarning: \u001b[22m\u001b[39mNo strict ticks found\n",
       "\u001b[33m\u001b[1m└ \u001b[22m\u001b[39m\u001b[90m@ PlotUtils C:\\Users\\issan\\.julia\\packages\\PlotUtils\\dVEMd\\src\\ticks.jl:194\u001b[39m\n",
       "\u001b[33m\u001b[1m┌ \u001b[22m\u001b[39m\u001b[33m\u001b[1mWarning: \u001b[22m\u001b[39mNo strict ticks found\n",
@@ -584,12 +550,12 @@
      "text": [
       "\n",
       "=== Experiment 4: Power then Inverse Iteration ===\n",
-      "     N | median_residual | median_relerr_lambda |      median_relerr_v | median_time(s) | median_iters\n",
+      "     N |   mean_residual |   mean_relerr_lambda |        mean_relerr_v | mean_time(s) | mean_iters\n",
       "-----------------------------------------------------------------------------------------------\n",
-      "    50 |    1.433157e-06 |         5.681779e-08 |         4.562817e-16 |     0.000039 |       7.00\n",
-      "   100 |    3.950637e-07 |         7.860780e-09 |         4.632952e-16 |     0.000163 |       7.00\n",
-      "   200 |    4.412238e-05 |         4.396122e-07 |         5.315392e-16 |     0.001555 |       6.00\n",
-      "   400 |    2.361601e-05 |         1.178978e-07 |         6.383028e-16 |     0.010504 |       6.00\n"
+      "    50 |    1.629618e-06 |         6.510854e-08 |         4.793259e-16 |     0.000057 |       7.00\n",
+      "   100 |    1.375552e-06 |         2.742017e-08 |         4.681961e-16 |     0.000223 |       6.98\n",
+      "   200 |    4.627855e-05 |         4.625105e-07 |         5.756233e-16 |     0.002310 |       6.00\n",
+      "   400 |    2.357273e-05 |         1.177965e-07 |         6.564195e-16 |     0.011748 |       6.00\n"
      ]
     }
    ],
@@ -649,7 +615,7 @@
     "    itrs           = zeros(Int, num_trials)\n",
     "\n",
     "    for t in 1:num_trials\n",
-    "        A = rand(N,N)\n",
+    "        A = randn(N,N)\n",
     "        A = (A + A') / 2\n",
     "        λref, vref = eigen(A).values[end], eigen(A).vectors[:, end]\n",
     "        times[t] = @elapsed begin\n",
@@ -739,7 +705,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": null,
    "metadata": {},
    "outputs": [
     {
@@ -748,7 +714,7 @@
        "qr_manual (generic function with 1 method)"
       ]
      },
-     "execution_count": 7,
+     "execution_count": 16,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -771,7 +737,49 @@
     "\n",
     "end\n",
     "\n",
-    "\n"
+    "\n",
+    "function invEigen(A, mu, max_iter=1000, tol=1e-12)\n",
+    "    n = size(A, 1)\n",
+    "    ε = 1e-6  # Increase shift to avoid near-singular matrices\n",
+    "    \n",
+    "    # Create shifted matrix and check for NaN/Inf\n",
+    "    A_shifted = A - (mu + ε) * I\n",
+    "    if any(isnan, A_shifted) || any(isinf, A_shifted)\n",
+    "        # If matrix is bad, return approximate eigenvector\n",
+    "        b_k = rand(n)\n",
+    "        b_k /= norm(b_k)\n",
+    "        λ = dot(b_k, A * b_k) / dot(b_k, b_k)\n",
+    "        return λ, b_k\n",
+    "    end\n",
+    "    \n",
+    "    # Try LU factorization with error handling\n",
+    "    try\n",
+    "        F = lu(A_shifted)\n",
+    "        b_k = rand(n)\n",
+    "        b_k /= norm(b_k)\n",
+    "        for _ in 1:max_iter\n",
+    "            y = F \\ b_k\n",
+    "            # Check for NaN/Inf in result\n",
+    "            if any(isnan, y) || any(isinf, y)\n",
+    "                break\n",
+    "            end\n",
+    "            y /= norm(y)\n",
+    "            if norm(y - b_k) < tol\n",
+    "                b_k = y\n",
+    "                break\n",
+    "            end\n",
+    "            b_k = y\n",
+    "        end\n",
+    "        λ = dot(b_k, A * b_k) / dot(b_k, b_k)\n",
+    "        return λ, b_k\n",
+    "    catch e\n",
+    "        # If LU fails, use a random vector as approximation\n",
+    "        b_k = rand(n)\n",
+    "        b_k /= norm(b_k)\n",
+    "        λ = dot(b_k, A * b_k) / dot(b_k, b_k)\n",
+    "        return λ, b_k\n",
+    "    end\n",
+    "end\n"
    ]
   },
   {
@@ -800,9 +808,7 @@
     "    for k in 1:n\n",
     "        mu = eigenvalues[k]\n",
     "        _, v_k= invEigen(A, mu, max_iter, tol)\n",
-    "        eigenvectors[:, k] = v_k\n",
     "    end\n",
-    "\n",
     "    return eigenvalues, eigenvectors, itr\n",
     "end\n",
     "\n",
@@ -896,7 +902,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": null,
    "metadata": {},
    "outputs": [
     {
@@ -904,12 +910,12 @@
      "output_type": "stream",
      "text": [
       "\n",
-      "     N |  median_resnorm | median_relerr_eigenvalue | median_time(s) | median_iters\n",
+      "     N |    mean_resnorm | mean_relerr_eigenvalue | mean_time(s) | mean_iters\n",
       "--------------------------------------------------------------------------------\n",
-      "    10 |    2.082963e-15 |         9.942911e-15 |     0.002968 |      22.00\n",
-      "    20 |    2.858343e-15 |         2.498125e-14 |     0.016567 |      44.50\n",
-      "    40 |    1.167546e-14 |         1.677499e-14 |     0.064912 |      85.50\n",
-      "    80 |    4.099115e-14 |         5.632376e-14 |     0.391922 |     179.00\n"
+      "    10 |    2.501506e-15 |         3.043254e-14 |     0.006180 |      22.24\n",
+      "    20 |    5.430818e-15 |         7.038863e-14 |     0.022716 |      45.97\n",
+      "    40 |    1.527971e-14 |         6.184411e-14 |     0.086108 |      90.04\n",
+      "    80 |    4.051939e-14 |         1.488087e-13 |     0.454530 |     174.25\n"
      ]
     }
    ],
@@ -964,6 +970,59 @@
     "    end\n",
     "    \n",
     "    return eigenvalues, eigenvectors, itr\n",
+    "end\n",
+    "\n",
+    "function qr_manual(A)\n",
+    "    n = size(A, 1)\n",
+    "    Q = copy(A)\n",
+    "    R = Matrix{eltype(A)}(I, n, n)\n",
+    "    # Gram–Schmidt\n",
+    "    for k = 1:n\n",
+    "        for j = 1:k-1\n",
+    "            R[j, k] = dot(Q[:, j], Q[:, k])\n",
+    "            Q[:, k] .-= R[j, k] * Q[:, j]\n",
+    "        end\n",
+    "        R[k, k] = norm(Q[:, k])\n",
+    "        Q[:, k] /= R[k, k]\n",
+    "    end\n",
+    "    return Q, R\n",
+    "end\n",
+    "\n",
+    "function invEigen(A, mu, max_iter=1000, tol=1e-12)\n",
+    "    n = size(A, 1)\n",
+    "    ε = 1e-6  # Increase shift to avoid near-singular matrices\n",
+    "    \n",
+    "    # Create shifted matrix and check for NaN/Inf\n",
+    "    A_shifted = A - (mu + ε) * I\n",
+    "    if any(isnan, A_shifted) || any(isinf, A_shifted)\n",
+    "        # If matrix is bad, return approximate eigenvector\n",
+    "        b_k = rand(n)\n",
+    "        b_k /= norm(b_k)\n",
+    "        λ = dot(b_k, A * b_k) / dot(b_k, b_k)\n",
+    "        return λ, b_k\n",
+    "    end\n",
+    "    \n",
+    "    # Try LU factorization with error handling\n",
+    "    \n",
+    "    F = lu(A_shifted)\n",
+    "    b_k = rand(n)\n",
+    "    b_k /= norm(b_k)\n",
+    "    for _ in 1:max_iter\n",
+    "        y = F \\ b_k\n",
+    "        # Check for NaN/Inf in result\n",
+    "        if any(isnan, y) || any(isinf, y)\n",
+    "            break\n",
+    "        end\n",
+    "        y /= norm(y)\n",
+    "        if norm(y - b_k) < tol\n",
+    "            b_k = y\n",
+    "            break\n",
+    "        end\n",
+    "        b_k = y\n",
+    "    end\n",
+    "    λ = dot(b_k, A * b_k) / dot(b_k, b_k)\n",
+    "    return λ, b_k\n",
+    "\n",
     "end\n",
     "\n",
     "\n",
@@ -1057,7 +1116,7 @@
     "results = []\n",
     "\n",
     "for N in Ns\n",
-    "    m_res, m_rel, m_time, m_itrs = plot_exp6(N, 10)\n",
+    "    m_res, m_rel, m_time, m_itrs = plot_exp6(N, 100)\n",
     "    push!(results, (N, m_res, m_rel, m_time, m_itrs))\n",
     "end\n",
     "\n",

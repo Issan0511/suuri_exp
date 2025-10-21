@@ -6,8 +6,13 @@
 \usepackage{hyperref}
 \usepackage{float}
 
+\hypersetup{
+  pdftitle={数理工学実験レポート 第1章（数値線形代数）},
+  pdfauthor={中塚 一瑳}
+}
+
 \title{数理工学実験レポート\\\vspace{5pt}\large 第1章（数値線形代数）}
-\author{京都大学 工学部情報学科 数理工学コース\\学籍番号 1029366161\quad 中塚 一瑳}
+\author{学籍番号 1029366161\quad 中塚 一瑳}
 \date{\today}
 
 \begin{document}
@@ -26,7 +31,7 @@
 \begin{tabular}{@{}ll}
 科目名： & 数理工学実験 \\
 実験テーマ： & 数値線形代数 \\
-実験の実施年月日： & ~2025年10月21日 \\
+実験の実施年月日： & \today \\
 レポート提出年月日： & \today \\
 \end{tabular}
 \vfill
@@ -51,13 +56,13 @@
 \[
 A\boldsymbol{x} = \boldsymbol{b}
 \]
-を上三角化によって逐次的に解く手法である．行基本変形により係数行列 $A$ を上三角行列 $U$ に変換し，対応して右辺 $\boldsymbol{b}$ にも同じ操作を施す．これにより
+を上三角化によって逐次的に解く手法である\cite{exp2025}．行基本変形により係数行列 $A$ を上三角行列 $U$ に変換し，対応して右辺 $\boldsymbol{b}$ にも同じ操作を施す．これにより
 \[
 U\boldsymbol{x} = \boldsymbol{c}
 \]
 の形が得られ，最後に後退代入（back substitution）を行うことで未知ベクトル $\boldsymbol{x}$ を求める．
 
-各ステップでは，ピボット要素 $A_{kk}$ を基準に第 $k$ 列の下部要素を消去する．ただし $A_{kk}$ が小さいと丸め誤差の影響で数値不安定となるため，絶対値が最大の要素を選んで行を入れ替える「主成分選択（partial pivoting）」を導入する．これにより除算時の誤差伝播が抑制され，計算の安定性が向上する．
+各ステップでは，ピボット要素 $A_{k,k}$ を基準に第 $k$ 列の下部要素を消去する．ただし $A_{k,k}$ が小さいと丸め誤差の影響で数値不安定となるため，絶対値が最大の要素を選んで行を入れ替える「主成分選択（partial pivoting）」を導入する．これにより除算時の誤差伝播が抑制され，計算の安定性が向上する．
 
 Julia による実装例を以下に示す．
 
@@ -84,7 +89,7 @@ function gaussian_elimination(A)
 end
 \end{verbatim}
 
-得られた上三角行列 $U$ に対しては後退代入法を適用，上の行に依存する各変数を逆順に計算していくことで $x_i$ を逆順に求める．後退代入の実装を以下に示す．
+得られた上三角行列 $U$ に対しては後退代入法を適用，上の行に依存する各変数を逆順に計算していくことで $x_{i}$ を逆順に求める．後退代入の実装を以下に示す．
 
 \begin{verbatim}
 function back_substitution(A) # [U b]
@@ -261,13 +266,13 @@ P A = L U
 
 順方向代入では，既に求めた未知数を使って次の項を計算していく．つまり $L$ が下三角行列であることを利用し，式
 \[
-y_i = \frac{1}{L_{ii}}\left(b_i - \sum_{j=1}^{i-1} L_{ij}y_j\right)
+y_{i} = \frac{1}{L_{i,i}}\left(b_{i} - \sum_{j=1}^{i-1} L_{i,j}y_{j}\right)
 \]
 を $i=1$ から順に求める．
 
 後退代入も同様に，$U$ の上三角構造を用いて
 \[
-x_i = \frac{1}{U_{ii}}\left(y_i - \sum_{j=i+1}^{n} U_{ij}x_j\right)
+x_{i} = \frac{1}{U_{i,i}}\left(y_{i} - \sum_{j=i+1}^{n} U_{i,j}x_{j}\right)
 \]
 を $i=n$ から逆順に計算する．これらにより，同じ係数行列 $A$ に対して複数回の右辺 $\boldsymbol{b}$ に対応する解 $\boldsymbol{x}$ を効率的に求めることが可能となる
 
@@ -340,7 +345,7 @@ end
 \subsection{実験方法}
 本課題でも，課題1と同様の評価手順を用いた．行列サイズ $N$ ごとに乱数行列 $A\in\mathbb{R}^{N\times N}$ と $\boldsymbol{b}\in\mathbb{R}^N$ を生成し，100回の試行を実施する．各試行で，主成分選択付きLU分解 $PA=LU$ を計算し，順方向代入で $L\boldsymbol{y}=P\boldsymbol{b}$，続いて後退代入で $U\boldsymbol{x}=\boldsymbol{y}$ を解いて $\hat{\boldsymbol{x}}$ を得る．
 
-評価指標は，(i) 残差ノルム $\|A\hat{\boldsymbol{x}}-\boldsymbol{b}\|$，(ii) 相対誤差 $\|\hat{\boldsymbol{x}}-\boldsymbol{x}_{\mathrm{ref}}\|/\|\boldsymbol{x}_{\mathrm{ref}}\|$（参照解は Julia の \verb|A\b b|），(iii) 計算時間（\verb|@elapsed|）である．各指標について中央値を代表値として記録する．
+評価指標は，(i) 残差ノルム $\|A\hat{\boldsymbol{x}}-\boldsymbol{b}\|$，(ii) 相対誤差 $\|\hat{\boldsymbol{x}}-\boldsymbol{x}_{\mathrm{ref}}\|/\|\boldsymbol{x}_{\mathrm{ref}}\|$（参照解は Julia の \verb|A\b|），(iii) 計算時間（\verb|@elapsed|）である．各指標について中央値を代表値として記録する．
 
 実装は以下の関数で行った：
 \begin{verbatim}
@@ -371,7 +376,7 @@ end
 \end{verbatim}
 
 \subsection{結果(小問1)}
-LU分解による連立一次方程式の数値解法の結果を図\ref{fig:exp2_residuals}および\ref{fig:exp2_relerrs}、\ref{fig:exp2_times}に示す．さらに，試行ごとの分布の概要を 表\ref{tab:exp2_summary}に示す．各サイズ $N=100, 200, 400, 800$ に対して100回の試行を行い，残差ノルム・相対誤差・計算時間の平均値をまとめた．
+LU分解による連立一次方程式の数値解法の結果を図\ref{fig:exp2_residuals}および\ref{fig:exp2_relerrs}、\ref{fig:exp2_times}に示す．さらに，試行ごとの分布の概要を 表\ref{tab:exp2_summary}に示す．各サイズ $N=100, 200, 400, 800$ に対して100回の試行を行い，残差ノルム・相対誤差・計算時間の中央値をまとめた．
 
 \begin{figure}[H]
   \centering
@@ -411,7 +416,7 @@ LU分解による連立一次方程式の数値解法の結果を図\ref{fig:exp
 
 \begin{table}[H]
 \centering
-\caption{LU分解による実験結果（100試行の平均）}
+\caption{LU分解による実験結果（100試行の中央値）}
 \label{tab:exp2_summary}
 \begin{tabular}{r|r|r|r}
 \hline
@@ -458,21 +463,21 @@ LU分解では同程度の $O(N^3)$ の演算を分解段階で行い、順方�
 \section{課題4：べき乗法}
 \subsection{原理・方法}
 
-べき乗法（Power Method）は，正方行列 $A\in\mathbb{R}^{n\times n}$ の最大固有値と対応固有ベクトルを近似する反復法である。
-初期ベクトル $\bm{b}^{(0)}$ を任意に与え，以下を反復する：
+べき乗法（Power Method）は，正方行列 $A\in\mathbb{R}^{n\times n}$ の最大固有値と対応固有ベクトルを近似する反復法である\cite{exp2025}．
+初期ベクトル $\boldsymbol{b}^{(0)}$ を任意に与え，以下を反復する：
 \[
-  \bm{b}^{(k+1)}=\frac{A\bm{b}^{(k)}}{\|A\bm{b}^{(k)}\|}.
+  \boldsymbol{b}^{(k+1)}=\frac{A\boldsymbol{b}^{(k)}}{\|A\boldsymbol{b}^{(k)}\|}.
 \]
-十分な反復で $\bm{b}^{(k)}$ は $A$ の最大固有値 $\lambda_{\max}$ に対応する固有ベクトル方向に収束する。
-$A$ が対角化可能で $|\lambda_1|>|\lambda_2|\ge\cdots\ge|\lambda_n|$，かつ初期成分 $c_1\neq0$ のとき，
+十分な反復で $\boldsymbol{b}^{(k)}$ は $A$ の最大固有値 $\lambda_{\mathrm{max}}$ に対応する固有ベクトル方向に収束する。
+$A$ が対角化可能で $|\lambda_{1}|>|\lambda_{2}|\ge\cdots\ge|\lambda_{n}|$，かつ初期成分 $c_{1}\neq0$ のとき，
 \[
-  A^k\bm{b}^{(0)}=\sum_{i=1}^n c_i\,\lambda_i^k\,\bm{v}_i
+  A^{k}\boldsymbol{b}^{(0)}=\sum_{i=1}^{n} c_{i}\,\lambda_{i}^{k}\,\boldsymbol{v}_{i}
 \]
-より $|\lambda_1|$ の項が支配的になるためである。
+より $|\lambda_{1}|$ の項が支配的になるためである。
 
 収束後の固有値はレイリー商で推定する：
 \[
-  \lambda=\frac{\bm{b}^{\top}A\bm{b}}{\bm{b}^{\top}\bm{b}}.
+  \lambda=\frac{\boldsymbol{b}^{\top}A\boldsymbol{b}}{\boldsymbol{b}^{\top}\boldsymbol{b}}.
 \]
 
 以下が今回のべき乗法のJulia実装である：
@@ -543,7 +548,7 @@ function exp3(N; num_trials=100)
 end
 \end{verbatim}
 
-\subsection{結果}
+\subsection{結果(小問1)}
 べき乗法による最大固有値・固有ベクトルの推定結果を示す．行列サイズ $N=50, 100, 200, 400$ に対して100回の試行を行い，残差ノルム・固有値相対誤差・固有ベクトル相対誤差・計算時間・反復回数を評価した．
 
 \begin{figure}[H]
@@ -623,14 +628,14 @@ $N$ & 残差ノルム & 固有値相対誤差 & 固有ベクトル相対誤差 &
 \end{table}
 
 
-\subsection{考察}
-実行時間のオーダーは $O(N^1.7)$ 程度と推定され，理論的な $O(N^2)$ よりも若干良好である．これは、Nが大きくなると反復回数が減少する傾向があり、全体の計算量に影響を与えたためと考えられる。また，残差ノルム 、 固有値相対誤差 及び 固有ベクトル相対誤差は，いずれも $N$ の増加に伴いわずかに増加するものの，収束判定の許容誤差 $10^{-12}$ を一様に設定しているため、大きな悪化は見られなかった。反復回数は $N$ の増加に伴い減少傾向が見られ，これは固有値の分離度が高まることで収束が速まったためと考えられる。
+\subsection{考察(小問2,3)}
+実行時間のオーダーは $O(N^1.7)$ 程度と推定され，理論的な $O(N^2)$ よりも若干良好である．これは、Nが大きくなると反復回数が減少する傾向があり、全体の計算量に影響を与えたためと考えられる。また，残差ノルム 、 固有値相対誤差 及び 固有ベクトル相対誤差は，いずれも $N$ の増加に伴いわずかに増加した。収束判定の許容誤差 $10^{-12}$ を一様に設定しているため、大きな悪化は見られなかったものの、Nが大きくなり計算量が増えたことで丸め誤差が蓄積したと考えられる。反復回数は $N$ の増加に伴い減少傾向が見られ，これは固有値の分離度が高まることで収束が速まったためと考えられる。
 
 \section{課題5：逆反復法とべき乗法を用いた固有値問題の高速化}
 \subsection{原理・方法}
 
 逆反復法（Inverse Iteration Method）は，行列 $A \in \mathbb{R}^{n\times n}$ の固有値のうち，
-あらかじめ与えたシフト値 $\mu$ に最も近い固有値および対応する固有ベクトルを求める手法である．
+あらかじめ与えたシフト値 $\mu$ に最も近い固有値および対応する固有ベクトルを求める手法である\cite{exp2025}．
 
 シフト $\mu$ を用いて変換行列
 \[
@@ -638,20 +643,20 @@ B = (A - \mu I)^{-1}
 \]
 を考えると，$B$ の固有値は
 \[
-\frac{1}{\lambda_i - \mu} \quad (i = 1, \ldots, n)
+\frac{1}{\lambda_{i} - \mu} \quad (i = 1, \ldots, n)
 \]
 である．したがって，この $B$ に対してべき乗法を適用すれば，
-$\mu$ に最も近い固有値 $\lambda_i$ が支配的となる．
+$\mu$ に最も近い固有値 $\lambda_{i}$ が支配的となる．
 
 このとき，反復計算の手順は次のように表される：
 \[
 (A - \mu I) \boldsymbol{y}_{k} = \boldsymbol{x}_{k-1}, \quad
 \boldsymbol{x}_{k} = \frac{\boldsymbol{y}_{k}}{\|\boldsymbol{y}_{k}\|}.
 \]
-十分な反復の後，$\boldsymbol{x}_k$ は $\mu$ に最も近い固有値に対応する固有ベクトルに収束し，
+十分な反復の後，$\boldsymbol{x}_{k}$ は $\mu$ に最も近い固有値に対応する固有ベクトルに収束し，
 固有値はレイリー商
 \[
-\lambda = \frac{\boldsymbol{x}^T A \boldsymbol{x}}{\boldsymbol{x}^T \boldsymbol{x}}
+\lambda = \frac{\boldsymbol{x}^{T} A \boldsymbol{x}}{\boldsymbol{x}^{T} \boldsymbol{x}}
 \]
 により近似される．
 
@@ -688,7 +693,7 @@ end
 
 逆反復法は，特定の固有値に近いシフト値を与えることで，$\frac{\lambda_i+1}{\lambda_i - \mu}$ の項を小さくし、べき乗法よりも速く収束することが期待される．
 \subsection{実験方法}
-本課題では、固有値問題を高速化するため、べき乗法で得られた最大固有値をシフト値として逆反復法を適用し、その性能を評価した。行列サイズ $N = 50, 100, 200, 400$ に対して、ランダムに生成した対称行列 $A \in \mathbb{R}^{N \times N}$ に対して100回の試行を実施した。行列は $A = (A + A^T)/2$ として対称化した。
+本課題では、固有値問題を高速化するため、べき乗法で得られた最大固有値をシフト値として逆反復法を適用し、その性能を評価した．行列サイズ $N = 50, 100, 200, 400$ に対して、ランダムに生成した対称行列 $A \in \mathbb{R}^{N \times N}$ に対して100回の試行を実施した．行列は $A = (A + A^T)/2$ として対称化した。
 以下が今回のJulia実装である。:
 \begin{verbatim}
 function pow_andthen_invEigen(A, min_turning_iter= 50, max_iter = 1000, tol = 1e-12)
@@ -769,6 +774,7 @@ function exp4(N;num_trials=100)
     end
 
     (; resnorms, relerrs_lambda, relerrs_v, times, itrs)
+end
 \end{verbatim}
 
 \subsection{結果}
@@ -868,24 +874,24 @@ QR分解（QR Decomposition）は，任意の正方行列 $A \in \mathbb{R}^{n\t
 \[
 A = QR
 \]
-として表す手法である:contentReference[oaicite:0]{index=0}．
+として表す手法である\cite{exp2025}．
 ここで $Q^TQ = I$ が成り立つ．QR分解はグラム・シュミットの直交化に基づいて構成されるが，
-数値的安定性を向上させるため，「修正グラム・シュミット法」が用いられる:contentReference[oaicite:1]{index=1}．
+数値的安定性を向上させるため，「修正グラム・シュミット法」が用いられる\cite{exp2025}．
 
-修正版グラム・シュミット法では，行列 $A = (a_1, \ldots, a_n)$ の各列ベクトル $a_j$ に対して次の手順を繰り返す：
+修正版グラム・シュミット法では，行列 $A = (a_{1}, \ldots, a_{n})$ の各列ベクトル $a_{j}$ に対して次の手順を繰り返す：
 
 \begin{align}
 &\text{for } j = 1, \ldots, n \text{ do} \notag\\
-&\quad R_{j,j} = \|a_j\|, \\
-&\quad q_j = \frac{a_j}{R_{j,j}}, \\
+&\quad R_{j,j} = \|a_{j}\|, \\
+&\quad q_{j} = \frac{a_{j}}{R_{j,j}}, \\
 &\quad \text{for } k = j+1, \ldots, n \text{ do} \notag\\
-&\qquad R_{j,k} = q_j^T a_k, \\
-&\qquad a_k \leftarrow a_k - R_{j,k} q_j, \\
+&\qquad R_{j,k} = q_{j}^{T} a_{k}, \\
+&\qquad a_{k} \leftarrow a_{k} - R_{j,k} q_{j}, \\
 &\quad \text{end for} \notag\\
 &\text{end for} \notag
 \end{align}
 
-この手続きにより，$Q = (q_1, \ldots, q_n)$ は直交行列，$R$ は上三角行列となり，
+この手続きにより，$Q = (q_{1}, \ldots, q_{n})$ は直交行列，$R$ は上三角行列となり，
 \[
 A = QR
 \]
@@ -910,14 +916,14 @@ function qr_manual(A)
 end
 \end{verbatim}
 
-次に，QR法（QR Algorithm）は，このQR分解を反復的に適用して行列の固有値を求める手法である．
-初期行列 $A_0 = A$ に対して以下の手順を繰り返す：
+次に，QR法（QR Algorithm）は，このQR分解を反復的に適用して行列の固有値を求める手法である{\cite{exp2025}}．
+初期行列 $A_{0} = A$ に対して以下の手順を繰り返す：
 \begin{align}
-A_k &= Q_k R_k, \\
-A_{k+1} &= R_k Q_k (= Q_k^{-1} A_k Q_k).
+A_{k} &= Q_{k} R_{k}, \\
+A_{k+1} &= R_{k} Q_{k} (= Q_{k}^{-1} A_{k} Q_{k}).
 \end{align}
-これはユニタリ行列による相似変換の繰り返しであり，各 $A_k$ は $A$ と同じ固有値を持つ．
-反復を続けると $A_k$ は上三角行列に近づき，その対角成分が固有値に収束する．
+これはユニタリ行列による相似変換の繰り返しであり，各 $A_{k}$ は $A$ と同じ固有値を持つ．
+反復を続けると $A_{k}$ は上三角行列に近づき，その対角成分が固有値に収束する．
 本実装では，収束判定条件
 \[
 \|A_{k+1} - A_k\|_{\infty} < \mathrm{tol} \cdot \|A_k\|_{\infty}
@@ -944,6 +950,7 @@ function qrEigens(A; max_iter=100000, tol=1e-10)
     for k in 1:n
         mu = eigenvalues[k]
         _, v_k = invEigen(A, mu, max_iter, tol)
+        eigenvectors[:, k] = v_k
     end
     return eigenvalues, eigenvectors, itr
 end
@@ -1009,56 +1016,121 @@ end
 QR法の数値安定性と収束性能を比較できるよう設計した．
 
 
-\subsection{結果}
-コードを実行したものの、1時間経っても終わらなかったため、やむなくnum\_trialsを10に減らして実行した。N = 10, 20, 40, 80に対して10回の試行を行い、各試行における最大残差ノルム、固有値誤差、計算時間を記録し。
-\subsection{考察}
-古典／改良GSとハウスホルダーの安定性差。
+\subsection{結果(小問1)}
+QR法による固有値計算の結果を図\ref{fig:exp5_residuals}～図\ref{fig:exp5_iterations}に示す．また，試行ごとの分布の概要を表\ref{tab:exp5_summary}に示す．行列サイズ $N=10, 20, 40, 80$ に対して10回の試行を行い，最大残差ノルム・最大固有値相対誤差・計算時間・反復回数を評価した．
+また、本来は100回の試行を予定していたが、計算時間の都合上10回に変更した。
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[width=72mm]{graphs/exp5_n10_max_residual.png} &
+    \includegraphics[width=72mm]{graphs/exp5_n20_max_residual.png} \\
+    \includegraphics[width=72mm]{graphs/exp5_n40_max_residual.png} &
+    \includegraphics[width=72mm]{graphs/exp5_n80_max_residual.png} \\
+  \end{tabular}
+  \caption{QR法における最大残差ノルム分布（各$N$）}
+  \label{fig:exp5_residuals}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[width=72mm]{graphs/exp5_n10_max_relerr_eigenvalue.png} &
+    \includegraphics[width=72mm]{graphs/exp5_n20_max_relerr_eigenvalue.png} \\
+    \includegraphics[width=72mm]{graphs/exp5_n40_max_relerr_eigenvalue.png} &
+    \includegraphics[width=72mm]{graphs/exp5_n80_max_relerr_eigenvalue.png} \\
+  \end{tabular}
+  \caption{QR法における最大固有値相対誤差分布（各$N$）}
+  \label{fig:exp5_relerrs}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[width=72mm]{graphs/exp5_n10_time.png} &
+    \includegraphics[width=72mm]{graphs/exp5_n20_time.png} \\
+    \includegraphics[width=72mm]{graphs/exp5_n40_time.png} &
+    \includegraphics[width=72mm]{graphs/exp5_n80_time.png} \\
+  \end{tabular}
+  \caption{QR法における計算時間分布（各$N$）}
+  \label{fig:exp5_times}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[width=72mm]{graphs/exp5_n10_iterations.png} &
+    \includegraphics[width=72mm]{graphs/exp5_n20_iterations.png} \\
+    \includegraphics[width=72mm]{graphs/exp5_n40_iterations.png} &
+    \includegraphics[width=72mm]{graphs/exp5_n80_iterations.png} \\
+  \end{tabular}
+  \caption{QR法における収束までの反復回数分布（各$N$）}
+  \label{fig:exp5_iterations}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{QR法による固有値計算の結果まとめ（10試行の中央値）}
+\label{tab:exp5_summary}
+\begin{tabular}{r|r|r|r|r}
+\hline
+$N$ & 最大残差ノルム & 最大固有値相対誤差 & 計算時間 [s] & 反復回数 \\
+\hline
+10  & $2.31\times10^{-15}$ & $1.07\times10^{-14}$ & 0.343 & 283.5 \\
+20  & $7.39\times10^{-15}$ & $3.66\times10^{-14}$ & 1.25 & 1128.0 \\
+40  & $3.10\times10^{-13}$ & $2.57\times10^{-13}$ & 6.68 & 4551.0 \\
+80  & $1.17\times10^{-10}$ & $8.29\times10^{-11}$ & 201.7 & 51532.0 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{考察(小問2,3)}
+一番はN=80における反復回数が他のNの増加量に比べても病的に長い点である。最大残差ノルムが他よりも異様に大きいのも、反復回数が多く丸め誤差が蓄積したためだと考えられる。N=80における反復回数の増加は、相対誤差のとりうる最小の誤差が今回の設定した許容誤差よりも大きかったため、収束判定が厳しくなりすぎたことが原因と考えられ、実際N＝40までの相対誤差の増加量を見ると少なくとも$O(N^2)$であり、N=80では$10^{-12}$を超えることが予想される。\\
+
+N = 10, 20, 40における反復回数の増加量と計算時間はほぼ$O(N^2)$であり、$\frac{計算時間}{反復回数} $つまり、一回のループの計算時間がNの増加に対してほぼ一定であることが分かる。QR分解の計算量は$O(N^3)$であり、結果と矛盾するように見えるが、今回の実験範囲ではNのサンプルが少なく、また試行回数も10回と少ないため、計算量の理論値が反映されなかったと考えられる。\\
 
 \section{課題7：QR法}
 \subsection{原理・方法}
 
-QR法の高速化には，「シフト（shift）」と「減次（deflation）」の2つの戦略が用いられる:contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}．
+QR法の高速化には，「シフト（shift）」と「減次（deflation）」の2つの戦略が用いられる\cite{exp2025}．
 
 \paragraph{シフトによる収束の加速}
 行列 $A$ に対して定数 $\sigma$ を引いた
 \[
 A' = A - \sigma I
 \]
-という変換を行う操作をシフトという．
-$A$ の固有値が $\lambda_1, \ldots, \lambda_n$ のとき，
-シフト後の行列 $A'$ の固有値は $\lambda_i - \sigma$ である．
+という変換を行う操作をシフトという{\cite{exp2025}}．
+$A$ の固有値が $\lambda_{1}, \ldots, \lambda_{n}$ のとき，
+シフト後の行列 $A'$ の固有値は $\lambda_{i} - \sigma$ である．
 
-QR法の反復中で，例えば第 $n$ 固有値 $\lambda_n$ の近似値 $\sigma$ が得られたとき，
-次の反復を $A_k - \sigma I$ に対して行うことで収束を加速できる．
-特に $\sigma$ が $\lambda_n$ に近ければ，
-行列 $A_k$ の下三角成分の収束率
+QR法の反復中で，例えば第 $n$ 固有値 $\lambda_{n}$ の近似値 $\sigma$ が得られたとき，
+次の反復を $A_{k} - \sigma I$ に対して行うことで収束を加速できる．
+特に $\sigma$ が $\lambda_{n}$ に近ければ，
+行列 $A_{k}$ の下三角成分の収束率
 \[
-\rho'_{i,j} = \frac{|\lambda_i - \sigma|}{|\lambda_j - \sigma|}
+\rho'_{i,j} = \frac{|\lambda_{i} - \sigma|}{|\lambda_{j} - \sigma|}
 \]
-はシフト前の収束率 $\rho_{i,j} = |\lambda_i| / |\lambda_j|$ より小さくなり，
+はシフト前の収束率 $\rho_{i,j} = |\lambda_{i}| / |\lambda_{j}|$ より小さくなり，
 第 $n$ 行要素の収束が著しく速くなる．
-このような「レイリー商シフト（Rayleigh quotient shift）」は，
-実際の反復で有効な加速手段である．
 
 \paragraph{減次による計算量削減}
-QR法を繰り返すと，行列 $A_k$ の第 $n$ 行成分がほぼゼロになる（すなわち下三角要素が十分に小さい）時点が現れる．
+QR法を繰り返すと，行列 $A_{k}$ の第 $n$ 行成分がほぼゼロになる（すなわち下三角要素が十分に小さい）時点が現れる．
 すなわち，ある閾値 $\varepsilon$ に対して
 \[
 \frac{|a_{k;n,j}|}{|a_{k;n,n}|} < \varepsilon \quad (1 \le j < n)
 \]
-が成立すれば，$A_k$ は
+が成立すれば，$A_{k}$ は
 \[
-A_k \approx
+A_{k} \approx
 \begin{pmatrix}
-B_k & * \\
+B_{k} & * \\
 0 & a_{k;n,n}
 \end{pmatrix}
 \]
-の形となる．ここで $B_k$ は $A_k$ の左上 $(n-1)\times(n-1)$ の部分行列であり，
-固有値は $a_{k;n,n}$ と $B_k$ の固有値で近似できる．
+の形となる．ここで $B_{k}$ は $A_{k}$ の左上 $(n-1)\times(n-1)$ の部分行列であり，
+固有値は $a_{k;n,n}$ と $B_{k}$ の固有値で近似できる．
 このとき $a_{k;n,n}$ を1つの固有値として確定させ，
-以後の反復を $B_k$ に対してのみ続けることで，
-行列のサイズを1つ減らし計算量を削減できる．
+以後の反復を $B_{k}$ に対してのみ続けることで，
+行列のサイズを1つ減らし計算量を削減できる{\cite{exp2025}}．
 この手続きを「減次」と呼ぶ．
 
 
@@ -1111,7 +1183,7 @@ end
 計算量を効果的に削減することができる．
 
 \subsection{実験方法}
-課題6と同一の評価系を用いる．対称行列 $A\in\mathbb{R}^{N\times N}$ を乱数から生成・対称化し，高速化QR法（シフト＋減次）\verb|qrEigens_fast| を適用する．各 $N$ について100回試行し，(i) 最大残差ノルム $\max_i\|(A-\lambda_i I)\boldsymbol{v}_i\|$，(ii) 固有値の最大相対誤差 $\max_i |\lambda_i-\hat\lambda_i|/|\lambda_i|$（参照は \verb|eigen(A)|），(iii) 計算時間，(iv) 反復回数を記録し，代表値として中央値を用いる．
+課題6と同一の評価系を用いる．対称行列 $A\in\mathbb{R}^{N\times N}$ を乱数から生成・対称化し，高速化QR法（シフト＋減次）\verb|qrEigens_fast| を適用する．各 $N$ について10回試行し，(i) 最大残差ノルム $\max_{i}\|(A-\lambda_{i} I)\boldsymbol{v}_{i}\|$，(ii) 固有値の最大相対誤差 $\max_{i} |\lambda_{i}-\hat{\lambda}_{i}|/|\lambda_{i}|$（参照は \verb|eigen(A)|），(iii) 計算時間，(iv) 反復回数を記録し，代表値として中央値を用いる．
 
 \begin{verbatim}
 function exp6(N; num_trials=100)
@@ -1150,28 +1222,92 @@ end
 
 
 \subsection{結果}
+高速化QR法（シフト＋減次）による固有値計算の結果を図\ref{fig:exp6_residuals}～図\ref{fig:exp6_iterations}に示す．また，試行ごとの分布の概要を表\ref{tab:exp6_summary}に示す．行列サイズ $N=10, 20, 40, 80$ に対して10回の試行を行い，最大残差ノルム・最大固有値相対誤差・計算時間・反復回数を評価した．
 
-% \begin{figure}[H]
-%   \centering
-%   \includegraphics[width=0.62\linewidth]{fig_t7.pdf}
-%   \caption{課題7の結果。横軸：反復回数（回），縦軸：$\max_{i\ne j}|(A_k)_{ij}|$（–）。}
-%   \label{fig:t7}
-% \end{figure}
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[width=72mm]{graphs/exp6_n10_max_residual.png} &
+    \includegraphics[width=72mm]{graphs/exp6_n20_max_residual.png} \\
+    \includegraphics[width=72mm]{graphs/exp6_n40_max_residual.png} &
+    \includegraphics[width=72mm]{graphs/exp6_n80_max_residual.png} \\
+  \end{tabular}
+  \caption{高速化QR法における最大残差ノルム分布（各$N$）}
+  \label{fig:exp6_residuals}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[width=72mm]{graphs/exp6_n10_max_relerr_eigenvalue.png} &
+    \includegraphics[width=72mm]{graphs/exp6_n20_max_relerr_eigenvalue.png} \\
+    \includegraphics[width=72mm]{graphs/exp6_n40_max_relerr_eigenvalue.png} &
+    \includegraphics[width=72mm]{graphs/exp6_n80_max_relerr_eigenvalue.png} \\
+  \end{tabular}
+  \caption{高速化QR法における最大固有値相対誤差分布（各$N$）}
+  \label{fig:exp6_relerrs}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[width=72mm]{graphs/exp6_n10_time.png} &
+    \includegraphics[width=72mm]{graphs/exp6_n20_time.png} \\
+    \includegraphics[width=72mm]{graphs/exp6_n40_time.png} &
+    \includegraphics[width=72mm]{graphs/exp6_n80_time.png} \\
+  \end{tabular}
+  \caption{高速化QR法における計算時間分布（各$N$）}
+  \label{fig:exp6_times}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[width=72mm]{graphs/exp6_n10_iterations.png} &
+    \includegraphics[width=72mm]{graphs/exp6_n20_iterations.png} \\
+    \includegraphics[width=72mm]{graphs/exp6_n40_iterations.png} &
+    \includegraphics[width=72mm]{graphs/exp6_n80_iterations.png} \\
+  \end{tabular}
+  \caption{高速化QR法における収束までの反復回数分布（各$N$）}
+  \label{fig:exp6_iterations}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{高速化QR法による固有値計算の結果まとめ（10試行の中央値）}
+\label{tab:exp6_summary}
+\begin{tabular}{r|r|r|r|r}
+\hline
+$N$ & 最大残差ノルム & 最大固有値相対誤差 & 計算時間 [s] & 反復回数 \\
+\hline
+10  & $2.08\times10^{-15}$ & $9.94\times10^{-15}$ & 0.00297 & 22.0 \\
+20  & $2.86\times10^{-15}$ & $2.50\times10^{-14}$ & 0.0166 & 44.5 \\
+40  & $1.17\times10^{-14}$ & $1.68\times10^{-14}$ & 0.0649 & 85.5 \\
+80  & $4.10\times10^{-14}$ & $5.63\times10^{-14}$ & 0.392 & 179.0 \\
+\hline
+\end{tabular}
+\end{table}
+
 \subsection{考察}
-シフト導入の効果。収束速度と計算コストのトレードオフ。
+課題6と比べて、反復回数、計算時間ともに大幅に削減されており、それに伴い丸め誤差による最大残差ノルム、最大固有値相対誤差も軽減されたことが確認できた。特にN=80における反復回数の増加量が他のNに比べても抑えられており、シフトと減次の効果が顕著であることが示されている。\\
 
+反復回数が$O(N)$であるのは、シフトにより高々定数回の反復で一つの固有値が確定し、行列の次元が1ずつ減少していくためである。
 \section{結論}
-主要な知見を要約。今後の改良点を簡潔に述べる。
+
+本章では，数値線形代数における主要なアルゴリズムを実装・評価した．各課題において実装したアルゴリズムの数値的特性は，線形代数の理論と基本的に一致していることが確認できた．一方，ランダムに生成された行列データを用いることで，全課題を通して外れ値やランダム要素が顕著に現れたことが観測された。つまり、行列の条件数がランダムに変動するため，各試行ごとに計算精度や収束速度にばらつきが生じ、 特に条件の悪いケースが稀に現れることで，最大誤差や計算時間の分布に長い裾が生じた．課題6では試行回数が少なく、このようなランダム要素に影響されたため、計算量が理論通りに行かなかったと考えられる。これらの現象は，理論的には平均的な挙動をよく説明する一方で，実装レベルでは統計的なばらつきを含む実践的な理解が重要であることを示唆している．\\
+
+結論として，本実験は数値線形代数の理論と計算機実装の関係を具体的に学ぶ良い教材となった．同時に，ランダム行列に由来する外れ値やばらつきの影響を理解することが，実際の数値計算において重要であることを示した．今後の課題として，より堅牢なアルゴリズム設計や，ランダム性を考慮した数値解析手法の開発が期待される．
+\section*{付録（Appendix）}
+\begin{itemize}
+  \item 使用したソースコード（Julia/Python）
+  \url{https://github.com/Issan0511/suuri_exp/blob/master/1/julia1.ipynb}
+  \item AI補完の使用: Juliaコードの一部およびレポートの一部において、GPT-5およびClaude Sonnet 4.5の補完を使用した。
+\end{itemize}
 
 \section*{参考文献（References）}
 \begin{thebibliography}{99}
 \bibitem{exp2025} 数理工学実験（2025年度配布資料）.
 \end{thebibliography}
 
-\section*{付録（Appendix）}
-\begin{itemize}
-  \item 使用したソースコード（Julia/Python）
-  \item 追加ログ・出力データ
-\end{itemize}
 
 \end{document}

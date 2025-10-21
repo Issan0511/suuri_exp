@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  21 OCT 2025 13:24
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  21 OCT 2025 13:27
  restricted system commands enabled.
 **report_1.tex
 (./report_1.tex
@@ -961,10 +961,9 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box73
 \@float@everytoks=\toks34
 \@floatcapt=\box74
-)
-No file report_1.aux.
-
+) (./report_1.aux)
 \openout1 = report_1.aux
+
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
 LaTeX Font Info:    ... okay on input line 18.
 LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
@@ -989,6 +988,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
 LaTeX Font Info:    ... okay on input line 18.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 18.
 LaTeX Font Info:    ... okay on input line 18.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: luatex
 *geometry* verbose mode - [ preamble ] result:
@@ -1046,6 +1046,8 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 Package hyperref Info: Link coloring OFF on input line 18.
+
+(./report_1.out) (./report_1.out)
 \@outlinefile=\write3
 
 \openout3 = report_1.out
@@ -1097,19 +1099,6 @@ LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
 (Font)              scaled to size 11.09656pt on input line 54.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 11.09656pt on input line 54.
-(load cache: extra_lmroman10-bold.luc)
-LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 59.
-LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 8.44485pt on input line 59.
-LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <10> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 59.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 8.44485pt on input line 59.
-
-
-LaTeX Warning: Citation `exp2025' on page 1 undefined on input line 59.
-
 (load cache: extra_lmmono10-regular.luc)
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
 (Font)              scaled to size 9.24713pt on input line 69.
@@ -1125,25 +1114,25 @@ Overfull \hbox (67.89342pt too wide) in paragraph at lines 137--137
 elerrs), time_median=median(times))[] 
  []
 
-<graphs/exp1_n100_residual.png, id=32, 702.625pt x 501.875pt>
+<graphs/exp1_n100_residual.png, id=170, 702.625pt x 501.875pt>
 File: graphs/exp1_n100_residual.png Graphic file (type png)
 <use graphs/exp1_n100_residual.png>
 Package luatex.def Info: graphs/exp1_n100_residual.png  used on input line 160.
 
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp1_n200_residual.png, id=33, 702.625pt x 501.875pt>
+<graphs/exp1_n200_residual.png, id=171, 702.625pt x 501.875pt>
 File: graphs/exp1_n200_residual.png Graphic file (type png)
 <use graphs/exp1_n200_residual.png>
 Package luatex.def Info: graphs/exp1_n200_residual.png  used on input line 161.
 
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp1_n400_residual.png, id=34, 702.625pt x 501.875pt>
+<graphs/exp1_n400_residual.png, id=172, 702.625pt x 501.875pt>
 File: graphs/exp1_n400_residual.png Graphic file (type png)
 <use graphs/exp1_n400_residual.png>
 Package luatex.def Info: graphs/exp1_n400_residual.png  used on input line 162.
 
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp1_n800_residual.png, id=35, 702.625pt x 501.875pt>
+<graphs/exp1_n800_residual.png, id=173, 702.625pt x 501.875pt>
 File: graphs/exp1_n800_residual.png Graphic file (type png)
 <use graphs/exp1_n800_residual.png>
 Package luatex.def Info: graphs/exp1_n800_residual.png  used on input line 163.
@@ -1192,46 +1181,46 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 
 
 [3]
-<graphs/exp1_n100_relerr_solution.png, id=43, 702.625pt x 501.875pt>
+<graphs/exp1_n100_relerr_solution.png, id=180, 702.625pt x 501.875pt>
 File: graphs/exp1_n100_relerr_solution.png Graphic file (type png)
 <use graphs/exp1_n100_relerr_solution.png>
 Package luatex.def Info: graphs/exp1_n100_relerr_solution.png  used on input li
 ne 172.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp1_n200_relerr_solution.png, id=44, 702.625pt x 501.875pt>
+<graphs/exp1_n200_relerr_solution.png, id=181, 702.625pt x 501.875pt>
 File: graphs/exp1_n200_relerr_solution.png Graphic file (type png)
 <use graphs/exp1_n200_relerr_solution.png>
 Package luatex.def Info: graphs/exp1_n200_relerr_solution.png  used on input li
 ne 173.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp1_n400_relerr_solution.png, id=45, 702.625pt x 501.875pt>
+<graphs/exp1_n400_relerr_solution.png, id=182, 702.625pt x 501.875pt>
 File: graphs/exp1_n400_relerr_solution.png Graphic file (type png)
 <use graphs/exp1_n400_relerr_solution.png>
 Package luatex.def Info: graphs/exp1_n400_relerr_solution.png  used on input li
 ne 174.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp1_n800_relerr_solution.png, id=46, 702.625pt x 501.875pt>
+<graphs/exp1_n800_relerr_solution.png, id=183, 702.625pt x 501.875pt>
 File: graphs/exp1_n800_relerr_solution.png Graphic file (type png)
 <use graphs/exp1_n800_relerr_solution.png>
 Package luatex.def Info: graphs/exp1_n800_relerr_solution.png  used on input li
 ne 175.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp1_n100_time.png, id=47, 702.625pt x 501.875pt>
+<graphs/exp1_n100_time.png, id=184, 702.625pt x 501.875pt>
 File: graphs/exp1_n100_time.png Graphic file (type png)
 <use graphs/exp1_n100_time.png>
 Package luatex.def Info: graphs/exp1_n100_time.png  used on input line 184.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp1_n200_time.png, id=48, 702.625pt x 501.875pt>
+<graphs/exp1_n200_time.png, id=185, 702.625pt x 501.875pt>
 File: graphs/exp1_n200_time.png Graphic file (type png)
 <use graphs/exp1_n200_time.png>
 Package luatex.def Info: graphs/exp1_n200_time.png  used on input line 185.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp1_n400_time.png, id=49, 702.625pt x 501.875pt>
+<graphs/exp1_n400_time.png, id=186, 702.625pt x 501.875pt>
 File: graphs/exp1_n400_time.png Graphic file (type png)
 <use graphs/exp1_n400_time.png>
 Package luatex.def Info: graphs/exp1_n400_time.png  used on input line 186.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp1_n800_time.png, id=50, 702.625pt x 501.875pt>
+<graphs/exp1_n800_time.png, id=187, 702.625pt x 501.875pt>
 File: graphs/exp1_n800_time.png Graphic file (type png)
 <use graphs/exp1_n800_time.png>
 Package luatex.def Info: graphs/exp1_n800_time.png  used on input line 187.
@@ -1246,18 +1235,6 @@ warning  (pdf backend): ignoring duplicate destination with the name 'figure.2'
 _n400_residual.png><./graphs/exp1_n800_residual.png><./graphs/exp1_n100_relerr_s
 olution.png><./graphs/exp1_n200_relerr_solution.png><./graphs/exp1_n400_relerr_s
 olution.png><./graphs/exp1_n800_relerr_solution.png>]
-
-LaTeX Warning: Reference `fig:exp1_residuals' on page 5 undefined on input line
- 213.
-
-
-LaTeX Warning: Reference `fig:exp1_times' on page 5 undefined on input line 213
-.
-
-
-LaTeX Warning: Reference `tab:exp1_summary' on page 5 undefined on input line 2
-15.
-
 
 Class ltjsarticle Warning: deprecated old font command `\rm' used.
 (ltjsarticle)              You should note, that since 1994 LaTeX2e provides a
@@ -1286,41 +1263,25 @@ LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 [7]
 
 [8]
-
-LaTeX Warning: Reference `fig:exp2_residuals' on page 9 undefined on input line
- 379.
-
-
-LaTeX Warning: Reference `fig:exp2_relerrs' on page 9 undefined on input line 3
-79.
-
-
-LaTeX Warning: Reference `fig:exp2_times' on page 9 undefined on input line 379
-.
-
-
-LaTeX Warning: Reference `tab:exp2_summary' on page 9 undefined on input line 3
-79.
-
-<graphs/exp2_n100_residual.png, id=97, 702.625pt x 501.875pt>
+<graphs/exp2_n100_residual.png, id=239, 702.625pt x 501.875pt>
 File: graphs/exp2_n100_residual.png Graphic file (type png)
 <use graphs/exp2_n100_residual.png>
 Package luatex.def Info: graphs/exp2_n100_residual.png  used on input line 384.
 
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp2_n200_residual.png, id=98, 702.625pt x 501.875pt>
+<graphs/exp2_n200_residual.png, id=240, 702.625pt x 501.875pt>
 File: graphs/exp2_n200_residual.png Graphic file (type png)
 <use graphs/exp2_n200_residual.png>
 Package luatex.def Info: graphs/exp2_n200_residual.png  used on input line 385.
 
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp2_n400_residual.png, id=99, 702.625pt x 501.875pt>
+<graphs/exp2_n400_residual.png, id=241, 702.625pt x 501.875pt>
 File: graphs/exp2_n400_residual.png Graphic file (type png)
 <use graphs/exp2_n400_residual.png>
 Package luatex.def Info: graphs/exp2_n400_residual.png  used on input line 386.
 
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp2_n800_residual.png, id=100, 702.625pt x 501.875pt>
+<graphs/exp2_n800_residual.png, id=242, 702.625pt x 501.875pt>
 File: graphs/exp2_n800_residual.png Graphic file (type png)
 <use graphs/exp2_n800_residual.png>
 Package luatex.def Info: graphs/exp2_n800_residual.png  used on input line 387.
@@ -1329,46 +1290,46 @@ Package luatex.def Info: graphs/exp2_n800_residual.png  used on input line 387.
 
 
 [9]
-<graphs/exp2_n100_relerr_solution.png, id=106, 702.625pt x 501.875pt>
+<graphs/exp2_n100_relerr_solution.png, id=252, 702.625pt x 501.875pt>
 File: graphs/exp2_n100_relerr_solution.png Graphic file (type png)
 <use graphs/exp2_n100_relerr_solution.png>
 Package luatex.def Info: graphs/exp2_n100_relerr_solution.png  used on input li
 ne 396.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp2_n200_relerr_solution.png, id=107, 702.625pt x 501.875pt>
+<graphs/exp2_n200_relerr_solution.png, id=253, 702.625pt x 501.875pt>
 File: graphs/exp2_n200_relerr_solution.png Graphic file (type png)
 <use graphs/exp2_n200_relerr_solution.png>
 Package luatex.def Info: graphs/exp2_n200_relerr_solution.png  used on input li
 ne 397.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp2_n400_relerr_solution.png, id=108, 702.625pt x 501.875pt>
+<graphs/exp2_n400_relerr_solution.png, id=254, 702.625pt x 501.875pt>
 File: graphs/exp2_n400_relerr_solution.png Graphic file (type png)
 <use graphs/exp2_n400_relerr_solution.png>
 Package luatex.def Info: graphs/exp2_n400_relerr_solution.png  used on input li
 ne 398.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp2_n800_relerr_solution.png, id=109, 702.625pt x 501.875pt>
+<graphs/exp2_n800_relerr_solution.png, id=255, 702.625pt x 501.875pt>
 File: graphs/exp2_n800_relerr_solution.png Graphic file (type png)
 <use graphs/exp2_n800_relerr_solution.png>
 Package luatex.def Info: graphs/exp2_n800_relerr_solution.png  used on input li
 ne 399.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp2_n100_time.png, id=110, 702.625pt x 501.875pt>
+<graphs/exp2_n100_time.png, id=256, 702.625pt x 501.875pt>
 File: graphs/exp2_n100_time.png Graphic file (type png)
 <use graphs/exp2_n100_time.png>
 Package luatex.def Info: graphs/exp2_n100_time.png  used on input line 408.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp2_n200_time.png, id=111, 702.625pt x 501.875pt>
+<graphs/exp2_n200_time.png, id=257, 702.625pt x 501.875pt>
 File: graphs/exp2_n200_time.png Graphic file (type png)
 <use graphs/exp2_n200_time.png>
 Package luatex.def Info: graphs/exp2_n200_time.png  used on input line 409.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp2_n400_time.png, id=112, 702.625pt x 501.875pt>
+<graphs/exp2_n400_time.png, id=258, 702.625pt x 501.875pt>
 File: graphs/exp2_n400_time.png Graphic file (type png)
 <use graphs/exp2_n400_time.png>
 Package luatex.def Info: graphs/exp2_n400_time.png  used on input line 410.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp2_n800_time.png, id=113, 702.625pt x 501.875pt>
+<graphs/exp2_n800_time.png, id=259, 702.625pt x 501.875pt>
 File: graphs/exp2_n800_time.png Graphic file (type png)
 <use graphs/exp2_n800_time.png>
 Package luatex.def Info: graphs/exp2_n800_time.png  used on input line 411.
@@ -1383,15 +1344,6 @@ warning  (pdf backend): ignoring duplicate destination with the name 'figure.5'
 _n400_residual.png><./graphs/exp2_n800_residual.png><./graphs/exp2_n100_relerr_s
 olution.png><./graphs/exp2_n200_relerr_solution.png><./graphs/exp2_n400_relerr_s
 olution.png><./graphs/exp2_n800_relerr_solution.png>]
-
-LaTeX Warning: Reference `tab:exp2_summary' on page 11 undefined on input line 
-433.
-
-
-LaTeX Warning: Reference `tab:compare_elim_lu' on page 11 undefined on input li
-ne 437.
-
-
 Overfull \hbox (77.0437pt too wide) in paragraph at lines 443--453
  [][][][] 
  []
@@ -1405,14 +1357,6 @@ warning  (pdf backend): ignoring duplicate destination with the name 'table.2'
 <./graphs/exp2_n100_time.png><./graphs/exp2_n200_time.png><./graphs/exp2_n400_ti
 me.png><./graphs/exp2_n800_time.png>]
 
-LaTeX Warning: Reference `tab:compare_elim_lu' on page 12 undefined on input li
-ne 455.
-
-
-LaTeX Warning: Citation `exp2025' on page 12 undefined on input line 466.
-
-
-
 [12
 warning  (pdf backend): ignoring duplicate destination with the name 'table.3'
 ]
@@ -1423,24 +1367,24 @@ Overfull \hbox (21.9033pt too wide) in paragraph at lines 549--549
 ed) / norm(vref_normalized)[] 
  []
 
-<graphs/exp3_n50_residual.png, id=155, 702.625pt x 501.875pt>
+<graphs/exp3_n50_residual.png, id=296, 702.625pt x 501.875pt>
 File: graphs/exp3_n50_residual.png Graphic file (type png)
 <use graphs/exp3_n50_residual.png>
 Package luatex.def Info: graphs/exp3_n50_residual.png  used on input line 557.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n100_residual.png, id=156, 702.625pt x 501.875pt>
+<graphs/exp3_n100_residual.png, id=297, 702.625pt x 501.875pt>
 File: graphs/exp3_n100_residual.png Graphic file (type png)
 <use graphs/exp3_n100_residual.png>
 Package luatex.def Info: graphs/exp3_n100_residual.png  used on input line 558.
 
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n200_residual.png, id=157, 702.625pt x 501.875pt>
+<graphs/exp3_n200_residual.png, id=298, 702.625pt x 501.875pt>
 File: graphs/exp3_n200_residual.png Graphic file (type png)
 <use graphs/exp3_n200_residual.png>
 Package luatex.def Info: graphs/exp3_n200_residual.png  used on input line 559.
 
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n400_residual.png, id=158, 702.625pt x 501.875pt>
+<graphs/exp3_n400_residual.png, id=299, 702.625pt x 501.875pt>
 File: graphs/exp3_n400_residual.png Graphic file (type png)
 <use graphs/exp3_n400_residual.png>
 Package luatex.def Info: graphs/exp3_n400_residual.png  used on input line 560.
@@ -1449,49 +1393,49 @@ Package luatex.def Info: graphs/exp3_n400_residual.png  used on input line 560.
 
 
 [14]
-<graphs/exp3_n50_relerr_eigenvalue.png, id=164, 702.625pt x 501.875pt>
+<graphs/exp3_n50_relerr_eigenvalue.png, id=304, 702.625pt x 501.875pt>
 File: graphs/exp3_n50_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp3_n50_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp3_n50_relerr_eigenvalue.png  used on input l
 ine 569.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n100_relerr_eigenvalue.png, id=165, 702.625pt x 501.875pt>
+<graphs/exp3_n100_relerr_eigenvalue.png, id=305, 702.625pt x 501.875pt>
 File: graphs/exp3_n100_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp3_n100_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp3_n100_relerr_eigenvalue.png  used on input 
 line 570.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n200_relerr_eigenvalue.png, id=166, 702.625pt x 501.875pt>
+<graphs/exp3_n200_relerr_eigenvalue.png, id=306, 702.625pt x 501.875pt>
 File: graphs/exp3_n200_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp3_n200_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp3_n200_relerr_eigenvalue.png  used on input 
 line 571.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n400_relerr_eigenvalue.png, id=167, 702.625pt x 501.875pt>
+<graphs/exp3_n400_relerr_eigenvalue.png, id=307, 702.625pt x 501.875pt>
 File: graphs/exp3_n400_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp3_n400_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp3_n400_relerr_eigenvalue.png  used on input 
 line 572.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n50_relerr_eigenvector.png, id=168, 702.625pt x 501.875pt>
+<graphs/exp3_n50_relerr_eigenvector.png, id=308, 702.625pt x 501.875pt>
 File: graphs/exp3_n50_relerr_eigenvector.png Graphic file (type png)
 <use graphs/exp3_n50_relerr_eigenvector.png>
 Package luatex.def Info: graphs/exp3_n50_relerr_eigenvector.png  used on input 
 line 581.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n100_relerr_eigenvector.png, id=169, 702.625pt x 501.875pt>
+<graphs/exp3_n100_relerr_eigenvector.png, id=309, 702.625pt x 501.875pt>
 File: graphs/exp3_n100_relerr_eigenvector.png Graphic file (type png)
 <use graphs/exp3_n100_relerr_eigenvector.png>
 Package luatex.def Info: graphs/exp3_n100_relerr_eigenvector.png  used on input
  line 582.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n200_relerr_eigenvector.png, id=170, 702.625pt x 501.875pt>
+<graphs/exp3_n200_relerr_eigenvector.png, id=310, 702.625pt x 501.875pt>
 File: graphs/exp3_n200_relerr_eigenvector.png Graphic file (type png)
 <use graphs/exp3_n200_relerr_eigenvector.png>
 Package luatex.def Info: graphs/exp3_n200_relerr_eigenvector.png  used on input
  line 583.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n400_relerr_eigenvector.png, id=171, 702.625pt x 501.875pt>
+<graphs/exp3_n400_relerr_eigenvector.png, id=311, 702.625pt x 501.875pt>
 File: graphs/exp3_n400_relerr_eigenvector.png Graphic file (type png)
 <use graphs/exp3_n400_relerr_eigenvector.png>
 Package luatex.def Info: graphs/exp3_n400_relerr_eigenvector.png  used on input
@@ -1507,45 +1451,45 @@ warning  (pdf backend): ignoring duplicate destination with the name 'figure.8'
 n200_residual.png><./graphs/exp3_n400_residual.png><./graphs/exp3_n50_relerr_eig
 envalue.png><./graphs/exp3_n100_relerr_eigenvalue.png><./graphs/exp3_n200_relerr
 _eigenvalue.png><./graphs/exp3_n400_relerr_eigenvalue.png>]
-<graphs/exp3_n50_time.png, id=186, 702.625pt x 501.875pt>
+<graphs/exp3_n50_time.png, id=326, 702.625pt x 501.875pt>
 File: graphs/exp3_n50_time.png Graphic file (type png)
 <use graphs/exp3_n50_time.png>
 Package luatex.def Info: graphs/exp3_n50_time.png  used on input line 593.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n100_time.png, id=187, 702.625pt x 501.875pt>
+<graphs/exp3_n100_time.png, id=327, 702.625pt x 501.875pt>
 File: graphs/exp3_n100_time.png Graphic file (type png)
 <use graphs/exp3_n100_time.png>
 Package luatex.def Info: graphs/exp3_n100_time.png  used on input line 594.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n200_time.png, id=188, 702.625pt x 501.875pt>
+<graphs/exp3_n200_time.png, id=328, 702.625pt x 501.875pt>
 File: graphs/exp3_n200_time.png Graphic file (type png)
 <use graphs/exp3_n200_time.png>
 Package luatex.def Info: graphs/exp3_n200_time.png  used on input line 595.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n400_time.png, id=189, 702.625pt x 501.875pt>
+<graphs/exp3_n400_time.png, id=329, 702.625pt x 501.875pt>
 File: graphs/exp3_n400_time.png Graphic file (type png)
 <use graphs/exp3_n400_time.png>
 Package luatex.def Info: graphs/exp3_n400_time.png  used on input line 596.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n50_iterations.png, id=190, 702.625pt x 501.875pt>
+<graphs/exp3_n50_iterations.png, id=330, 702.625pt x 501.875pt>
 File: graphs/exp3_n50_iterations.png Graphic file (type png)
 <use graphs/exp3_n50_iterations.png>
 Package luatex.def Info: graphs/exp3_n50_iterations.png  used on input line 605
 .
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n100_iterations.png, id=191, 702.625pt x 501.875pt>
+<graphs/exp3_n100_iterations.png, id=331, 702.625pt x 501.875pt>
 File: graphs/exp3_n100_iterations.png Graphic file (type png)
 <use graphs/exp3_n100_iterations.png>
 Package luatex.def Info: graphs/exp3_n100_iterations.png  used on input line 60
 6.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n200_iterations.png, id=192, 702.625pt x 501.875pt>
+<graphs/exp3_n200_iterations.png, id=332, 702.625pt x 501.875pt>
 File: graphs/exp3_n200_iterations.png Graphic file (type png)
 <use graphs/exp3_n200_iterations.png>
 Package luatex.def Info: graphs/exp3_n200_iterations.png  used on input line 60
 7.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp3_n400_iterations.png, id=193, 702.625pt x 501.875pt>
+<graphs/exp3_n400_iterations.png, id=333, 702.625pt x 501.875pt>
 File: graphs/exp3_n400_iterations.png Graphic file (type png)
 <use graphs/exp3_n400_iterations.png>
 Package luatex.def Info: graphs/exp3_n400_iterations.png  used on input line 60
@@ -1562,10 +1506,6 @@ warning  (pdf backend): ignoring duplicate destination with the name 'figure.10'
 .png><./graphs/exp3_n200_relerr_eigenvector.png><./graphs/exp3_n400_relerr_eigen
 vector.png><./graphs/exp3_n50_time.png><./graphs/exp3_n100_time.png><./graphs/ex
 p3_n200_time.png><./graphs/exp3_n400_time.png>]
-
-LaTeX Warning: Citation `exp2025' on page 17 undefined on input line 638.
-
-
 
 [17
 warning  (pdf backend): ignoring duplicate destination with the name 'figure.11'
@@ -1597,48 +1537,48 @@ Overfull \hbox (21.9033pt too wide) in paragraph at lines 778--778
 ed) / norm(vref_normalized)[] 
  []
 
-<graphs/exp4_n50_residual.png, id=237, 702.625pt x 501.875pt>
+<graphs/exp4_n50_residual.png, id=374, 702.625pt x 501.875pt>
 File: graphs/exp4_n50_residual.png Graphic file (type png)
 <use graphs/exp4_n50_residual.png>
 Package luatex.def Info: graphs/exp4_n50_residual.png  used on input line 787.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n100_residual.png, id=238, 702.625pt x 501.875pt>
+<graphs/exp4_n100_residual.png, id=375, 702.625pt x 501.875pt>
 File: graphs/exp4_n100_residual.png Graphic file (type png)
 <use graphs/exp4_n100_residual.png>
 Package luatex.def Info: graphs/exp4_n100_residual.png  used on input line 788.
 
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n200_residual.png, id=239, 702.625pt x 501.875pt>
+<graphs/exp4_n200_residual.png, id=376, 702.625pt x 501.875pt>
 File: graphs/exp4_n200_residual.png Graphic file (type png)
 <use graphs/exp4_n200_residual.png>
 Package luatex.def Info: graphs/exp4_n200_residual.png  used on input line 789.
 
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n400_residual.png, id=240, 702.625pt x 501.875pt>
+<graphs/exp4_n400_residual.png, id=377, 702.625pt x 501.875pt>
 File: graphs/exp4_n400_residual.png Graphic file (type png)
 <use graphs/exp4_n400_residual.png>
 Package luatex.def Info: graphs/exp4_n400_residual.png  used on input line 790.
 
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n50_relerr_eigenvalue.png, id=241, 702.625pt x 501.875pt>
+<graphs/exp4_n50_relerr_eigenvalue.png, id=378, 702.625pt x 501.875pt>
 File: graphs/exp4_n50_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp4_n50_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp4_n50_relerr_eigenvalue.png  used on input l
 ine 799.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n100_relerr_eigenvalue.png, id=242, 702.625pt x 501.875pt>
+<graphs/exp4_n100_relerr_eigenvalue.png, id=379, 702.625pt x 501.875pt>
 File: graphs/exp4_n100_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp4_n100_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp4_n100_relerr_eigenvalue.png  used on input 
 line 800.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n200_relerr_eigenvalue.png, id=243, 702.625pt x 501.875pt>
+<graphs/exp4_n200_relerr_eigenvalue.png, id=380, 702.625pt x 501.875pt>
 File: graphs/exp4_n200_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp4_n200_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp4_n200_relerr_eigenvalue.png  used on input 
 line 801.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n400_relerr_eigenvalue.png, id=244, 702.625pt x 501.875pt>
+<graphs/exp4_n400_relerr_eigenvalue.png, id=381, 702.625pt x 501.875pt>
 File: graphs/exp4_n400_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp4_n400_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp4_n400_relerr_eigenvalue.png  used on input 
@@ -1651,46 +1591,46 @@ warning  (pdf backend): ignoring duplicate destination with the name 'figure.12'
 
 <./graphs/exp4_n50_residual.png><./graphs/exp4_n100_residual.png><./graphs/exp4_
 n200_residual.png><./graphs/exp4_n400_residual.png>]
-<graphs/exp4_n50_relerr_eigenvector.png, id=255, 702.625pt x 501.875pt>
+<graphs/exp4_n50_relerr_eigenvector.png, id=391, 702.625pt x 501.875pt>
 File: graphs/exp4_n50_relerr_eigenvector.png Graphic file (type png)
 <use graphs/exp4_n50_relerr_eigenvector.png>
 Package luatex.def Info: graphs/exp4_n50_relerr_eigenvector.png  used on input 
 line 811.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n100_relerr_eigenvector.png, id=256, 702.625pt x 501.875pt>
+<graphs/exp4_n100_relerr_eigenvector.png, id=392, 702.625pt x 501.875pt>
 File: graphs/exp4_n100_relerr_eigenvector.png Graphic file (type png)
 <use graphs/exp4_n100_relerr_eigenvector.png>
 Package luatex.def Info: graphs/exp4_n100_relerr_eigenvector.png  used on input
  line 812.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n200_relerr_eigenvector.png, id=257, 702.625pt x 501.875pt>
+<graphs/exp4_n200_relerr_eigenvector.png, id=393, 702.625pt x 501.875pt>
 File: graphs/exp4_n200_relerr_eigenvector.png Graphic file (type png)
 <use graphs/exp4_n200_relerr_eigenvector.png>
 Package luatex.def Info: graphs/exp4_n200_relerr_eigenvector.png  used on input
  line 813.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n400_relerr_eigenvector.png, id=258, 702.625pt x 501.875pt>
+<graphs/exp4_n400_relerr_eigenvector.png, id=394, 702.625pt x 501.875pt>
 File: graphs/exp4_n400_relerr_eigenvector.png Graphic file (type png)
 <use graphs/exp4_n400_relerr_eigenvector.png>
 Package luatex.def Info: graphs/exp4_n400_relerr_eigenvector.png  used on input
  line 814.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n50_time.png, id=259, 702.625pt x 501.875pt>
+<graphs/exp4_n50_time.png, id=395, 702.625pt x 501.875pt>
 File: graphs/exp4_n50_time.png Graphic file (type png)
 <use graphs/exp4_n50_time.png>
 Package luatex.def Info: graphs/exp4_n50_time.png  used on input line 823.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n100_time.png, id=260, 702.625pt x 501.875pt>
+<graphs/exp4_n100_time.png, id=396, 702.625pt x 501.875pt>
 File: graphs/exp4_n100_time.png Graphic file (type png)
 <use graphs/exp4_n100_time.png>
 Package luatex.def Info: graphs/exp4_n100_time.png  used on input line 824.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n200_time.png, id=261, 702.625pt x 501.875pt>
+<graphs/exp4_n200_time.png, id=397, 702.625pt x 501.875pt>
 File: graphs/exp4_n200_time.png Graphic file (type png)
 <use graphs/exp4_n200_time.png>
 Package luatex.def Info: graphs/exp4_n200_time.png  used on input line 825.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n400_time.png, id=262, 702.625pt x 501.875pt>
+<graphs/exp4_n400_time.png, id=398, 702.625pt x 501.875pt>
 File: graphs/exp4_n400_time.png Graphic file (type png)
 <use graphs/exp4_n400_time.png>
 Package luatex.def Info: graphs/exp4_n400_time.png  used on input line 826.
@@ -1708,35 +1648,30 @@ ng><./graphs/exp4_n200_relerr_eigenvalue.png><./graphs/exp4_n400_relerr_eigenval
 ue.png><./graphs/exp4_n50_relerr_eigenvector.png><./graphs/exp4_n100_relerr_eige
 nvector.png><./graphs/exp4_n200_relerr_eigenvector.png><./graphs/exp4_n400_reler
 r_eigenvector.png>]
-<graphs/exp4_n50_iterations.png, id=277, 702.625pt x 501.875pt>
+<graphs/exp4_n50_iterations.png, id=414, 702.625pt x 501.875pt>
 File: graphs/exp4_n50_iterations.png Graphic file (type png)
 <use graphs/exp4_n50_iterations.png>
 Package luatex.def Info: graphs/exp4_n50_iterations.png  used on input line 835
 .
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n100_iterations.png, id=278, 702.625pt x 501.875pt>
+<graphs/exp4_n100_iterations.png, id=415, 702.625pt x 501.875pt>
 File: graphs/exp4_n100_iterations.png Graphic file (type png)
 <use graphs/exp4_n100_iterations.png>
 Package luatex.def Info: graphs/exp4_n100_iterations.png  used on input line 83
 6.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n200_iterations.png, id=279, 702.625pt x 501.875pt>
+<graphs/exp4_n200_iterations.png, id=416, 702.625pt x 501.875pt>
 File: graphs/exp4_n200_iterations.png Graphic file (type png)
 <use graphs/exp4_n200_iterations.png>
 Package luatex.def Info: graphs/exp4_n200_iterations.png  used on input line 83
 7.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp4_n400_iterations.png, id=280, 702.625pt x 501.875pt>
+<graphs/exp4_n400_iterations.png, id=417, 702.625pt x 501.875pt>
 File: graphs/exp4_n400_iterations.png Graphic file (type png)
 <use graphs/exp4_n400_iterations.png>
 Package luatex.def Info: graphs/exp4_n400_iterations.png  used on input line 83
 8.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-
-
-LaTeX Warning: Reference `tab:exp4_summary' on page 23 undefined on input line 
-844.
-
 
 
 [23
@@ -1750,55 +1685,32 @@ e.png><./graphs/exp4_n400_time.png><./graphs/exp4_n50_iterations.png><./graphs/e
 xp4_n100_iterations.png><./graphs/exp4_n200_iterations.png><./graphs/exp4_n400_i
 terations.png>]
 
-LaTeX Warning: Citation `exp2025' on page 24 undefined on input line 877.
-
-
-LaTeX Warning: Citation `exp2025' on page 24 undefined on input line 879.
-
-
-
 [24
 warning  (pdf backend): ignoring duplicate destination with the name 'table.5'
 ]
 
-LaTeX Warning: Citation `exp2025' on page 25 undefined on input line 919.
-
-
-
 [25]
 
 [26]
-
-LaTeX Warning: Reference `fig:exp5_residuals' on page 27 undefined on input lin
-e 1020.
-
-
-LaTeX Warning: Reference `fig:exp5_iterations' on page 27 undefined on input li
-ne 1020.
-
-
-LaTeX Warning: Reference `tab:exp5_summary' on page 27 undefined on input line 
-1020.
-
-<graphs/exp5_n10_max_residual.png, id=318, 702.625pt x 501.875pt>
+<graphs/exp5_n10_max_residual.png, id=461, 702.625pt x 501.875pt>
 File: graphs/exp5_n10_max_residual.png Graphic file (type png)
 <use graphs/exp5_n10_max_residual.png>
 Package luatex.def Info: graphs/exp5_n10_max_residual.png  used on input line 1
 025.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n20_max_residual.png, id=319, 702.625pt x 501.875pt>
+<graphs/exp5_n20_max_residual.png, id=462, 702.625pt x 501.875pt>
 File: graphs/exp5_n20_max_residual.png Graphic file (type png)
 <use graphs/exp5_n20_max_residual.png>
 Package luatex.def Info: graphs/exp5_n20_max_residual.png  used on input line 1
 026.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n40_max_residual.png, id=320, 702.625pt x 501.875pt>
+<graphs/exp5_n40_max_residual.png, id=463, 702.625pt x 501.875pt>
 File: graphs/exp5_n40_max_residual.png Graphic file (type png)
 <use graphs/exp5_n40_max_residual.png>
 Package luatex.def Info: graphs/exp5_n40_max_residual.png  used on input line 1
 027.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n80_max_residual.png, id=321, 702.625pt x 501.875pt>
+<graphs/exp5_n80_max_residual.png, id=464, 702.625pt x 501.875pt>
 File: graphs/exp5_n80_max_residual.png Graphic file (type png)
 <use graphs/exp5_n80_max_residual.png>
 Package luatex.def Info: graphs/exp5_n80_max_residual.png  used on input line 1
@@ -1807,46 +1719,46 @@ Package luatex.def Info: graphs/exp5_n80_max_residual.png  used on input line 1
 
 
 [27]
-<graphs/exp5_n10_max_relerr_eigenvalue.png, id=327, 702.625pt x 501.875pt>
+<graphs/exp5_n10_max_relerr_eigenvalue.png, id=473, 702.625pt x 501.875pt>
 File: graphs/exp5_n10_max_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp5_n10_max_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp5_n10_max_relerr_eigenvalue.png  used on inp
 ut line 1037.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n20_max_relerr_eigenvalue.png, id=328, 702.625pt x 501.875pt>
+<graphs/exp5_n20_max_relerr_eigenvalue.png, id=474, 702.625pt x 501.875pt>
 File: graphs/exp5_n20_max_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp5_n20_max_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp5_n20_max_relerr_eigenvalue.png  used on inp
 ut line 1038.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n40_max_relerr_eigenvalue.png, id=329, 702.625pt x 501.875pt>
+<graphs/exp5_n40_max_relerr_eigenvalue.png, id=475, 702.625pt x 501.875pt>
 File: graphs/exp5_n40_max_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp5_n40_max_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp5_n40_max_relerr_eigenvalue.png  used on inp
 ut line 1039.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n80_max_relerr_eigenvalue.png, id=330, 702.625pt x 501.875pt>
+<graphs/exp5_n80_max_relerr_eigenvalue.png, id=476, 702.625pt x 501.875pt>
 File: graphs/exp5_n80_max_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp5_n80_max_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp5_n80_max_relerr_eigenvalue.png  used on inp
 ut line 1040.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n10_time.png, id=331, 702.625pt x 501.875pt>
+<graphs/exp5_n10_time.png, id=477, 702.625pt x 501.875pt>
 File: graphs/exp5_n10_time.png Graphic file (type png)
 <use graphs/exp5_n10_time.png>
 Package luatex.def Info: graphs/exp5_n10_time.png  used on input line 1049.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n20_time.png, id=332, 702.625pt x 501.875pt>
+<graphs/exp5_n20_time.png, id=478, 702.625pt x 501.875pt>
 File: graphs/exp5_n20_time.png Graphic file (type png)
 <use graphs/exp5_n20_time.png>
 Package luatex.def Info: graphs/exp5_n20_time.png  used on input line 1050.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n40_time.png, id=333, 702.625pt x 501.875pt>
+<graphs/exp5_n40_time.png, id=479, 702.625pt x 501.875pt>
 File: graphs/exp5_n40_time.png Graphic file (type png)
 <use graphs/exp5_n40_time.png>
 Package luatex.def Info: graphs/exp5_n40_time.png  used on input line 1051.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n80_time.png, id=334, 702.625pt x 501.875pt>
+<graphs/exp5_n80_time.png, id=480, 702.625pt x 501.875pt>
 File: graphs/exp5_n80_time.png Graphic file (type png)
 <use graphs/exp5_n80_time.png>
 Package luatex.def Info: graphs/exp5_n80_time.png  used on input line 1052.
@@ -1864,25 +1776,25 @@ s/exp5_n40_max_residual.png><./graphs/exp5_n80_max_residual.png><./graphs/exp5_n
 10_max_relerr_eigenvalue.png><./graphs/exp5_n20_max_relerr_eigenvalue.png><./gra
 phs/exp5_n40_max_relerr_eigenvalue.png><./graphs/exp5_n80_max_relerr_eigenvalue.
 png>]
-<graphs/exp5_n10_iterations.png, id=349, 702.625pt x 501.875pt>
+<graphs/exp5_n10_iterations.png, id=494, 702.625pt x 501.875pt>
 File: graphs/exp5_n10_iterations.png Graphic file (type png)
 <use graphs/exp5_n10_iterations.png>
 Package luatex.def Info: graphs/exp5_n10_iterations.png  used on input line 106
 1.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n20_iterations.png, id=350, 702.625pt x 501.875pt>
+<graphs/exp5_n20_iterations.png, id=495, 702.625pt x 501.875pt>
 File: graphs/exp5_n20_iterations.png Graphic file (type png)
 <use graphs/exp5_n20_iterations.png>
 Package luatex.def Info: graphs/exp5_n20_iterations.png  used on input line 106
 2.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n40_iterations.png, id=351, 702.625pt x 501.875pt>
+<graphs/exp5_n40_iterations.png, id=496, 702.625pt x 501.875pt>
 File: graphs/exp5_n40_iterations.png Graphic file (type png)
 <use graphs/exp5_n40_iterations.png>
 Package luatex.def Info: graphs/exp5_n40_iterations.png  used on input line 106
 3.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp5_n80_iterations.png, id=352, 702.625pt x 501.875pt>
+<graphs/exp5_n80_iterations.png, id=497, 702.625pt x 501.875pt>
 File: graphs/exp5_n80_iterations.png Graphic file (type png)
 <use graphs/exp5_n80_iterations.png>
 Package luatex.def Info: graphs/exp5_n80_iterations.png  used on input line 106
@@ -1899,82 +1811,58 @@ warning  (pdf backend): ignoring duplicate destination with the name 'figure.20'
 <./graphs/exp5_n10_time.png><./graphs/exp5_n20_time.png><./graphs/exp5_n40_time.
 png><./graphs/exp5_n80_time.png><./graphs/exp5_n10_iterations.png><./graphs/exp5
 _n20_iterations.png><./graphs/exp5_n40_iterations.png><./graphs/exp5_n80_iterati
-ons.png>]
-
-LaTeX Warning: Citation `exp2025' on page 30 undefined on input line 1094.
-
-(load cache: extra_lmsans10-regular.luc)
-
-LaTeX Warning: Citation `exp2025' on page 30 undefined on input line 1101.
-
-
+ons.png>](load cache: extra_lmsans10-regular.luc)
 
 [30
 warning  (pdf backend): ignoring duplicate destination with the name 'table.6'
 ]
 
-LaTeX Warning: Citation `exp2025' on page 31 undefined on input line 1133.
-
-
-
 [31]
 
 [32]
-
-LaTeX Warning: Reference `fig:exp6_residuals' on page 33 undefined on input lin
-e 1225.
-
-
-LaTeX Warning: Reference `fig:exp6_iterations' on page 33 undefined on input li
-ne 1225.
-
-
-LaTeX Warning: Reference `tab:exp6_summary' on page 33 undefined on input line 
-1225.
-
-<graphs/exp6_n10_max_residual.png, id=387, 702.625pt x 501.875pt>
+<graphs/exp6_n10_max_residual.png, id=534, 702.625pt x 501.875pt>
 File: graphs/exp6_n10_max_residual.png Graphic file (type png)
 <use graphs/exp6_n10_max_residual.png>
 Package luatex.def Info: graphs/exp6_n10_max_residual.png  used on input line 1
 230.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n20_max_residual.png, id=388, 702.625pt x 501.875pt>
+<graphs/exp6_n20_max_residual.png, id=535, 702.625pt x 501.875pt>
 File: graphs/exp6_n20_max_residual.png Graphic file (type png)
 <use graphs/exp6_n20_max_residual.png>
 Package luatex.def Info: graphs/exp6_n20_max_residual.png  used on input line 1
 231.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n40_max_residual.png, id=389, 702.625pt x 501.875pt>
+<graphs/exp6_n40_max_residual.png, id=536, 702.625pt x 501.875pt>
 File: graphs/exp6_n40_max_residual.png Graphic file (type png)
 <use graphs/exp6_n40_max_residual.png>
 Package luatex.def Info: graphs/exp6_n40_max_residual.png  used on input line 1
 232.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n80_max_residual.png, id=390, 702.625pt x 501.875pt>
+<graphs/exp6_n80_max_residual.png, id=537, 702.625pt x 501.875pt>
 File: graphs/exp6_n80_max_residual.png Graphic file (type png)
 <use graphs/exp6_n80_max_residual.png>
 Package luatex.def Info: graphs/exp6_n80_max_residual.png  used on input line 1
 233.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n10_max_relerr_eigenvalue.png, id=391, 702.625pt x 501.875pt>
+<graphs/exp6_n10_max_relerr_eigenvalue.png, id=538, 702.625pt x 501.875pt>
 File: graphs/exp6_n10_max_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp6_n10_max_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp6_n10_max_relerr_eigenvalue.png  used on inp
 ut line 1242.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n20_max_relerr_eigenvalue.png, id=392, 702.625pt x 501.875pt>
+<graphs/exp6_n20_max_relerr_eigenvalue.png, id=539, 702.625pt x 501.875pt>
 File: graphs/exp6_n20_max_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp6_n20_max_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp6_n20_max_relerr_eigenvalue.png  used on inp
 ut line 1243.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n40_max_relerr_eigenvalue.png, id=393, 702.625pt x 501.875pt>
+<graphs/exp6_n40_max_relerr_eigenvalue.png, id=540, 702.625pt x 501.875pt>
 File: graphs/exp6_n40_max_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp6_n40_max_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp6_n40_max_relerr_eigenvalue.png  used on inp
 ut line 1244.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n80_max_relerr_eigenvalue.png, id=394, 702.625pt x 501.875pt>
+<graphs/exp6_n80_max_relerr_eigenvalue.png, id=541, 702.625pt x 501.875pt>
 File: graphs/exp6_n80_max_relerr_eigenvalue.png Graphic file (type png)
 <use graphs/exp6_n80_max_relerr_eigenvalue.png>
 Package luatex.def Info: graphs/exp6_n80_max_relerr_eigenvalue.png  used on inp
@@ -1987,45 +1875,45 @@ warning  (pdf backend): ignoring duplicate destination with the name 'figure.21'
 
 <./graphs/exp6_n10_max_residual.png><./graphs/exp6_n20_max_residual.png><./graph
 s/exp6_n40_max_residual.png><./graphs/exp6_n80_max_residual.png>]
-<graphs/exp6_n10_time.png, id=405, 702.625pt x 501.875pt>
+<graphs/exp6_n10_time.png, id=554, 702.625pt x 501.875pt>
 File: graphs/exp6_n10_time.png Graphic file (type png)
 <use graphs/exp6_n10_time.png>
 Package luatex.def Info: graphs/exp6_n10_time.png  used on input line 1254.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n20_time.png, id=406, 702.625pt x 501.875pt>
+<graphs/exp6_n20_time.png, id=555, 702.625pt x 501.875pt>
 File: graphs/exp6_n20_time.png Graphic file (type png)
 <use graphs/exp6_n20_time.png>
 Package luatex.def Info: graphs/exp6_n20_time.png  used on input line 1255.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n40_time.png, id=407, 702.625pt x 501.875pt>
+<graphs/exp6_n40_time.png, id=556, 702.625pt x 501.875pt>
 File: graphs/exp6_n40_time.png Graphic file (type png)
 <use graphs/exp6_n40_time.png>
 Package luatex.def Info: graphs/exp6_n40_time.png  used on input line 1256.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n80_time.png, id=408, 702.625pt x 501.875pt>
+<graphs/exp6_n80_time.png, id=557, 702.625pt x 501.875pt>
 File: graphs/exp6_n80_time.png Graphic file (type png)
 <use graphs/exp6_n80_time.png>
 Package luatex.def Info: graphs/exp6_n80_time.png  used on input line 1257.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n10_iterations.png, id=409, 702.625pt x 501.875pt>
+<graphs/exp6_n10_iterations.png, id=558, 702.625pt x 501.875pt>
 File: graphs/exp6_n10_iterations.png Graphic file (type png)
 <use graphs/exp6_n10_iterations.png>
 Package luatex.def Info: graphs/exp6_n10_iterations.png  used on input line 126
 6.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n20_iterations.png, id=410, 702.625pt x 501.875pt>
+<graphs/exp6_n20_iterations.png, id=559, 702.625pt x 501.875pt>
 File: graphs/exp6_n20_iterations.png Graphic file (type png)
 <use graphs/exp6_n20_iterations.png>
 Package luatex.def Info: graphs/exp6_n20_iterations.png  used on input line 126
 7.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n40_iterations.png, id=411, 702.625pt x 501.875pt>
+<graphs/exp6_n40_iterations.png, id=560, 702.625pt x 501.875pt>
 File: graphs/exp6_n40_iterations.png Graphic file (type png)
 <use graphs/exp6_n40_iterations.png>
 Package luatex.def Info: graphs/exp6_n40_iterations.png  used on input line 126
 8.
 (luatex.def)             Requested size: 204.85983pt x 146.32878pt.
-<graphs/exp6_n80_iterations.png, id=412, 702.625pt x 501.875pt>
+<graphs/exp6_n80_iterations.png, id=561, 702.625pt x 501.875pt>
 File: graphs/exp6_n80_iterations.png Graphic file (type png)
 <use graphs/exp6_n80_iterations.png>
 Package luatex.def Info: graphs/exp6_n80_iterations.png  used on input line 126
@@ -2062,56 +1950,43 @@ L3 programming layer <2025-09-02>
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `report_1.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `report_1.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  5EAB3B7E847A14BBD270840E380E5E75;3844.
+Package rerunfilecheck Info: File `report_1.out' has not changed.
+(rerunfilecheck)             Checksum: 5EAB3B7E847A14BBD270840E380E5E75;3844.
 )
 
 Here is how much of LuaTeX's memory you used:
- 13381 strings out of 476291
+ 13428 strings out of 476291
  156557,662416 words of node,token memory allocated
  1734 words of node memory still in use:
    11 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 1 glyph, 502 attribute, 56 glue_sp
 ec, 58 attribute_list, 1 write, 14 user_defined, 1 pdf_action nodes
-   avail lists: 1:31,2:38114,3:890,4:386,5:189,6:80,7:4549,8:65,9:1800,10:30,11:
+   avail lists: 1:29,2:38186,3:890,4:386,5:189,6:80,7:4550,8:65,9:1805,10:30,11:
 22
- 34965 multiletter control sequences out of 65536+600000
- 95 fonts using 73644535 bytes
+ 34997 multiletter control sequences out of 65536+600000
+ 94 fonts using 73512527 bytes
  119i,13n,112p,1785b,502s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf><c:/te
 xlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/texlive/
 2025/texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf><c:/texlive/2025/t
-exmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf><c:/texlive/2025/texmf-dis
-t/fonts/opentype/public/lm/lmsans12-regular.otf><c:/texlive/2025/texmf-dist/font
-s/opentype/public/haranoaji/HaranoAjiGothic-Medium.otf><c:/texlive/2025/texmf-di
-st/fonts/opentype/public/lm/lmroman10-regular.otf><c:/texlive/2025/texmf-dist/fo
-nts/opentype/public/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-dist/fonts/o
-pentype/public/haranoaji/HaranoAjiMincho-Regular.otf><c:/texlive/2025/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmmi5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb>
-<c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texli
-ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfon
-ts/symbols/msbm10.pfb>
-Output written on report_1.pdf (37 pages, 2308415 bytes).
+exmf-dist/fonts/opentype/public/lm/lmsans12-regular.otf><c:/texlive/2025/texmf-d
+ist/fonts/opentype/public/haranoaji/HaranoAjiGothic-Medium.otf><c:/texlive/2025/
+texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/texlive/2025/texmf
+-dist/fonts/opentype/public/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-dist
+/fonts/opentype/public/haranoaji/HaranoAjiMincho-Regular.otf><c:/texlive/2025/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><
+c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/
+2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/publi
+c/amsfonts/symbols/msbm10.pfb>
+Output written on report_1.pdf (37 pages, 2310364 bytes).
 
-PDF statistics: 547 PDF objects out of 1000 (max. 8388607)
- 275 compressed objects within 3 object streams
+PDF statistics: 687 PDF objects out of 1000 (max. 8388607)
+ 416 compressed objects within 5 object streams
  116 named destinations out of 1000 (max. 131072)
- 1 words of extra memory for PDF output out of 10000 (max. 100000000)
+ 281 words of extra memory for PDF output out of 10000 (max. 100000000)
 

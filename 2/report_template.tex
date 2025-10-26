@@ -53,11 +53,7 @@
   showstringspaces=false
 }
 
-% 実験表題用コマンド
-\newcommand{\ExperimentHeader}[2]{%
-  \section{#1}%
-  \textbf{目的：} #2\par\vspace{6pt}%
-}
+
 
 % キャプションのフォント調整
 \captionsetup{font=small,labelfont=bf}
@@ -88,9 +84,11 @@
 \end{itemize}
 
 % ===== 例：実験テンプレート =====
-\ExperimentHeader{はじめに}
-今回は
-\ExperimentHeader{課題1：タイトル}{課題の目的を短く記述}
+\section{はじめに}
+本実験第2回では，最小二乗法の基礎とその実装手法を学ぶことを目的とする。具体的には，観測データからのパラメータ推定，重み付き・逐次最小二乗法，データ分割・推定値の合成を通して，推定精度と計算効率の違いを実験的に比較する。
+
+
+\section{課題1：タイトル}{課題の目的を短く記述}
 \subsection{原理・方法}
 % 理論的な説明
 \subsection{実装（サンプルコード）}
@@ -130,7 +128,7 @@ $N$ & 残差 & 相対誤差 & 時間[s] \\
 
 % ===== 複数課題の繰り返し =====
 % 以下を必要数コピーして各課題を記述
-\ExperimentHeader{課題2：LU分解}{目的を記載}
+\section{課題2：LU分解}{目的を記載}
 % ... 同様に節を展開
 
 % ===== 総合比較 =====

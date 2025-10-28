@@ -1,4 +1,4 @@
-\subsection{3.2.2 原理と方法}
+\subsection{原理と方法}
 
 \paragraph{原理}
 各観測 $i=1,\dots,N$ で $y_i\in\mathbb{R}^m$, $X_i\in\mathbb{R}^{m\times p}$ とし
@@ -33,58 +33,52 @@ $V=\sigma^2\Sigma$ のようにスケール未知なら
 (1) 各 $i$ の設計行列 $X_i$ と観測 $y_i$ を用意（$X_i$ は $m\times p$）。  
 (2) $Q=V^{-1}$ を決めて $S=\sum X_i^\top QX_i,\ b=\sum X_i^\top Qy_i$ を計算。  
 (3) $\hat\theta=S^{-1}b$。  
-(4) 残差 $r_i=y_i-X_i\hat\theta$ を求め，$V$ 既知なら $\widehat{\mathrm{Cov}}(\hat\theta)=S^{-1}$。$V=\sigma^2\Sigma$ のときは上式で $\hat\sigma^2$ を推定し $\hat\sigma^2 S^{-1}$ を用いる。
 
 \paragraph{実装}
 R による実装例を以下に示す。
 \begin{lstlisting}
-# Weighted Least Squares for {y_i = X_i theta + w_i}
-# x: array (m, p, n) with X_i = x[,,i]
-# y: matrix (n, m) or vector length n*m? -> here matrix with row i = y_i^T
-# V: m x m covariance of w_i (known)  ; Q = solve(V)
-# If V = sigma^2 * Sigma, pass Sigma via V and set scale_unknown=TRUE.
-
-regression_multiple <- function(x, y, V, scale_unknown = FALSE){
-  if (length(dim(x)) != 3) stop("x must be an array (m, p, n)")
-  m <- dim(x)[1]; p <- dim(x)[2]; n <- dim(x)[3]
-  if (is.null(dim(y))) y <- matrix(y, nrow = n, ncol = m)
-  if (!all(dim(y) == c(n, m))) stop("y must be n x m")
-  Q <- solve(V)
-
-  S <- matrix(0, p, p)
-  b <- matrix(0, p, 1)
-  for (i in 1:n){
-    Xi <- x[,,i]              # m x p
-    yi <- matrix(y[i,], m, 1) # m x 1
-    S  <- S + t(Xi) %*% Q %*% Xi
-    b  <- b + t(Xi) %*% Q %*% yi
-  }
-  theta_hat <- solve(S, b)
-
-  # residuals
-  SSEw <- 0
-  for (i in 1:n){
-    Xi <- x[,,i]; yi <- matrix(y[i,], m, 1)
-    ri <- yi - Xi %*% theta_hat
-    SSEw <- SSEw + t(ri) %*% Q %*% ri
-  }
-  if (scale_unknown){
-    dof <- n*m - p
-    sigma2_hat <- as.numeric(SSEw / dof)
-    err_cov_mat <- sigma2_hat * solve(S)
-  } else {
-    err_cov_mat <- solve(S)               # V known exactly
-    sigma2_hat <- NA_real_
-  }
-  list(theta_hat = theta_hat,
-       err_cov_mat = err_cov_mat,
-       sigma2_hat = sigma2_hat,
-       S = S, b = b)
+regression_multiple <- function(x, y, V = NULL, Q = NULL){
+    # y: n×1行列（またはベクトル）
+    if (is.null(ncol(y))) {
+        y <- as.matrix(y, ncol = 1)
+    }
+    if (length(dim(x)) != 3) {
+        stop("x must be a 3-dimensional array")
+    }
+    n <- dim(x)[3]
+    m <- ncol(y)
+    p <- dim(x)[1] # 特徴量数
+    S <- matrix(0, p, p)
+    b <- matrix(0, p, 1)
+    T <- matrix(0, p, p)
+    if (is.null(V)) {
+        V <- diag(m)
+    }
+    if (is.null(Q)) {
+        Q <- solve(V)
+    }
+    # m=1（スカラー出力）の場合はQ,Vをスカラー化
+    if (m == 1) {
+        Q <- as.numeric(Q)
+        V <- as.numeric(V)
+        for (i in 1:n) {
+            xi <- as.matrix(x[,,i]) # (p,1)
+            S <- S + xi %*% t(xi) * Q
+            b <- b + xi * Q * y[i, 1]
+            T <- T + xi %*% t(xi) * V
+        }
+    } else {
+        for (i in 1:n) {
+            xi <- as.matrix(x[,,i])
+            yi <- matrix(y[i, ], nrow = m, ncol = 1)
+            S <- S + t(xi) %*% Q %*% xi
+            b <- b + t(xi) %*% Q %*% yi
+            T <- T + t(xi) %*% V %*% xi
+        }
+    }
+    theta_hat <- solve(S) %*% b
+    err_cov_mat <- solve(S) %*% T %*% solve(S)
+    return(list(theta_hat = theta_hat, err_cov_mat = err_cov_mat, S = S, b = b, T = T))
 }
-
-# m = 1（スカラー出力）で各点の重み w_i = 1/Var(w_i) がある場合の簡易呼び出し:
-# ここでは X_i はベクトル（p×1）なので m=1, V = 1/w_i ではなく Var = 1/w_i ⇒ Q_i = w_i。
-# 観測ごとに重みが異なるときは、対角ブロック Q = diag(w_1, ..., w_n) を展開するか、
-# 上のループで各 i ごとに Q_i = w_i を使って S += w_i * X_i X_i^T, b += w_i * X_i y_i とすればよい。
 \end{lstlisting}
 

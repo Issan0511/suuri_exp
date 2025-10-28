@@ -79,7 +79,7 @@
 
 以下の R 関数が上記推定を実装している．
 
-\begin{verbatim}
+\begin{lstlisting}[language=R]
 regression_simple <- function(x, y){
     theta_hat  <- solve(t(x) %*% x) %*% t(x) %*% y
     sigma2_hat <- as.numeric(t(y - x %*% theta_hat) %*%
@@ -91,7 +91,7 @@ regression_simple <- function(x, y){
     list(theta_hat=theta_hat, err_cov_mat=err_cov_mat,
          sigma2_hat=sigma2_hat, det_coef=det_coef)
 }
-\end{verbatim}
+\end{lstlisting}
 
 
 \subsection{課題1（重回帰）}
@@ -145,7 +145,7 @@ R^2=0.8629734 .
 \end{figure}
 
 \paragraph{Rコード}
-\begin{verbatim}
+\begin{lstlisting}[language=R]
 # データ読み込み
 data <- read.csv("datas/mmse_kadai1.csv", header=FALSE,
                  col.names = c("x1","x2","y"))
@@ -201,7 +201,7 @@ print(th); print(Vhat); print(R2)
 
 # 収束図
 plot_exp1(x, y)
-\end{verbatim}
+\end{lstlisting}
 
 \paragraph {考察}
 
@@ -253,7 +253,7 @@ R^2=0.461855 .
 \end{figure}
 
 \paragraph{Rコード}
-\begin{verbatim}
+\begin{lstlisting}[language=R]
 # データ
 data <- read.csv("datas/mmse_kadai2.csv", header=FALSE,
                  col.names=c("x1","y"))
@@ -309,7 +309,7 @@ print(exp2(x, y, N_max)$theta_hat)
 print(exp2(x, y, N_max)$err_cov_mat)
 print(exp2(x, y, N_max)$det_coef)
 plot_exp2(x, y)
-\end{verbatim}
+\end{lstlisting}
 \paragraph {考察}
 
 
@@ -354,7 +354,7 @@ R^2=0.0002841468.
 \end{figure}
 
 \paragraph{Rコード}
-\begin{verbatim}
+\begin{lstlisting}[language=R]
 # データ読込
 data3 <- read.csv("datas/mmse_kadai3.csv", header=FALSE,
                   col.names=c("x1","x2","y"))
@@ -407,7 +407,7 @@ print(exp3(x, y, N_max)$theta_hat)
 print(exp3(x, y, N_max)$err_cov_mat)
 print(exp3(x, y, N_max)$det_coef)
 plot_exp3(x, y)
-\end{verbatim}
+\end{lstlisting}
 
 \paragraph{考察}
 資料にあるように、Cauchy 誤差では外れ値の影響が支配的で，$\hat\theta_N$ は $N$ を増やしても安定しにくいことが確認できた。
@@ -424,7 +424,7 @@ $X=[\varphi(x_1);\dots;\varphi(x_N)]\in\mathbb{R}^{N\times4}$, $y=[y_1;\dots;y_N
 推定量・共分散・決定係数は課題1と同じ形式（$p=4$）で計算する．
 
 \paragraph{Rコード}
-\begin{verbatim}
+\begin{lstlisting}[language=R]
 # 課題4: x ∈ [0,1], φ(x)=[1 x x^2 x^3]
 data <- read.csv("datas/mmse_kadai4.csv", header=FALSE,
                  col.names=c("x1","y"))
@@ -456,7 +456,7 @@ res4 <- exp4(x, y, N_max)
 print(res4$theta_hat)
 print(res4$err_cov_mat)
 print(res4$det_coef)   # R^2
-\end{verbatim}
+\end{lstlisting}
 
 \paragraph{結果（$N=10000$）}
 \[

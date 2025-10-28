@@ -37,16 +37,16 @@
 
 % 数式用の簡易マクロ
 \newcommand{\R}{\mathbb{R}}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+% \newcommand{\norm}[1]{\left\lVert#1\right\rVert}  % physics パッケージで既に定義済み
 
-% listings 設定（Julia を例示）
+% listings 設定（R を例示）
 \lstset{
   basicstyle=\ttfamily\footnotesize,
   breaklines=true,
   frame=single,
   numbers=left,
   numberstyle=\tiny,
-  language=Julia,
+  language=R,
   keywordstyle=\color{blue},
   commentstyle=\color{gray},
   stringstyle=\color{teal},
@@ -75,77 +75,46 @@
 \tableofcontents
 \clearpage
 
-\section*{表記・略記}
-本レポートにおける表記と略記を示す。必要に応じて編集すること。
-\begin{itemize}
-  \item $\R$：実数全体
-  \item $\|\cdot\|$：ユークリッドノルム（明示が必要な場合は添字を用いる）
-  \item 各種パラメータや記号は本文中で定義する
-\end{itemize}
+% \section*{表記・略記}
+% 本レポートにおける表記と略記を示す。必要に応じて編集すること。
+% \begin{itemize}
+%   \item $\R$：実数全体
+%   \item $\|\cdot\|$：ユークリッドノルム（明示が必要な場合は添字を用いる）
+%   \item 各種パラメータや記号は本文中で定義する
+% \end{itemize}
 
 % ===== 例：実験テンプレート =====
 \section{はじめに}
 本実験第2回では，最小二乗法の基礎とその実装手法を学ぶことを目的とする。具体的には，観測データからのパラメータ推定，重み付き・逐次最小二乗法，データ分割・推定値の合成を通して，推定精度と計算効率の違いを実験的に比較する。
 
 
-\section{課題1：タイトル}{課題の目的を短く記述}
-\subsection{原理・方法}
-% 理論的な説明
-\subsection{実装（サンプルコード）}
-\begin{lstlisting}
-# ここに実験で用いた主要コード（抜粋）を貼る
-function example(A, b)
-    # ...
-end
-\end{lstlisting}
+\section{最小二乗法とその評価方法}
 
-\subsection{実験方法}
-実験の再現手順、乱数シード、試行回数、計測指標（残差、相対誤差、時間など）を明記する。
+\input{section_ols.tex}
 
-\subsection{結果}
-代表的な図表を貼る。図の参照は相対パス \verb|\graphdir| を利用。
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\linewidth]{\graphdir/exp1_result.png}
-  \caption{課題1の代表結果（説明を一行）}
-  \label{fig:exp1_result}
-\end{figure}
+\section{重み付き最小二乗法}
 
-\begin{table}[H]
-\centering
-\caption{課題1の結果サマリ（中央値等）}
-\begin{tabular}{r|r r r}
-\toprule
-$N$ & 残差 & 相対誤差 & 時間[s] \\
-\midrule
-100 & $x\times10^{-y}$ & $x\times10^{-y}$ & 0.00 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\input{section_wls.tex}
 
-\subsection{考察}
-% 結果の解釈、理論との比較、誤差の原因、改善案を簡潔に。
+\section{逐次最小二乗法}
 
-% ===== 複数課題の繰り返し =====
-% 以下を必要数コピーして各課題を記述
-\section{課題2：LU分解}{目的を記載}
-% ... 同様に節を展開
+% \input{section_rls.tex}
+
+
 
 % ===== 総合比較 =====
 \section{アルゴリズム比較}
 表や図を用いて複数手法の比較を行う。計算量・精度・安定性・実行時間の観点でまとめる。
 
-% ===== 結論 =====
 \section{結論}
 本章での結論と今後の課題を箇条書きでまとめる。
 
-% ===== 付録 =====
 \appendix
 \section{使用コード一覧}
 主要スクリプトと入手先を列挙する。
 \begin{itemize}
   \item 実験コード（R）：\url{https://github.com/<your-repo>}
-  \item データ生成スクリプト：scripts/generate_data.jl
+  \item データ生成スクリプト：\texttt{scripts/generate\_data.jl}
 \end{itemize}
 
 \section{補足導出}

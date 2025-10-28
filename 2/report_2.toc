@@ -1,0 +1,35 @@
+\contentsline {section}{\numberline {1}はじめに}{2}{section.1}%
+\contentsline {section}{\numberline {2}最小二乗法とその評価方法}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}原理・方法}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}課題1（重回帰）}{3}{subsection.2.2}%
+\contentsline {paragraph}{モデル}{3}{section*.2}%
+\contentsline {paragraph}{推定量}{4}{section*.3}%
+\contentsline {paragraph}{収束確認}{4}{section*.4}%
+\contentsline {paragraph}{結果（全データ $N=10000$）}{4}{section*.5}%
+\contentsline {paragraph}{Rコード}{5}{section*.7}%
+\contentsline {paragraph}{考察}{6}{section*.8}%
+\contentsline {subsection}{\numberline {2.3}課題2（多項式回帰）}{6}{subsection.2.3}%
+\contentsline {paragraph}{モデル}{6}{section*.9}%
+\contentsline {paragraph}{推定量}{6}{section*.10}%
+\contentsline {paragraph}{収束確認}{6}{section*.11}%
+\contentsline {paragraph}{結果（全データ $N=10000$）}{6}{section*.12}%
+\contentsline {paragraph}{Rコード}{7}{section*.14}%
+\contentsline {paragraph}{考察}{9}{section*.15}%
+\contentsline {subsection}{\numberline {2.4}課題3（分散の観測誤差：Cauchy）}{9}{subsection.2.4}%
+\contentsline {paragraph}{モデルと注意}{9}{section*.16}%
+\contentsline {paragraph}{推定（形式的なOLS）}{9}{section*.17}%
+\contentsline {paragraph}{結果（全データ $N=10000$）}{9}{section*.18}%
+\contentsline {paragraph}{Rコード}{10}{section*.20}%
+\contentsline {paragraph}{考察}{11}{section*.21}%
+\contentsline {subsection}{\numberline {2.5}課題4（入力域の制約と設計）}{11}{subsection.2.5}%
+\contentsline {paragraph}{設定}{11}{section*.22}%
+\contentsline {paragraph}{推定量}{11}{section*.23}%
+\contentsline {paragraph}{Rコード}{11}{section*.24}%
+\contentsline {paragraph}{結果（$N=10000$）}{12}{section*.25}%
+\contentsline {paragraph}{課題2.1との比較（$N=10000$）}{12}{section*.26}%
+\contentsline {paragraph}{考察（どうデータを取るべきか）}{12}{section*.27}%
+\contentsline {section}{\numberline {3}}{13}{section.3}%
+\contentsline {section}{\numberline {4}アルゴリズム比較}{13}{section.4}%
+\contentsline {section}{\numberline {5}結論}{13}{section.5}%
+\contentsline {section}{\numberline {付録A}使用コード一覧}{13}{appendix.A}%
+\contentsline {section}{\numberline {付録B}補足導出}{13}{appendix.B}%

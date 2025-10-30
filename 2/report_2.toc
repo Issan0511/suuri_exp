@@ -29,12 +29,24 @@
 \contentsline {paragraph}{課題2.1との比較（$N=10000$）}{10}{section*.26}%
 \contentsline {paragraph}{考察（どうデータを取るべきか）}{11}{section*.27}%
 \contentsline {section}{\numberline {3}重み付き最小二乗法}{11}{section.3}%
-\contentsline {subsection}{\numberline {3.1}3.2.2 原理と方法}{11}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.1}原理と方法}{11}{subsection.3.1}%
 \contentsline {paragraph}{原理}{11}{section*.28}%
 \contentsline {paragraph}{方法}{11}{section*.29}%
 \contentsline {paragraph}{実装}{11}{section*.30}%
-\contentsline {section}{\numberline {4}逐次最小二乗法}{12}{section.4}%
-\contentsline {section}{\numberline {5}アルゴリズム比較}{12}{section.5}%
-\contentsline {section}{\numberline {6}結論}{12}{section.6}%
-\contentsline {section}{\numberline {付録A}使用コード一覧}{13}{appendix.A}%
-\contentsline {section}{\numberline {付録B}補足導出}{13}{appendix.B}%
+\contentsline {subsection}{\numberline {3.2}課題5（2次元出力：重み付き最小二乗法）}{12}{subsection.3.2}%
+\contentsline {paragraph}{課題の内容}{12}{section*.31}%
+\contentsline {paragraph}{推定法}{12}{section*.32}%
+\contentsline {paragraph}{実装}{13}{section*.33}%
+\contentsline {paragraph}{結果}{13}{section*.34}%
+\contentsline {paragraph}{考察}{15}{section*.37}%
+\contentsline {subsection}{\numberline {3.3}課題6（2次元出力・異分散2群に対する重み付き最小二乗）}{15}{subsection.3.3}%
+\contentsline {paragraph}{課題の内容}{15}{section*.38}%
+\contentsline {paragraph}{推定法（GLS/WLS）}{15}{section*.39}%
+\contentsline {paragraph}{実装}{16}{section*.40}%
+\contentsline {paragraph}{結果}{16}{section*.41}%
+\contentsline {paragraph}{考察}{18}{section*.44}%
+\contentsline {section}{\numberline {4}逐次最小二乗法}{18}{section.4}%
+\contentsline {section}{\numberline {5}アルゴリズム比較}{18}{section.5}%
+\contentsline {section}{\numberline {6}結論}{18}{section.6}%
+\contentsline {section}{\numberline {付録A}使用コード一覧}{18}{appendix.A}%
+\contentsline {section}{\numberline {付録B}補足導出}{19}{appendix.B}%

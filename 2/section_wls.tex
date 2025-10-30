@@ -82,3 +82,199 @@ regression_multiple <- function(x, y, V = NULL, Q = NULL){
 }
 \end{lstlisting}
 
+\subsection{課題5（2次元出力：重み付き最小二乗法）}
+
+\paragraph{課題の内容}
+入力 $x_i \in \mathbb{R}$（$i=1,\dots,1000$）に対し，$m=2$ 次元出力の線形モデル
+\[
+  y_i \;=\; \phi(x_i)\,\theta \;+\; w_i,\qquad
+  \phi(x) = 
+  \begin{bmatrix}
+    1 & x\\
+    1 & x^2
+  \end{bmatrix},
+  \quad
+  w_i \sim \mathcal{N}(0,V),\;
+  V=\begin{bmatrix}100&0\\0&1\end{bmatrix},
+\]
+を考える．ここで $\theta\in\mathbb{R}^2$ を推定対象とする．
+
+\paragraph{推定法}
+最小二乗（OLS）の推定値は
+\[
+  \hat{\theta}_N \;=\;
+  \Bigl(\sum_{i=1}^N \phi_i^\top \phi_i \Bigr)^{-1}
+  \sum_{i=1}^N \phi_i^\top y_i,
+\]
+で与えられる（$\phi_i=\phi(x_i)$）．
+観測雑音の共分散 $V$ が既知で，その影響を反映した重み付き最小二乗（WLS）を用いると，
+$V=W^2$ を満たす $W$ に対し
+\[
+  \hat{\theta}_N \;=\;
+  \Bigl(\sum_{i=1}^N \phi_i^\top W^{-2}\phi_i \Bigr)^{-1}
+  \sum_{i=1}^N \phi_i^\top W^{-2} y_i
+  \;=\;
+  \Bigl(\sum_{i=1}^N \phi_i^\top Q\,\phi_i \Bigr)^{-1}
+  \sum_{i=1}^N \phi_i^\top Q\, y_i,
+\]
+となる（$Q=W^{-2}=V^{-1}$）．
+
+\paragraph{実装}
+\texttt{datas/mmse\_kadai5.csv} を読み込み，$x$ から
+\(
+\phi(x)=\begin{bmatrix}1&x\\1&x^2\end{bmatrix}
+\)
+を構成して $x\in\mathbb{R}^{2\times 2\times N}$ の 3 次元配列とし，
+$y\in\mathbb{R}^{N\times 2}$ を観測行列とした．
+推定は関数 \texttt{regression\_multiple} を用い，
+\textbf{OLS} は無重み（$Q=I$），
+\textbf{WLS} は $V=\mathrm{diag}(100,1)$ を渡し内部で $Q=V^{-1}$ を用いる設定とした．
+また，$N\in\{4,8,16,32,64,128,256,512,1000\}$ に対する
+$\hat{\theta}_N$ の収束の様子を片対数（$x$ 軸のみ対数）で可視化した．
+
+\paragraph{結果}
+全データ（$N=1000$）を用いた推定結果は次のとおりである．
+
+\medskip
+\noindent\textbf{OLS}
+\[
+  \hat{\theta}_{\mathrm{OLS}}=
+  \begin{bmatrix}
+    2.994567\\[-1mm]
+   -2.068971
+  \end{bmatrix},\qquad
+  \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{OLS}})=
+  \begin{bmatrix}
+    5.7621\!\times\!10^{-4} & -1.5041\!\times\!10^{-4}\\
+    -1.5041\!\times\!10^{-4} & 2.9684\!\times\!10^{-4}
+  \end{bmatrix}.
+\]
+
+\noindent\textbf{WLS}
+\[
+  \hat{\theta}_{\mathrm{WLS}}=
+  \begin{bmatrix}
+    2.939084\\[-1mm]
+   -1.986465
+  \end{bmatrix},\qquad
+  \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{WLS}})=
+  \begin{bmatrix}
+    2.39993\!\times\!10^{-1} & -9.66541\!\times\!10^{-2}\\
+    -9.66541\!\times\!10^{-2} & 4.99126\!\times\!10^{-2}
+  \end{bmatrix}.
+\]
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.82\linewidth]{graphs/task5_ols.png}
+  \caption{$\hat{\theta}_N$ の収束（OLS）}
+  \label{fig:task5_ols}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.82\linewidth]{graphs/task5_wls.png}
+  \caption{$\hat{\theta}_N$ の収束（WLS，$V=\mathrm{diag}(100,1)$）}
+  \label{fig:task5_wls}
+\end{figure}
+
+\paragraph{考察}
+% （ここに考察を記述）
+
+
+\subsection{課題6（2次元出力・異分散2群に対する重み付き最小二乗）}
+
+\paragraph{課題の内容}
+入力 $x_i\in\mathbb{R}$ に対し，
+\[
+  y_i \;=\; \phi(x_i)\,\theta + w_i,\qquad
+  \phi(x)=
+  \begin{bmatrix}
+    1 & x\\[1mm]
+    1 & x^2
+  \end{bmatrix},\quad
+  \theta\in\mathbb{R}^2,
+\]
+という $m=2$ 次元出力の線形モデルを考える．雑音は $N$ サンプルのうち前半 $i=1,\dots,\texttt{num}$ が
+$w_i\sim\mathcal{N}(0,V_1)$，後半 $i=\texttt{num}+1,\dots,N$ が $w_i\sim\mathcal{N}(0,V_2)$ に従うとする．
+本課題では $V_1=\mathrm{diag}(100,1)$，$V_2=\mathrm{diag}(2,1)$，$\texttt{num}=500$ を既知として推定を行う．
+
+\paragraph{推定法（GLS/WLS）}
+$Q_k=V_k^{-1}$（$k=1,2$）とおくと，一般化最小二乗（WLS）の正規方程式は
+\[
+  S\,\hat{\theta}_N \;=\; b,
+  \quad
+  S \;=\; \sum_{i=1}^{\texttt{num}}\!\phi_i^\top Q_1\phi_i \;+\; \sum_{i=\texttt{num}+1}^{N}\!\phi_i^\top Q_2\phi_i,
+  \quad
+  b \;=\; \sum_{i=1}^{\texttt{num}}\!\phi_i^\top Q_1 y_i \;+\; \sum_{i=\texttt{num}+1}^{N}\!\phi_i^\top Q_2 y_i,
+\]
+より
+\[
+  \hat{\theta}_N \;=\; S^{-1} b.
+\]
+標本ベースの誤差共分散推定は（実装に合わせて）
+\[
+  \widehat{\mathrm{Cov}}(\hat{\theta}_N)
+  \;=\;
+  S^{-1}\,T\,S^{-1},\qquad
+  T \;=\; \sum_{i=1}^{\texttt{num}}\!\phi_i^\top V_1\phi_i \;+\; \sum_{i=\texttt{num}+1}^{N}\!\phi_i^\top V_2\phi_i .
+\]
+なお OLS は $Q_1=Q_2=I$ とした特別な場合である．
+
+\paragraph{実装}
+\texttt{datas/mmse\_kadai6.csv} から $x$ を読み，$\phi(x)$ を用いて
+$x\in\mathbb{R}^{2\times2\times N}$，$y\in\mathbb{R}^{N\times2}$ を構成した．
+推定は関数 \texttt{regression\_multiple\_different\_distributions} により，
+前半 $V_1$，後半 $V_2$ の重みで $S,b,T$ を分割加算して $\hat{\theta}_N$ と
+$\widehat{\mathrm{Cov}}(\hat{\theta}_N)$ を得た．
+また $N$ を \texttt{ns = seq(4,1000,length.out=20)} で走らせ，
+$\hat{\theta}_N$ の収束の様子を折れ線で可視化した（$x$ 軸は線形目盛）．
+
+\paragraph{結果}
+全データ（$N=1000$，$\texttt{num}=500$）の推定結果は以下のとおりである．
+
+\medskip
+\noindent\textbf{OLS（比較）}
+\[
+  \hat{\theta}_{\mathrm{OLS}}=
+  \begin{bmatrix}
+    3.188356\\[-1mm]
+   -2.092183
+  \end{bmatrix},\qquad
+  \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{OLS}})=
+  \begin{bmatrix}
+    5.692084\!\times\!10^{-4} & -1.402629\!\times\!10^{-4}\\
+    -1.402629\!\times\!10^{-4} & 2.842674\!\times\!10^{-4}
+  \end{bmatrix}.
+\]
+
+\noindent\textbf{WLS（$V_1=\mathrm{diag}(100,1)$，$V_2=\mathrm{diag}(2,1)$）}
+\[
+  \hat{\theta}_{\mathrm{WLS}}=
+  \begin{bmatrix}
+    2.994202\\[-1mm]
+   -2.014699
+  \end{bmatrix},\qquad
+  \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{WLS}})=
+  \begin{bmatrix}
+    6.019710\!\times\!10^{-2} & -2.227335\!\times\!10^{-2}\\
+    -2.227335\!\times\!10^{-2} & 1.276759\!\times\!10^{-2}
+  \end{bmatrix}.
+\]
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.82\linewidth]{graphs/task6_ols.png}
+  \caption{$\hat{\theta}_N$ の収束（OLS）}
+  \label{fig:task6_ols}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.82\linewidth]{graphs/task6_wls.png}
+  \caption{$\hat{\theta}_N$ の収束（WLS，$V_1$/$V_2$ 異分散）}
+  \label{fig:task6_wls}
+\end{figure}
+
+\paragraph{考察}
+% （ここに考察を記述）

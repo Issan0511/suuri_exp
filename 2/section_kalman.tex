@@ -1,93 +1,171 @@
-\section{カルマンフィルタとカルマンスムーサの原理と方法}
+\subsection{原理と方法}
 
-\subsection{状態空間モデル}
-線形ガウスモデルを用いる。
+\paragraph{モデル}
+一次元の線形状態空間モデルを用いる：
 \[
-\begin{aligned}
-  x_k &= A_k x_{k-1} + B_k u_{k-1} + w_{k-1},\qquad w_{k-1}\sim\mathcal N(0,Q_k),\\
-  y_k &= H_k x_k + v_k,\qquad\qquad\qquad\quad v_k\sim\mathcal N(0,R_k).
-\end{aligned}
+  \theta_k = a_k\,\theta_{k-1} + v_k,\tag{3.40}
 \]
-初期分布は $x_0\sim\mathcal N(\hat x_{0|0},P_{0|0})$ とする。$u_k$ は既知入力。\cite{exp2025}
-
-\subsection{カルマンフィルタ（前向き推定）}
-目的は $\hat x_{k|k}=\mathbb E[x_k\mid y_{1:k}]$ と $P_{k|k}=\mathrm{Cov}(x_k\mid y_{1:k})$ の逐次計算。
-
-\paragraph{予測ステップ}
 \[
-\hat x_{k|k-1}=A_k \hat x_{k-1|k-1}+B_k u_{k-1},\qquad
-P_{k|k-1}=A_k P_{k-1|k-1} A_k^\top + Q_k.
+  y_k = c_k\,\theta_k + w_k,\tag{3.41}
 \]
+ここで $v_k\sim\mathcal N(0,\sigma_v^2)$，$w_k\sim\mathcal N(0,\sigma_w^2)$ は互いに独立で白色，$a_k,c_k$ は既知とする\cite{exp2025}。目的は「時刻 $k$ までの観測 $\{y_\ell\}_{\ell=1}^k$ に基づく $\theta_k$ の最小平均二乗誤差（MMSE）推定」を行うこと\cite{exp2025}。
 
-\paragraph{更新ステップ}
+以下はこのモデルに基づくデータ生成のRによる実装例である。
+\begin{lstlisting}[language=R,caption={データ生成関数}]
+# データ生成関数（exp11とexp12で共通使用）
+generate_kalman_data <- function(seed = 123, N = 100, a_k = 0.9, c_k = 2, 
+                                  sigma2_v = 1, sigma2_w = 1) {
+  # 乱数シードを設定
+  set.seed(seed)
+  
+  # 初期値
+  theta_0 <- rnorm(1, mean = 3, sd = sqrt(2))  # θ_0 ~ N(3, 2)
+  V_0 <- 2
+  
+  # データ格納用
+  theta_true <- numeric(N)
+  y_obs <- numeric(N)
+  
+  # 初期化
+  theta_k_1 <- theta_0
+  
+  # データ生成
+  for (k in 1:N) {
+    # 真の状態遷移 (3.40): θ_k = a_k * θ_{k-1} + v_k
+    v_k <- rnorm(1, mean = 0, sd = sqrt(sigma2_v))
+    theta_k <- a_k * theta_k_1 + v_k
+    theta_true[k] <- theta_k
+    
+    # 観測 (3.41): y_k = c_k * θ_k + w_k
+    w_k <- rnorm(1, mean = 0, sd = sqrt(sigma2_w))
+    y_k <- c_k * theta_k + w_k
+    y_obs[k] <- y_k
+    
+    # 次のステップへ
+    theta_k_1 <- theta_k
+  }
+  
+  # データを返す
+  return(list(
+    theta_true = theta_true,
+    y_obs = y_obs,
+    theta_0 = theta_0,
+    V_0 = V_0,
+    a_k = a_k,
+    c_k = c_k,
+    sigma2_v = sigma2_v,
+    sigma2_w = sigma2_w,
+    N = N
+  ))
+}
+\end{lstlisting}
+
+\paragraph{Kalman フィルタ}
+平方完成による最適ゲイン $F_k$ と分散更新を導くと，予測分散 $X_k$，事後分散 $V_k$，推定値 $\hat\theta_k$ は
 \[
-\begin{aligned}
-  \tilde y_k &= y_k - H_k \hat x_{k|k-1}\quad(\text{イノベーション}),\\
-  S_k &= H_k P_{k|k-1} H_k^\top + R_k\quad(\text{イノベーション共分散}),\\
-  K_k &= P_{k|k-1} H_k^\top S_k^{-1}\quad(\text{カルマンゲイン}),\\
-  \hat x_{k|k} &= \hat x_{k|k-1} + K_k \tilde y_k,\\
-  P_{k|k} &= (I - K_k H_k) P_{k|k-1}. 
-\end{aligned}
+\hat\theta_k = a_k\hat\theta_{k-1} + F_k\bigl(y_k - c_k a_k \hat\theta_{k-1}\bigr),\tag{3.36}
 \]
-数値安定化には Joseph 形を推奨。
 \[
-P_{k|k}=(I-K_k H_k)P_{k|k-1}(I-K_k H_k)^\top + K_k R_k K_k^\top.
+X_k = a_k^2 V_{k-1} + \sigma_v^2,\tag{3.37}
 \]
-$S_k^{-1}$ は逆行列でなく Cholesky 分解と連立解法で求める。\cite{exp2025}
-
-\paragraph{方法（アルゴリズム）}
-\begin{enumerate}\setlength{\itemsep}{2pt}
-  \item 初期化：$\hat x_{0|0},P_{0|0}$。
-  \item $k=1,2,\dots$ について予測→更新を繰り返す。
-  \item 欠測観測があれば更新をスキップ（予測のみ）。
-\end{enumerate}
-
-\paragraph{RLS との関係}
-静的パラメータ $\theta$ を状態 $x_k$ とし $A_k=I,\ H_k=\phi_k^\top$，観測 $y_k=\phi_k^\top \theta + v_k$ とすると，KF は逐次最小二乗（RLS）と等価。忘却係数つき RLS は $Q_k\succ0$ を与える動的モデル $\theta_{k}=\theta_{k-1}+q_{k-1}$（$q_{k-1}\sim\mathcal N(0,Q_k)$）として解釈できる。\cite{exp2025}
-
-\subsection{カルマンスムーサ（Rauch--Tung--Striebel: 後向き平滑化）}
-目的は $\hat x_{k|N}=\mathbb E[x_k\mid y_{1:N}]$ と $P_{k|N}$ の計算。まず $k=1,\dots,N$ で KF を実行して $\{\hat x_{k|k},P_{k|k},\hat x_{k+1|k},P_{k+1|k}\}$ を保存し，$k=N-1,\dots,0$ の後向きパスで次を適用する。
-
-\paragraph{平滑化ゲイン}
 \[
-C_k = P_{k|k} A_{k+1}^\top P_{k+1|k}^{-1}.
+V_k = \frac{\sigma_w^2\, X_k}{c_k^2 X_k + \sigma_w^2},\tag{3.38}
 \]
-
-\paragraph{状態・共分散の平滑化}
 \[
-\begin{aligned}
-  \hat x_{k|N} &= \hat x_{k|k} + C_k\bigl(\hat x_{k+1|N}-\hat x_{k+1|k}\bigr),\\
-  P_{k|N} &= P_{k|k} + C_k\bigl(P_{k+1|N}-P_{k+1|k}\bigr) C_k^\top.
-\end{aligned}
+F_k = \frac{c_k X_k}{c_k^2 X_k + \sigma_w^2}.\tag{3.39}
 \]
-必要に応じて交差共分散も計算する。
+これが Kalman フィルタであり，推定誤差分散を最小にする\cite{exp2025}。初期条件は $\hat\theta_0=\bar\theta,\;V_0=P$ とする\cite{exp2025}。
+
+以下は、KalmanフィルタのRによる実装例である。
+
+\begin{lstlisting}[language=R,caption={Kalmanフィルタ更新（式(3.36)–(3.39)）}]
+update_kalman_filter <- function(theta_k_1, V_k_1, y_k, a_k, c_k, sigma2_v, sigma2_w) {
+  # (3.37) 予測分散
+  X_k <- a_k^2 * V_k_1 + sigma2_v
+  # (3.39) カルマンゲイン
+  F_k <- (c_k * X_k) / (c_k^2 * X_k + sigma2_w)
+  # (3.36) 推定値更新
+  theta_k <- a_k * theta_k_1 + F_k * (y_k - c_k * a_k * theta_k_1)
+  # (3.38) 事後分散更新
+  V_k <- (sigma2_w * X_k) / (c_k^2 * X_k + sigma2_w)
+  list(theta_k = theta_k, V_k = V_k, X_k = X_k, F_k = F_k)
+}
+\end{lstlisting}
+
+\paragraph{Kalman スムーザ}
+全データ $\{y_1,\dots,y_N\}$ を用いて各 $\theta_k$ を後処理で精密化する。Rauch–Tung–Striebel（RTS）型の退行更新は
 \[
-P_{k,k+1|N} = C_k P_{k+1|N}.
+\hat\theta_k^{\,s}=\hat\theta_k + g_k\bigl(\hat\theta_{k+1}^{\,s}-a_k\hat\theta_k\bigr),\tag{3.42}
 \]
-これにより全時刻の最小分散線形不偏推定が得られる（固定区間スムージング）。\cite{exp2025}
+\[
+g_k=\frac{a_k V_k}{X_{k+1}},\tag{3.43}
+\]
+\[
+V_k^{\,s}=V_k + g_k^2\bigl(V_{k+1}^{\,s}-X_{k+1}\bigr),\tag{3.44}
+\]
+終端条件は $\hat\theta_N^{\,s}=\hat\theta_N,\;V_N^{\,s}=V_N$。$\{\hat\theta_k^{\,s}\}$ は時刻 $N$ までの全情報に基づく MMSE 推定となる\cite{exp2025}。
 
-\subsection{実装上の要点}
-\begin{itemize}\setlength{\itemsep}{2pt}
-  \item 直交化（平方根 KF）：$P$ の Cholesky を持ち回すと数値安定性が高い。
-  \item 時変行列 $A_k,H_k,Q_k,R_k$ にそのまま対応。
-  \item 入力 $u_k$ は予測で加味し，バイアスは状態に含めて推定する。
-  \item 計算量は更新ごとに観測次元 $m$ の系で $S_k$ を解くのが支配的。
-\end{itemize}
+以下は、KalmanスムーザのRによる実装例である。
 
-\subsection{手順のまとめ}
-\paragraph{カルマンフィルタ}
-\begin{enumerate}\setlength{\itemsep}{2pt}
-  \item 予測：$\hat x_{k|k-1},P_{k|k-1}$ を計算。
-  \item 利得：$S_k$ を分解し $K_k=P_{k|k-1}H_k^\top S_k^{-1}$。
-  \item 更新：$\hat x_{k|k}=\hat x_{k|k-1}+K_k\tilde y_k$，$P_{k|k}$ を Joseph 形で更新。
-\end{enumerate}
+\begin{lstlisting}[language=R,caption={Kalmanスムーザ更新（式(3.42)–(3.44)）}]
+update_kalman_smoother <- function(theta_k, theta_k_plus_1_s, V_k, V_k_plus_1_s, X_k_plus_1, a_k) {
+  # (3.43) 後向きゲイン
+  g_k <- a_k * V_k / X_k_plus_1
+  # (3.42) 推定値の後向き補正
+  theta_k_s <- theta_k + g_k * (theta_k_plus_1_s - a_k * theta_k)
+  # (3.44) 分散の後向き補正
+  V_k_s <- V_k + g_k^2 * (V_k_plus_1_s - X_k_plus_1)
+  list(theta_k_s = theta_k_s, V_k_s = V_k_s, g_k = g_k)
+}
+\end{lstlisting}
 
-\paragraph{RTS スムーサ}
-\begin{enumerate}\setlength{\itemsep}{2pt}
-  \item 後向き：$C_k=P_{k|k}A_{k+1}^\top P_{k+1|k}^{-1}$。
-  \item 状態：$\hat x_{k|N}=\hat x_{k|k}+C_k(\hat x_{k+1|N}-\hat x_{k+1|k})$。
-  \item 共分散：$P_{k|N}=P_{k|k}+C_k(P_{k+1|N}-P_{k+1|k})C_k^\top$。
-\end{enumerate}
-\medskip
+\subsection{課題11（カルマンフィルタ：フォワード）}
+\label{subsec:task11}
 
-以上を用いれば，RLS で扱った逐次推定を状態空間の枠組みに拡張し，オンライン（フィルタ）とオフライン（スムーサ）の双方で最適推定が可能になる。\cite{exp2025}
+\paragraph{内容}
+一次元状態空間モデルを対象とする．
+\begin{align}
+  \theta_k &= a_k\,\theta_{k-1} + v_{k-1}, \quad v_{k-1}\sim \mathcal{N}(0,\sigma_v^2),\\
+  y_k &= c_k\,\theta_k + w_k, \quad w_k\sim \mathcal{N}(0,\sigma_w^2).
+\end{align}
+初期推定値は$\hat{\theta}_0=\theta_0$, 分散$V_0$を与える．
+評価は平均二乗誤差
+\begin{align}
+  \mathrm{MSE}=\frac{1}{N}\sum_{k=1}^{N}\bigl(\theta_k^{\mathrm{true}}-\hat{\theta}_k\bigr)^2
+\end{align}
+で行う．
+
+\paragraph{方法}
+時刻$k$ごとに予測と更新を行う．
+\begin{align}
+  X_k &= a_k^2 V_{k-1} + \sigma_v^2,\\
+  F_k &= \frac{c_k X_k}{c_k^2 X_k + \sigma_w^2},\\
+  \hat{\theta}_k &= a_k \hat{\theta}_{k-1} + F_k\bigl(y_k - c_k a_k \hat{\theta}_{k-1}\bigr),\\
+  V_k &= (1 - F_k c_k)\,X_k.
+\end{align}
+出力は$\{\hat{\theta}_k\}_{k=1}^N$と$\{V_k\}_{k=1}^N$．
+
+\paragraph{実装}
+関数\verb|exp11(data)|を用いる．各$k$で\verb|update_kalman_filter|を呼び，$X_k, F_k, \hat{\theta}_k, V_k$を更新する．推定系列と真値を重ね描画し\verb|graphs/task11.png|に保存する．
+
+\paragraph{結果}
+データ生成と実行条件は
+\begin{verbatim}
+kalman_data <- generate_kalman_data(seed = 42, N = 100,
+                                    a_k = 0.9, c_k = 2,
+                                    sigma2_v = 1, sigma2_w = 1)
+result11 <- exp11(kalman_data)
+\end{verbatim}
+である．MSEは\verb|mmse: 0.1935684| となった．図\ref{fig:task11_fig}に真値と推定の系列を示す．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{graphs/task11.png}
+  \caption{カルマンフィルタ（フォワード）による推定結果（赤：真値，青：推定）}
+  \label{fig:task11_fig}
+\end{figure}
+
+\paragraph{考察}
+% ここに記述
+
+

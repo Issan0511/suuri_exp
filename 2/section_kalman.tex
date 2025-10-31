@@ -156,7 +156,7 @@ kalman_data <- generate_kalman_data(seed = 42, N = 100,
                                     sigma2_v = 1, sigma2_w = 1)
 result11 <- exp11(kalman_data)
 \end{verbatim}
-である．MSEは\verb|mmse: 0.1935684| となった．図\ref{fig:task11_fig}に真値と推定の系列を示す．
+である．MSEは$0.1935684$となった．図\ref{fig:task11_fig}に真値と推定の系列を示す．
 
 \begin{figure}[H]
   \centering
@@ -168,4 +168,58 @@ result11 <- exp11(kalman_data)
 \paragraph{考察}
 % ここに記述
 
+
+\subsection{課題12（カルマンスムーザー）}
+\label{subsec:task12}
+
+\paragraph{内容}
+一次元状態空間モデル
+\begin{align}
+  \theta_k &= a_k\,\theta_{k-1} + v_{k-1},\quad v_{k-1}\sim\mathcal{N}(0,\sigma_v^2),\\
+  y_k &= c_k\,\theta_k + w_k,\quad w_k\sim\mathcal{N}(0,\sigma_w^2)
+\end{align}
+に対し，時刻$1\!:\!N$の全観測を用いて各時刻の状態を後向きに精緻化する．
+
+\paragraph{方法}
+まず課題11と同じ前向きフィルタで
+\begin{align}
+  X_k &= a_k^2 V_{k-1}+\sigma_v^2,\quad
+  F_k=\frac{c_k X_k}{c_k^2 X_k+\sigma_w^2},\\
+  \hat\theta_k &= a_k\hat\theta_{k-1}+F_k\bigl(y_k-c_k a_k\hat\theta_{k-1}\bigr),\quad
+  V_k=(1-F_k c_k)X_k
+\end{align}
+を得る．後向きではRTSスムーザーを用いる（スカラー）．平滑化ゲイン
+\begin{align}
+  J_k &= \frac{V_k\,a_k}{X_{k+1}},
+\end{align}
+更新式
+\begin{align}
+  \hat\theta_k^{\,s} &= \hat\theta_k + J_k\bigl(\hat\theta_{k+1}^{\,s}-a_k\hat\theta_k\bigr),\\
+  V_k^{\,s} &= V_k + J_k^2\bigl(V_{k+1}^{\,s}-X_{k+1}\bigr),
+\end{align}
+終端条件は$\hat\theta_N^{\,s}=\hat\theta_N,\;V_N^{\,s}=V_N$．
+
+\paragraph{実装}
+\verb|exp12(data)|を用いる．前向きで\verb|theta_hat, V_all, X_all|を保存し，後向きで$k=N-1$から$1$へ\verb|update_kalman_smoother|を適用して\verb|theta_smooth, V_smooth|を得る．真値と平滑化推定を描画し\verb|graphs/task12.png|に保存する．評価は\verb|mean((theta_true - theta_smooth)^2)|．
+
+\paragraph{結果}
+データ生成と実行
+\begin{verbatim}
+kalman_data <- generate_kalman_data(seed = 42, N = 100,
+                                    a_k = 0.9, c_k = 2,
+                                    sigma2_v = 1, sigma2_w = 1)
+result12 <- exp12(kalman_data)
+\end{verbatim}
+出力は
+\verb|mmse: 0.1716128| であった．図\ref{fig:task12_fig}に真値と平滑化推定を示す．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{graphs/task12.png}
+  \caption{カルマンスムーザーの推定結果（赤：真値，緑：平滑化推定）}
+  \label{fig:task12_fig}
+\end{figure}
+
+\paragraph{考察}
+% ここに記述
 

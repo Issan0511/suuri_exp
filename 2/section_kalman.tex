@@ -1,0 +1,93 @@
+\section{カルマンフィルタとカルマンスムーサの原理と方法}
+
+\subsection{状態空間モデル}
+線形ガウスモデルを用いる。
+\[
+\begin{aligned}
+  x_k &= A_k x_{k-1} + B_k u_{k-1} + w_{k-1},\qquad w_{k-1}\sim\mathcal N(0,Q_k),\\
+  y_k &= H_k x_k + v_k,\qquad\qquad\qquad\quad v_k\sim\mathcal N(0,R_k).
+\end{aligned}
+\]
+初期分布は $x_0\sim\mathcal N(\hat x_{0|0},P_{0|0})$ とする。$u_k$ は既知入力。\cite{exp2025}
+
+\subsection{カルマンフィルタ（前向き推定）}
+目的は $\hat x_{k|k}=\mathbb E[x_k\mid y_{1:k}]$ と $P_{k|k}=\mathrm{Cov}(x_k\mid y_{1:k})$ の逐次計算。
+
+\paragraph{予測ステップ}
+\[
+\hat x_{k|k-1}=A_k \hat x_{k-1|k-1}+B_k u_{k-1},\qquad
+P_{k|k-1}=A_k P_{k-1|k-1} A_k^\top + Q_k.
+\]
+
+\paragraph{更新ステップ}
+\[
+\begin{aligned}
+  \tilde y_k &= y_k - H_k \hat x_{k|k-1}\quad(\text{イノベーション}),\\
+  S_k &= H_k P_{k|k-1} H_k^\top + R_k\quad(\text{イノベーション共分散}),\\
+  K_k &= P_{k|k-1} H_k^\top S_k^{-1}\quad(\text{カルマンゲイン}),\\
+  \hat x_{k|k} &= \hat x_{k|k-1} + K_k \tilde y_k,\\
+  P_{k|k} &= (I - K_k H_k) P_{k|k-1}. 
+\end{aligned}
+\]
+数値安定化には Joseph 形を推奨。
+\[
+P_{k|k}=(I-K_k H_k)P_{k|k-1}(I-K_k H_k)^\top + K_k R_k K_k^\top.
+\]
+$S_k^{-1}$ は逆行列でなく Cholesky 分解と連立解法で求める。\cite{exp2025}
+
+\paragraph{方法（アルゴリズム）}
+\begin{enumerate}\setlength{\itemsep}{2pt}
+  \item 初期化：$\hat x_{0|0},P_{0|0}$。
+  \item $k=1,2,\dots$ について予測→更新を繰り返す。
+  \item 欠測観測があれば更新をスキップ（予測のみ）。
+\end{enumerate}
+
+\paragraph{RLS との関係}
+静的パラメータ $\theta$ を状態 $x_k$ とし $A_k=I,\ H_k=\phi_k^\top$，観測 $y_k=\phi_k^\top \theta + v_k$ とすると，KF は逐次最小二乗（RLS）と等価。忘却係数つき RLS は $Q_k\succ0$ を与える動的モデル $\theta_{k}=\theta_{k-1}+q_{k-1}$（$q_{k-1}\sim\mathcal N(0,Q_k)$）として解釈できる。\cite{exp2025}
+
+\subsection{カルマンスムーサ（Rauch--Tung--Striebel: 後向き平滑化）}
+目的は $\hat x_{k|N}=\mathbb E[x_k\mid y_{1:N}]$ と $P_{k|N}$ の計算。まず $k=1,\dots,N$ で KF を実行して $\{\hat x_{k|k},P_{k|k},\hat x_{k+1|k},P_{k+1|k}\}$ を保存し，$k=N-1,\dots,0$ の後向きパスで次を適用する。
+
+\paragraph{平滑化ゲイン}
+\[
+C_k = P_{k|k} A_{k+1}^\top P_{k+1|k}^{-1}.
+\]
+
+\paragraph{状態・共分散の平滑化}
+\[
+\begin{aligned}
+  \hat x_{k|N} &= \hat x_{k|k} + C_k\bigl(\hat x_{k+1|N}-\hat x_{k+1|k}\bigr),\\
+  P_{k|N} &= P_{k|k} + C_k\bigl(P_{k+1|N}-P_{k+1|k}\bigr) C_k^\top.
+\end{aligned}
+\]
+必要に応じて交差共分散も計算する。
+\[
+P_{k,k+1|N} = C_k P_{k+1|N}.
+\]
+これにより全時刻の最小分散線形不偏推定が得られる（固定区間スムージング）。\cite{exp2025}
+
+\subsection{実装上の要点}
+\begin{itemize}\setlength{\itemsep}{2pt}
+  \item 直交化（平方根 KF）：$P$ の Cholesky を持ち回すと数値安定性が高い。
+  \item 時変行列 $A_k,H_k,Q_k,R_k$ にそのまま対応。
+  \item 入力 $u_k$ は予測で加味し，バイアスは状態に含めて推定する。
+  \item 計算量は更新ごとに観測次元 $m$ の系で $S_k$ を解くのが支配的。
+\end{itemize}
+
+\subsection{手順のまとめ}
+\paragraph{カルマンフィルタ}
+\begin{enumerate}\setlength{\itemsep}{2pt}
+  \item 予測：$\hat x_{k|k-1},P_{k|k-1}$ を計算。
+  \item 利得：$S_k$ を分解し $K_k=P_{k|k-1}H_k^\top S_k^{-1}$。
+  \item 更新：$\hat x_{k|k}=\hat x_{k|k-1}+K_k\tilde y_k$，$P_{k|k}$ を Joseph 形で更新。
+\end{enumerate}
+
+\paragraph{RTS スムーサ}
+\begin{enumerate}\setlength{\itemsep}{2pt}
+  \item 後向き：$C_k=P_{k|k}A_{k+1}^\top P_{k+1|k}^{-1}$。
+  \item 状態：$\hat x_{k|N}=\hat x_{k|k}+C_k(\hat x_{k+1|N}-\hat x_{k+1|k})$。
+  \item 共分散：$P_{k|N}=P_{k|k}+C_k(P_{k+1|N}-P_{k+1|k})C_k^\top$。
+\end{enumerate}
+\medskip
+
+以上を用いれば，RLS で扱った逐次推定を状態空間の枠組みに拡張し，オンライン（フィルタ）とオフライン（スムーサ）の双方で最適推定が可能になる。\cite{exp2025}

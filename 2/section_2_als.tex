@@ -1,0 +1,156 @@
+
+
+\subsection{交互最小二乗法}
+\label{subsec:als}
+
+\subsubsection{原理と方法}
+
+\paragraph{原理}
+非線形最小二乗問題のうち，パラメータを二分割すると片方ずつは線形になる場合に適用する．
+パラメータを $\theta=(\alpha,\beta)^\top$ と分割し，$g(\alpha,\beta,x)$ が $\alpha,\beta$ に関してそれぞれ線形（双線形など）であるとする．
+観測 $(x_i,y_i)$ に対し，目的関数
+\begin{align}
+  J(\alpha,\beta) := \sum_{i=1}^N \|\,y_i - g(\alpha,\beta,x_i)\,\|^2
+\end{align}
+を最小化する．片方のパラメータを固定すれば通常の線形最小二乗（式(3.5)型）で解ける．
+交互更新により $J$ は単調非増加で，反復に伴い悪化しない．ただし一般には局所解に収束しうるため初期値が重要である．
+
+\paragraph{方法}
+初期値 $\alpha^{(0)},\beta^{(0)}$ を与え，$j=1,2,\ldots$ について次を繰り返す．
+\begin{enumerate}
+  \item \textbf{Step A（$\beta$ 固定）}：$\beta=\beta^{(j-1)}$ として
+  \begin{align}
+    \alpha^{(j)} := \arg\min_{\alpha}\ \sum_{i=1}^N \|\,y_i - g(\alpha,\beta^{(j-1)},x_i)\,\|^2.
+  \end{align}
+  これは線形最小二乗で解く．
+  \item \textbf{Step B（$\alpha$ 固定）}：$\alpha=\alpha^{(j)}$ として
+  \begin{align}
+    \beta^{(j)} := \arg\min_{\beta}\ \sum_{i=1}^N \|\,y_i - g(\alpha^{(j)},\beta,x_i)\,\|^2.
+  \end{align}
+  これも線形最小二乗で解く．
+\end{enumerate}
+収束判定は例えば $\|\alpha^{(j)}-\alpha^{(j-1)}\|^2+\|\beta^{(j)}-\beta^{(j-1)}\|^2<\varepsilon$ などとする．
+更新ごとに $J(\alpha^{(j)},\beta^{(j)}) \le J(\alpha^{(j-1)},\beta^{(j-1)})$ が成り立つ性質を利用する．
+初期値の多点スタートや正則化の併用が実務上有効である．
+
+以下は、交互最小二乗法のRによる実装例である。
+
+\begin{lstlisting}[language=R,caption={交互最小二乗法更新}]
+update_alpha_beta <- function(alpha, beta, x, x_T, y, n) {
+    # Step 1: alphaを固定してbetaを推定
+    x_alpha <- matrix(0, nrow = n, ncol = 3)
+    for (i in 1:n) {
+        x_alpha[i, ] <- t(alpha) %*% x[, , i]
+    }
+    result <- regression_simple(x_alpha, y)
+    beta_new <- result$theta_hat
+    
+    # Step 2: betaを固定してalphaを推定
+    x_beta <- matrix(0, nrow = n, ncol = 2)
+    for (i in 1:n) {
+        x_beta[i, ] <- t(beta_new) %*% x_T[, , i]
+    }
+    result2 <- regression_simple(x_beta, y)
+    alpha_new <- result2$theta_hat
+    
+    return(list(alpha_new = alpha_new, beta_new = beta_new))
+}
+\end{lstlisting}
+
+
+\subsection{K-平均法}
+\label{subsec:kmeans}
+
+\subsubsection{原理と方法}
+
+\paragraph{原理}
+データ $\{x_i\}_{i=1}^N \subset \mathbb{R}^p$ を $K$ 個のクラスタに分割する．
+クラスタ $V_\ell$ の代表点（重心）を
+\begin{align}
+  \mu(V_\ell) := \arg\min_{\mu\in\mathbb{R}^p} \sum_{i\in V_\ell} \|x_i-\mu\|^2
+  = \frac{1}{|V_\ell|}\sum_{i\in V_\ell} x_i
+\end{align}
+と定めると，目的は
+\begin{align}
+  \min_{\{V_\ell\}}\ \sum_{\ell=1}^K \sum_{i\in V_\ell} \|x_i-\mu(V_\ell)\|^2
+\end{align}
+の最小化である．指示変数 $r_{i,\ell}\in\{0,1\}$（$x_i$ がクラスタ $\ell$ に属すれば1）を用いると
+\begin{align}
+  \min_{\{\mu_\ell\},\{r_{i,\ell}\}}\ \sum_{\ell=1}^K \sum_{i=1}^N r_{i,\ell}\,\|x_i-\mu_\ell\|^2
+\end{align}
+と書ける．行列表示では $X=[x_1,\dots,x_N]$, $U=[\mu_1,\dots,\mu_K]$, $R=(r_{i,\ell})$ として
+\begin{align}
+  \|X-UR\|_F^2
+\end{align}
+の最小化に等価である．大域最適性は保証されず初期値依存性が強い．
+
+\paragraph{方法}
+初期重心 $\{\mu_\ell^{(0)}\}_{\ell=1}^K$ を与え，$j=1,2,\ldots$ について次を交互に実行する．
+\begin{enumerate}
+  \item \textbf{割当て（Assignment）}：各データを最も近い重心へ割り当てる．
+  \begin{align}
+    r_{i,\ell}^{(j)}=\begin{cases}
+      1 & \text{if } \ell=\arg\min_{k=1,\dots,K}\ \|x_i-\mu_k^{(j-1)}\|^2,\\
+      0 & \text{otherwise.}
+    \end{cases}
+  \end{align}
+  \item \textbf{重心更新（Update）}：各クラスタの平均で重心を更新する．
+  \begin{align}
+    \mu_\ell^{(j)}=\frac{\sum_{i=1}^N r_{i,\ell}^{(j)}\,x_i}{\sum_{i=1}^N r_{i,\ell}^{(j)}}\quad (\sum_{i} r_{i,\ell}^{(j)} > 0).
+  \end{align}
+\end{enumerate}
+停止条件は $\max_\ell \|\mu_\ell^{(j)}-\mu_\ell^{(j-1)}\|^2<\varepsilon$ 等とする．
+目的関数は反復で非増加となるが，局所解に収束するため初期化戦略（例：多点スタート，$k$-means++）が重要である．
+
+以下は、K-平均法のRによる実装例である。
+
+\begin{lstlisting}[language=R,caption={K-平均法}]
+k_means <- function(x, K, max_iters = 10000, tol = 1e-6) {
+    n <- nrow(x)
+    d <- ncol(x)
+    
+    # ランダムに初期クラスタ中心を選択
+    centroids <- x[sample(1:n, K), ]
+    
+    cluster_assignments <- rep(0, n)
+    for (iter in 1:max_iters) {
+        # 各データポイントを最も近いクラスタ中心に割り当て
+        for (i in 1:n) {
+            distances <- apply(centroids, 1, function(centroid) sum((x[i, ] - centroid)^2))
+            cluster_assignments[i] <- which.min(distances)
+        }
+        
+        # 新しいクラスタ中心を計算
+        new_centroids <- matrix(0, nrow = K, ncol = d)
+        for (k in 1:K) {
+            points_in_cluster <- x[cluster_assignments == k, , drop = FALSE]
+            if (nrow(points_in_cluster) > 0) {
+                new_centroids[k, ] <- colMeans(points_in_cluster)
+            } else {
+                new_centroids[k, ] <- centroids[k, ]  # クラスタにポイントがない場合は中心を維持
+            }
+        }
+        
+        # 収束判定
+        if (max(sqrt(rowSums((new_centroids - centroids)^2))) < tol) {
+            # 各データポイントから割り当てられた中心までの距離の合計を計算
+            total_distance <- 0
+            for (i in 1:n) {
+                centroid_idx <- cluster_assignments[i]
+                distance <- sum((x[i, ] - centroids[centroid_idx, ])^2)
+                total_distance <- total_distance + distance
+            }
+            break
+        }
+        
+        centroids <- new_centroids
+    }
+    
+    return(list(
+        centroids = centroids,
+        cluster_assignments = cluster_assignments,
+        total_distance = total_distance
+    ))
+}
+\end{lstlisting}
+

@@ -204,12 +204,12 @@ result11 <- exp11(kalman_data)
 
 \paragraph{結果}
 データ生成と実行
-\begin{verbatim}
+\begin{lstlisting}
 kalman_data <- generate_kalman_data(seed = 42, N = 100,
                                     a_k = 0.9, c_k = 2,
                                     sigma2_v = 1, sigma2_w = 1)
 result12 <- exp12(kalman_data)
-\end{verbatim}
+\end{lstlisting}
 出力は
 \verb|mmse: 0.1716128| であった．図\ref{fig:task12_fig}に真値と平滑化推定を示す．
 

@@ -99,8 +99,17 @@
 \contentsline {paragraph}{方法}{31}{section*.99}%
 \contentsline {paragraph}{実装}{32}{section*.100}%
 \contentsline {paragraph}{結果}{32}{section*.101}%
-\contentsline {paragraph}{考察}{33}{section*.103}%
-\contentsline {section}{\numberline {6}アルゴリズム比較}{33}{section.6}%
-\contentsline {section}{\numberline {7}結論}{33}{section.7}%
-\contentsline {section}{\numberline {付録A}使用コード一覧}{33}{appendix.A}%
-\contentsline {section}{\numberline {付録B}補足導出}{33}{appendix.B}%
+\contentsline {paragraph}{考察}{32}{section*.103}%
+\contentsline {section}{\numberline {6}交互最小二乗法とK-平均法}{33}{section.6}%
+\contentsline {subsection}{\numberline {6.1}交互最小二乗法}{33}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}原理と方法}{33}{subsubsection.6.1.1}%
+\contentsline {paragraph}{原理}{33}{section*.104}%
+\contentsline {paragraph}{方法}{33}{section*.105}%
+\contentsline {subsection}{\numberline {6.2}K-平均法}{34}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}原理と方法}{34}{subsubsection.6.2.1}%
+\contentsline {paragraph}{原理}{34}{section*.106}%
+\contentsline {paragraph}{方法}{34}{section*.107}%
+\contentsline {section}{\numberline {7}アルゴリズム比較}{35}{section.7}%
+\contentsline {section}{\numberline {8}結論}{36}{section.8}%
+\contentsline {section}{\numberline {付録A}使用コード一覧}{36}{appendix.A}%
+\contentsline {section}{\numberline {付録B}補足導出}{36}{appendix.B}%

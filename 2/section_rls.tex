@@ -1,5 +1,7 @@
 
-\subsection{推定値の合成（Estimator Fusion）}
+\subsection{原理と方法}
+
+\paragraph{推定値の合成（Estimator Fusion）}
 $f(\theta,x)=\phi(x)\theta$ の線形回帰で，$D_N$ と $D'_M$ から得た推定
 \(
 \hat\theta_N=\Phi_N \sum_{i=1}^N \phi_i^\top y_i,\;
@@ -13,7 +15,8 @@ $f(\theta,x)=\phi(x)\theta$ の線形回帰で，$D_N$ と $D'_M$ から得た�
 \]
 で与えられる。\cite{exp2025}
 
-\paragraph{実装例（R）}
+以下が R による実装例である。
+
 \begin{lstlisting}
 # 既存バッチN=6000とM=4000の合成（S = Φ^{-1} を情報行列とする）
 # S_6000, S_4000 はそれぞれ Φ_6000^{-1}, Φ_4000^{-1}
@@ -22,7 +25,7 @@ theta_6000_4000 <- solve(S_6000 + S_4000) %*%
   (S_6000 %*% theta_6000 + S_4000 %*% theta_4000)
 \end{lstlisting}
 
-\subsection{逐次最小二乗法（RLS）}
+\paragraph{逐次最小二乗法（RLS）}
 逆行列補題を用いると，バッチ解は次の再帰で更新できる：
 \[
 \begin{aligned}
@@ -43,7 +46,7 @@ theta_6000_4000 <- solve(S_6000 + S_4000) %*%
 \]
 \cite{exp2025}
 
-\paragraph{実装例（R，忘却係数つき更新関数）}
+以下が R による実装例である。
 \begin{lstlisting}
 update_regression_mat <- function(Phi_N, phi_N_plus_1, theta_N, y_N_plus_1, gamma = 1){
   I_m <- diag(1)  # m=1想定。m>1なら diag(nrow(phi_N_plus_1 %*% Phi_N %*% t(phi_N_plus_1))) に置換
@@ -58,8 +61,8 @@ update_regression_mat <- function(Phi_N, phi_N_plus_1, theta_N, y_N_plus_1, gamm
 }
 \end{lstlisting}
 
-\paragraph{初期化と計算量}
-$\Phi_0=\varepsilon^{-1}I$（小 $\varepsilon$）で初期化し，逐次更新する。各ステップの計算は
+
+$\Phi_0=\varepsilon^{-1}I$（ $\varepsilon$は小さい正の実数）で初期化し，逐次更新する。各ステップの計算は
 $\dim(\theta)=p$ に対して $O(p^2)$ 程度で済む。\cite{exp2025}
 
 \subsection{課題7（推定値の合成の検証：2分割データの統合）}

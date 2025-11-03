@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  3 NOV 2025 14:39
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  3 NOV 2025 17:12
  restricted system commands enabled.
 **report_2.tex
 (./report_2.tex
@@ -1643,112 +1643,91 @@ LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
 [4]
-<graphs/task1.png, id=214, 481.8pt x 481.8pt>
+<graphs/task1.png, id=204, 481.8pt x 481.8pt>
 File: graphs/task1.png Graphic file (type png)
 <use graphs/task1.png>
-Package luatex.def Info: graphs/task1.png  used on input line 142.
+Package luatex.def Info: graphs/task1.png  used on input line 147.
 (luatex.def)             Requested size: 341.43307pt x 341.4408pt.
 (load cache: extra_lmroman9-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <9> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 143.
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 148.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 7.60036pt on input line 143.
+(Font)              scaled to size 7.60036pt on input line 148.
 LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <9> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 143.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 148.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 7.60036pt on input line 143.
-LaTeX Font Info:    Calculating math sizes for size <9.85501> on input line 143
+(Font)              scaled to size 7.60036pt on input line 148.
+LaTeX Font Info:    Calculating math sizes for size <9.85501> on input line 148
 .
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.5> not available
-(Font)              size <5> substituted on input line 143.
+(Font)              size <5> substituted on input line 148.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.5> not available
-(Font)              size <5> substituted on input line 143.
+(Font)              size <5> substituted on input line 148.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.5> not available
-(Font)              size <5> substituted on input line 143.
+(Font)              size <5> substituted on input line 148.
 
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 5.82565pt on input line 143.
+(Font)              scaled to size 5.82565pt on input line 148.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 4.16121pt on input line 143.
+(Font)              scaled to size 4.16121pt on input line 148.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 5.82565pt on input line 143.
+(Font)              scaled to size 5.82565pt on input line 148.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 4.16121pt on input line 143.
+(Font)              scaled to size 4.16121pt on input line 148.
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.5> not available
-(Font)              size <5> substituted on input line 143.
+(Font)              size <5> substituted on input line 148.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4.5> not available
-(Font)              size <5> substituted on input line 143.
+(Font)              size <5> substituted on input line 148.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.5> not available
-(Font)              size <5> substituted on input line 143.
+(Font)              size <5> substituted on input line 148.
 
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
+
 
 [5<./graphs/task1.png>]
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
-
-[6]
-Overfull \hbox (128.32295pt too wide) detected at line 236
+Overfull \hbox (128.32295pt too wide) detected at line 188
 [] \OT1/cmr/m/n/10.95001 = [] \OML/cmm/m/it/10.95001 ;  []\OT1/cmr/m/n/10.95001
  ([]) = [] \OML/cmm/m/it/10.95001 :
  []
 
-<graphs/task2.png, id=292, 481.8pt x 481.8pt>
+<graphs/task2.png, id=220, 481.8pt x 481.8pt>
 File: graphs/task2.png Graphic file (type png)
 <use graphs/task2.png>
-Package luatex.def Info: graphs/task2.png  used on input line 250.
+Package luatex.def Info: graphs/task2.png  used on input line 202.
 (luatex.def)             Requested size: 341.43307pt x 341.4408pt.
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 
-[7<./graphs/task2.png>]
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
-[8]
-<graphs/task3.png, id=364, 481.8pt x 481.8pt>
+[6<./graphs/task2.png>]
+<graphs/task3.png, id=232, 481.8pt x 481.8pt>
 File: graphs/task3.png Graphic file (type png)
 <use graphs/task3.png>
-Package luatex.def Info: graphs/task3.png  used on input line 351.
+Package luatex.def Info: graphs/task3.png  used on input line 247.
 (luatex.def)             Requested size: 341.43307pt x 341.4408pt.
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 
-[9<./graphs/task3.png>]
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 
-[10]
-Removing  `ltj.listings_unicode' from `process_input_buffer'.(load cache: extra_
-lmroman7-regular.luc)
+[7<./graphs/task3.png>](load cache: extra_lmroman7-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 6.47295pt on input line 465.
+(Font)              scaled to size 6.47295pt on input line 274.
+) (./section_wls.tex
 
-
-[11]) (./section_wls.tex
+[8]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 
-[12]
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
-
-[13](load cache: extra_lmroman10-bold.luc)
+[9]
+Removing  `ltj.listings_unicode' from `process_input_buffer'.(load cache: extra_
+lmroman10-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10> not available
 (Font)              Font shape `JT3/gt/m/n' tried instead on input line 130.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
@@ -1757,46 +1736,74 @@ LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <10> not available
 (Font)              Font shape `JY3/gt/m/n' tried instead on input line 130.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 8.44485pt on input line 130.
-<graphs/task5_ols.png, id=534, 481.8pt x 481.8pt>
+
+
+[10]
+<graphs/task5_ols.png, id=315, 481.8pt x 481.8pt>
 File: graphs/task5_ols.png Graphic file (type png)
 <use graphs/task5_ols.png>
 Package luatex.def Info: graphs/task5_ols.png  used on input line 169.
 (luatex.def)             Requested size: 373.3035pt x 373.31026pt.
-
-
-[14]
-<graphs/task5_wls.png, id=543, 481.8pt x 481.8pt>
+<graphs/task5_wls.png, id=316, 481.8pt x 481.8pt>
 File: graphs/task5_wls.png Graphic file (type png)
 <use graphs/task5_wls.png>
 Package luatex.def Info: graphs/task5_wls.png  used on input line 176.
 (luatex.def)             Requested size: 373.3035pt x 373.31026pt.
 
 
-[15<./graphs/task5_ols.png>]
+[11<./graphs/task5_ols.png>]
 
-[16<./graphs/task5_wls.png>]
-<graphs/task6_ols.png, id=560, 481.8pt x 481.8pt>
+[12<./graphs/task5_wls.png>]
+<graphs/task6_ols.png, id=335, 481.8pt x 481.8pt>
 File: graphs/task6_ols.png Graphic file (type png)
 <use graphs/task6_ols.png>
 Package luatex.def Info: graphs/task6_ols.png  used on input line 267.
 (luatex.def)             Requested size: 373.3035pt x 373.31026pt.
 
 
-[17]
-<graphs/task6_wls.png, id=567, 481.8pt x 481.8pt>
+[13]
+<graphs/task6_wls.png, id=342, 481.8pt x 481.8pt>
 File: graphs/task6_wls.png Graphic file (type png)
 <use graphs/task6_wls.png>
 Package luatex.def Info: graphs/task6_wls.png  used on input line 274.
 (luatex.def)             Requested size: 373.3035pt x 373.31026pt.
 
 
-[18<./graphs/task6_ols.png>]) (./section_rls.tex
+[14<./graphs/task6_ols.png>]) (./section_rls.tex
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
-[19<./graphs/task6_wls.png>]
+[15<./graphs/task6_wls.png>]
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' in `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' in `process_input_buffer'.
+
+[16]
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+
+[17]
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' in `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' in `process_input_buffer'.
+
+[18]
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+
+[19]
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' in `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
@@ -1807,27 +1814,31 @@ Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' in `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
 [21]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
+<graphs/task10.png, id=606, 481.8pt x 481.8pt>
+File: graphs/task10.png Graphic file (type png)
+<use graphs/task10.png>
+Package luatex.def Info: graphs/task10.png  used on input line 498.
+(luatex.def)             Requested size: 373.3035pt x 373.31026pt.
+
+
+[22]) (./section_kalman.tex
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 14.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 
-[22]
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
-
-[23]
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
+[23<./graphs/task10.png>]
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
 [24]
@@ -1841,48 +1852,16 @@ Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
 [25]
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
-<graphs/task10.png, id=833, 481.8pt x 481.8pt>
-File: graphs/task10.png Graphic file (type png)
-<use graphs/task10.png>
-Package luatex.def Info: graphs/task10.png  used on input line 495.
-(luatex.def)             Requested size: 373.3035pt x 373.31026pt.
-
-
-[26]) (./section_kalman.tex
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 14.
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
-
-[27<./graphs/task10.png>]
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
-
-[28]
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
-
-[29]
-<graphs/task11.png, id=975, 481.8pt x 481.8pt>
+<graphs/task11.png, id=749, 481.8pt x 481.8pt>
 File: graphs/task11.png Graphic file (type png)
 <use graphs/task11.png>
 Package luatex.def Info: graphs/task11.png  used on input line 163.
 (luatex.def)             Requested size: 364.19667pt x 364.2089pt.
 
 
-[30]
+[26]
 
-[31<./graphs/task11.png>]
+[27<./graphs/task11.png>]
 Overfull \hbox (0.60327pt too wide) in paragraph at lines 203--204
 |\JY3/mc/m/n/10.95001 推 |定 |を |描 |画 |し \TU/lmtt/m/n/10.95001 graphs/
 task12.png |\JY3/mc/m/n/10.95001 に |保 |存 |す |る []  |評 |価 |は \TU
@@ -1893,30 +1872,30 @@ Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
-<graphs/task12.png, id=1005, 481.8pt x 481.8pt>
+<graphs/task12.png, id=778, 481.8pt x 481.8pt>
 File: graphs/task12.png Graphic file (type png)
 <use graphs/task12.png>
 Package luatex.def Info: graphs/task12.png  used on input line 218.
 (luatex.def)             Requested size: 364.19667pt x 364.2089pt.
 ) (./section_2_als.tex
 
-[32<./graphs/task12.png>]
+[28<./graphs/task12.png>]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 
-[33]
+[29]
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 
-[34]
+[30]
 Removing  `ltj.listings_unicode' from `process_input_buffer'.)
 
-[35]
+[31]
 
-[36] (./report_2.aux)
+[32] (./report_2.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -1927,19 +1906,19 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 2.5pt have occurred.
 
 Package rerunfilecheck Info: File `report_2.out' has not changed.
-(rerunfilecheck)             Checksum: 96D0F7BC22EB54B7AA94500C7B752D17;4505.
+(rerunfilecheck)             Checksum: 9F52D60E5CEF4101A662B713DD251A4C;4097.
 )
 
 Here is how much of LuaTeX's memory you used:
- 23576 strings out of 476291
- 1166549,1144653 words of node,token memory allocated
+ 23344 strings out of 476291
+ 1166585,1144653 words of node,token memory allocated
  5063 words of node memory still in use:
    12 hlist, 2 vlist, 7 rule, 1 local_par, 5 glue, 4 kern, 2 penalty, 10 sub_mli
 st, 3 glyph, 1978 attribute, 57 glue_spec, 193 attribute_list, 1 write, 15 user_
 defined nodes
-   avail lists: 1:36,2:179628,3:753,4:29891,5:21629,6:119,7:24230,8:69,9:42084,1
-0:51,11:1332
- 44523 multiletter control sequences out of 65536+600000
+   avail lists: 1:34,2:163258,3:672,4:26983,5:20086,6:116,7:18551,8:69,9:38609,1
+0:51,11:1258
+ 44499 multiletter control sequences out of 65536+600000
  144 fonts using 125478879 bytes
  119i,16n,115p,1785b,1630s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf><c:/te
@@ -1969,10 +1948,10 @@ fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/am
 sfonts/symbols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfont
 s/symbols/msbm7.pfb>
-Output written on report_2.pdf (36 pages, 555651 bytes).
+Output written on report_2.pdf (32 pages, 527653 bytes).
 
-PDF statistics: 1293 PDF objects out of 1440 (max. 8388607)
- 1168 compressed objects within 12 object streams
- 809 named destinations out of 1000 (max. 131072)
- 233 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1056 PDF objects out of 1200 (max. 8388607)
+ 937 compressed objects within 10 object streams
+ 601 named destinations out of 1000 (max. 131072)
+ 217 words of extra memory for PDF output out of 10000 (max. 100000000)
 

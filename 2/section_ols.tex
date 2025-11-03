@@ -116,6 +116,11 @@ R^2=\frac{\|X\hat\theta_N-\bar y\mathbf{1}\|_2^2}{\|y-\bar y\mathbf{1}\|_2^2},\q
 \bar y=\frac1N\sum_{i=1}^N y_i .
 \]
 
+\paragraph{実装}
+データから設計行列 $X$ と観測ベクトル $y$ を構成し，$\hat\theta = (X^\top X)^{-1} X^\top y$ により推定量を計算する．
+残差 $r = y - X\hat\theta$ から雑音分散推定量 $\hat\sigma^2 = \|r\|^2/(N-p)$ を求め，
+推定誤差共分散 $\hat\sigma^2 (X^\top X)^{-1}$ および決定係数 $R^2$ を算出する関数を実装した．
+
 \paragraph{収束確認}
 $N\in\{2,4,8,\dots,2^{13}=8192\}$ で $\hat\theta_N$ を計算し，$N$ を横軸とする片対数図で各成分を同一図に描く．
 
@@ -144,77 +149,24 @@ R^2=0.8629734 .
   \label{fig:task1-conv}
 \end{figure}
 
-\paragraph{Rコード}
-\begin{lstlisting}[language=R]
-# データ読み込み
-data <- read.csv("datas/mmse_kadai1.csv", header=FALSE,
-                 col.names = c("x1","x2","y"))
-x <- as.matrix(data[, c("x1","x2")])
-y <- as.matrix(data[, "y"])
-
-# 最小二乗（原理・方法で用いる関数）
-regression_simple <- function(x, y){
-  theta_hat  <- solve(t(x) %*% x) %*% t(x) %*% y
-  sigma2_hat <- as.numeric(t(y - x %*% theta_hat) %*%
-                           (y - x %*% theta_hat) / (nrow(x) - ncol(x)))
-  err_cov_mat <- sigma2_hat * solve(t(x) %*% x)
-  det_coef <- sum((x %*% theta_hat - mean(y))^2) /
-              sum((y - mean(y))^2)
-  list(theta_hat=theta_hat, err_cov_mat=err_cov_mat,
-       sigma2_hat=sigma2_hat, det_coef=det_coef)
-}
-
-# 部分データでの実験
-exp1 <- function (x, y, n){
-  x <- x[1:n, , drop=FALSE]
-  y <- y[1:n, , drop=FALSE]
-  result <- regression_simple(x, y)
-  list(theta_hat = result$theta_hat,
-       err_cov_mat = result$err_cov_mat,
-       det_coef = result$det_coef)
-}
-
-# 収束図の作成
-plot_exp1 <- function(x, y, out="graphs/task1.png"){
-  ns <- 2^(1:13)  # 2,...,8192
-  theta_hats <- matrix(NA_real_, nrow=length(ns), ncol=ncol(x))
-  for(i in seq_along(ns)){
-    theta_hats[i, ] <- as.vector(exp1(x, y, ns[i])$theta_hat)
-  }
-  dir.create(dirname(out), showWarnings=FALSE, recursive=TRUE)
-  png(out, width=960, height=600, res=120)
-  matplot(ns, theta_hats, type="b", log="x",
-          xlab="N", ylab=expression(hat(theta)),
-          main="Convergence of OLS estimates")
-  legend("bottomright",
-         legend=paste0("theta[", 1:ncol(x), "]"),
-         lty=1:ncol(x), pch=1:ncol(x))
-  dev.off()
-}
-
-# 実行例（全データ）
-N_max <- nrow(x)
-th   <- exp1(x, y, N_max)$theta_hat
-Vhat <- exp1(x, y, N_max)$err_cov_mat
-R2   <- exp1(x, y, N_max)$det_coef
-print(th); print(Vhat); print(R2)
-
-# 収束図
-plot_exp1(x, y)
-\end{lstlisting}
-
 \paragraph {考察}
+グラフの結果から，$\hat\theta_N$ は $N$ を増やすにつれて収束していることが確認できた．
 
 
 \subsection{課題2（多項式回帰）}
 
 \paragraph{モデル}
 $y_i=\varphi(x_i)\theta+w_i,\quad \varphi(x)=[\,1\ x\ x^2\ x^3\,],\ i=1,\dots,N.$
-雑音 $w_i$ は独立，同分散 $\sigma^2$，平均0．
+雑音 $w_i$ は独立，同分散 $\sigma^2$，平均0．分散9の正規分布．
 $X=[\varphi(x_1);\dots;\varphi(x_N)]\in\mathbb{R}^{N\times4}$．
 
 \paragraph{推定量}
 推定量・共分散・決定係数は課題1と同じ形式（$p=4$）で計算する．
+
+\paragraph{実装}
+入力 $x_i$ から特徴ベクトル $\varphi(x_i) = [1\ x_i\ x_i^2\ x_i^3]$ を構成し，設計行列 $X$ を作成する．
+課題1と同様の関数を用いてパラメータ推定量，誤差共分散，決定係数を算出する．
+$N\in\{4,8,16,\dots,8192\}$ の各点で推定量を計算し，片対数プロットで収束の様子を可視化した．
 
 \paragraph{収束確認}
 $N\in\{4,8,16,\dots,8192\}$ で $\hat\theta_N$ を計算し，$N$ を横軸とする片対数図で各成分を同一図に描画する．
@@ -252,64 +204,6 @@ R^2=0.461855 .
   \label{fig:task2-conv}
 \end{figure}
 
-\paragraph{Rコード}
-\begin{lstlisting}[language=R]
-# データ
-data <- read.csv("datas/mmse_kadai2.csv", header=FALSE,
-                 col.names=c("x1","y"))
-x0 <- rep(1, nrow(data))
-x1 <- as.matrix(data[,"x1"])
-x2 <- x1^2; x3 <- x1^3
-x  <- cbind(x0, x1, x2, x3)
-y  <- as.matrix(data[,"y"])
-
-# OLS 基本関数（課題1と同じ）
-regression_simple <- function(x, y){
-  theta_hat  <- solve(t(x) %*% x) %*% t(x) %*% y
-  sigma2_hat <- as.numeric(t(y - x %*% theta_hat) %*%
-                           (y - x %*% theta_hat) / (nrow(x) - ncol(x)))
-  err_cov_mat <- sigma2_hat * solve(t(x) %*% x)
-  det_coef <- sum((x %*% theta_hat - mean(y))^2) /
-              sum((y - mean(y))^2)
-  list(theta_hat=theta_hat, err_cov_mat=err_cov_mat,
-       sigma2_hat=sigma2_hat, det_coef=det_coef)
-}
-
-# 部分データ実験
-exp2 <- function(x, y, n){
-  x <- x[1:n, , drop=FALSE]
-  y <- y[1:n, , drop=FALSE]
-  result <- regression_simple(x, y)
-  list(theta_hat=result$theta_hat,
-       err_cov_mat=result$err_cov_mat,
-       det_coef=result$det_coef)
-}
-
-# 収束図
-plot_exp2 <- function(x, y, out="graphs/task2.png"){
-  ns <- 2^(2:13)  # 4,...,8192
-  theta_hats <- matrix(NA_real_, nrow=length(ns), ncol=ncol(x))
-  for(i in seq_along(ns)){
-    theta_hats[i, ] <- as.vector(exp2(x, y, ns[i])$theta_hat)
-  }
-  dir.create(dirname(out), showWarnings=FALSE, recursive=TRUE)
-  png(out, width=960, height=600, res=120)
-  matplot(ns, theta_hats, type="b", log="x",
-          xlab="N", ylab=expression(hat(theta)),
-          main="Convergence of OLS estimates (poly degree 3)")
-  legend("bottomright",
-         legend=paste0("theta[",0:(ncol(x)-1),"]"),
-         lty=1:ncol(x), pch=1:ncol(x))
-  dev.off()
-}
-
-# 実行例
-N_max <- nrow(x)
-print(exp2(x, y, N_max)$theta_hat)
-print(exp2(x, y, N_max)$err_cov_mat)
-print(exp2(x, y, N_max)$det_coef)
-plot_exp2(x, y)
-\end{lstlisting}
 \paragraph {考察}
 
 
@@ -318,12 +212,14 @@ plot_exp2(x, y)
 \paragraph{モデルと注意}
 $y_i=x_i^\top\theta+w_i\ (i=1,\dots,N)$，$x_i\in\mathbb{R}^2$．
 観測誤差 $w_i\sim \mathrm{Cauchy}(0,1)$ 独立同分布．
-Cauchy は二乗可積分でないため $\mathbb{E}[w_i^2]$ が存在せず，最小二乗法の通常仮定（有限分散と大数の法則）は満たされない。
-よって $\sigma^2$ や $\mathrm{Cov}(\hat\theta)$ は理論上定義できない。以下の分散・標準誤差・$R^2$ は便宜的な値であり，統計的保証はない。
 
 \paragraph{推定（形式的なOLS）}
 推定量・共分散・決定係数は課題1と同じ形式（$p=2$）で計算する．
-ただし観測誤差が Cauchy 分布であり理論保証がないことに注意．
+
+\paragraph{実装}
+課題1と同じ最小二乗推定の枠組みを用いて，$N\in\{2,4,\dots,8192\}$ の各サンプルサイズで推定量を計算した．
+Cauchy 分布は分散が定義されないため，通常の推定誤差共分散や決定係数は理論的根拠を持たないが，
+形式的に計算することで推定の不安定性を確認する．
 
 \paragraph{結果（全データ $N=10000$）}
 \[
@@ -353,62 +249,6 @@ R^2=0.0002841468.
   \label{fig:task3-conv}
 \end{figure}
 
-\paragraph{Rコード}
-\begin{lstlisting}[language=R]
-# データ読込
-data3 <- read.csv("datas/mmse_kadai3.csv", header=FALSE,
-                  col.names=c("x1","x2","y"))
-x <- as.matrix(data3[, c("x1","x2")])
-y <- as.matrix(data3[, "y"])
-
-# 形式的なOLS（課題1と同様）
-regression_simple <- function(x, y){
-  theta_hat  <- solve(t(x) %*% x) %*% t(x) %*% y
-  sigma2_hat <- as.numeric(t(y - x %*% theta_hat) %*%
-                           (y - x %*% theta_hat) / (nrow(x) - ncol(x)))
-  err_cov_mat <- sigma2_hat * solve(t(x) %*% x)
-  det_coef <- sum((x %*% theta_hat - mean(y))^2) /
-              sum((y - mean(y))^2)
-  list(theta_hat=theta_hat, err_cov_mat=err_cov_mat,
-       sigma2_hat=sigma2_hat, det_coef=det_coef)
-}
-
-# 部分データでの実験
-exp3 <- function(x, y, n){
-  x <- x[1:n, , drop=FALSE]
-  y <- y[1:n, , drop=FALSE]
-  res <- regression_simple(x, y)
-  list(theta_hat=res$theta_hat,
-       err_cov_mat=res$err_cov_mat,
-       det_coef=res$det_coef)
-}
-
-# 収束図
-plot_exp3 <- function(x, y, out="graphs/task3.png"){
-  ns <- 2^(1:13)                      # 2,...,8192
-  ns <- ns[ns <= nrow(x)]
-  theta_hats <- matrix(NA_real_, nrow=length(ns), ncol=ncol(x))
-  for(i in seq_along(ns)){
-    theta_hats[i, ] <- as.vector(exp3(x, y, ns[i])$theta_hat)
-  }
-  dir.create(dirname(out), showWarnings=FALSE, recursive=TRUE)
-  png(out, width=960, height=600, res=120)
-  matplot(ns, theta_hats, type="b", log="x",
-          xlab="N", ylab=expression(hat(theta)),
-          main="Convergence of OLS under Cauchy noise")
-  legend("topright", legend=paste0("theta[",1:ncol(x),"]"),
-         lty=1:ncol(x), pch=1:ncol(x))
-  dev.off()
-}
-
-# 実行例
-N_max <- nrow(x)
-print(exp3(x, y, N_max)$theta_hat)
-print(exp3(x, y, N_max)$err_cov_mat)
-print(exp3(x, y, N_max)$det_coef)
-plot_exp3(x, y)
-\end{lstlisting}
-
 \paragraph{考察}
 資料にあるように、Cauchy 誤差では外れ値の影響が支配的で，$\hat\theta_N$ は $N$ を増やしても安定しにくいことが確認できた。
 
@@ -423,40 +263,9 @@ $X=[\varphi(x_1);\dots;\varphi(x_N)]\in\mathbb{R}^{N\times4}$, $y=[y_1;\dots;y_N
 \paragraph{推定量}
 推定量・共分散・決定係数は課題1と同じ形式（$p=4$）で計算する．
 
-\paragraph{Rコード}
-\begin{lstlisting}[language=R]
-# 課題4: x ∈ [0,1], φ(x)=[1 x x^2 x^3]
-data <- read.csv("datas/mmse_kadai4.csv", header=FALSE,
-                 col.names=c("x1","y"))
-x0 <- rep(1, nrow(data))
-x1 <- as.matrix(data[,"x1"])
-x2 <- x1^2; x3 <- x1^3
-x  <- cbind(x0, x1, x2, x3)
-y  <- as.matrix(data[,"y"])
-
-regression_simple <- function(x, y){
-  theta_hat  <- solve(t(x) %*% x) %*% t(x) %*% y
-  sigma2_hat <- as.numeric(t(y - x %*% theta_hat) %*%
-                           (y - x %*% theta_hat) / (nrow(x) - ncol(x)))
-  err_cov_mat <- sigma2_hat * solve(t(x) %*% x)
-  det_coef <- sum((x %*% theta_hat - mean(y))^2) /
-              sum((y - mean(y))^2)
-  list(theta_hat=theta_hat, err_cov_mat=err_cov_mat,
-       sigma2_hat=sigma2_hat, det_coef=det_coef)
-}
-
-exp4 <- function(x, y, n){
-  x <- x[1:n, , drop=FALSE]
-  y <- y[1:n, , drop=FALSE]
-  regression_simple(x, y)
-}
-
-N_max <- nrow(x)
-res4 <- exp4(x, y, N_max)
-print(res4$theta_hat)
-print(res4$err_cov_mat)
-print(res4$det_coef)   # R^2
-\end{lstlisting}
+\paragraph{実装}
+課題2と同様に $\varphi(x)=[1\ x\ x^2\ x^3]$ の特徴ベクトルを用いて設計行列を構成し，
+全データ $N=10000$ に対して最小二乗推定を行った．
 
 \paragraph{結果（$N=10000$）}
 \[

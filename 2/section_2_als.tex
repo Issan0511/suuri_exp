@@ -1,11 +1,8 @@
 
 
-\subsection{交互最小二乗法}
-\label{subsec:als}
+\subsection{原理と方法}
 
-\subsubsection{原理と方法}
-
-\paragraph{原理}
+\paragraph{交互最小二乗法}
 非線形最小二乗問題のうち，パラメータを二分割すると片方ずつは線形になる場合に適用する．
 パラメータを $\theta=(\alpha,\beta)^\top$ と分割し，$g(\alpha,\beta,x)$ が $\alpha,\beta$ に関してそれぞれ線形（双線形など）であるとする．
 観測 $(x_i,y_i)$ に対し，目的関数
@@ -15,7 +12,7 @@
 を最小化する．片方のパラメータを固定すれば通常の線形最小二乗（式(3.5)型）で解ける．
 交互更新により $J$ は単調非増加で，反復に伴い悪化しない．ただし一般には局所解に収束しうるため初期値が重要である．
 
-\paragraph{方法}
+
 初期値 $\alpha^{(0)},\beta^{(0)}$ を与え，$j=1,2,\ldots$ について次を繰り返す．
 \begin{enumerate}
   \item \textbf{Step A（$\beta$ 固定）}：$\beta=\beta^{(j-1)}$ として
@@ -58,12 +55,9 @@ update_alpha_beta <- function(alpha, beta, x, x_T, y, n) {
 \end{lstlisting}
 
 
-\subsection{K-平均法}
-\label{subsec:kmeans}
 
-\subsubsection{原理と方法}
 
-\paragraph{原理}
+\paragraph{K-平均法}
 データ $\{x_i\}_{i=1}^N \subset \mathbb{R}^p$ を $K$ 個のクラスタに分割する．
 クラスタ $V_\ell$ の代表点（重心）を
 \begin{align}
@@ -84,7 +78,7 @@ update_alpha_beta <- function(alpha, beta, x, x_T, y, n) {
 \end{align}
 の最小化に等価である．大域最適性は保証されず初期値依存性が強い．
 
-\paragraph{方法}
+
 初期重心 $\{\mu_\ell^{(0)}\}_{\ell=1}^K$ を与え，$j=1,2,\ldots$ について次を交互に実行する．
 \begin{enumerate}
   \item \textbf{割当て（Assignment）}：各データを最も近い重心へ割り当てる．

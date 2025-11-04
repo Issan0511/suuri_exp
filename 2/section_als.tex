@@ -152,7 +152,7 @@ k_means <- function(x, K, max_iters = 10000, tol = 1e-6) {
 \label{subsec:task13}
 
 \paragraph{内容}
-二分割パラメータ $\theta=\alpha\beta^\top$（$\alpha\in\mathbb{R}^{2}$, $\beta\in\mathbb{R}^{3}$）を用いた双線形モデル
+パラメータ $\alpha\in\mathbb{R}^{2}$, $\beta\in\mathbb{R}^{3}$を用いた双線形モデル
 \[
 y_i \approx \alpha^\top X_i \beta
 \]
@@ -233,5 +233,60 @@ $\alpha$ の軌跡を \verb|graphs/task13_convergence.png|，\verb|graphs/task13
   \label{fig:task13_traj}
 \end{figure}
 
+全試行の統計情報を表\ref{tab:task13_stats}に示す．
+
+\begin{table}[H]
+\centering
+\caption{全試行 $10$ 回の統計情報}
+\label{tab:task13_stats}
+\begin{tabular}{|l|c|}
+\hline
+試行回数 & 10 \\
+\hline
+MMSE - 平均 & 0.3329 \\
+\hline
+MMSE - 標準偏差 & 0.0000 \\
+\hline
+MMSE - 最小 & 0.3329 \\
+\hline
+MMSE - 最大 & 0.3329 \\
+\hline
+\end{tabular}
+\end{table}
+
+$\theta=\alpha\beta^\top$ の各要素の範囲を表\ref{tab:task13_theta_range}に示す．
+
+\begin{table}[H]
+\centering
+\caption{$\theta=\alpha\beta^\top$ の各要素の範囲}
+\label{tab:task13_theta_range}
+\begin{tabular}{|c|c|c|}
+\hline
+要素 & 最小値 & 最大値 \\
+\hline
+$\theta_{1,1}$ & 0.5065 & 0.5065 \\
+\hline
+$\theta_{1,2}$ & $-0.9967$ & $-0.9967$ \\
+\hline
+$\theta_{1,3}$ & 2.0003 & 2.0003 \\
+\hline
+$\theta_{2,1}$ & $-1.0132$ & $-1.0132$ \\
+\hline
+$\theta_{2,2}$ & 1.9939 & 1.9939 \\
+\hline
+$\theta_{2,3}$ & $-4.0017$ & $-4.0017$ \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
 \paragraph{考察}
-% ここに記述
+図\ref{fig:task13_conv}と、図\ref{fig:task13_traj} より，ALS は数十回の反復で高速に収束することが分かる．
+
+また，表\ref{tab:task13_stats}および表\ref{tab:task13_theta_range}から，全試行にわたってMMSEや$\theta$の各要素が非常に安定していることも分かる．
+
+
+
+
+

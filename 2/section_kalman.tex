@@ -165,8 +165,7 @@ result11 <- exp11(kalman_data)
   \label{fig:task11_fig}
 \end{figure}
 
-\paragraph{考察}
-% ここに記述
+
 
 
 \subsection{課題12（カルマンスムーザー）}
@@ -221,5 +220,5 @@ result12 <- exp12(kalman_data)
 \end{figure}
 
 \paragraph{考察}
-% ここに記述
+同じシード値でカルマンフィルタ,カルマンスムーサーを実行したが,図\ref{fig:task11_fig}と図\ref{fig:task12_fig}を比較しても,mmseを比較しても,カルマンスムーサーの方が真値に近い推定ができていることがわかる.これは,カルマンスムーサーは全データを用いて各時刻の状態を推定するため,より多くの情報を活用できることによると考えられる.
 

@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  4 NOV 2025 11:36
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  4 NOV 2025 16:23
  restricted system commands enabled.
 **report_2.tex
 (./report_2.tex
@@ -1688,7 +1688,7 @@ LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.5> not available
 [5]
 
 [6<./graphs/task1.png>]
-<graphs/task2.png, id=268, 481.8pt x 481.8pt>
+<graphs/task2.png, id=270, 481.8pt x 481.8pt>
 File: graphs/task2.png Graphic file (type png)
 <use graphs/task2.png>
 Package luatex.def Info: graphs/task2.png  used on input line 236.
@@ -1696,7 +1696,7 @@ Package luatex.def Info: graphs/task2.png  used on input line 236.
 
 
 [7<./graphs/task2.png>]
-<graphs/task3.png, id=277, 481.8pt x 481.8pt>
+<graphs/task3.png, id=281, 481.8pt x 481.8pt>
 File: graphs/task3.png Graphic file (type png)
 <use graphs/task3.png>
 Package luatex.def Info: graphs/task3.png  used on input line 282.
@@ -1725,7 +1725,7 @@ LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <10> not available
 (Font)              Font shape `JY3/gt/m/n' tried instead on input line 130.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 8.44485pt on input line 130.
-<graphs/task5_ols.png, id=342, 481.8pt x 481.8pt>
+<graphs/task5_ols.png, id=348, 481.8pt x 481.8pt>
 File: graphs/task5_ols.png Graphic file (type png)
 <use graphs/task5_ols.png>
 Package luatex.def Info: graphs/task5_ols.png  used on input line 169.
@@ -1733,7 +1733,7 @@ Package luatex.def Info: graphs/task5_ols.png  used on input line 169.
 
 
 [11]
-<graphs/task5_wls.png, id=363, 481.8pt x 481.8pt>
+<graphs/task5_wls.png, id=369, 481.8pt x 481.8pt>
 File: graphs/task5_wls.png Graphic file (type png)
 <use graphs/task5_wls.png>
 Package luatex.def Info: graphs/task5_wls.png  used on input line 176.
@@ -1743,7 +1743,7 @@ Package luatex.def Info: graphs/task5_wls.png  used on input line 176.
 [12<./graphs/task5_ols.png>]
 
 [13<./graphs/task5_wls.png>]
-<graphs/task6_ols.png, id=379, 481.8pt x 481.8pt>
+<graphs/task6_ols.png, id=388, 481.8pt x 481.8pt>
 File: graphs/task6_ols.png Graphic file (type png)
 <use graphs/task6_ols.png>
 Package luatex.def Info: graphs/task6_ols.png  used on input line 268.
@@ -1751,7 +1751,7 @@ Package luatex.def Info: graphs/task6_ols.png  used on input line 268.
 
 
 [14]
-<graphs/task6_wls.png, id=387, 481.8pt x 481.8pt>
+<graphs/task6_wls.png, id=396, 481.8pt x 481.8pt>
 File: graphs/task6_wls.png Graphic file (type png)
 <use graphs/task6_wls.png>
 Package luatex.def Info: graphs/task6_wls.png  used on input line 275.
@@ -1813,10 +1813,10 @@ Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
-<graphs/task10.png, id=650, 481.8pt x 481.8pt>
+<graphs/task10.png, id=659, 481.8pt x 481.8pt>
 File: graphs/task10.png Graphic file (type png)
 <use graphs/task10.png>
-Package luatex.def Info: graphs/task10.png  used on input line 501.
+Package luatex.def Info: graphs/task10.png  used on input line 497.
 (luatex.def)             Requested size: 373.3035pt x 373.31026pt.
 
 
@@ -1841,7 +1841,11 @@ Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
 [26]
-<graphs/task11.png, id=792, 481.8pt x 481.8pt>
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' in `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+<graphs/task11.png, id=802, 481.8pt x 481.8pt>
 File: graphs/task11.png Graphic file (type png)
 <use graphs/task11.png>
 Package luatex.def Info: graphs/task11.png  used on input line 163.
@@ -1861,7 +1865,7 @@ Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
-<graphs/task12.png, id=821, 481.8pt x 481.8pt>
+<graphs/task12.png, id=837, 481.8pt x 481.8pt>
 File: graphs/task12.png Graphic file (type png)
 <use graphs/task12.png>
 Package luatex.def Info: graphs/task12.png  used on input line 218.
@@ -1883,7 +1887,7 @@ Inserting `ltj.process_input_buffer' in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
 [32]
-<graphs/task13_convergence.png, id=942, 803.0pt x 602.25pt>
+<graphs/task13_convergence.png, id=957, 803.0pt x 602.25pt>
 File: graphs/task13_convergence.png Graphic file (type png)
 <use graphs/task13_convergence.png>
 Package luatex.def Info: graphs/task13_convergence.png  used on input line 224.
@@ -1892,16 +1896,18 @@ Package luatex.def Info: graphs/task13_convergence.png  used on input line 224.
 
 
 [33]
-<graphs/task13_trajectory.png, id=955, 803.0pt x 602.25pt>
+<graphs/task13_trajectory.png, id=970, 803.0pt x 602.25pt>
 File: graphs/task13_trajectory.png Graphic file (type png)
 <use graphs/task13_trajectory.png>
 Package luatex.def Info: graphs/task13_trajectory.png  used on input line 231.
 (luatex.def)             Requested size: 355.08984pt x 266.3233pt.
-)
 
-[34<./graphs/task13_convergence.png><./graphs/task13_trajectory.png>]
 
-[35] (./report_2.aux)
+[34<./graphs/task13_convergence.png><./graphs/task13_trajectory.png>])
+
+[35]
+
+[36] (./report_2.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -1916,15 +1922,15 @@ Package rerunfilecheck Info: File `report_2.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 23336 strings out of 476291
- 1166574,1144653 words of node,token memory allocated
- 5489 words of node memory still in use:
+ 23351 strings out of 476291
+ 1166576,1144653 words of node,token memory allocated
+ 5543 words of node memory still in use:
    12 hlist, 2 vlist, 7 rule, 1 local_par, 5 glue, 4 kern, 2 penalty, 10 sub_mli
-st, 3 glyph, 2174 attribute, 57 glue_spec, 210 attribute_list, 1 write, 15 user_
+st, 3 glyph, 2198 attribute, 57 glue_spec, 213 attribute_list, 1 write, 15 user_
 defined nodes
-   avail lists: 1:34,2:162865,3:702,4:26983,5:20086,6:117,7:18530,8:69,9:38608,1
+   avail lists: 1:34,2:162460,3:696,4:26983,5:20084,6:117,7:18559,8:70,9:38592,1
 0:51,11:1258
- 44436 multiletter control sequences out of 65536+600000
+ 44443 multiletter control sequences out of 65536+600000
  144 fonts using 125478879 bytes
  119i,16n,115p,1785b,1630s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf><c:/te
@@ -1951,14 +1957,14 @@ mr5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/
 texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2025/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symb
-ols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/m
-sbm7.pfb>
-Output written on report_2.pdf (35 pages, 562885 bytes).
+1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
+pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on report_2.pdf (36 pages, 572846 bytes).
 
-PDF statistics: 1130 PDF objects out of 1200 (max. 8388607)
- 1002 compressed objects within 11 object streams
- 650 named destinations out of 1000 (max. 131072)
+PDF statistics: 1162 PDF objects out of 1200 (max. 8388607)
+ 1032 compressed objects within 11 object streams
+ 658 named destinations out of 1000 (max. 131072)
  225 words of extra memory for PDF output out of 10000 (max. 100000000)
 

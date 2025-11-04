@@ -7,102 +7,108 @@
 \contentsline {paragraph}{実装}{5}{section*.4}%
 \contentsline {paragraph}{収束確認}{5}{section*.5}%
 \contentsline {paragraph}{結果（全データ $N=10000$）}{5}{section*.6}%
-\contentsline {paragraph}{考察}{5}{section*.8}%
-\contentsline {subsection}{\numberline {2.3}課題2（多項式回帰）}{5}{subsection.2.3}%
-\contentsline {paragraph}{モデル}{5}{section*.9}%
+\contentsline {paragraph}{考察}{6}{section*.8}%
+\contentsline {subsection}{\numberline {2.3}課題2（多項式回帰）}{6}{subsection.2.3}%
+\contentsline {paragraph}{モデル}{6}{section*.9}%
 \contentsline {paragraph}{推定量}{6}{section*.10}%
 \contentsline {paragraph}{実装}{6}{section*.11}%
 \contentsline {paragraph}{収束確認}{6}{section*.12}%
-\contentsline {paragraph}{結果（全データ $N=10000$）}{6}{section*.13}%
-\contentsline {paragraph}{考察}{6}{section*.15}%
-\contentsline {subsection}{\numberline {2.4}課題3（分散の観測誤差：Cauchy）}{7}{subsection.2.4}%
-\contentsline {paragraph}{モデルと注意}{7}{section*.16}%
-\contentsline {paragraph}{推定（形式的なOLS）}{7}{section*.17}%
-\contentsline {paragraph}{実装}{7}{section*.18}%
-\contentsline {paragraph}{結果（全データ $N=10000$）}{7}{section*.19}%
-\contentsline {paragraph}{考察}{7}{section*.21}%
-\contentsline {subsection}{\numberline {2.5}課題4（入力域の制約と設計）}{8}{subsection.2.5}%
-\contentsline {paragraph}{設定}{8}{section*.22}%
-\contentsline {paragraph}{推定量}{8}{section*.23}%
-\contentsline {paragraph}{実装}{8}{section*.24}%
-\contentsline {paragraph}{結果（$N=10000$）}{8}{section*.25}%
-\contentsline {paragraph}{課題2.1との比較（$N=10000$）}{8}{section*.26}%
-\contentsline {paragraph}{考察（どうデータを取るべきか）}{8}{section*.27}%
+\contentsline {paragraph}{結果（全データ $N=10000$）}{7}{section*.13}%
+\contentsline {paragraph}{考察}{7}{section*.15}%
+\contentsline {subsection}{\numberline {2.4}課題3（分散の観測誤差：Cauchy）}{8}{subsection.2.4}%
+\contentsline {paragraph}{モデルと注意}{8}{section*.16}%
+\contentsline {paragraph}{推定量}{8}{section*.17}%
+\contentsline {paragraph}{実装}{8}{section*.18}%
+\contentsline {paragraph}{結果（全データ $N=10000$）}{8}{section*.19}%
+\contentsline {paragraph}{考察}{8}{section*.21}%
+\contentsline {subsection}{\numberline {2.5}課題4（入力域の制約と設計）}{9}{subsection.2.5}%
+\contentsline {paragraph}{設定}{9}{section*.22}%
+\contentsline {paragraph}{推定量}{9}{section*.23}%
+\contentsline {paragraph}{実装}{9}{section*.24}%
+\contentsline {paragraph}{結果（$N=10000$）}{9}{section*.25}%
+\contentsline {paragraph}{課題2.1との比較（$N=10000$）}{9}{section*.26}%
+\contentsline {paragraph}{考察}{9}{section*.27}%
 \contentsline {section}{\numberline {3}重み付き最小二乗法}{9}{section.3}%
 \contentsline {subsection}{\numberline {3.1}原理と方法}{9}{subsection.3.1}%
 \contentsline {paragraph}{原理}{9}{section*.28}%
-\contentsline {paragraph}{方法}{9}{section*.29}%
-\contentsline {paragraph}{実装}{9}{section*.30}%
-\contentsline {subsection}{\numberline {3.2}課題5（2次元出力：重み付き最小二乗法）}{10}{subsection.3.2}%
-\contentsline {paragraph}{課題の内容}{10}{section*.31}%
-\contentsline {paragraph}{推定法}{10}{section*.32}%
-\contentsline {paragraph}{実装}{10}{section*.33}%
+\contentsline {paragraph}{方法}{10}{section*.29}%
+\contentsline {paragraph}{実装}{10}{section*.30}%
+\contentsline {subsection}{\numberline {3.2}課題5（2次元出力：重み付き最小二乗法）}{11}{subsection.3.2}%
+\contentsline {paragraph}{課題の内容}{11}{section*.31}%
+\contentsline {paragraph}{推定量}{11}{section*.32}%
+\contentsline {paragraph}{実装}{11}{section*.33}%
 \contentsline {paragraph}{結果}{11}{section*.34}%
-\contentsline {paragraph}{考察}{12}{section*.37}%
-\contentsline {subsection}{\numberline {3.3}課題6（2次元出力・異分散2群に対する重み付き最小二乗）}{12}{subsection.3.3}%
-\contentsline {paragraph}{課題の内容}{12}{section*.38}%
-\contentsline {paragraph}{推定法（GLS/WLS）}{12}{section*.39}%
-\contentsline {paragraph}{実装}{13}{section*.40}%
-\contentsline {paragraph}{結果}{13}{section*.41}%
-\contentsline {paragraph}{考察}{15}{section*.44}%
-\contentsline {section}{\numberline {4}推定値の合成と逐次最小二乗法}{15}{section.4}%
-\contentsline {subsection}{\numberline {4.1}原理と方法}{15}{subsection.4.1}%
-\contentsline {paragraph}{推定値の合成（Estimator Fusion）}{15}{section*.45}%
-\contentsline {paragraph}{逐次最小二乗法（RLS）}{16}{section*.46}%
-\contentsline {subsection}{\numberline {4.2}課題7（推定値の合成の検証：2分割データの統合）}{16}{subsection.4.2}%
-\contentsline {paragraph}{課題の内容}{16}{section*.47}%
-\contentsline {paragraph}{実装}{17}{section*.48}%
-\contentsline {paragraph}{結果}{17}{section*.49}%
-\contentsline {paragraph}{考察}{17}{section*.50}%
-\contentsline {subsection}{\numberline {4.3}課題7（推定値の合成の検証：非線形基底・分割データ）}{18}{subsection.4.3}%
-\contentsline {paragraph}{課題の内容}{18}{section*.51}%
-\contentsline {paragraph}{実装（OLS 版）}{18}{lstlisting.-6}%
-\contentsline {paragraph}{実装（推定分散による重み付き合成）}{18}{section*.53}%
-\contentsline {paragraph}{結果}{19}{section*.54}%
-\contentsline {paragraph}{考察}{19}{section*.55}%
-\contentsline {subsection}{\numberline {4.4}課題9（逐次最小二乗法によるシステム同定）}{19}{subsection.4.4}%
-\contentsline {paragraph}{モデル}{19}{section*.56}%
-\contentsline {paragraph}{使用コード（共通）}{20}{lstlisting.-8}%
-\contentsline {paragraph}{内容}{20}{section*.59}%
-\contentsline {paragraph}{結果}{20}{section*.60}%
-\contentsline {paragraph}{考察}{20}{section*.61}%
-\contentsline {paragraph}{コード}{20}{lstlisting.-9}%
-\contentsline {paragraph}{内容}{20}{section*.64}%
-\contentsline {paragraph}{結果}{21}{section*.65}%
-\contentsline {paragraph}{考察}{21}{section*.66}%
+\contentsline {paragraph}{考察}{13}{section*.37}%
+\contentsline {subsection}{\numberline {3.3}課題6（2次元出力・異分散2群に対する重み付き最小二乗）}{13}{subsection.3.3}%
+\contentsline {paragraph}{課題の内容}{13}{section*.38}%
+\contentsline {paragraph}{推定法（GLS/WLS）}{14}{section*.39}%
+\contentsline {paragraph}{実装}{14}{section*.40}%
+\contentsline {paragraph}{結果}{14}{section*.41}%
+\contentsline {paragraph}{考察}{16}{section*.44}%
+\contentsline {section}{\numberline {4}推定値の合成と逐次最小二乗法}{16}{section.4}%
+\contentsline {subsection}{\numberline {4.1}原理と方法}{16}{subsection.4.1}%
+\contentsline {paragraph}{推定値の合成（Estimator Fusion）}{16}{section*.45}%
+\contentsline {paragraph}{逐次最小二乗法（RLS）}{17}{section*.46}%
+\contentsline {subsection}{\numberline {4.2}課題7（推定値の合成の検証：2分割データの統合）}{17}{subsection.4.2}%
+\contentsline {paragraph}{課題の内容}{17}{section*.47}%
+\contentsline {paragraph}{実装}{18}{section*.48}%
+\contentsline {paragraph}{結果}{18}{section*.49}%
+\contentsline {paragraph}{考察}{18}{section*.50}%
+\contentsline {subsection}{\numberline {4.3}課題7（推定値の合成の検証：非線形基底・分割データ）}{19}{subsection.4.3}%
+\contentsline {paragraph}{課題の内容}{19}{section*.51}%
+\contentsline {paragraph}{実装（OLS 版）}{19}{lstlisting.-7}%
+\contentsline {paragraph}{実装（推定分散による重み付き合成）}{19}{section*.53}%
+\contentsline {paragraph}{結果}{20}{section*.54}%
+\contentsline {paragraph}{考察}{20}{section*.55}%
+\contentsline {subsection}{\numberline {4.4}課題9（逐次最小二乗法によるシステム同定）}{20}{subsection.4.4}%
+\contentsline {paragraph}{モデル}{20}{section*.56}%
+\contentsline {paragraph}{使用コード（共通）}{21}{lstlisting.-9}%
+\contentsline {paragraph}{内容}{21}{section*.59}%
+\contentsline {paragraph}{結果}{21}{section*.60}%
+\contentsline {paragraph}{考察}{21}{section*.61}%
 \contentsline {paragraph}{コード}{21}{lstlisting.-10}%
-\contentsline {paragraph}{内容}{21}{section*.69}%
-\contentsline {paragraph}{結果}{21}{section*.70}%
-\contentsline {paragraph}{考察}{21}{section*.71}%
-\contentsline {paragraph}{コード}{21}{lstlisting.-11}%
-\contentsline {subsection}{\numberline {4.5}課題10（非定常時系列の追従：忘却係数付きRLS）}{21}{subsection.4.5}%
-\contentsline {paragraph}{内容}{21}{section*.73}%
-\contentsline {paragraph}{方法}{22}{section*.74}%
-\contentsline {paragraph}{実装}{22}{lstlisting.-12}%
-\contentsline {paragraph}{結果}{22}{section*.76}%
-\contentsline {paragraph}{考察}{23}{section*.78}%
-\contentsline {section}{\numberline {5}カルマンフィルタ、カルマンスムーサー}{23}{section.5}%
-\contentsline {subsection}{\numberline {5.1}原理と方法}{23}{subsection.5.1}%
-\contentsline {paragraph}{モデル}{23}{section*.79}%
-\contentsline {paragraph}{Kalman フィルタ}{24}{section*.82}%
-\contentsline {paragraph}{Kalman スムーザ}{25}{section*.87}%
-\contentsline {subsection}{\numberline {5.2}課題11（カルマンフィルタ：フォワード）}{25}{subsection.5.2}%
-\contentsline {paragraph}{内容}{25}{section*.91}%
-\contentsline {paragraph}{方法}{26}{section*.92}%
-\contentsline {paragraph}{実装}{26}{section*.93}%
-\contentsline {paragraph}{結果}{26}{section*.94}%
-\contentsline {paragraph}{考察}{27}{section*.96}%
-\contentsline {subsection}{\numberline {5.3}課題12（カルマンスムーザー）}{27}{subsection.5.3}%
-\contentsline {paragraph}{内容}{27}{section*.97}%
-\contentsline {paragraph}{方法}{27}{section*.98}%
-\contentsline {paragraph}{実装}{28}{section*.99}%
-\contentsline {paragraph}{結果}{28}{section*.100}%
-\contentsline {paragraph}{考察}{28}{section*.102}%
-\contentsline {section}{\numberline {6}交互最小二乗法とK-平均法}{29}{section.6}%
-\contentsline {subsection}{\numberline {6.1}原理と方法}{29}{subsection.6.1}%
-\contentsline {paragraph}{交互最小二乗法}{29}{section*.103}%
-\contentsline {paragraph}{K-平均法}{30}{section*.104}%
-\contentsline {section}{\numberline {7}アルゴリズム比較}{31}{section.7}%
-\contentsline {section}{\numberline {8}結論}{31}{section.8}%
-\contentsline {section}{\numberline {付録A}使用コード一覧}{32}{appendix.A}%
-\contentsline {section}{\numberline {付録B}補足導出}{32}{appendix.B}%
+\contentsline {paragraph}{内容}{21}{section*.64}%
+\contentsline {paragraph}{結果}{22}{section*.65}%
+\contentsline {paragraph}{考察}{22}{section*.66}%
+\contentsline {paragraph}{コード}{22}{lstlisting.-11}%
+\contentsline {paragraph}{内容}{22}{section*.69}%
+\contentsline {paragraph}{結果}{22}{section*.70}%
+\contentsline {paragraph}{考察}{22}{section*.71}%
+\contentsline {paragraph}{コード}{22}{lstlisting.-12}%
+\contentsline {subsection}{\numberline {4.5}課題10（非定常時系列の追従：忘却係数付きRLS）}{22}{subsection.4.5}%
+\contentsline {paragraph}{内容}{22}{section*.73}%
+\contentsline {paragraph}{方法}{23}{section*.74}%
+\contentsline {paragraph}{実装}{23}{lstlisting.-13}%
+\contentsline {paragraph}{結果}{23}{section*.76}%
+\contentsline {paragraph}{考察}{24}{section*.78}%
+\contentsline {section}{\numberline {5}カルマンフィルタ、カルマンスムーサー}{24}{section.5}%
+\contentsline {subsection}{\numberline {5.1}原理と方法}{24}{subsection.5.1}%
+\contentsline {paragraph}{モデル}{24}{section*.79}%
+\contentsline {paragraph}{Kalman フィルタ}{25}{section*.82}%
+\contentsline {paragraph}{Kalman スムーザ}{26}{section*.87}%
+\contentsline {subsection}{\numberline {5.2}課題11（カルマンフィルタ：フォワード）}{26}{subsection.5.2}%
+\contentsline {paragraph}{内容}{26}{section*.91}%
+\contentsline {paragraph}{方法}{27}{section*.92}%
+\contentsline {paragraph}{実装}{27}{section*.93}%
+\contentsline {paragraph}{結果}{27}{section*.94}%
+\contentsline {paragraph}{考察}{28}{section*.96}%
+\contentsline {subsection}{\numberline {5.3}課題12（カルマンスムーザー）}{28}{subsection.5.3}%
+\contentsline {paragraph}{内容}{28}{section*.97}%
+\contentsline {paragraph}{方法}{28}{section*.98}%
+\contentsline {paragraph}{実装}{29}{section*.99}%
+\contentsline {paragraph}{結果}{29}{section*.100}%
+\contentsline {paragraph}{考察}{29}{section*.102}%
+\contentsline {section}{\numberline {6}交互最小二乗法とK-平均法}{30}{section.6}%
+\contentsline {subsection}{\numberline {6.1}原理と方法}{30}{subsection.6.1}%
+\contentsline {paragraph}{交互最小二乗法}{30}{section*.103}%
+\contentsline {paragraph}{K-平均法}{31}{section*.104}%
+\contentsline {subsection}{\numberline {6.2}課題13（交互最小二乗法）}{32}{subsection.6.2}%
+\contentsline {paragraph}{内容}{32}{section*.105}%
+\contentsline {paragraph}{方法}{33}{section*.106}%
+\contentsline {paragraph}{実装}{33}{section*.107}%
+\contentsline {paragraph}{結果}{33}{section*.108}%
+\contentsline {paragraph}{考察}{34}{section*.111}%
+\contentsline {section}{\numberline {7}アルゴリズム比較}{35}{section.7}%
+\contentsline {section}{\numberline {8}結論}{35}{section.8}%
+\contentsline {section}{\numberline {付録A}使用コード一覧}{35}{appendix.A}%
+\contentsline {section}{\numberline {付録B}補足導出}{35}{appendix.B}%

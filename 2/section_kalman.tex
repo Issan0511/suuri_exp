@@ -150,13 +150,13 @@ update_kalman_smoother <- function(theta_k, theta_k_plus_1_s, V_k, V_k_plus_1_s,
 
 \paragraph{結果}
 データ生成と実行条件は
-\begin{verbatim}
+\begin{lstlisting}
 kalman_data <- generate_kalman_data(seed = 42, N = 100,
                                     a_k = 0.9, c_k = 2,
                                     sigma2_v = 1, sigma2_w = 1)
 result11 <- exp11(kalman_data)
-\end{verbatim}
-である．MSEは$0.1935684$となった．図\ref{fig:task11_fig}に真値と推定の系列を示す．
+\end{lstlisting}
+である．MSEは$0.1936$となった．図\ref{fig:task11_fig}に真値と推定の系列を示す．
 
 \begin{figure}[H]
   \centering
@@ -211,7 +211,7 @@ kalman_data <- generate_kalman_data(seed = 42, N = 100,
 result12 <- exp12(kalman_data)
 \end{lstlisting}
 出力は
-\verb|mmse: 0.1716128| であった．図\ref{fig:task12_fig}に真値と平滑化推定を示す．
+\verb|mmse: 0.1716| であった．図\ref{fig:task12_fig}に真値と平滑化推定を示す．
 
 \begin{figure}[H]
   \centering

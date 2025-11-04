@@ -120,6 +120,44 @@ R^2=\frac{\|X\hat\theta_N-\bar y\mathbf{1}\|_2^2}{\|y-\bar y\mathbf{1}\|_2^2},\q
 データから設計行列 $X$ と観測ベクトル $y$ を構成し，$\hat\theta = (X^\top X)^{-1} X^\top y$ により推定量を計算する．
 残差 $r = y - X\hat\theta$ から雑音分散推定量 $\hat\sigma^2 = \|r\|^2/(N-p)$ を求め，
 推定誤差共分散 $\hat\sigma^2 (X^\top X)^{-1}$ および決定係数 $R^2$ を算出する関数を実装した．
+以下がRによる実装例である。
+\begin{lstlisting}[language=R]
+# データの読み込み
+data <- read.csv("datas/mmse_kadai1.csv", header=FALSE,
+                 col.names = c("x1","x2","y"))
+x <- as.matrix(data[,c("x1","x2")])
+y <- as.matrix(data[,"y"])
+
+# サンプルサイズ n で推定を実行する関数
+exp1 <- function (x, y, n){
+    x_n <- x[1:n,]
+    y_n <- y[1:n,]
+    result <- regression_simple(x_n, y_n)
+    return(list(theta_hat = result$theta_hat, 
+                err_cov_mat = result$err_cov_mat, 
+                det_coef = result$det_coef))
+}
+
+N_max <- nrow(x)
+print(exp1(x, y, N_max)$theta_hat)
+print(exp1(x, y, N_max)$err_cov_mat)
+print(exp1(x, y, N_max)$det_coef)
+
+# 収束の可視化
+plot_exp1 <- function(x, y){
+    ns <- c(2,4,8,16,32,64,128,256,512,1024,2048,4096,8192)
+    theta_hats <- matrix(0, nrow=length(ns), ncol=ncol(x))
+    for (i in 1:length(ns)){
+        result <- exp1(x, y, ns[i])
+        theta_hats[i, ] <- as.vector(result$theta_hat)  
+    }
+    png("graphs/task1.png")
+    matplot(ns, theta_hats, type="b", log="x", xlab="n", ylab="theta_hat",
+            main="Convergence of theta_hat")
+    dev.off()
+}
+plot_exp1(x, y)
+\end{lstlisting}
 
 \paragraph{収束確認}
 $N\in\{2,4,8,\dots,2^{13}=8192\}$ で $\hat\theta_N$ を計算し，$N$ を横軸とする片対数図で各成分を同一図に描く．
@@ -128,18 +166,18 @@ $N\in\{2,4,8,\dots,2^{13}=8192\}$ で $\hat\theta_N$ を計算し，$N$ を横�
 \[
 \hat\theta_{N}=
 \begin{bmatrix}
-1.506551\\
-1.997696
+1.507\\
+1.998
 \end{bmatrix},\qquad
 \widehat{\mathrm{Cov}}(\hat\theta_{N})=
 \begin{bmatrix}
-9.866491\times10^{-5} & -4.081657\times10^{-7}\\
--4.081657\times10^{-7} & 1.005248\times10^{-4}
-\end{bmatrix}.
+9.867 & -0.04081\\
+-0.04081 & 10.05
+\end{bmatrix}\times10^{-5}.
 \]
 決定係数
 \[
-R^2=0.8629734 .
+R^2=0.8630 .
 \]
 
 \begin{figure}[H]
@@ -151,7 +189,7 @@ R^2=0.8629734 .
 
 \paragraph {考察}
 グラフの結果から，$\hat\theta_N$ は $N$ を増やすにつれて収束していることが確認できた．
-
+また、共分散行列の非対角成分が対角成分に比べて非常に小さいことから，確かに各成分の推定誤差が独立であることも示唆された。
 
 \subsection{課題2（多項式回帰）}
 
@@ -174,27 +212,23 @@ $N\in\{4,8,16,\dots,8192\}$ で $\hat\theta_N$ を計算し，$N$ を横軸と�
 \paragraph{結果（全データ $N=10000$）}
 \[
 \hat\theta_N=\begin{bmatrix}
--0.50902942\\
-\ \ 1.97586067\\
-\ \ 0.19774405\\
--0.09866691
+-0.5090\\
+\ \ 1.976\\
+\ \ 0.1977\\
+-0.09867
 \end{bmatrix},\qquad
 \widehat{\mathrm{Cov}}(\hat\theta_N)=\begin{bmatrix}
-2.023442\times10^{-3} & -1.186497\times10^{-5} & -1.348312\times10^{-4} & \ \ 3.971165\times10^{-7}\\
--1.186497\times10^{-5} & 6.753015\times10^{-4} & -1.898545\times10^{-7} & -3.794719\times10^{-5}\\
--1.348312\times10^{-4} & -1.898545\times10^{-7} & 1.603910\times10^{-5} & \ \ 6.351820\times10^{-8}\\
-\ \ 3.971165\times10^{-7} & -3.794719\times10^{-5} & \ \ 6.351820\times10^{-8} & \ \ 2.528711\times10^{-6}
-\end{bmatrix}.
+2.023 & -0.01186 & -0.1348 & 0.0003971\\
+-0.01186 & 6.753 & -0.001899 & -37.95\\
+-0.1348 & -0.001899 & 16.04 & 0.06352\\
+0.0003971 & -37.95 & 0.06352 & 2.529
+\end{bmatrix}\times10^{-3}.
 \]
-標準誤差（対角の平方根）：
-$\mathrm{SE}(\hat\theta_0)\approx0.0450,\ 
-\mathrm{SE}(\hat\theta_1)\approx0.0260,\ 
-\mathrm{SE}(\hat\theta_2)\approx0.00400,\ 
-\mathrm{SE}(\hat\theta_3)\approx0.00159.$
+
 
 決定係数：
 \[
-R^2=0.461855 .
+R^2=0.4619 .
 \]
 
 \begin{figure}[H]
@@ -205,6 +239,8 @@ R^2=0.461855 .
 \end{figure}
 
 \paragraph {考察}
+課題1と同様に，$\hat\theta_N$ は $N$ を増やすにつれて収束し、対角成分に比べて非対角成分が小さいかったものの、課題1よりも収束が遅く、非対角成分の割合がやや大きいことが確認できた。なにより，モデルの精度を表す決定係数 $R^2$ が課題1に比べて大幅に低下しており，モデルの当てはまりが悪化していることが分かる。
+これについて、課題2では雑音分散が9と大きく設定されており、これは元データのｘに対する影響が大きいため、モデルの当てはまりが悪化したと考えられる。特に定数項と1次項の収束が遅いことから、これらの成分が雑音よりも十分に大きくないのでその影響を受けやすいことが示唆される。
 
 
 \subsection{課題3（分散の観測誤差：Cauchy）}
@@ -213,33 +249,32 @@ R^2=0.461855 .
 $y_i=x_i^\top\theta+w_i\ (i=1,\dots,N)$，$x_i\in\mathbb{R}^2$．
 観測誤差 $w_i\sim \mathrm{Cauchy}(0,1)$ 独立同分布．
 
-\paragraph{推定（形式的なOLS）}
+\paragraph{推定量}
 推定量・共分散・決定係数は課題1と同じ形式（$p=2$）で計算する．
 
 \paragraph{実装}
 課題1と同じ最小二乗推定の枠組みを用いて，$N\in\{2,4,\dots,8192\}$ の各サンプルサイズで推定量を計算した．
-Cauchy 分布は分散が定義されないため，通常の推定誤差共分散や決定係数は理論的根拠を持たないが，
-形式的に計算することで推定の不安定性を確認する．
+
 
 \paragraph{結果（全データ $N=10000$）}
 \[
 \hat\theta_N=
 \begin{bmatrix}
-2.373074\\
-1.537311
+2.373\\
+1.537
 \end{bmatrix},\qquad
 \widehat{\mathrm{Cov}}(\hat\theta_N)=
 \begin{bmatrix}
-9.234588215 & -0.003642121\\
--0.003642121 & 9.264075136
+9.235 & -0.003642\\
+-0.003642 & 9.264
 \end{bmatrix}.
 \]
 参考：対角の平方根は
-$\mathrm{SE}(\hat\theta_1)\approx 3.0388,\ 
- \mathrm{SE}(\hat\theta_2)\approx 3.0437$．
+$\mathrm{SE}(\hat\theta_1)\approx 3.039,\ 
+ \mathrm{SE}(\hat\theta_2)\approx 3.044$．
 決定係数（参考値）は
 \[
-R^2=0.0002841468.
+R^2=0.0002841 .
 \]
 
 \begin{figure}[H]
@@ -250,7 +285,7 @@ R^2=0.0002841468.
 \end{figure}
 
 \paragraph{考察}
-資料にあるように、Cauchy 誤差では外れ値の影響が支配的で，$\hat\theta_N$ は $N$ を増やしても安定しにくいことが確認できた。
+資料にあるように、Cauchy 誤差では外れ値の影響が支配的で，$\hat\theta_N$ は $N$ を増やしても収束せず、決定係数もほぼ0であることが確認できた。
 
 
 \subsection{課題4（入力域の制約と設計）}
@@ -271,37 +306,41 @@ $X=[\varphi(x_1);\dots;\varphi(x_N)]\in\mathbb{R}^{N\times4}$, $y=[y_1;\dots;y_N
 \[
 \hat\theta_{(4)}=
 \begin{bmatrix}
-\boxed{\text{ここに数値}}\\
-\boxed{\text{ここに数値}}\\
-\boxed{\text{ここに数値}}\\
-\boxed{\text{ここに数値}}
+-0.5777\\
+\ \ 2.097\\
+-0.3950\\
+\ \ 0.5491
 \end{bmatrix},\quad
-\widehat{\mathrm{Cov}}(\hat\theta_{(4)})=\boxed{\text{ここに $4\times4$ 行列}},\quad
-R^2=\boxed{\text{ここに数値}}.
+\widehat{\mathrm{Cov}}(\hat\theta_{(4)})=\begin{bmatrix}
+0.1532 & -1.149 & \ \ 2.296 & -1.339\\
+-1.149 & 11.46 & -25.75 & 16.01\\
+\ \ 2.296 & -25.75 & 61.72 & -39.97\\
+-1.339 & 16.01 & -39.97 & 26.62
+\end{bmatrix},\quad
+R^2=0.04084.
 \]
-（上の枠に，直上の R 出力を転記）
+
 
 \paragraph{課題2.1との比較（$N=10000$）}
 課題2.1の推定結果：
 \[
 \hat\theta_{(2.1)}=
 \begin{bmatrix}
--0.50902942\\
-\ \ 1.97586067\\
-\ \ 0.19774405\\
--0.09866691
+-0.5090\\
+\ \ 1.976\\
+\ \ 0.1977\\
+-0.09867
 \end{bmatrix},\quad
-R^2=0.461855.
+R^2=0.4619.
 \]
-評価観点：
-\begin{itemize}\setlength{\itemsep}{0pt}
-\item 分散は $\mathrm{Var}(\hat\theta)=\sigma^2(X^\top X)^{-1}$ に比例．$x\in[0,1]$ では列 $\{1,x,x^2,x^3\}$ が強く相関しやすく，$X^\top X$ の条件が悪化し $\hat\theta$ の不確かさが増えやすい．
-\item $R^2$ は母集団の $y$ の散らばり（$SST$）に依存．入力域が狭いと $SST$ が小さく，雑音分散が同じなら $R^2$ は低下しやすい．
-\end{itemize}
 
-\paragraph{考察（どうデータを取るべきか）}
+
+
+\paragraph{考察}
+精度が大幅に低下していることが確認できた。これは、入力 $x$ が $[0,1]$ に制約されることで、特徴量 $\varphi(x)$ の値域が狭まり、設計行列 $X$ の列間の相関が高くなったことが原因と考えられる。また,$x$ が $[0,1]$に制約されることは、高次項も小さな値に限定されることを意味し、雑音の分散が9であることを考慮すると、モデルの当てはまりがさらに悪化したと考えられる。
+入力設計の工夫としては、
 \begin{itemize}\setlength{\itemsep}{0pt}
-\item 目的は $\mathrm{Var}(\hat\theta)$ の縮小（= $X^\top X$ を「大きく」「良条件」に）．
-\item 入力設計：$x$ を区間全体で広く配置（例：一様），中心化・標準化して $[-1,1]$ に写像，または直交基底（Legendre/Chebyshev）で回帰．
-\item 最適化観点：A/D 最適設計を用いて $\mathrm{tr}((X^\top X)^{-1})$ や $\det((X^\top X)^{-1})$ を最小化する点集合を選ぶ．
+\item xの分散を十分に大きくすることで、雑音の影響が相対的に小さくなるようにする。
+\item xの値を[0,1]区間から大きく離すことで、特徴量同士の相関を低減させる。
 \end{itemize}
+が挙げられる。

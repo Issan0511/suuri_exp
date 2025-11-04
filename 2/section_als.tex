@@ -148,3 +148,90 @@ k_means <- function(x, K, max_iters = 10000, tol = 1e-6) {
 }
 \end{lstlisting}
 
+\subsection{課題13（交互最小二乗法）}
+\label{subsec:task13}
+
+\paragraph{内容}
+二分割パラメータ $\theta=\alpha\beta^\top$（$\alpha\in\mathbb{R}^{2}$, $\beta\in\mathbb{R}^{3}$）を用いた双線形モデル
+\[
+y_i \approx \alpha^\top X_i \beta
+\]
+を最小二乗で推定する．特徴は $\phi_i=(1,\,x_i,\,x_i^2,\,x_i^3)$ とし，
+\[
+X_i=
+\begin{pmatrix}
+\phi_{i,1} & \phi_{i,2} & \phi_{i,3}\\
+\phi_{i,2} & \phi_{i,3} & \phi_{i,4}
+\end{pmatrix}
+\in\mathbb{R}^{2\times 3}
+\]
+を用いる．目的は $\min_{\alpha,\beta}\sum_{i=1}^{n}\bigl(y_i-\alpha^\top X_i\beta\bigr)^2$．
+
+\paragraph{方法}
+交互最小二乗法（ALS）を用いる．反復 $j=1,2,\dots$ に対し
+\begin{align}
+\beta^{(j)}&:=\arg\min_{\beta}\sum_{i=1}^{n}\bigl(y_i-(\alpha^{(j-1)})^\top X_i\beta\bigr)^2,\\
+\alpha^{(j)}&:=\arg\min_{\alpha}\sum_{i=1}^{n}\bigl(y_i-\alpha^\top X_i\beta^{(j)}\bigr)^2,
+\end{align}
+を交互に解く（いずれも線形最小二乗）．収束判定は
+\[
+\max\bigl(\|\alpha^{(j)}-\alpha^{(j-1)}\|_2,\ \|\beta^{(j)}-\beta^{(j-1)}\|_2\bigr)<\varepsilon.
+\]
+
+\paragraph{実装}
+CSV \verb|datas/mmse_kadai13.csv| を読み込み，$X_i$ を \verb|x[,,i]|，$X_i^\top$ を \verb|x_T[,,i]| に格納．
+\verb|update_alpha_beta| で
+\[
+\underbrace{(\alpha^\top X_i)_{i=1:n}}_{\text{$n\times 3$設計行列}}\ \text{から}\ \beta,
+\quad
+\underbrace{(X_i\beta)_{i=1:n}}_{\text{$n\times 2$設計行列}}\ \text{から}\ \alpha
+\]
+を逐次推定する．多点初期化（乱数）で \verb|num_trials=10| を走らせ最良解を採用．収束履歴と
+$\alpha$ の軌跡を \verb|graphs/task13_convergence.png|，\verb|graphs/task13_trajectory.png| に保存する．
+
+\paragraph{結果}
+全試行 $10$ 回の平均二乗誤差（MMSE）は
+\[
+\mathrm{MMSE}=0.3329
+\]
+であった（有効数字4桁）．最良試行での推定結果は
+\[
+\alpha=
+\begin{pmatrix}
+0.6000\\[-2pt]
+-1.200
+\end{pmatrix},\quad
+\beta=
+\begin{pmatrix}
+0.8441\\[-2pt]
+-1.661\\[-2pt]
+3.334
+\end{pmatrix},
+\]
+\[
+\theta=\alpha\beta^\top=
+\left(
+\begin{array}{ccc}
+\ 0.5065 & -0.9967 & \ 2.000\\
+-1.013 & \ 1.994 & -4.002
+\end{array}
+\right).
+\]
+収束挙動とパラメータ軌跡を図\ref{fig:task13_conv}および図\ref{fig:task13_traj}に示す．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.78\linewidth]{graphs/task13_convergence.png}
+  \caption{ALS による収束履歴（縦軸は $\max(\|\Delta\alpha\|_2,\|\Delta\beta\|_2)$，対数目盛）}
+  \label{fig:task13_conv}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.78\linewidth]{graphs/task13_trajectory.png}
+  \caption{$\alpha$ の推定軌跡（緑：初期，赤：収束点）}
+  \label{fig:task13_traj}
+\end{figure}
+
+\paragraph{考察}
+% ここに記述

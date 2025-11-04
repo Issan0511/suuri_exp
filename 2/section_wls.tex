@@ -99,7 +99,7 @@ regression_multiple <- function(x, y, V = NULL, Q = NULL){
 \]
 を考える．ここで $\theta\in\mathbb{R}^2$ を推定対象とする．
 
-\paragraph{推定法}
+\paragraph{推定量}
 最小二乗（OLS）の推定値は
 \[
   \hat{\theta}_N \;=\;
@@ -140,27 +140,27 @@ $\hat{\theta}_N$ の収束の様子を片対数（$x$ 軸のみ対数）で可�
 \[
   \hat{\theta}_{\mathrm{OLS}}=
   \begin{bmatrix}
-    2.994567\\[-1mm]
-   -2.068971
+    2.995\\[-1mm]
+   -2.069
   \end{bmatrix},\qquad
   \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{OLS}})=
   \begin{bmatrix}
-    5.7621\!\times\!10^{-4} & -1.5041\!\times\!10^{-4}\\
-    -1.5041\!\times\!10^{-4} & 2.9684\!\times\!10^{-4}
-  \end{bmatrix}.
+    5.762 & -1.504\\
+    -1.504 & 2.968
+  \end{bmatrix}\times 10^{-4}.
 \]
 
 \noindent\textbf{WLS}
 \[
   \hat{\theta}_{\mathrm{WLS}}=
   \begin{bmatrix}
-    2.939084\\[-1mm]
-   -1.986465
+    2.939\\[-1mm]
+   -1.986
   \end{bmatrix},\qquad
   \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{WLS}})=
   \begin{bmatrix}
-    2.39993\!\times\!10^{-1} & -9.66541\!\times\!10^{-2}\\
-    -9.66541\!\times\!10^{-2} & 4.99126\!\times\!10^{-2}
+    0.2400 & -0.09665\\
+    -0.09665 & 0.04991
   \end{bmatrix}.
 \]
 
@@ -179,7 +179,8 @@ $\hat{\theta}_N$ の収束の様子を片対数（$x$ 軸のみ対数）で可�
 \end{figure}
 
 \paragraph{考察}
-% （ここに考察を記述）
+出力された係数はほとんど同じなので最適化方法は違っても両者ともに同じ値に近づいていることがわかる。また図から、OLS と WLS の両方で，$\hat{\theta}_N$ は $N$ を増やすにつれて収束しており、中でもよりもWLS の方が速く収束していることが確認できた。
+また，WLS の方が OLS よりも推定誤差共分散が
 
 
 \subsection{課題6（2次元出力・異分散2群に対する重み付き最小二乗）}
@@ -238,27 +239,27 @@ $\hat{\theta}_N$ の収束の様子を折れ線で可視化した（$x$ 軸は�
 \[
   \hat{\theta}_{\mathrm{OLS}}=
   \begin{bmatrix}
-    3.188356\\[-1mm]
-   -2.092183
+    3.188\\[-1mm]
+   -2.092
   \end{bmatrix},\qquad
   \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{OLS}})=
   \begin{bmatrix}
-    5.692084\!\times\!10^{-4} & -1.402629\!\times\!10^{-4}\\
-    -1.402629\!\times\!10^{-4} & 2.842674\!\times\!10^{-4}
-  \end{bmatrix}.
+    5.692 & -1.403\\
+    -1.403 & 2.843
+  \end{bmatrix}\times 10^{-4}.
 \]
 
 \noindent\textbf{WLS（$V_1=\mathrm{diag}(100,1)$，$V_2=\mathrm{diag}(2,1)$）}
 \[
   \hat{\theta}_{\mathrm{WLS}}=
   \begin{bmatrix}
-    2.994202\\[-1mm]
-   -2.014699
+    2.994\\[-1mm]
+   -2.015
   \end{bmatrix},\qquad
   \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{WLS}})=
   \begin{bmatrix}
-    6.019710\!\times\!10^{-2} & -2.227335\!\times\!10^{-2}\\
-    -2.227335\!\times\!10^{-2} & 1.276759\!\times\!10^{-2}
+    0.06020 & -0.02227\\
+    -0.02227 & 0.01277
   \end{bmatrix}.
 \]
 

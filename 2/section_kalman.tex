@@ -8,7 +8,7 @@
 \[
   y_k = c_k\,\theta_k + w_k,\tag{3.41}
 \]
-ここで $v_k\sim\mathcal N(0,\sigma_v^2)$，$w_k\sim\mathcal N(0,\sigma_w^2)$ は互いに独立で白色，$a_k,c_k$ は既知とする\cite{exp2025}。目的は「時刻 $k$ までの観測 $\{y_\ell\}_{\ell=1}^k$ に基づく $\theta_k$ の最小平均二乗誤差（MMSE）推定」を行うこと\cite{exp2025}。
+ここで $v_k\sim\mathcal N(0,\sigma_v^2)$，$w_k\sim\mathcal N(0,\sigma_w^2)$ は互いに独立で白色，$a_k,c_k$ は既知とする。目的は「時刻 $k$ までの観測 $\{y_\ell\}_{\ell=1}^k$ に基づく $\theta_k$ の最小平均二乗誤差（MMSE）推定」を行うこと\cite{exp2025}.
 
 以下はこのモデルに基づくデータ生成のRによる実装例である。
 \begin{lstlisting}[language=R,caption={データ生成関数}]

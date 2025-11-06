@@ -2,15 +2,16 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{exp2025}
 \@writefile{toc}{\contentsline {section}{\numberline {1}はじめに}{3}{section.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2}最小二乗法とその評価方法}{3}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}原理・方法}{3}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}課題1（重回帰）}{4}{subsection.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{モデル}{4}{section*.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{推定量}{4}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{推定量}{5}{section*.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{実装}{5}{section*.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{収束確認}{5}{section*.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{結果（全データ $N=10000$）}{5}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{結果（全データ $N=10000$）}{6}{section*.6}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces $\hat  \theta _N$ の収束（横軸 $N=2,4,\dots  ,8192$ の片対数）}}{6}{figure.caption.7}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:task1-conv}{{1}{6}{$\hat \theta _N$ の収束（横軸 $N=2,4,\dots ,8192$ の片対数）}{figure.caption.7}{}}
@@ -19,7 +20,7 @@
 \@writefile{toc}{\contentsline {paragraph}{モデル}{6}{section*.9}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{推定量}{6}{section*.10}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{実装}{6}{section*.11}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{収束確認}{6}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{収束確認}{7}{section*.12}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{結果（全データ $N=10000$）}{7}{section*.13}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces $\hat  \theta _N$ の収束（横軸 $N=4,8,\dots  ,8192$ の片対数）}}{7}{figure.caption.14}\protected@file@percent }
 \newlabel{fig:task2-conv}{{2}{7}{$\hat \theta _N$ の収束（横軸 $N=4,8,\dots ,8192$ の片対数）}{figure.caption.14}{}}
@@ -42,6 +43,7 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}重み付き最小二乗法}{9}{section.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}原理と方法}{9}{subsection.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{原理}{9}{section*.28}\protected@file@percent }
+\citation{exp2025}
 \@writefile{toc}{\contentsline {paragraph}{方法}{10}{section*.29}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{実装}{10}{section*.30}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}課題5（2次元出力：重み付き最小二乗法）}{11}{subsection.3.2}\protected@file@percent }
@@ -111,7 +113,6 @@
 \@writefile{toc}{\contentsline {paragraph}{実装}{23}{lstlisting.-13}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{結果}{23}{section*.76}\protected@file@percent }
 \citation{exp2025}
-\citation{exp2025}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces 忘却係数付きRLSによる非定常平均の追従（$\gamma =0.99$）}}{24}{figure.caption.77}\protected@file@percent }
 \newlabel{fig:task10}{{8}{24}{忘却係数付きRLSによる非定常平均の追従（$\gamma =0.99$）}{figure.caption.77}{}}
 \@writefile{toc}{\contentsline {paragraph}{考察}{24}{section*.78}\protected@file@percent }
@@ -143,6 +144,7 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces カルマンスムーザーの推定結果（赤：真値，緑：平滑化推定）}}{29}{figure.caption.100}\protected@file@percent }
 \newlabel{fig:task12_fig}{{10}{29}{カルマンスムーザーの推定結果（赤：真値，緑：平滑化推定）}{figure.caption.100}{}}
 \@writefile{toc}{\contentsline {paragraph}{考察}{29}{section*.101}\protected@file@percent }
+\citation{exp2025}
 \@writefile{toc}{\contentsline {section}{\numberline {6}交互最小二乗法とK-平均法}{30}{section.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}原理と方法}{30}{subsection.6.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{交互最小二乗法}{30}{section*.102}\protected@file@percent }
@@ -159,14 +161,27 @@
 \newlabel{fig:task13_conv}{{11}{34}{ALS による収束履歴（縦軸は $\max (\|\Delta \alpha \|_2,\|\Delta \beta \|_2)$，対数目盛）}{figure.caption.108}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces $\alpha $ の推定軌跡（緑：初期，赤：収束点）}}{34}{figure.caption.109}\protected@file@percent }
 \newlabel{fig:task13_traj}{{12}{34}{$\alpha $ の推定軌跡（緑：初期，赤：収束点）}{figure.caption.109}{}}
-\bibcite{exp2025}{1}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces 全試行 $10$ 回の統計情報}}{35}{table.caption.110}\protected@file@percent }
 \newlabel{tab:task13_stats}{{1}{35}{全試行 $10$ 回の統計情報}{table.caption.110}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces $\theta =\alpha \beta ^\top $ の各要素の範囲}}{35}{table.caption.111}\protected@file@percent }
 \newlabel{tab:task13_theta_range}{{2}{35}{$\theta =\alpha \beta ^\top $ の各要素の範囲}{table.caption.111}{}}
 \@writefile{toc}{\contentsline {paragraph}{考察}{35}{section*.112}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}アルゴリズム比較}{35}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}結論}{35}{section.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {付録A}使用コード一覧}{35}{appendix.A}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {付録B}補足導出}{35}{appendix.B}\protected@file@percent }
-\gdef \@abspage@last{36}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}課題14（K-平均法による2次元データの3クラスタ分類）}{35}{subsection.6.3}\protected@file@percent }
+\newlabel{subsec:task14}{{6.3}{35}{課題14（K-平均法による2次元データの3クラスタ分類）}{subsection.6.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{内容}{35}{section*.113}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{実装方法1（素朴な解法）}{35}{section*.114}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{結果}{35}{section*.115}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces K-means（$K=3$）最良試行の結果．色はクラスタ，×は重心}}{36}{figure.caption.116}\protected@file@percent }
+\newlabel{fig:task14_kmeans}{{13}{36}{K-means（$K=3$）最良試行の結果．色はクラスタ，×は重心}{figure.caption.116}{}}
+\@writefile{toc}{\contentsline {paragraph}{考察}{36}{section*.117}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{実装方法2（$K=6$で分割後，3組にペアリング）}{36}{section*.118}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{結果}{36}{section*.119}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces $K=6$ での細分割結果．色は6クラスタ，×は重心}}{37}{figure.caption.120}\protected@file@percent }
+\newlabel{fig:task14_kmeans_re}{{14}{37}{$K=6$ での細分割結果．色は6クラスタ，×は重心}{figure.caption.120}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces 重心間距離最小の3ペアで再結合した結果．同色が同一グループ}}{37}{figure.caption.121}\protected@file@percent }
+\newlabel{fig:task14_pairs}{{15}{37}{重心間距離最小の3ペアで再結合した結果．同色が同一グループ}{figure.caption.121}{}}
+\@writefile{toc}{\contentsline {paragraph}{考察}{37}{section*.122}\protected@file@percent }
+\bibcite{exp2025}{1}
+\@writefile{toc}{\contentsline {section}{\numberline {7}結論}{38}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {付録A}使用コード一覧}{38}{appendix.A}\protected@file@percent }
+\gdef \@abspage@last{38}

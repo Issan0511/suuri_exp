@@ -10,7 +10,7 @@
   J(\alpha,\beta) := \sum_{i=1}^N \|\,y_i - g(\alpha,\beta,x_i)\,\|^2
 \end{align}
 を最小化する．片方のパラメータを固定すれば通常の線形最小二乗（式(3.5)型）で解ける．
-交互更新により $J$ は単調非増加で，反復に伴い悪化しない．ただし一般には局所解に収束しうるため初期値が重要である．
+交互更新により $J$ は単調非増加で，反復に伴い悪化しない．ただし一般には局所解に収束しうるため初期値が重要である\cite{exp2025}.
 
 
 初期値 $\alpha^{(0)},\beta^{(0)}$ を与え，$j=1,2,\ldots$ について次を繰り返す．
@@ -288,5 +288,67 @@ $\theta_{2,3}$ & $-4.0017$ & $-4.0017$ \\
 
 
 
+\subsection{課題14（K-平均法による2次元データの3クラスタ分類）}
+\label{subsec:task14}
+
+\paragraph{内容}
+与えられた点列 $x_i\in\mathbb{R}^2\ (i=1,\dots,1000)$ を3クラスタに分割する．
+初期値を10組以上試し，最良の分類と理由を示す．
+
+\paragraph{実装方法1（素朴な解法）}
+K-平均法を $K=3$ で実行する．
+初期重心はデータ点から一様無作為抽出．
+試行回数は $100$．
+評価はクラスタ内平方和
+\[
+\mathrm{WCSS}=\sum_{k=1}^{3}\sum_{i\in V_k}\|x_i-\mu_k\|_2^2
+\]
+の最小値で選ぶ．最良試行の割当と重心を図示する（\verb|graphs/task14_kmeans.png|）．
+
+\paragraph{結果}
+図\ref{fig:task14_kmeans}に最良試行の分類を示す．
+点色はクラスタ，黒い×は重心を表す．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.82\linewidth]{graphs/task14_kmeans.png}
+  \caption{K-means（$K=3$）最良試行の結果．色はクラスタ，×は重心}
+  \label{fig:task14_kmeans}
+\end{figure}
+
+\paragraph{考察}
+K-平均法はユークリッド距離と平均による更新のため球状かつ等方的なクラスタを仮定する．
+細長いクラスタや曲線状の群では分割が不適切になりやすい．
+
+
+\paragraph{実装方法2（$K=6$で分割後，3組にペアリング）}
+まず $K=6$ のK-平均で細分割し重心 $\{\nu_j\}_{j=1}^6$ を得る（\verb|graphs/task14_kmeans_re.png|）．
+つぎに6重心から3組のペア $\{(p_1,q_1),(p_2,q_2),(p_3,q_3)\}$ を選び
+\[
+\sum_{r=1}^3 \|\nu_{p_r}-\nu_{q_r}\|_2
+\]
+が最小となる組合せを全探索で決定する（\verb|find_optimal_cluster_pairs|）．
+各ペアの2クラスタを同一グループとして3クラスタに再結合し，点群と重心，ペア線分を図示する（\verb|graphs/task14_optimal_pairs.png|）．
+
+\paragraph{結果}
+図\ref{fig:task14_kmeans_re}に $K=6$ の細分割結果，図\ref{fig:task14_pairs}に最適ペアリングによる3グループ化を示す．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.82\linewidth]{graphs/task14_kmeans_re.png}
+  \caption{$K=6$ での細分割結果．色は6クラスタ，×は重心}
+  \label{fig:task14_kmeans_re}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.82\linewidth]{graphs/task14_optimal_pairs.png}
+  \caption{重心間距離最小の3ペアで再結合した結果．同色が同一グループ}
+  \label{fig:task14_pairs}
+\end{figure}
+
+\paragraph{考察}
+細長い群は2つの近接クラスタとして先に抽出し，のちに結合する手法で生成されたクラスタの方が直感に合う．
+実装1より境界が群の形状に適応しやすい．
 
 

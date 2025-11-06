@@ -37,48 +37,40 @@ $V=\sigma^2\Sigma$ のようにスケール未知なら
 \paragraph{実装}
 R による実装例を以下に示す。
 \begin{lstlisting}
-regression_multiple <- function(x, y, V = NULL, Q = NULL){
-    # y: n×1行列（またはベクトル）
-    if (is.null(ncol(y))) {
-        y <- as.matrix(y, ncol = 1)
-    }
-    if (length(dim(x)) != 3) {
-        stop("x must be a 3-dimensional array")
-    }
+regression_multiple <- function(x, y, V = NULL, Q = NULL) {
+    if (is.null(ncol(y))) y <- as.matrix(y, ncol = 1)
+    if (length(dim(x)) != 3) stop("x must be 3D array")
+
     n <- dim(x)[3]
     m <- ncol(y)
-    p <- dim(x)[1] # 特徴量数
+    p <- dim(x)[1]
     S <- matrix(0, p, p)
     b <- matrix(0, p, 1)
-    T <- matrix(0, p, p)
-    if (is.null(V)) {
-        V <- diag(m)
+
+    if (is.null(V)) V <- diag(m)
+    if (is.null(Q)) Q <- solve(V)
+
+    for (i in 1:n) {
+        xi <- as.matrix(x[,,i])
+        yi <- matrix(y[i, ], nrow = m)
+        S <- S + t(xi) %*% Q %*% xi
+        b <- b + t(xi) %*% Q %*% yi
     }
-    if (is.null(Q)) {
-        Q <- solve(V)
-    }
-    # m=1（スカラー出力）の場合はQ,Vをスカラー化
-    if (m == 1) {
-        Q <- as.numeric(Q)
-        V <- as.numeric(V)
-        for (i in 1:n) {
-            xi <- as.matrix(x[,,i]) # (p,1)
-            S <- S + xi %*% t(xi) * Q
-            b <- b + xi * Q * y[i, 1]
-            T <- T + xi %*% t(xi) * V
-        }
-    } else {
+
+    theta_hat <- solve(S, b)
+
+    if (all(Q == diag(m))) {
+        T <- matrix(0, p, p)
         for (i in 1:n) {
             xi <- as.matrix(x[,,i])
-            yi <- matrix(y[i, ], nrow = m, ncol = 1)
-            S <- S + t(xi) %*% Q %*% xi
-            b <- b + t(xi) %*% Q %*% yi
             T <- T + t(xi) %*% V %*% xi
         }
+        err_cov_mat <- solve(S) %*% T %*% solve(S)
+    } else {
+        err_cov_mat <- solve(S)
     }
-    theta_hat <- solve(S) %*% b
-    err_cov_mat <- solve(S) %*% T %*% solve(S)
-    return(list(theta_hat = theta_hat, err_cov_mat = err_cov_mat, S = S, b = b, T = T))
+
+    list(theta_hat = theta_hat, err_cov_mat = err_cov_mat, S = S, b = b)
 }
 \end{lstlisting}
 
@@ -145,9 +137,9 @@ $\hat{\theta}_N$ の収束の様子を片対数（$x$ 軸のみ対数）で可�
   \end{bmatrix},\qquad
   \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{OLS}})=
   \begin{bmatrix}
-    5.762 & -1.504\\
-    -1.504 & 2.968
-  \end{bmatrix}\times 10^{-4}.
+    3.515 & -1.252\\
+    -1.252 & 1.086
+  \end{bmatrix}\times 10^{-2}.
 \]
 
 \noindent\textbf{WLS}
@@ -159,9 +151,9 @@ $\hat{\theta}_N$ の収束の様子を片対数（$x$ 軸のみ対数）で可�
   \end{bmatrix},\qquad
   \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{WLS}})=
   \begin{bmatrix}
-    0.2400 & -0.09665\\
-    -0.09665 & 0.04991
-  \end{bmatrix}.
+    1.477 & -0.5001\\
+    -0.5001 & 0.5131
+  \end{bmatrix}\times 10^{-3}.
 \]
 
 \begin{figure}[H]
@@ -179,8 +171,8 @@ $\hat{\theta}_N$ の収束の様子を片対数（$x$ 軸のみ対数）で可�
 \end{figure}
 
 \paragraph{考察}
-出力された係数はほとんど同じなので最適化方法は違っても両者ともに同じ値に近づいていることがわかる。また図\ref{fig:task5_ols}と図\ref{fig:task5_wls}から、OLS と WLS の両方で，$\hat{\theta}_N$ は $N$ を増やすにつれて収束しており、中でもよりもWLS の方が速く収束していることが確認できた。
-また，WLS の方が OLS よりも推定誤差共分散が
+出力された係数はほとんど同じなので最適化方法は違っても両者ともに同じ値に近づいていることがわかる。また図\ref{fig:task5_ols}と図\ref{fig:task5_wls}から、OLS と WLS の両方で，$\hat{\theta}_N$ は $N$ を増やすにつれて収束しており、中でもOLSよりもWLS の方が速く収束していることが確認できた。
+また，WLS の方が OLS よりも推定誤差共分散が小さいことから，WLS の方がより良い推定量であると言える。
 
 
 \subsection{課題6（2次元出力・異分散2群に対する重み付き最小二乗）}
@@ -244,23 +236,23 @@ $\hat{\theta}_N$ の収束の様子を折れ線で可視化した（$x$ 軸は�
   \end{bmatrix},\qquad
   \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{OLS}})=
   \begin{bmatrix}
-    5.692 & -1.403\\
-    -1.403 & 2.843
-  \end{bmatrix}\times 10^{-4}.
+    1.740 & -0.5675\\
+    -0.5675 & 0.4937
+  \end{bmatrix}\times 10^{-2}.
 \]
 
 \noindent\textbf{WLS（$V_1=\mathrm{diag}(100,1)$，$V_2=\mathrm{diag}(2,1)$）}
 \[
   \hat{\theta}_{\mathrm{WLS}}=
   \begin{bmatrix}
-    2.994\\[-1mm]
-   -2.015
+    2.993\\[-1mm]
+   -2.016
   \end{bmatrix},\qquad
   \widehat{\mathrm{Cov}}(\hat{\theta}_{\mathrm{WLS}})=
   \begin{bmatrix}
-    0.06020 & -0.02227\\
-    -0.02227 & 0.01277
-  \end{bmatrix}.
+    1.492 & -0.5020\\
+    -0.5020 & 0.5018
+  \end{bmatrix}\times 10^{-3}.
 \]
 
 \begin{figure}[H]
@@ -278,4 +270,5 @@ $\hat{\theta}_N$ の収束の様子を折れ線で可視化した（$x$ 軸は�
 \end{figure}
 
 \paragraph{考察}
-% （ここに考察を記述）
+課題5と同様に、出力された係数はほとんど同じなので最適化方法は違っても両者ともに同じ値に近づいていることがわかる。また図\ref{fig:task6_ols}と図\ref{fig:task6_wls}から、OLS と WLS の両方で，$\hat{\theta}_N$ は $N$ を増やすにつれて収束しており、中でもOLSよりもWLS の方が速く収束していることが確認できた。興味深いのは、OLSの場合$n = 500 $の時点で雑音の分散が変化するため、$\hat{\theta}_N$の収束が一時的に遅くなっているのに対し、WLSではその影響が少なく、よりスムーズに収束している点である。これはWLSが異分散を考慮しているためであり、より適切な推定が行われていることを示している。
+推定誤差共分散についても課題5同様に、WLSの方がOLSよりも小さく、より良い推定量であると言える。

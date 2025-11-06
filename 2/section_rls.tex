@@ -338,21 +338,6 @@ update_regression_mat <- function(Phi_N, phi_N_plus_1, theta_N, y_N_plus_1, gamm
 $F_k=1$ を一定とし，$k=1,\dots,10000$ で RLS により
 $\theta=[a_1,a_2,b]^\top$ を推定する。\cite{exp2025}
 
-\paragraph{結果}
-実行出力：
-\[
-\hat\theta=
-\begin{bmatrix}
-1.995\\
--0.9953\\
-2.151\times10^{-3}
-\end{bmatrix}.
-\]
-
-\paragraph{考察}
-$a_1,a_2$ は真値に近い。$b$ は真値 $5\times10^{-5}$ に対して過大。
-定数入力で効果が極小かつ雑音が大きく，bの寄与は雑音に埋もれる。。
-
 \paragraph{コード}
 \begin{lstlisting}
 exp9_1 <- function(){
@@ -369,24 +354,26 @@ exp9_1 <- function(){
 }
 \end{lstlisting}
 
-\subsubsection*{(2) 入力 $F_k=\sin(\pi k/5)$（小振幅正弦）}
-\paragraph{内容}
-$F$ を低振幅の正弦波にして同様に推定。\cite{exp2025}
-
 \paragraph{結果}
 実行出力：
 \[
 \hat\theta=
 \begin{bmatrix}
-1.996\\
--0.9959\\
-2.637\times10^{-3}
+1.995\\
+-0.9953\\
+2.151\times10^{-3}
 \end{bmatrix}.
 \]
 
 \paragraph{考察}
-$F$ は時間変化するが振幅が小さく，$b$ は依然として真値より二桁以上大きい。
+$a_1,a_2$ は真値に近い。$b$ は真値 $5\times10^{-5}$ に対して過大。
+定数入力で効果が極小かつ雑音が大きく，bの寄与は雑音に埋もれる。。
 
+
+
+\subsubsection*{(2) 入力 $F_k=\sin(\pi k/5)$（小振幅正弦）}
+\paragraph{内容}
+$F$ を低振幅の正弦波にして同様に推定。\cite{exp2025}
 
 \paragraph{コード}
 \begin{lstlisting}
@@ -405,23 +392,26 @@ exp9_2 <- function(){
 }
 \end{lstlisting}
 
-\subsubsection*{(3) 入力 $F_k=1000000\sin(\pi k/5)$（大振幅正弦）}
-\paragraph{内容}
-入力振幅を $10^6$ 倍して強い励起を与える。\cite{exp2025}
-
 \paragraph{結果}
 実行出力：
 \[
 \hat\theta=
 \begin{bmatrix}
-1.995099\\
--0.995256\\
-4.999822\times10^{-5}
+1.996\\
+-0.9959\\
+2.637\times10^{-3}
 \end{bmatrix}.
 \]
 
 \paragraph{考察}
-$b$ が真値 $5.0\times10^{-5}$ に一致。十分な振幅で雑音が相対的に非常に小さくなり，$F$ の係数が正しく同定できる。$a_1,a_2$ も誤差が小さい。
+$F$ は時間変化するが振幅が小さく，$b$ は依然として真値より二桁以上大きい。
+
+
+
+
+\subsubsection*{(3) 入力 $F_k=1000000\sin(\pi k/5)$（大振幅正弦）}
+\paragraph{内容}
+入力振幅を $10^6$ 倍して強い励起を与える。\cite{exp2025}
 
 \paragraph{コード}
 \begin{lstlisting}
@@ -439,6 +429,22 @@ exp9_3 <- function(){
   print(theta)
 }
 \end{lstlisting}
+
+\paragraph{結果}
+実行出力：
+\[
+\hat\theta=
+\begin{bmatrix}
+1.995\\
+-0.9953\\
+5.000\times10^{-5}
+\end{bmatrix}.
+\]
+
+\paragraph{考察}
+$b$ が真値 $5.0\times10^{-5}$ に一致。十分な振幅で雑音が相対的に非常に小さくなり，$F$ の係数が正しく同定できる。$a_1,a_2$ も誤差が小さい。
+
+
 
 
 \subsection{課題10（非定常時系列の追従：忘却係数付きRLS）}

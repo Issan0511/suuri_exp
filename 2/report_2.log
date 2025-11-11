@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  6 NOV 2025 13:07
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  6 NOV 2025 13:12
  restricted system commands enabled.
 **report_2.tex
 (./report_2.tex
@@ -1928,6 +1928,13 @@ Package luatex.def Info: graphs/task14_optimal_pairs.png  used on input line 34
 )
 
 [37<./graphs/task14_kmeans_re.png><./graphs/task14_optimal_pairs.png>]
+Overfull \hbox (137.24872pt too wide) in paragraph at lines 118--119
+[]|\JY3/mc/m/n/10.95001 実 |験 |コ |ー |ド  []\TU/lmr/m/n/10.95001 R[] [] 
+[][]$\TU/lmtt/m/n/10.95001 https://github.com/Issan0511/suuri_exp/blob/aaf8c74b8
+31aa8b3abb17d2e08713248fbf3de89/
+ []
+
+
 
 [38] (./report_2.aux)
  ***********
@@ -1946,11 +1953,11 @@ Package rerunfilecheck Info: File `report_2.out' has not changed.
 Here is how much of LuaTeX's memory you used:
  23386 strings out of 476291
  1166607,1144653 words of node,token memory allocated
- 5537 words of node memory still in use:
+ 5567 words of node memory still in use:
    12 hlist, 2 vlist, 7 rule, 1 local_par, 5 glue, 4 kern, 2 penalty, 10 sub_mli
-st, 3 glyph, 2196 attribute, 57 glue_spec, 212 attribute_list, 1 write, 15 user_
-defined nodes
-   avail lists: 1:27,2:164301,3:714,4:26984,5:20096,6:114,7:18833,8:69,9:38651,1
+st, 3 glyph, 2207 attribute, 57 glue_spec, 213 attribute_list, 1 write, 15 user_
+defined, 1 pdf_action nodes
+   avail lists: 1:27,2:164289,3:714,4:26984,5:20096,6:113,7:18833,8:95,9:38651,1
 0:51,11:1258
  44467 multiletter control sequences out of 65536+600000
  144 fonts using 125478879 bytes
@@ -1983,10 +1990,10 @@ fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type
 sfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/c
 msy9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
 pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on report_2.pdf (38 pages, 623954 bytes).
+Output written on report_2.pdf (38 pages, 624412 bytes).
 
-PDF statistics: 1187 PDF objects out of 1200 (max. 8388607)
- 1049 compressed objects within 11 object streams
+PDF statistics: 1188 PDF objects out of 1200 (max. 8388607)
+ 1050 compressed objects within 11 object streams
  660 named destinations out of 1000 (max. 131072)
  217 words of extra memory for PDF output out of 10000 (max. 100000000)
 

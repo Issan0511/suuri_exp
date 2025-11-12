@@ -89,61 +89,61 @@ def runge_kutta4_lorenz (n,t_start = 0, t_end = 50, u_start = (1,0,0), return_tr
 
 
 # パラメータ設定
-n = 10000
+n=100000
 t_start = 0
 t_end = 100
-u_start = (1, 0, 0)
 
-print(f"初期条件: x={u_start[0]}, y={u_start[1]}, z={u_start[2]}")
-print(f"時間範囲: t={t_start} から t={t_end}")
-print(f"ステップ数: {n}")
-print()
+epsilons = [0.0, 0.1, 0.01, 0.001]
+colors = ['blue', 'red', 'green', 'purple']
 
-# ルンゲ・クッタ法で軌道を計算
-print("ルンゲ・クッタ法で計算中...")
-u_final_rk, t_values_rk, trajectory_rk = runge_kutta4_lorenz(
-    n, t_start, t_end, u_start, return_trajectory=True
-)
-print(f"ルンゲ・クッタ法 最終状態: x={u_final_rk[0]:.4f}, y={u_final_rk[1]:.4f}, z={u_final_rk[2]:.4f}")
+# 各εに対する軌道を計算
+trajectories_rk = []
+trajectories_fe = []
+t_values_list = []
 
-# 前進オイラー法で軌道を計算
-print("前進オイラー法で計算中...")
-u_final_euler, t_values_euler, trajectory_euler = forward_euler_lorenz(
-    n, t_start, t_end, u_start, return_trajectory=True
-)
-print(f"前進オイラー法 最終状態: x={u_final_euler[0]:.4f}, y={u_final_euler[1]:.4f}, z={u_final_euler[2]:.4f}")
-print()
+for epsilon in epsilons:
+    x_start = 1.0 + epsilon
+    u_start = (x_start, 0, 0)
+    u_final_rk, t_values_rk, trajectory_rk = runge_kutta4_lorenz(n, t_start, t_end, u_start, return_trajectory=True)
+    u_final_fe, t_values_fe, trajectory_fe = forward_euler_lorenz(n, t_start, t_end, u_start, return_trajectory=True)
+    
+    trajectories_rk.append(trajectory_rk)
+    trajectories_fe.append(trajectory_fe)
+    t_values_list.append(t_values_rk)
 
-# ルンゲ・クッタ法の3次元プロット
-fig1 = plt.figure(figsize=(12, 9))
-ax1 = fig1.add_subplot(111, projection='3d')
+# グラフ作成: t ∈ [0, 50]
+fig1 = plt.figure(figsize=(12, 6))
 
-ax1.plot(trajectory_rk[:, 0], trajectory_rk[:, 1], trajectory_rk[:, 2], linewidth=0.5, color='blue', alpha=0.8)
-ax1.scatter(trajectory_rk[0, 0], trajectory_rk[0, 1], trajectory_rk[0, 2], color='green', s=100, label='Start', marker='o')
-ax1.scatter(trajectory_rk[-1, 0], trajectory_rk[-1, 1], trajectory_rk[-1, 2], color='red', s=100, label='End', marker='x')
-
-ax1.set_xlabel('X', fontsize=12)
-ax1.set_ylabel('Y', fontsize=12)
-ax1.set_zlabel('Z', fontsize=12)
-ax1.set_title('Lorenz Attractor - Runge-Kutta Method', fontsize=14)
-ax1.legend()
-ax1.grid(True, alpha=0.3)
-
-# 前進オイラー法の3次元プロット
-fig2 = plt.figure(figsize=(12, 9))
-ax2 = fig2.add_subplot(111, projection='3d')
-
-ax2.plot(trajectory_euler[:, 0], trajectory_euler[:, 1], trajectory_euler[:, 2], linewidth=0.5, color='red', alpha=0.8)
-ax2.scatter(trajectory_euler[0, 0], trajectory_euler[0, 1], trajectory_euler[0, 2], color='green', s=100, label='Start', marker='o')
-ax2.scatter(trajectory_euler[-1, 0], trajectory_euler[-1, 1], trajectory_euler[-1, 2], color='purple', s=100, label='End', marker='x')
-
-ax2.set_xlabel('X', fontsize=12)
-ax2.set_ylabel('Y', fontsize=12)
-ax2.set_zlabel('Z', fontsize=12)
-ax2.set_title('Lorenz Attractor - Forward Euler Method', fontsize=14)
-ax2.legend()
-ax2.grid(True, alpha=0.3)
+# Runge-Kutta法: x(t)
+for i, epsilon in enumerate(epsilons):
+    mask = t_values_list[i] <= 50
+    plt.plot(t_values_list[i][mask], trajectories_rk[i][mask, 0], 
+             color=colors[i], label=f'ε={epsilon}', alpha=0.8, linewidth=1.0)
+plt.xlabel('t')
+plt.ylabel('x')
+plt.title('Runge-Kutta: x(t) (t∈[0,50])')
+plt.legend()
+plt.grid(True, alpha=0.3)
 
 plt.tight_layout()
+plt.savefig('lorenz_x_t0_50.png', dpi=150)
 plt.show()
 
+# グラフ作成: t ∈ [50, 100]
+fig2 = plt.figure(figsize=(12, 6))
+
+# Runge-Kutta法: x(t)
+for i, epsilon in enumerate(epsilons):
+    mask = t_values_list[i] > 50
+    plt.plot(t_values_list[i][mask], trajectories_rk[i][mask, 0], 
+             color=colors[i], label=f'ε={epsilon}', alpha=0.8, linewidth=1.0)
+plt.xlabel('t')
+plt.ylabel('x')
+plt.title('Runge-Kutta: x(t) (t∈[50,100])')
+plt.legend()
+plt.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.savefig('lorenz_x_t50_100.png', dpi=150)
+plt.show()
+    

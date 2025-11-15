@@ -1,0 +1,382 @@
+\section{課題4}
+
+\subsection{原理・方法}
+
+本課題では，線形常微分方程式
+\begin{align}
+  u'(t) = -\alpha u(t) + \beta, \qquad u(0)=u_0,\qquad \alpha>0
+  \label{eq:kadai4_ode}
+\end{align}
+に対し，クランク・ニコルソン法，予測子・修正子法，
+ホイン法を適用したときの\textbf{安定性領域}を解析的に求める。
+
+以下では
+\[
+  z = \alpha\,\Delta t
+\]
+とおき，時間刻み幅 $\Delta t$ のみを変化させたときの
+\textbf{増幅因子}の条件から安定性を議論する。
+
+式 \eqref{eq:kadai4_ode} の定常解は $u_\ast=\beta/\alpha$ であり，
+$v(t)=u(t)-u_\ast$ とおけば
+\[
+  v'(t) = -\alpha v(t)
+\]
+となる。したがって，安定性解析では定数項を無視して
+\[
+  u'(t) = -\alpha u(t)
+  \label{eq:kadai4_homo}
+\]
+とした場合の更新式の係数の絶対値を調べれば十分である。
+
+一般に，数値解法により
+\[
+  u_{n+1} = R(z)\,u_n + C(z)\,\beta
+\]
+と書けるとき，式 \eqref{eq:kadai4_homo} に対する安定性条件は
+\[
+  |R(z)| < 1
+\]
+である。以下，各手法について $R(z)$ を求め，$|R(z)|<1$ から
+$z$ の許容範囲を導く。
+
+\subsubsection*{クランク・ニコルソン法}
+
+クランク・ニコルソン法は
+\begin{align}
+  u_{n+1}
+  &= u_n + \frac{\Delta t}{2}\bigl( u'_{n+1} + u'_n \bigr)
+\end{align}
+と書ける。式 \eqref{eq:kadai4_ode} を代入すると
+\begin{align}
+  u_{n+1}
+  &= u_n + \frac{\Delta t}{2}
+     \bigl( -\alpha u_{n+1} + \beta - \alpha u_n + \beta \bigr) \\
+  &= u_n - \frac{\alpha\Delta t}{2}(u_{n+1}+u_n) + \Delta t\,\beta \\
+  &= u_n - \frac{z}{2}(u_{n+1}+u_n) + \Delta t\,\beta.
+\end{align}
+これを $u_{n+1}$ について解くと
+\begin{align}
+  \left(1+\frac{z}{2}\right)u_{n+1}
+  &= \left(1-\frac{z}{2}\right)u_n + \Delta t\,\beta, \\
+  u_{n+1}
+  &= \frac{1-\frac{z}{2}}{1+\frac{z}{2}}\,u_n
+     + \frac{\Delta t}{1+\frac{z}{2}}\beta.
+\end{align}
+したがって増幅因子は
+\[
+  R_{\mathrm{CN}}(z) = \frac{1-\frac{z}{2}}{1+\frac{z}{2}}.
+\]
+
+安定性条件は
+\[
+  \left|\frac{1-\frac{z}{2}}{1+\frac{z}{2}}\right| < 1.
+\]
+$z>0$ のもとでは分母 $1+z/2>0$ なので，これは
+\[
+  \bigl|1-\tfrac{z}{2}\bigr| < 1+\tfrac{z}{2}
+\]
+と同値である。
+両辺を二乗しても不等号の向きは変わらず
+\begin{align}
+  \left(1-\frac{z}{2}\right)^2
+  &< \left(1+\frac{z}{2}\right)^2 \\
+  1 - z + \frac{z^2}{4}
+  &< 1 + z + \frac{z^2}{4} \\
+  -z &< z
+\end{align}
+となる。$z>0$ ならばこれは常に成り立つから，
+クランク・ニコルソン法は
+\[
+  z = \alpha\Delta t > 0
+\]
+に対して\textbf{常に安定}であり，時間刻み幅に制限はない
+（無条件安定）。
+
+\subsubsection*{予測子・修正子法
+（前進オイラー＋後退オイラー）}
+
+ここでは予測子に前進オイラー法，修正子に後退オイラー法を用いた
+1 段の予測子・修正子法を考える。
+まず前進オイラー法で予測値 $u_n^\ast$ を求める：
+\begin{align}
+  u_n^\ast
+  &= u_{n-1} + \Delta t\,u'_{n-1} \\
+  &= u_{n-1} + \Delta t(-\alpha u_{n-1} + \beta) \\
+  &= (1-z)u_{n-1} + \Delta t\,\beta.
+\end{align}
+次に，この予測値を用いて後退オイラー法を陽的化し，
+\begin{align}
+  u_n
+  &= u_{n-1} + \Delta t\,(-\alpha u_n^\ast + \beta)
+\end{align}
+とする（$f(t_n,u_n)$ を $f(t_n,u_n^\ast)$ で近似した形）。
+
+$u_n^\ast$ を代入して
+\begin{align}
+  u_n
+  &= u_{n-1}
+     + \Delta t\Bigl(-\alpha\bigl((1-z)u_{n-1} + \Delta t\,\beta\bigr)
+                     + \beta\Bigr) \\
+  &= u_{n-1}
+     - \alpha\Delta t(1-z)u_{n-1}
+     - \alpha\Delta t^2\beta
+     + \Delta t\,\beta \\
+  &= \bigl(1 - z + z^2\bigr) u_{n-1}
+     + (1 - z)\Delta t\,\beta.
+\end{align}
+したがって増幅因子は
+\[
+  R_{\mathrm{PC}}(z) = 1 - z + z^2.
+\]
+
+安定性条件は
+\[
+  |1 - z + z^2| < 1.
+\]
+左辺は
+\[
+  1 - z + z^2 = \left(z-\frac{1}{2}\right)^2 + \frac{3}{4} > 0
+\]
+なので，絶対値を外して
+\[
+  0 < 1 - z + z^2 < 1
+\]
+に等しい。右の不等式だけを解けばよく，
+\begin{align}
+  1 - z + z^2 &< 1 \\
+  -z + z^2 &< 0 \\
+  z(z-1) &< 0
+\end{align}
+より
+\[
+  0 < z < 1
+\]
+となる。したがって予測子・修正子法は
+\[
+  0 < \alpha\Delta t < 1
+\quad\Longleftrightarrow\quad
+  \Delta t < \frac{1}{\alpha}
+\]
+の範囲でのみ安定であり，\textbf{条件付き安定}である。
+
+\subsubsection*{ホイン法（Heun 法）}
+
+ホイン法は 2 次のルンゲ・クッタ法であり，
+予測値 $u_n^\ast$ を
+\begin{align}
+  u_n^\ast
+  &= u_{n-1} + \Delta t\,u'_{n-1}
+   = (1-z)u_{n-1} + \Delta t\,\beta
+\end{align}
+とおいたあと，
+\begin{align}
+  u_n
+  &= u_{n-1}
+   + \frac{\Delta t}{2}\Bigl( u'_{n-1} + u'_n{}^\ast \Bigr)
+\end{align}
+で修正を行う。ここで
+\begin{align}
+  u'_{n-1} &= -\alpha u_{n-1} + \beta, \\
+  u'_n{}^\ast &= -\alpha u_n^\ast + \beta
+              = -\alpha\bigl((1-z)u_{n-1}+\Delta t\,\beta\bigr)+\beta
+\end{align}
+であるから
+\begin{align}
+  u_n
+  &= u_{n-1}
+   + \frac{\Delta t}{2}
+     \Bigl[
+       -\alpha u_{n-1} + \beta
+       -\alpha(1-z)u_{n-1} - \alpha\Delta t\,\beta + \beta
+     \Bigr] \\
+  &= u_{n-1}
+   - \frac{\alpha\Delta t}{2}(2-z)u_{n-1}
+   + \frac{\Delta t}{2}(2-z)\beta \\
+  &= \bigl(1 - z + \tfrac{z^2}{2}\bigr)u_{n-1}
+   + \Bigl(1-\frac{z}{2}\Bigr)\Delta t\,\beta.
+\end{align}
+したがって増幅因子は
+\[
+  R_{\mathrm{Heun}}(z) = 1 - z + \frac{z^2}{2}
+\]
+である。
+
+安定性条件は
+\[
+  \bigl|1 - z + \tfrac{z^2}{2}\bigr| < 1.
+\]
+同様に
+\[
+  1 - z + \frac{z^2}{2}
+  = \frac{1}{2}(z-1)^2 + \frac{1}{2} > 0
+\]
+なので，これは
+\[
+  0 < 1 - z + \frac{z^2}{2} < 1
+\]
+と同値である。右の不等式を解くと
+\begin{align}
+  1 - z + \frac{z^2}{2} &< 1 \\
+  -z + \frac{z^2}{2} &< 0 \\
+  z\left(\frac{z}{2}-1\right) &< 0
+\end{align}
+より
+\[
+  0 < z < 2
+\]
+を得る。したがってホイン法は
+\[
+  0 < \alpha\Delta t < 2
+\quad\Longleftrightarrow\quad
+  \Delta t < \frac{2}{\alpha}
+\]
+の範囲で安定である。
+
+\subsection{解析的結果のまとめ}
+
+以上より，式 \eqref{eq:kadai4_ode} に対して得られた
+各手法の安定性領域（$z=\alpha\Delta t>0$）は次のようにまとめられる：
+\begin{itemize}
+  \item クランク・ニコルソン法：
+        \quad 全ての $z>0$ で安定（無条件安定）。
+  \item 予測子・修正子法（前進オイラー＋後退オイラー）：
+        \quad $0<z<1$ で安定。
+  \item ホイン法：
+        \quad $0<z<2$ で安定。
+\end{itemize}
+
+これらの理論的安定性領域と，実際に数値計算で観測される
+解の振る舞いを比較することで，次節で数値的な確認を行う。
+
+\subsection{結果}
+
+本課題では，線形常微分方程式
+\begin{align}
+  u'(t) = -\alpha u(t) + \beta, \qquad u(0)=1,
+\end{align}
+に対して $\alpha=10,\ \beta=0$ を固定し，時間区間 $[0,10]$ を各種の刻み幅
+$\Delta t$ で分割して数値解を求めた。
+真値は
+\begin{align}
+  u_{\mathrm{exact}}(t) = e^{-10t}
+\end{align}
+である。
+
+クランク・ニコルソン法については
+\[
+  \Delta t = 0.01,\ 0.19,\ 0.205
+\]
+の場合を計算し，図\ref{fig:task4_cn} に数値解と真値の比較を示した。
+縦軸は $u\in[-1,1]$ の範囲に固定している。
+$\Delta t=0.01$ の場合，真値とほぼ重なる減衰曲線が得られた。
+$\Delta t=0.19,\ 0.205$ では時間刻みが粗くなるため初期付近で真値との差が大きくなるが，
+いずれの場合も数値解は急速に原点へ収束し，発散や振動は観測されなかった。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{task4_crank_nicolson.png}
+  \caption{クランク・ニコルソン法による式(4.28)の数値解
+           （$\Delta t = 0.01,\,0.19,\,0.205$）。}
+  \label{fig:task4_cn}
+\end{figure}
+
+予測子・修正子法（前進オイラー＋後退オイラー）については，
+安定性条件 $0<z=\alpha\Delta t < 1$ の境界付近の挙動を観察するため，
+\[
+  \Delta t = 0.01,\ 0.095,\ 0.105
+\]
+とした。図\ref{fig:task4_pc} に，縦軸 $u\in[-1,10]$ の範囲で描いた結果を示す。
+$\Delta t=0.01$ では真値と同様に滑らかにゼロへ減衰する。
+$\Delta t=0.095$（$z=0.95$）では，減衰は続くものの，
+$\Delta t=0.01$ に比べてゼロへの収束が非常に緩やかになっている。
+一方，$\Delta t=0.105$（$z=1.05$）では，時間の経過とともに振幅が増大し，
+$t=10$ の時点では $u$ が $10^2$ オーダーまで成長する発散解が得られた。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{task4_predictor_corrector.png}
+  \caption{予測子・修正子法（前進オイラー＋後退オイラー）による式(4.28)の数値解
+           （$\Delta t = 0.01,\,0.095,\,0.105$）。}
+  \label{fig:task4_pc}
+\end{figure}
+
+ホイン法については，クランク・ニコルソン法と同じ
+\[
+  \Delta t = 0.01,\ 0.19,\ 0.205
+\]
+を用いて計算し，結果を図\ref{fig:task4_heun} に示した。
+縦軸は $u\in[-1,10]$ に固定している。
+$\Delta t=0.01$ では真値とほとんど一致する減衰が得られた。
+$\Delta t=0.19$（$z=1.9$）では理論上はまだ安定領域内であり，
+数値解は緩やかにゼロに近づく様子が見られた。
+これに対し，$\Delta t=0.205$（$z\approx 2.05$）では安定限界 $z=2$ をわずかに超えているため，
+数値解は$t=10$ の時点で $u$ が $10^1$ オーダーに達する発散挙動を示した。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{task4_heun.png}
+  \caption{ホイン法による式(4.28)の数値解
+           （$\Delta t = 0.01,\,0.19,\,0.205$）。}
+  \label{fig:task4_heun}
+\end{figure}
+
+\subsection{考察}
+
+まず，クランク・ニコルソン法について解析的に得られた増幅因子
+\[
+  R_{\mathrm{CN}}(z) = \frac{1-\frac{z}{2}}{1+\frac{z}{2}}, \qquad z=\alpha\Delta t
+\]
+は，$z>0$ に対して常に $|R_{\mathrm{CN}}(z)|<1$ を満たすため無条件安定である。
+数値結果でも，$\Delta t=0.19,\ 0.205$ のように $\alpha\Delta t$ が 1 を大きく超える場合であっても，
+数値解はすべての時刻で有界に保たれ，時間とともにゼロへ収束している。
+ただし，$z$ が大きくなると $R_{\mathrm{CN}}(z)$ は真の減衰係数 $e^{-z}$ から大きく外れ，
+過度に強い減衰や（$z>2$ の領域では）符号反転を伴う振動が生じる。
+したがって，クランク・ニコルソン法は安定性の観点からは刻み幅に制限を受けない一方で，
+精度の観点からは $\alpha\Delta t$ を適度に小さく取る必要があることが確認できる。
+
+予測子・修正子法（前進オイラー＋後退オイラー）の増幅因子は
+\[
+  R_{\mathrm{PC}}(z) = 1 - z + z^2
+\]
+であり，$|R_{\mathrm{PC}}(z)|<1$ より $0<z<1$ の範囲のみ安定である。
+数値結果では，$z=0.1$ に対応する $\Delta t=0.01$ では真値と同様に指数減衰が再現され，
+$z=0.95$ に対応する $\Delta t=0.095$ では減衰はするものの，$R_{\mathrm{PC}}(0.95)\approx 0.95$ と 1 に近いため，
+ゼロへの収束が非常に遅いことが観察された。
+これに対し，$z=1.05$ の $\Delta t=0.105$ では $R_{\mathrm{PC}}(1.05)\approx 1.05>1$ となり，
+理論通り発散解が得られた。
+安定限界をわずかに越えただけで振幅が指数的に増大し，
+$t=10$ の段階で $10^2$ オーダーにまで達していることから，
+この手法はクランク・ニコルソン法に比べてかなり厳しい刻み幅制限を受けることが分かる。
+
+ホイン法の増幅因子は
+\[
+  R_{\mathrm{Heun}}(z) = 1 - z + \frac{z^2}{2}
+\]
+であり，安定範囲は $0<z<2$ となる。
+数値結果でも，$z=1$ に相当するような $\Delta t$ では安定で，
+$\Delta t=0.19$（$z\approx 1.9$）では緩やかな減衰が観測された。
+一方，$\Delta t=0.205$（$z\approx 2.05$）では $R_{\mathrm{Heun}}(z)>1$ となり，
+数値解がゼロから離れて増大していった。
+すなわち，ホイン法も予測子・修正子法と同様に条件付き安定であり，
+明示的手法として典型的な「有限の安定領域」を持つことが数値的にも確認された。
+
+以上をまとめると，今回の一次元線形問題に関して
+
+\begin{itemize}
+  \item クランク・ニコルソン法は無条件安定であり，
+        大きな $\Delta t$ に対しても解は発散しないが，
+        減衰の速さや位相の再現性は $\alpha\Delta t$ に強く依存する。
+  \item 予測子・修正子法は高次化された陽的手法であるにもかかわらず，
+        安定領域は $0<\alpha\Delta t<1$ と比較的狭く，
+        安定限界をわずかに上回るだけで解が急激に発散する。
+  \item ホイン法は安定領域 $0<\alpha\Delta t<2$ を持ち，
+        予測子・修正子法よりは広いものの，
+        やはり刻み幅を安定限界近くまで大きくすると解が発散する。
+\end{itemize}
+
+このように，安定性解析で導かれた増幅因子 $R(z)$ の条件と，
+実際の数値解の振る舞いが定性的にも定量的にも一致していることが確認できた。
+より高次・高精度な手法であっても，陽的である限りは安定領域の制約を回避できないため，
+剛性の強い問題や固有値の実部が大きく負の問題では，
+クランク・ニコルソン法のような陰的手法を用いる方が実用上有利であるといえる。

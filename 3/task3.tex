@@ -1,4 +1,318 @@
-% \section {課題3}
 
-\subsubsection{原理・方法}
+\subsection{原理・方法}
+
+本課題では，常微分方程式の初期値問題
+\begin{align}
+  u'(t) = u(t), \qquad u(0) = 1
+  \label{eq:kadai3_ivp}
+\end{align}
+を区間 $t \in [0,1]$ で数値的に解き，いくつかの代表的な数値解法の
+\emph{収束次数}を，誤差の振る舞いから確認する。
+
+式 \eqref{eq:kadai3_ivp} の解析解は
+\begin{align}
+  u_{\mathrm{exact}}(t) = \exp(t)
+\end{align}
+であり，特に $t=1$ における真値は $u_{\mathrm{exact}}(1)=\mathrm{e}$ である。
+
+\subsubsection*{離散化と誤差の定義}
+
+時間刻み幅 $\Delta t$ を
+\begin{align}
+  \Delta t = \frac{1}{2^i}, \qquad i = 1,2,\dots,i_{\max}
+\end{align}
+とし，ステップ数を $N = 2^i$，離散化した時刻を
+\begin{align}
+  t_n = n \Delta t, \qquad n = 0,1,\dots,N
+\end{align}
+とおく。数値解を $u_n \approx u(t_n)$ と表す。
+
+各 $i$ に対し，$t=1$ に対応する $n=N$ での数値解 $u_N^{(i)}$ を求め，  
+絶対誤差
+\begin{align}
+  E^{(i)} = \left| u_N^{(i)} - u_{\mathrm{exact}}(1) \right|
+  = \left| u_N^{(i)} - \mathrm{e} \right|
+\end{align}
+を定義する。
+
+さらに，連続する刻み幅に対する誤差比
+\begin{align}
+  E_r^{(i)} = \frac{E^{(i)}}{E^{(i-1)}} \qquad (i \geq 2)
+\end{align}
+を考える。$p$ 次精度の手法では，$\Delta t$ を半分にすると誤差が理論的に
+\begin{align}
+  E^{(i)} \approx C (\Delta t)^p = C 2^{-ip}
+\end{align}
+と振る舞うので，
+\begin{align}
+  E_r^{(i)} \approx \frac{C 2^{-ip}}{C 2^{-(i-1)p}} = 2^{-p}
+\end{align}
+が期待される。したがって，数値的に $E_r^{(i)}$ が $2^{-p}$ に近づくかどうかを調べることで，
+各手法の収束次数 $p$ を検証できる。
+
+\subsubsection*{対象とする数値解法}
+
+本課題では，次の 5 種類の手法を比較する。
+
+\paragraph{(1) 前進オイラー法 (Forward Euler, FE)}
+
+式 \eqref{eq:kadai3_ivp} に対する前進オイラー法は
+\begin{align}
+  u_{n+1}
+  &= u_n + \Delta t\, f(t_n,u_n), \\
+  f(t,u) &= u
+\end{align}
+で与えられる。本問題では $f(t_n,u_n)=u_n$ であるから，
+\begin{align}
+  u_{n+1} = (1+\Delta t)\, u_n
+\end{align}
+となる。これは 1 次精度の陽的一段法である。
+
+\paragraph{(2) 2 次アダムス・バッシュフォース法 (AB2)}
+
+2 次の Adams–Bashforth 法は陽的二段法であり，
+\begin{align}
+  u_{n+1}
+  = u_n + \Delta t
+  \left(
+    \frac{3}{2} f_n - \frac{1}{2} f_{n-1}
+  \right),
+  \qquad f_n = f(t_n,u_n)
+\end{align}
+と表される。本問題では $f_n = u_n$ である。
+
+多段法の性質上，$u_0,u_1$ の 2 点が初期値として必要になる。
+本レポートでは，$u_0$ に加えて $u_1 = u_{\mathrm{exact}}(t_1)$ を
+解析解から与えている。
+
+\paragraph{(3) 3 次アダムス・バッシュフォース法 (AB3)}
+
+3 次の Adams–Bashforth 法は陽的三段法であり，
+\begin{align}
+  u_{n+1}
+  = u_n + \Delta t
+  \left(
+    \frac{23}{12} f_n
+    - \frac{16}{12} f_{n-1}
+    + \frac{5}{12}  f_{n-2}
+  \right)
+\end{align}
+で与えられる。本問題では $f_n=u_n$ である。
+
+三段法のため，$u_0,u_1,u_2$ の 3 点が初期値として必要になる。
+本レポートでは，$u_1,u_2$ を
+\begin{align}
+  u_1 = u_{\mathrm{exact}}(t_1),\qquad
+  u_2 = u_{\mathrm{exact}}(t_2)
+\end{align}
+と解析解から与えている。
+
+\paragraph{(4) ホイン法 (Heun 法, 2 次ルンゲ・クッタ法)}
+
+ホイン法は 2 次精度の陽的一段法であり，予測子・修正子の形で
+\begin{align}
+  &\text{予測:} && u^{\ast}_{n+1} = u_n + \Delta t\, f(t_n,u_n), \\
+  &\text{修正:} && u_{n+1}
+    = u_n + \frac{\Delta t}{2}
+      \bigl( f(t_n,u_n) + f(t_{n+1},u^{\ast}_{n+1}) \bigr)
+\end{align}
+と書ける。本問題では $f(t,u)=u$ である。
+
+\paragraph{(5) 4 次ルンゲ・クッタ法 (RK4)}
+
+4 次のルンゲ・クッタ法は
+\begin{align}
+  k_1 &= f(t_n, u_n), \\
+  k_2 &= f\left(t_n + \frac{\Delta t}{2},\, u_n + \frac{\Delta t}{2} k_1\right), \\
+  k_3 &= f\left(t_n + \frac{\Delta t}{2},\, u_n + \frac{\Delta t}{2} k_2\right), \\
+  k_4 &= f\left(t_n + \Delta t,\, u_n + \Delta t\, k_3\right),
+\end{align}
+\begin{align}
+  u_{n+1}
+  = u_n + \frac{\Delta t}{6}
+    \left( k_1 + 2k_2 + 2k_3 + k_4 \right)
+\end{align}
+と定義される。本問題では $f(t,u)=u$ であり，4 次精度の陽的一段法となる。
+
+\subsubsection*{数値実験の手順}
+
+式
+\[
+  u'(t) = u(t),\quad u(0)=1
+\]
+を区間 $[0,1]$ で数値的に解き，$t=1$ における解の誤差を比較する。
+
+時間刻みは
+\[
+  n = 2^i,\quad i = 2,3,\dots,9,\qquad
+  \Delta t = \frac{1}{n}
+\]
+とし，$t_0=0,\,u_0=1$ から $n$ ステップ進めて $t_n=1$ の値 $u_n$ を求める。
+
+実装では，以下の 5 種類の手法を用いた。
+
+\begin{itemize}
+  \item 前進オイラー法（Forward Euler）\\
+        更新式
+        \[
+          u_{k+1} = u_k + \Delta t\, f(t_k,u_k),\quad f(t,u)=u
+        \]
+        を $k=0,\dots,n-1$ について適用する関数
+        \texttt{foward\_euler} を用いた。
+
+  \item 2次アダムス・バッシュフォース法（AB2）\\
+        更新式
+        \[
+          u_{k+1}
+          = u_k + \Delta t\left(
+            \frac{3}{2} f_k - \frac{1}{2} f_{k-1}
+          \right),\quad f_k=f(t_k,u_k)
+        \]
+        を用いる関数 \texttt{adam\_bashforth2} を実装した。
+        多段法の初期化のため，$u_0=1$ に加えて
+        \[
+          u_1 = u_{\mathrm{exact}}(t_1) = \exp(\Delta t)
+        \]
+        を解析解から与え，$k=1,\dots,n-1$ で上式を適用した。
+
+  \item 3次アダムス・バッシュフォース法（AB3）\\
+        更新式
+        \[
+          u_{k+1}
+          = u_k + \Delta t\left(
+            \frac{23}{12} f_k
+            - \frac{16}{12} f_{k-1}
+            + \frac{5}{12}  f_{k-2}
+          \right)
+        \]
+        を用いる関数 \texttt{adam\_bashforth3} を実装した。
+        初期化のため $u_0=1$ に加え
+        \[
+          u_1 = u_{\mathrm{exact}}(t_1),\quad
+          u_2 = u_{\mathrm{exact}}(t_2)
+        \]
+        を解析解から与え，$k=2,\dots,n-1$ で上式を適用した。
+
+  \item ホイン法（Heun 法，2次ルンゲ・クッタ法）\\
+        関数 \texttt{heun} で
+        \begin{align}
+          &\text{予測: } &&
+            u^{\ast}_{k+1} = u_k + \Delta t\, f(t_k,u_k),\\
+          &\text{修正: } &&
+            u_{k+1}
+              = u_k + \frac{\Delta t}{2}
+              \bigl( f(t_k,u_k) + f(t_{k+1},u^{\ast}_{k+1}) \bigr)
+        \end{align}
+        を $k=0,\dots,n-1$ について適用した。
+
+  \item 4次ルンゲ・クッタ法（RK4）\\
+        関数 \texttt{runge\_kutta4} で
+        \begin{align}
+          k_1 &= f(t_k, u_k),\\
+          k_2 &= f\!\left(t_k + \frac{\Delta t}{2},\, u_k + \frac{\Delta t}{2} k_1\right),\\
+          k_3 &= f\!\left(t_k + \frac{\Delta t}{2},\, u_k + \frac{\Delta t}{2} k_2\right),\\
+          k_4 &= f\!\left(t_k + \Delta t,\, u_k + \Delta t\, k_3\right),
+        \end{align}
+        \[
+          u_{k+1}
+            = u_k + \frac{\Delta t}{6}
+              (k_1 + 2k_2 + 2k_3 + k_4)
+        \]
+        を $k=0,\dots,n-1$ について適用した。
+\end{itemize}
+
+各 $n$ に対して，$t=1$ における真値 $u_{\mathrm{exact}}(1)=\mathrm{e}$ との差
+\[
+  E(n) = \bigl|u_n - \mathrm{e}\bigr|
+\]
+を計算し，誤差の大きさと減少の仕方を比較した。
+さらに，誤差比
+\[
+  \frac{E(n)}{E(n/2)}
+\]
+を用いて，各手法の収束次数を推定した。
+
+\subsection{結果}
+
+$n=4,8,\dots,512$ に対して得られた $t=1$ における誤差 $E(n)$ を
+表\ref{tab:kadai3_error} に示す（有効数字 4 桁）。
+
+\begin{table}[htbp]
+  \centering
+  \caption{$t=1$ における絶対誤差 $E(n)=|u_n-\mathrm{e}|$}
+  \begin{tabular}{c|ccccc}
+    \hline
+    $n$
+      & 前進オイラー
+      & AB2
+      & AB3
+      & ホイン
+      & RK4 \\
+    \hline
+     4  & 0.2769 & 0.04240        & 0.005826        & 0.02343        & $7.189\times 10^{-5}$ \\
+     8  & 0.1525 & 0.01407        & 0.001300        & 0.006441       & $4.984\times 10^{-6}$ \\
+    16  & 0.08035& 0.003973       & $2.035\times 10^{-4}$ & 0.001688 & $3.281\times 10^{-7}$ \\
+    32  & 0.04129& 0.001050       & $2.820\times 10^{-5}$ & $4.322\times 10^{-4}$ & $2.105\times 10^{-8}$ \\
+    64  & 0.02094& $2.696\times 10^{-4}$ & $3.704\times 10^{-6}$ & $1.093\times 10^{-4}$ & $1.333\times 10^{-9}$ \\
+   128  & 0.01054& $6.826\times 10^{-5}$ & $4.745\times 10^{-7}$ & $2.749\times 10^{-5}$ & $8.384\times 10^{-11}$ \\
+   256  & 0.005290& $1.717\times 10^{-5}$& $6.003\times 10^{-8}$ & $6.893\times 10^{-6}$ & $5.261\times 10^{-12}$ \\
+   512  & 0.002650& $4.307\times 10^{-6}$& $7.549\times 10^{-9}$ & $1.726\times 10^{-6}$ & $3.286\times 10^{-13}$ \\
+    \hline
+  \end{tabular}
+  \label{tab:kadai3_error}
+\end{table}
+
+また，誤差比 $E(n)/E(n/2)$ の典型的な値として，
+$n=256$ と $512$ の組に対しては
+\[
+\begin{array}{ll}
+  \text{前進オイラー} & E(512)/E(256) \approx 0.5009,\\
+  \text{AB2}           & E(512)/E(256) \approx 0.2508,\\
+  \text{AB3}           & E(512)/E(256) \approx 0.1258,\\
+  \text{ホイン}        & E(512)/E(256) \approx 0.2504,\\
+  \text{RK4}           & E(512)/E(256) \approx 0.0625
+\end{array}
+\]
+が得られた。
+
+\subsection{考察}
+
+表\ref{tab:kadai3_error} から，刻み数 $n$ を 2 倍にすると各手法の誤差は
+ほぼ一定の比率で減少していることがわかる。
+誤差比 $E(n)/E(n/2)$ の極限値は
+\[
+  2^{-p}
+\]
+となることから，$p$ 次精度の手法では
+\[
+  E(n)/E(n/2) \to 2^{-p}
+\]
+が期待される。本数値結果では，$n$ が大きい領域で
+
+\begin{itemize}
+  \item 前進オイラー法：$E(n)/E(n/2)\to 0.5 \approx 2^{-1}$，
+  \item AB2，ホイン法：$E(n)/E(n/2)\to 0.25 \approx 2^{-2}$，
+  \item AB3：$E(n)/E(n/2)\to 0.125 \approx 2^{-3}$，
+  \item RK4：$E(n)/E(n/2)\to 0.0625 = 2^{-4}$
+\end{itemize}
+となっており，それぞれ 1 次，2 次，3 次，4 次精度であるという
+理論的な収束次数と整合的な結果になっている。
+
+$n=512$ での誤差の大きさを比較すると，
+前進オイラー法は $E \approx 2.65\times 10^{-3}$ であるのに対し，
+AB2，ホイン法はそれぞれ $10^{-6}$ オーダー，
+AB3 は $10^{-9}$ オーダー，
+RK4 は $10^{-13}$ オーダーまで誤差が減少している。
+同じ刻み幅でも，高次の手法ほど誤差が急速に小さくなることが確認できる。
+
+また，多段法である AB2，AB3 は開始ステップで解析解を用いて初期値を与えているため，
+この問題設定では一段法よりも有利な初期条件になっている。
+それにもかかわらず，AB2 とホイン法（ともに 2 次精度）の誤差比は
+ほぼ同じ値に収束しており，「次数が同じであれば刻み幅に対する誤差の減少率も同程度」
+であることが数値的に確かめられる。
+RK4 は計算あたりの評価回数が多い一方で，
+同じ $n$ に対して最も小さい誤差を与えており，
+高次の一段法を用いることにより，
+粗い刻みでも高精度な解が得られることがわかる。
+
 

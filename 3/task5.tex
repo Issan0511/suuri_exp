@@ -1,0 +1,224 @@
+\section{課題5}
+
+\subsection{問題設定}
+
+常微分方程式
+\begin{align}
+  u'(t) = -2u(t) + 1, \qquad u(0)=1
+  \label{eq:kadai5_ode}
+\end{align}
+を考える。
+本課題では，ステップ幅 $\Delta t>0$ を用いて
+\[
+  t_n = n\Delta t,\qquad u_n \approx u(t_n)
+\]
+とし，2 段法
+\begin{align}
+  u_n = u_{n-2} + 2\Delta t\, f(t_{n-1},u_{n-1}),
+  \qquad f(t,u)=-2u+1
+  \label{eq:kadai5_scheme}
+\end{align}
+による数値解の安定性を解析する。
+
+式 \eqref{eq:kadai5_scheme} は，区間 $[t_{n-2},t_n]$ で
+中点 $t_{n-1}$ における微分係数 $u'(t_{n-1})$ を
+$2\Delta t$ だけ積分した形になっており，
+いわゆる中点公式（明示 2 段法）の一種である。
+
+\subsection{差分スキームの形}
+
+\eqref{eq:kadai5_ode} を \eqref{eq:kadai5_scheme} に代入すると
+\begin{align}
+  u_n
+  &= u_{n-2} + 2\Delta t\,(-2u_{n-1}+1) \nonumber\\
+  &= u_{n-2} - 4\Delta t\,u_{n-1} + 2\Delta t
+  \label{eq:kadai5_un_recur}
+\end{align}
+を得る。
+
+この差分方程式の定常解を考えると，
+連続系の平衡解 $u_\ast$ は
+\[
+  -2u_\ast + 1 = 0 \quad\Rightarrow\quad u_\ast = \frac{1}{2}
+\]
+であるから，数値解についても
+\[
+  u_n \equiv \frac{1}{2}
+\]
+が定常解になっていることが分かる。
+
+数値解の安定性を見るため，
+平衡解からの偏差
+\[
+  v_n = u_n - u_\ast = u_n - \frac{1}{2}
+\]
+を導入する。\eqref{eq:kadai5_un_recur} に
+$u_n = v_n + \tfrac{1}{2}$ を代入すると
+\begin{align}
+  v_n + \frac{1}{2}
+  &= v_{n-2} + \frac{1}{2}
+   - 4\Delta t\left(v_{n-1} + \frac{1}{2}\right) + 2\Delta t.
+\end{align}
+両辺から $\tfrac{1}{2}$ を消去すると
+\begin{align}
+  v_n
+  &= v_{n-2} - 4\Delta t\,v_{n-1}
+\end{align}
+を得る。したがって誤差 $v_n$ は線形 2 階の斉次漸化式
+\begin{align}
+  v_n + 4\Delta t\,v_{n-1} - v_{n-2} = 0
+  \label{eq:kadai5_v_recur}
+\end{align}
+に従う。
+
+\subsection{特性方程式による安定性解析}
+
+漸化式 \eqref{eq:kadai5_v_recur} の特性方程式は
+\begin{align}
+  D(\lambda) = \lambda^2 + 4\Delta t\,\lambda - 1 = 0
+  \label{eq:kadai5_charpoly}
+\end{align}
+である。\eqref{eq:kadai5_charpoly} の 2 つの根を
+$\lambda_1,\lambda_2$ とすると，
+係数比較から
+\begin{align}
+  \lambda_1 + \lambda_2 &= -4\Delta t, \\
+  \lambda_1 \lambda_2 &= -1
+  \label{eq:kadai5_root_product}
+\end{align}
+が成り立つ。
+
+特に，\eqref{eq:kadai5_root_product} より
+\[
+  |\lambda_1 \lambda_2| = 1
+\]
+であるから，もし一方の根が $|\lambda_1|<1$ を満たすならば，
+もう一方は
+\[
+  |\lambda_2| = \frac{1}{|\lambda_1|} > 1
+\]
+を満たさざるを得ない。
+すなわち，2 つの根の少なくとも一方は必ず $|\lambda|>1$ となる。
+
+根の位置をもう少し具体的に確認するため，
+$D(\lambda)$ の符号を調べる。
+$\Delta t>0$ とすると
+\begin{align}
+  D(-1) &= (-1)^2 + 4\Delta t(-1) - 1
+        = -4\Delta t < 0, \\
+  D(0)  &= -1 < 0, \\
+  D(1)  &= 1 + 4\Delta t - 1
+        = 4\Delta t > 0.
+\end{align}
+したがって，連続性より
+\[
+  0 < \lambda_1 < 1,\qquad \lambda_2 < -1
+\]
+となる 2 つの実根が存在する。
+このうち $\lambda_2$ は必ず $|\lambda_2|>1$ を満たす。
+
+漸化式 \eqref{eq:kadai5_v_recur} の一般解は
+\begin{align}
+  v_n = C_1 \lambda_1^n + C_2 \lambda_2^n
+\end{align}
+と書けるので，
+初期値 $(v_0,v_1)$ が特別に選ばれて
+$C_2=0$ となる場合を除き，
+$\lambda_2^n$ の項が支配的になり
+\[
+  |v_n| \sim |C_2|\,|\lambda_2|^n \to \infty
+  \qquad (n\to\infty)
+\]
+となる。
+
+\subsection{まとめ}
+
+以上から，差分スキーム \eqref{eq:kadai5_scheme} を
+\eqref{eq:kadai5_ode} に適用すると，
+平衡解からの偏差 $v_n$ は必ず
+\[
+  |\lambda_2|>1
+\]
+を持つ固有値成分を含むため，
+一般の初期値に対して $n\to\infty$ で発散する。
+
+すなわち，任意の $\Delta t>0$ に対して，
+この 2 段法は式 \eqref{eq:kadai5_ode} に対して
+\emph{安定ではなく}，$u_n$ は必ず発散する。
+
+\subsection{数値解析による結果}
+
+常微分方程式
+\begin{align}
+  u'(t) = -2u(t) + 1, \qquad u(0)=1
+\end{align}
+に対して，2 段法
+\begin{align}
+  u_n = u_{n-2} + 2\Delta t\,(-2u_{n-1}+1)
+  \label{eq:kadai5_scheme_num}
+\end{align}
+を用いて数値解の時間発展を調べた。
+
+時間区間は $[0,10]$ とし，刻み幅
+\[
+  \Delta t = 0.01,\ 0.05,\ 0.10
+\]
+の 3 通りについて計算を行った。  
+2 段法であるため，$u_0=1$ に加え，$u_1$ は解析解
+\[
+  u_{\mathrm{exact}}(t)
+  = \frac{1}{2} + \frac{1}{2} e^{-2t}
+\]
+を用いて
+\[
+  u_1 = u_{\mathrm{exact}}(\Delta t)
+\]
+と与えた。その後は式 \eqref{eq:kadai5_scheme_num} に従って
+$n=2,3,\dots,N$ まで時間発展させた（$N\Delta t = 10$）。
+
+図\ref{fig:task5_twostep} に，真値と 3 種類の刻み幅に対する数値解を示す。
+縦軸は $u\in[-200,200]$ に固定して描画した。
+いずれの刻み幅でも，初期のうちは真値と同様に減衰しているように見えるが，
+時間が進むにつれて振幅が増大し，$t\approx 10$ では
+$u$ が $\pm 10^2$～$10^5$ のオーダで発散していることが分かる。
+特に $\Delta t$ が大きいほど発散が急激であり，
+$\Delta t=0.10$ の場合には数値解が短時間で縦軸の表示範囲を大きく超えている。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{task5_two_step.png}
+  \caption{課題5の2段法
+           $u_n = u_{n-2} + 2\Delta t(-2u_{n-1}+1)$
+           による式(4.29)の数値解
+           （$\Delta t = 0.01,\,0.05,\,0.10$）。}
+  \label{fig:task5_twostep}
+\end{figure}
+
+
+$t=10$ における数値解 $u_N$ と真値 $u_{\mathrm{exact}}(10)$ の絶対誤差
+\[
+  E = \left|u_N - u_{\mathrm{exact}}(10)\right|
+\]
+を表\ref{tab:kadai5_error} に示す（有効数字 4 桁）。
+
+\begin{table}[H]
+  \centering
+  \caption{課題5 の 2 段法における $t=10$ での数値解と誤差}
+  \begin{tabular}{c|c|c}
+    \hline
+    $\Delta t$ & $u_N$ & $E = |u_N-u_{\mathrm{exact}}(10)|$ \\
+    \hline
+    $0.01$ & $1.588\times 10^{2}$ & $1.583\times 10^{2}$ \\
+    $0.05$ & $1.753\times 10^{4}$ & $1.753\times 10^{4}$ \\
+    $0.10$ & $1.120\times 10^{5}$ & $1.120\times 10^{5}$ \\
+    \hline
+  \end{tabular}
+  \label{tab:kadai5_error}
+\end{table}
+
+真値 $u_{\mathrm{exact}}(10)\approx 0.5$ が有界であるのに対し，
+どの刻み幅でも $u_N$ は時間とともに急速に増大しており，
+解析で得られた「本 2 段法の特性根の一つは常に $|\lambda|>1$ となるため，
+一般の初期値に対して数値解は必ず発散する」という結果と
+定性的にも定量的にも一致している。
+

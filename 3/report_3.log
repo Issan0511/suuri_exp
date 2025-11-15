@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  15 NOV 2025 17:12
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  15 NOV 2025 23:18
  restricted system commands enabled.
 **report_3.tex
 (./report_3.tex
@@ -1593,15 +1593,17 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 6.47295pt on input line 3.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 4.62357pt on input line 3.
-)
+
+
+[1
+
+{c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
 \tf@toc=\write5
 
 \openout5 = report_3.toc
 
 
-[1
-
-{c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./task1.tex
+[2] (./task1.tex
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
 (Font)              scaled to size 11.09656pt on input line 2.
 (load cache: extra_lmroman10-bold.luc)
@@ -1621,11 +1623,11 @@ LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 (Font)              scaled to size 4.62357pt on input line 39.
 
 
-[2
+[3
 
 ]
 
-[3]
+[4]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 141.
@@ -1640,7 +1642,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 
-[4]) (./task2.tex(load cache: extra_lmroman10-italic.luc)
+[5]) (./task2.tex(load cache: extra_lmroman10-italic.luc)
 LaTeX Font Info:    Font shape `JT3/gt/m/it' in size <10> not available
 (Font)              Font shape `JT3/gt/m/n' tried instead on input line 4.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
@@ -1651,61 +1653,173 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 8.44485pt on input line 4.
 
 
-[5]
-
 [6]
 
 [7]
 
 [8]
 
-[9])
+[9]
 
-[10]
+[10]) (./task3.tex
 
-[11] (./report_3.aux)
+[11]
+
+[12]
+
+[13](load cache: extra_lmmono10-regular.luc)
+
+[14](load cache: extra_lmroman9-bold.luc)
+LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <9> not available
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 242.
+LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
+(Font)              scaled to size 7.60036pt on input line 242.
+LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <9> not available
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 242.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 7.60036pt on input line 242.
+LaTeX Font Info:    Calculating math sizes for size <9.85501> on input line 242
+.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.5> not available
+(Font)              size <5> substituted on input line 242.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.5> not available
+(Font)              size <5> substituted on input line 242.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.5> not available
+(Font)              size <5> substituted on input line 242.
+
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 5.82565pt on input line 242.
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 4.16121pt on input line 242.
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.5> not available
+(Font)              size <5> substituted on input line 242.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4.5> not available
+(Font)              size <5> substituted on input line 242.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.5> not available
+(Font)              size <5> substituted on input line 242.
+
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 5.82565pt on input line 242.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 4.16121pt on input line 242.
+
+
+[15]) (./task4.tex
+
+[16]
+
+[17]
+
+[18]
+
+[19]
+<task4_crank_nicolson.png, id=430, 433.62pt x 289.08pt>
+File: task4_crank_nicolson.png Graphic file (type png)
+<use task4_crank_nicolson.png>
+Package luatex.def Info: task4_crank_nicolson.png  used on input line 278.
+(luatex.def)             Requested size: 318.66948pt x 212.4558pt.
+
+
+[20]
+<task4_predictor_corrector.png, id=440, 433.62pt x 289.08pt>
+File: task4_predictor_corrector.png Graphic file (type png)
+<use task4_predictor_corrector.png>
+Package luatex.def Info: task4_predictor_corrector.png  used on input line 298.
+
+(luatex.def)             Requested size: 318.66948pt x 212.4558pt.
+
+
+[21<./task4_crank_nicolson.png><./task4_predictor_corrector.png>]
+<task4_heun.png, id=452, 433.62pt x 289.08pt>
+File: task4_heun.png Graphic file (type png)
+<use task4_heun.png>
+Package luatex.def Info: task4_heun.png  used on input line 318.
+(luatex.def)             Requested size: 318.66948pt x 212.4558pt.
+
+
+[22<./task4_heun.png>]) (./task5.tex
+
+[23]
+
+[24]
+
+[25]
+<task5_two_step.png, id=504, 433.62pt x 289.08pt>
+File: task5_two_step.png Graphic file (type png)
+<use task5_two_step.png>
+Package luatex.def Info: task5_two_step.png  used on input line 189.
+(luatex.def)             Requested size: 318.66948pt x 212.4558pt.
+)
+
+[26<./task5_two_step.png>]
+
+[27] (./report_3.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
+
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 0.5pt have occurred.
+
 Package rerunfilecheck Info: File `report_3.out' has not changed.
-(rerunfilecheck)             Checksum: D1DC28BA332D7268F442ACA386256B62;1940.
+(rerunfilecheck)             Checksum: 0F3349120530CE176C4EEB6BA926D972;3727.
 )
 
 Here is how much of LuaTeX's memory you used:
- 21646 strings out of 476291
+ 21957 strings out of 476291
  156562,1144653 words of node,token memory allocated
- 4457 words of node memory still in use:
+ 7001 words of node memory still in use:
    12 hlist, 2 vlist, 7 rule, 1 local_par, 5 glue, 4 kern, 2 penalty, 8 sub_mlis
-t, 3 glyph, 1703 attribute, 57 glue_spec, 168 attribute_list, 1 write, 15 user_d
+t, 3 glyph, 2869 attribute, 57 glue_spec, 274 attribute_list, 1 write, 15 user_d
 efined nodes
-   avail lists: 1:14,2:37716,3:412,4:715,5:458,6:90,7:4374,8:58,9:1898,10:29,11:
-11
- 43350 multiletter control sequences out of 65536+600000
- 104 fonts using 78065903 bytes
- 119i,12n,115p,1785b,1029s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf><c:/te
-xlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf><c:/texlive/20
-25/texmf-dist/fonts/opentype/public/lm/lmsans12-regular.otf><c:/texlive/2025/tex
-mf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/texlive/2025/texmf-di
-st/fonts/opentype/public/lm/lmsans10-regular.otf><c:/texlive/2025/texmf-dist/fon
-ts/opentype/public/haranoaji/HaranoAjiGothic-Medium.otf><c:/texlive/2025/texmf-d
-ist/fonts/opentype/public/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-dist/f
-onts/opentype/public/haranoaji/HaranoAjiMincho-Regular.otf><c:/texlive/2025/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/
-texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2025
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy7.pfb>
-Output written on report_3.pdf (11 pages, 262766 bytes).
+   avail lists: 1:23,2:36444,3:544,4:715,5:462,6:117,7:4374,8:58,9:1898,10:29,11
+:8
+ 43516 multiletter control sequences out of 65536+600000
+ 126 fonts using 98179119 bytes
+ 119i,12n,115p,1785b,1031s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/te
+xlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman9-bold.otf><c:/texlive/202
+5/texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf><c:/texlive/2025/texm
+f-dist/fonts/opentype/public/lm/lmroman10-italic.otf><c:/texlive/2025/texmf-dist
+/fonts/opentype/public/lm/lmroman10-bold.otf><c:/texlive/2025/texmf-dist/fonts/o
+pentype/public/lm/lmsans12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentyp
+e/public/lm/lmroman10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/pub
+lic/lm/lmsans10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/ha
+ranoaji/HaranoAjiGothic-Medium.otf><c:/texlive/2025/texmf-dist/fonts/opentype/pu
+blic/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/
+haranoaji/HaranoAjiMincho-Regular.otf><c:/texlive/2025/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/20
+25/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2025/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/202
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2025/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy9.pfb>
+Output written on report_3.pdf (27 pages, 548615 bytes).
 
-PDF statistics: 322 PDF objects out of 1000 (max. 8388607)
- 271 compressed objects within 3 object streams
- 107 named destinations out of 1000 (max. 131072)
- 113 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 654 PDF objects out of 1000 (max. 8388607)
+ 561 compressed objects within 6 object streams
+ 229 named destinations out of 1000 (max. 131072)
+ 241 words of extra memory for PDF output out of 10000 (max. 100000000)
 

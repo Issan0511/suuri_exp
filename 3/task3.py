@@ -98,7 +98,7 @@ def runge_kutta4 (n,t_start = 0, t_end = 1, u_start = 1):
 
 def main (n):
     # 更新方法を変えて誤差を確認
-    print(f"n={n}")
+    
     print("Forward Euler:", abs ( foward_euler (n) - analytical_solution (1) ) )
     print("Adams-Bashforth 2nd order:", abs ( adam_bashforth2 (n) - analytical_solution (1) ) )
     print("Adams-Bashforth 3rd order:", abs ( adam_bashforth3 (n) - analytical_solution (1) ) )
@@ -111,4 +111,5 @@ print("真の解:", analytical_solution (1) )
 print("真の解との誤差:")
 for pow in range(2, 10):
     n = 2 ** pow
+    print("n =", n)
     main (n)

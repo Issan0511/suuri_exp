@@ -1,21 +1,42 @@
-\contentsline {section}{\numberline {1}はじめに}{2}{section.1}%
-\contentsline {section}{\numberline {2}課題1　身の回りの現象の定式化}{2}{section.2}%
-\contentsline {subsection}{\numberline {2.1}現象の説明}{2}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}モデル化のための仮定}{2}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}常微分方程式の初期値問題}{3}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}解析解}{3}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}パラメータ $\beta $ の解釈と考察}{4}{subsection.2.5}%
-\contentsline {section}{\numberline {3}課題2 4次のアダムス・バッシュフォース法とアダムス・ムルトン法の導出}{5}{section.3}%
-\contentsline {subsection}{\numberline {3.1}4次アダムス・バッシュフォース法の導出}{5}{subsection.3.1}%
-\contentsline {paragraph}{$\ell _0$ の積分}{7}{section*.8}%
-\contentsline {paragraph}{$\ell _1$ の積分}{7}{section*.9}%
-\contentsline {paragraph}{$\ell _2$ の積分}{8}{section*.10}%
-\contentsline {paragraph}{$\ell _3$ の積分}{8}{section*.11}%
-\contentsline {paragraph}{AB4 の最終形}{8}{section*.12}%
-\contentsline {subsection}{\numberline {3.2}4次アダムス・ムルトン法の導出}{9}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}4次予測子・修正子法}{10}{subsection.3.3}%
-\contentsline {paragraph}{予測 (Predictor: AB4)}{10}{section*.13}%
-\contentsline {paragraph}{修正 (Corrector: AM4)}{10}{section*.14}%
-\contentsline {subsection}{\numberline {3.4}まとめ}{10}{subsection.3.4}%
-\contentsline {section}{\numberline {4}結論}{11}{section.4}%
-\contentsline {section}{\numberline {付録A}使用コード一覧}{11}{appendix.A}%
+\contentsline {section}{\numberline {1}はじめに}{3}{section.1}%
+\contentsline {section}{\numberline {2}課題1　身の回りの現象の定式化}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}現象の説明}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}モデル化のための仮定}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}常微分方程式の初期値問題}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}解析解}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}パラメータ $\beta $ の解釈と考察}{5}{subsection.2.5}%
+\contentsline {section}{\numberline {3}課題2 4次のアダムス・バッシュフォース法とアダムス・ムルトン法の導出}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}4次アダムス・バッシュフォース法の導出}{6}{subsection.3.1}%
+\contentsline {paragraph}{$\ell _0$ の積分}{8}{section*.8}%
+\contentsline {paragraph}{$\ell _1$ の積分}{8}{section*.9}%
+\contentsline {paragraph}{$\ell _2$ の積分}{9}{section*.10}%
+\contentsline {paragraph}{$\ell _3$ の積分}{9}{section*.11}%
+\contentsline {paragraph}{AB4 の最終形}{9}{section*.12}%
+\contentsline {subsection}{\numberline {3.2}4次アダムス・ムルトン法の導出}{10}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}4次予測子・修正子法}{11}{subsection.3.3}%
+\contentsline {paragraph}{予測 (Predictor: AB4)}{11}{section*.13}%
+\contentsline {paragraph}{修正 (Corrector: AM4)}{11}{section*.14}%
+\contentsline {section}{\numberline {4}課題3 指数関数の微分方程式の数値解法}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}原理・方法}{11}{subsection.4.1}%
+\contentsline {paragraph}{(1) 前進オイラー法 (Forward Euler, FE)}{12}{section*.17}%
+\contentsline {paragraph}{(2) 2 次アダムス・バッシュフォース法 (AB2)}{13}{section*.18}%
+\contentsline {paragraph}{(3) 3 次アダムス・バッシュフォース法 (AB3)}{13}{section*.19}%
+\contentsline {paragraph}{(4) ホイン法 (Heun 法, 2 次ルンゲ・クッタ法)}{13}{section*.20}%
+\contentsline {paragraph}{(5) 4 次ルンゲ・クッタ法 (RK4)}{13}{section*.21}%
+\contentsline {subsection}{\numberline {4.2}結果}{15}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}考察}{15}{subsection.4.3}%
+\contentsline {section}{\numberline {5}課題4 各手法の安定性と安定性な領域の確認}{16}{section.5}%
+\contentsline {section}{\numberline {6}課題4}{16}{section.6}%
+\contentsline {subsection}{\numberline {6.1}原理・方法}{16}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}解析的結果のまとめ}{20}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}結果}{20}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}考察}{22}{subsection.6.4}%
+\contentsline {section}{\numberline {7}課題5　不安定性の確認}{23}{section.7}%
+\contentsline {section}{\numberline {8}課題5}{23}{section.8}%
+\contentsline {subsection}{\numberline {8.1}問題設定}{23}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}差分スキームの形}{24}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}特性方程式による安定性解析}{24}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}まとめ}{25}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}数値解析による結果}{25}{subsection.8.5}%
+\contentsline {section}{\numberline {9}結論}{27}{section.9}%
+\contentsline {section}{\numberline {付録A}使用コード一覧}{27}{appendix.A}%

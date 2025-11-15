@@ -1,0 +1,415 @@
+Adams 型多段法の一般的構成に基づき，
+4次のアダムス・バッシュフォース法（Adams–Bashforth, AB4）と
+4次のアダムス・ムルトン法（Adams–Moulton, AM4）を
+\emph{Lagrange 補間の積分を明示的に行うことで}導出する。
+さらに，これらを組み合わせて 4次の予測子・修正子法を構成する。
+
+対象とする常微分方程式は
+\begin{align}
+  u' = f(t,u), \qquad u(t_n) = u_n
+\end{align}
+とし，時間刻みを一定 $\Delta t$ とおく。
+資料と同様に
+\[
+  f_n = f(t_n,u_n)
+\]
+と略記する。
+
+\subsection{4次アダムス・バッシュフォース法の導出}
+
+まず，
+\[
+  u_n
+  = u_{n-1} + \int_{t_{n-1}}^{t_n} f(\tau,u(\tau))\, d\tau
+\]
+を数値積分で近似することを考える。
+4次 AB 法では，区間 $[t_{n-1},t_n]$ 上の $f$ を
+\[
+  (t_{n-1}, f_{n-1}),\ (t_{n-2}, f_{n-2}),\ (t_{n-3}, f_{n-3}),\ (t_{n-4}, f_{n-4})
+\]
+の 4 点を通る 3 次 Lagrange 多項式で近似し，その積分をとる。
+
+\subsubsection*{変数変換}
+等間隔刻み $\Delta t$ を用いて
+\begin{align}
+  \tau = t_{n-1} + \theta \Delta t, \qquad \theta \in [0,1]
+\end{align}
+とおくと，
+\[
+  d\tau = \Delta t\, d\theta
+\]
+より
+\begin{align}
+  \int_{t_{n-1}}^{t_n} f(\tau,u(\tau))\, d\tau
+  &= \Delta t \int_0^1 f(t_{n-1}+\theta\Delta t, u(t_{n-1}+\theta\Delta t))\, d\theta \\
+  &= \Delta t \int_0^1 g(\theta)\, d\theta,
+\end{align}
+ただし
+\[
+  g(\theta) = f(t_{n-1}+\theta\Delta t, u(t_{n-1}+\theta\Delta t))
+\]
+とおいた。
+
+$\theta$ の節点は
+\[
+  t_{n-1} \leftrightarrow \theta = 0,\quad
+  t_{n-2} \leftrightarrow \theta = -1,\quad
+  t_{n-3} \leftrightarrow \theta = -2,\quad
+  t_{n-4} \leftrightarrow \theta = -3
+\]
+となる。
+
+\subsubsection*{Lagrange 多項式の構成}
+節点
+\[
+  \theta_0 = 0,\quad \theta_1 = -1,\quad \theta_2 = -2,\quad \theta_3 = -3
+\]
+に対し，
+\[
+  g(\theta_k) = f_{n-1-k}\quad (k=0,1,2,3)
+\]
+となる。Lagrange 基底多項式を
+\[
+  \ell_k(\theta)
+  = \prod_{\substack{j=0\\ j\neq k}}^3
+    \frac{\theta-\theta_j}{\theta_k-\theta_j}
+\]
+とおくと，
+\[
+  g(\theta) \approx
+  \ell_0(\theta) f_{n-1}
+  + \ell_1(\theta) f_{n-2}
+  + \ell_2(\theta) f_{n-3}
+  + \ell_3(\theta) f_{n-4}
+\]
+と表される。
+
+各 $\ell_k(\theta)$ を具体的に書くと
+\begin{align}
+  \ell_0(\theta)
+  &= \frac{(\theta-\theta_1)(\theta-\theta_2)(\theta-\theta_3)}
+          {(\theta_0-\theta_1)(\theta_0-\theta_2)(\theta_0-\theta_3)} \\
+  &= \frac{(\theta+1)(\theta+2)(\theta+3)}{(0+1)(0+2)(0+3)}
+   = \frac{(\theta+1)(\theta+2)(\theta+3)}{6},
+\end{align}
+\begin{align}
+  \ell_1(\theta)
+  &= \frac{(\theta-\theta_0)(\theta-\theta_2)(\theta-\theta_3)}
+          {(\theta_1-\theta_0)(\theta_1-\theta_2)(\theta_1-\theta_3)} \\
+  &= \frac{\theta(\theta+2)(\theta+3)}
+          {(-1-0)(-1+2)(-1+3)}
+   = -\frac{\theta(\theta+2)(\theta+3)}{2},
+\end{align}
+\begin{align}
+  \ell_2(\theta)
+  &= \frac{(\theta-\theta_0)(\theta-\theta_1)(\theta-\theta_3)}
+          {(\theta_2-\theta_0)(\theta_2-\theta_1)(\theta_2-\theta_3)} \\
+  &= \frac{\theta(\theta+1)(\theta+3)}
+          {(-2-0)(-2+1)(-2+3)}
+   = \frac{\theta(\theta+1)(\theta+3)}{2},
+\end{align}
+\begin{align}
+  \ell_3(\theta)
+  &= \frac{(\theta-\theta_0)(\theta-\theta_1)(\theta-\theta_2)}
+          {(\theta_3-\theta_0)(\theta_3-\theta_1)(\theta_3-\theta_2)} \\
+  &= \frac{\theta(\theta+1)(\theta+2)}
+          {(-3-0)(-3+1)(-3+2)}
+   = -\frac{\theta(\theta+1)(\theta+2)}{6}.
+\end{align}
+
+\subsubsection*{係数の積分計算}
+\[
+  \int_0^1 g(\theta)\, d\theta
+  \approx
+  \sum_{k=0}^3
+  \Bigl(\int_0^1 \ell_k(\theta)\, d\theta\Bigr) f_{n-1-k}
+\]
+であるから，各
+\[
+  \alpha_k = \int_0^1 \ell_k(\theta)\, d\theta
+\]
+を計算すればよい。
+
+\paragraph{$\ell_0$ の積分}
+\begin{align}
+  \ell_0(\theta)
+    &= \frac{(\theta+1)(\theta+2)(\theta+3)}{6} \\
+    &= \frac{(\theta^2+3\theta+2)(\theta+3)}{6} \\
+    &= \frac{\theta^3+6\theta^2+11\theta+6}{6}.
+\end{align}
+したがって
+\begin{align}
+  \alpha_0
+  &= \int_0^1 \ell_0(\theta)\, d\theta \\
+  &= \frac{1}{6}
+     \int_0^1
+     (\theta^3+6\theta^2+11\theta+6)\, d\theta \\
+  &= \frac{1}{6}
+     \Bigl[
+       \frac{\theta^4}{4}
+       + 6\frac{\theta^3}{3}
+       + 11\frac{\theta^2}{2}
+       + 6\theta
+     \Bigr]_{0}^{1} \\
+  &= \frac{1}{6}
+     \Bigl(
+       \frac14 + 2 + \frac{11}{2} + 6
+     \Bigr)
+   = \frac{55}{24}.
+\end{align}
+
+\paragraph{$\ell_1$ の積分}
+\begin{align}
+  \ell_1(\theta)
+  &= -\frac{\theta(\theta+2)(\theta+3)}{2} \\
+  &= -\frac{\theta(\theta^2+5\theta+6)}{2}
+   = -\frac{\theta^3+5\theta^2+6\theta}{2}.
+\end{align}
+よって
+\begin{align}
+  \alpha_1
+  &= \int_0^1 \ell_1(\theta)\, d\theta \\
+  &= -\frac12
+     \int_0^1 (\theta^3+5\theta^2+6\theta)\, d\theta \\
+  &= -\frac12
+     \Bigl[
+       \frac{\theta^4}{4}
+       + 5\frac{\theta^3}{3}
+       + 6\frac{\theta^2}{2}
+     \Bigr]_{0}^{1} \\
+  &= -\frac12
+     \Bigl(
+       \frac14 + \frac{5}{3} + 3
+     \Bigr)
+   = -\frac{59}{24}.
+\end{align}
+
+\paragraph{$\ell_2$ の積分}
+\begin{align}
+  \ell_2(\theta)
+  &= \frac{\theta(\theta+1)(\theta+3)}{2} \\
+  &= \frac{\theta(\theta^2+4\theta+3)}{2}
+   = \frac{\theta^3+4\theta^2+3\theta}{2}.
+\end{align}
+したがって
+\begin{align}
+  \alpha_2
+  &= \int_0^1 \ell_2(\theta)\, d\theta \\
+  &= \frac12
+     \int_0^1 (\theta^3+4\theta^2+3\theta)\, d\theta \\
+  &= \frac12
+     \Bigl[
+       \frac{\theta^4}{4}
+       + 4\frac{\theta^3}{3}
+       + 3\frac{\theta^2}{2}
+     \Bigr]_{0}^{1} \\
+  &= \frac12
+     \Bigl(
+       \frac14 + \frac{4}{3} + \frac32
+     \Bigr)
+   = \frac{37}{24}.
+\end{align}
+
+\paragraph{$\ell_3$ の積分}
+\begin{align}
+  \ell_3(\theta)
+  &= -\frac{\theta(\theta+1)(\theta+2)}{6} \\
+  &= -\frac{\theta(\theta^2+3\theta+2)}{6}
+   = -\frac{\theta^3+3\theta^2+2\theta}{6}.
+\end{align}
+したがって
+\begin{align}
+  \alpha_3
+  &= \int_0^1 \ell_3(\theta)\, d\theta \\
+  &= -\frac16
+     \int_0^1 (\theta^3+3\theta^2+2\theta)\, d\theta \\
+  &= -\frac16
+     \Bigl[
+       \frac{\theta^4}{4}
+       + 3\frac{\theta^3}{3}
+       + 2\frac{\theta^2}{2}
+     \Bigr]_{0}^{1} \\
+  &= -\frac16
+     \Bigl(
+       \frac14 + 1 + 1
+     \Bigr)
+   = -\frac{3}{8}
+   = -\frac{9}{24}.
+\end{align}
+
+\paragraph{AB4 の最終形}
+以上より
+\[
+  \int_{t_{n-1}}^{t_n} f(\tau,u(\tau))\, d\tau
+  \approx
+  \Delta t \Bigl(
+    \alpha_0 f_{n-1}
+  + \alpha_1 f_{n-2}
+  + \alpha_2 f_{n-3}
+  + \alpha_3 f_{n-4}
+  \Bigr)
+\]
+であり，
+\begin{align}
+  u_n
+  &= u_{n-1}
+   + \Delta t \Bigl(
+    \frac{55}{24} f_{n-1}
+   - \frac{59}{24} f_{n-2}
+   + \frac{37}{24} f_{n-3}
+   - \frac{9}{24}  f_{n-4}
+   \Bigr) \\
+  &= u_{n-1}
+   + \frac{\Delta t}{24}
+      \Bigl(
+        55 f_{n-1}
+      - 59 f_{n-2}
+      + 37 f_{n-3}
+      - 9  f_{n-4}
+      \Bigr).
+\end{align}
+これが 4次アダムス・バッシュフォース法である。
+
+\subsection{4次アダムス・ムルトン法の導出}
+
+同様にして AM4 を導出する。
+今度は節点として
+\[
+  (t_n,f_n),\ (t_{n-1},f_{n-1}),\ (t_{n-2},f_{n-2}),\ (t_{n-3},f_{n-3})
+\]
+の 4 点を用いる。先ほどと同じ変数変換
+\[
+  \tau = t_{n-1} + \theta \Delta t,\quad \theta\in[0,1]
+\]
+を用いると
+\[
+  t_n \leftrightarrow \theta=1,\quad
+  t_{n-1} \leftrightarrow \theta=0,\quad
+  t_{n-2} \leftrightarrow \theta=-1,\quad
+  t_{n-3} \leftrightarrow \theta=-2
+\]
+となる。
+
+節点
+\[
+  \theta_0=1,\quad \theta_1=0,\quad \theta_2=-1,\quad \theta_3=-2
+\]
+に対し
+\[
+  g(\theta_k) =
+  \begin{cases}
+    f_n     & (k=0), \\
+    f_{n-1} & (k=1), \\
+    f_{n-2} & (k=2), \\
+    f_{n-3} & (k=3)
+  \end{cases}
+\]
+である。Lagrange 基底は
+\[
+  g(\theta) \approx
+  \tilde\ell_0(\theta) f_n
+  + \tilde\ell_1(\theta) f_{n-1}
+  + \tilde\ell_2(\theta) f_{n-2}
+  + \tilde\ell_3(\theta) f_{n-3}
+\]
+と書ける。
+
+同様に
+\begin{align}
+  \tilde\ell_0(\theta)
+  &= \frac{(\theta-\theta_1)(\theta-\theta_2)(\theta-\theta_3)}
+          {(\theta_0-\theta_1)(\theta_0-\theta_2)(\theta_0-\theta_3)} \\
+  &= \frac{\theta(\theta+1)(\theta+2)}{(1-0)(1+1)(1+2)}
+   = \frac{\theta(\theta+1)(\theta+2)}{6},
+\end{align}
+\begin{align}
+  \tilde\ell_1(\theta)
+  &= \frac{(\theta-\theta_0)(\theta-\theta_2)(\theta-\theta_3)}
+          {(\theta_1-\theta_0)(\theta_1-\theta_2)(\theta_1-\theta_3)} \\
+  &= -\frac{(\theta-1)(\theta+1)(\theta+2)}{2},
+\end{align}
+\begin{align}
+  \tilde\ell_2(\theta)
+  &= \frac{(\theta-\theta_0)(\theta-\theta_1)(\theta-\theta_3)}
+          {(\theta_2-\theta_0)(\theta_2-\theta_1)(\theta_2-\theta_3)} \\
+  &= \frac{\theta(\theta-1)(\theta+2)}{2},
+\end{align}
+\begin{align}
+  \tilde\ell_3(\theta)
+  &= \frac{(\theta-\theta_0)(\theta-\theta_1)(\theta-\theta_2)}
+          {(\theta_3-\theta_0)(\theta_3-\theta_1)(\theta_3-\theta_2)} \\
+  &= \frac{\theta(1-\theta^2)}{6}.
+\end{align}
+
+同様に
+\[
+  \tilde\alpha_k = \int_0^1 \tilde\ell_k(\theta)\, d\theta
+\]
+を計算すると
+\begin{align}
+  \tilde\alpha_0 &= \frac{3}{8} = \frac{9}{24}, \\
+  \tilde\alpha_1 &= \frac{19}{24}, \\
+  \tilde\alpha_2 &= -\frac{5}{24}, \\
+  \tilde\alpha_3 &= \frac{1}{24}
+\end{align}
+が得られる（展開・積分は AB4 の場合と同様に多項式を展開して項別に行う）。
+
+したがって
+\begin{align}
+  u_n
+  &= u_{n-1}
+   + \Delta t
+      \Bigl(
+        \tilde\alpha_0 f_n
+      + \tilde\alpha_1 f_{n-1}
+      + \tilde\alpha_2 f_{n-2}
+      + \tilde\alpha_3 f_{n-3}
+      \Bigr) \\
+  &= u_{n-1}
+   + \frac{\Delta t}{24}
+      \Bigl(
+         9 f_n
+      + 19 f_{n-1}
+      -  5 f_{n-2}
+      +    f_{n-3}
+      \Bigr).
+\end{align}
+これが 4次アダムス・ムルトン法である。
+
+\subsection{4次予測子・修正子法}
+
+AM4 は $f_n = f(t_n,u_n)$ を含む陰的法である。
+そこで，まず AB4 を用いて $u_n$ の予測値 $\tilde u_n$ を計算し，
+AM4 の中の $f_n$ を $f(t_n,\tilde u_n)$ に置き換えることで
+完全に陽的な 4次予測子・修正子法を得る。
+
+\paragraph{予測 (Predictor: AB4)}
+\begin{align}
+  \tilde{u}_n
+  = u_{n-1}
+  + \frac{\Delta t}{24}
+    \Bigl(
+      55 f_{n-1}
+      - 59 f_{n-2}
+      + 37 f_{n-3}
+      -  9 f_{n-4}
+    \Bigr).
+\end{align}
+
+\paragraph{修正 (Corrector: AM4)}
+\begin{align}
+  u_n
+  = u_{n-1}
+  + \frac{\Delta t}{24}
+    \Bigl(
+       9 f(t_n,\tilde u_n)
+     + 19 f_{n-1}
+     -  5 f_{n-2}
+     +    f_{n-3}
+    \Bigr).
+\end{align}
+
+必要に応じて修正ステップを繰り返せば，
+AM4 の陰的方程式に対する反復解法として解釈することもできる。
+
+

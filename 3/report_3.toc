@@ -1,0 +1,21 @@
+\contentsline {section}{\numberline {1}はじめに}{2}{section.1}%
+\contentsline {section}{\numberline {2}課題1　身の回りの現象の定式化}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}現象の説明}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}モデル化のための仮定}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}常微分方程式の初期値問題}{3}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}解析解}{3}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}パラメータ $\beta $ の解釈と考察}{4}{subsection.2.5}%
+\contentsline {section}{\numberline {3}課題2 4次のアダムス・バッシュフォース法とアダムス・ムルトン法の導出}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}4次アダムス・バッシュフォース法の導出}{5}{subsection.3.1}%
+\contentsline {paragraph}{$\ell _0$ の積分}{7}{section*.8}%
+\contentsline {paragraph}{$\ell _1$ の積分}{7}{section*.9}%
+\contentsline {paragraph}{$\ell _2$ の積分}{8}{section*.10}%
+\contentsline {paragraph}{$\ell _3$ の積分}{8}{section*.11}%
+\contentsline {paragraph}{AB4 の最終形}{8}{section*.12}%
+\contentsline {subsection}{\numberline {3.2}4次アダムス・ムルトン法の導出}{9}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}4次予測子・修正子法}{10}{subsection.3.3}%
+\contentsline {paragraph}{予測 (Predictor: AB4)}{10}{section*.13}%
+\contentsline {paragraph}{修正 (Corrector: AM4)}{10}{section*.14}%
+\contentsline {subsection}{\numberline {3.4}まとめ}{10}{subsection.3.4}%
+\contentsline {section}{\numberline {4}結論}{11}{section.4}%
+\contentsline {section}{\numberline {付録A}使用コード一覧}{11}{appendix.A}%

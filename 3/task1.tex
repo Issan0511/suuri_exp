@@ -1,0 +1,221 @@
+
+\subsection{現象の説明}
+
+本課題では，身の回りの現象として SNS（X，旧 Twitter）におけるツイートの「バズり方」を取り上げる．
+あるユーザが投稿したツイートが，他のユーザによるいいねやリポスト（拡散）によって時間とともに広がっていく様子を，常微分方程式の初期値問題としてモデル化する．
+
+ここではさらに，「どのくらい界隈を越えて受け入れられるツイートか」を表すパラメータとして $\beta$ を導入する．
+一般受けしやすいツイートほど，フォロワーの界隈から離れても反応が落ちにくく，身内ネタや日常報告のようなツイートほど，界隈が少し離れるだけで反応しにくくなる，という直感を数式に反映させることを目指す．
+
+\subsection{モデル化のための仮定}
+
+ツイートの広がり方を簡単に記述するために，次のような仮定をおく．
+
+\begin{itemize}
+  \item 時刻 $t$ をツイート投稿からの経過時間とする．
+  \item $x(t)$ を，時刻 $t$ までにそのツイートに対して
+        \textbf{いいねまたはリポストしたユーザの累積人数}と定める．
+  \item すでに反応したユーザは，界隈のそこからさらに外側の界隈へとツイートを伝播させる．
+        界隈が遠くなるほど反応しにくくなる効果を，$x$ に対する冪 $x^{1-\beta}$ の形で表し，
+        $0<\beta\le 1$ とする．
+        \begin{itemize}
+          \item $\beta \approx 0$：動物系、ニュース・政治系など界隈を問わず受け入れられやすい「一般受け」ツイート．
+          \item $\beta \approx 1$：身内ネタや日常報告など，特定の界隈にしか届きにくいツイート．
+        \end{itemize}
+  \item ツイートを見たユーザがいいね／リポストする確率は，界隈の内部では一定であり，
+        界隈内外で平均すると，$x^{1-\beta}$ に比例する総合的な効果にまとめられると仮定する．
+  \item アルゴリズムの影響により，ツイートは時間が経つほどおすすめやタイムラインに表示されにくくなる．
+        その効果を「実効的な拡散力」$k(t)$ が指数関数的に減衰する
+        \[
+          k(t) = k_0 e^{-\alpha t}\quad (k_0>0,\ \alpha>0)
+        \]
+        として表現する．
+  \item ツイートを最終的に見うる潜在的ユーザ数 $N$ は非常に大きく，実際の反応人数 $x(t)$ は
+        $x(t)\ll N$ の範囲にとどまると仮定し，飽和効果は無視する．
+\end{itemize}
+
+これらの仮定のもとで，時刻 $t$ における「新たに反応する人数の増加率」は
+\[
+\{\text{すでに反応した人数}\}^{1-\beta} \times \{\text{時間に応じた拡散力}\}
+\approx k(t)\,x(t)^{1-\beta}
+\]
+で与えられると考える．
+
+\subsection{常微分方程式の初期値問題}
+
+以上より，反応人数 $x(t)$ の時間発展は次の常微分方程式でモデル化できる：
+\begin{equation}
+  \frac{dx}{dt} = k(t)\,x(t)^{1-\beta}
+  = k_0 e^{-\alpha t} x(t)^{1-\beta},
+  \qquad 0<\beta\le 1,\ k_0>0,\ \alpha>0.
+  \label{eq:tweet_ode_beta}
+\end{equation}
+
+初期条件として，ツイート直後 $t=0$ の時点で，投稿者本人や一部のフォロワーによる反応が
+すでに $x_0$ 件存在していると仮定すると，
+\begin{equation}
+  x(0) = x_0 \quad (x_0 > 0)
+  \label{eq:tweet_ic}
+\end{equation}
+と書ける．
+
+したがって，ツイートのバズり方を表す初期値問題は
+\begin{equation}
+  \begin{cases}
+    \displaystyle \frac{dx}{dt} = k_0 e^{-\alpha t} x^{1-\beta}(t), \\[4pt]
+    x(0) = x_0,
+  \end{cases}
+  \label{eq:tweet_ivp_beta}
+\end{equation}
+となる．
+
+\subsection{解析解}
+
+式 \eqref{eq:tweet_ivp_beta} は変数分離形であり，$x>0$ の範囲で
+\[
+  x^{\beta-1}\frac{dx}{dt} = k_0 e^{-\alpha t}
+\]
+と書けるので，
+\[
+  x^{\beta-1}\,dx = k_0 e^{-\alpha t}\,dt
+\]
+を積分する：
+\[
+  \int x^{\beta-1}\,dx = \int k_0 e^{-\alpha t}\,dt.
+\]
+左辺は
+\[
+  \int x^{\beta-1}\,dx = \frac{x^{\beta}}{\beta},
+\]
+右辺は
+\[
+  \int k_0 e^{-\alpha t}\,dt = -\frac{k_0}{\alpha}e^{-\alpha t} + C
+\]
+であるから，
+\[
+  \frac{x^{\beta}}{\beta} = -\frac{k_0}{\alpha}e^{-\alpha t} + C.
+\]
+
+初期条件 $t=0,\ x(0)=x_0$ を用いると
+\[
+  \frac{x_0^{\beta}}{\beta} = -\frac{k_0}{\alpha} + C
+\]
+より
+\[
+  C = \frac{x_0^{\beta}}{\beta} + \frac{k_0}{\alpha}.
+\]
+したがって
+\[
+  \frac{x^{\beta}}{\beta}
+  = -\frac{k_0}{\alpha}e^{-\alpha t}
+    + \frac{x_0^{\beta}}{\beta}
+    + \frac{k_0}{\alpha}
+  = \frac{x_0^{\beta}}{\beta} + \frac{k_0}{\alpha}(1-e^{-\alpha t}),
+\]
+すなわち
+\begin{equation}
+  x(t)^{\beta}
+  = x_0^{\beta} + \frac{\beta k_0}{\alpha}(1-e^{-\alpha t}).
+\end{equation}
+よって解は
+\begin{equation}
+  x(t)
+  = \left[
+    x_0^{\beta}
+    + \frac{\beta k_0}{\alpha}(1-e^{-\alpha t})
+  \right]^{1/\beta}
+  \label{eq:tweet_solution}
+\end{equation}
+となる（括弧内が正の範囲で有効）．
+
+特に，十分時間が経った極限 $t\to\infty$ では $e^{-\alpha t}\to 0$ より
+\begin{equation}
+  x_\infty := \lim_{t\to\infty} x(t)
+  = \left[
+    x_0^{\beta} + \frac{\beta k_0}{\alpha}
+  \right]^{1/\beta}
+  \label{eq:x_infty}
+\end{equation}
+となる．これは「ツイートの寿命が尽きた後の最終的な反応数」に対応する．
+
+\subsection{パラメータ $\beta$ の解釈と考察}
+
+ツイートの「面白さ」や「受けやすさ」を表す指標を $s$ とし，
+面白いツイートほど初期拡散力が大きくなると仮定して
+\[
+  k_0 = k_{\mathrm{base}} s
+\]
+とおく．ここで $k_{\mathrm{base}}$ は定数である．このとき
+\eqref{eq:x_infty} より，最終的な反応数は
+\begin{equation}
+  x_\infty(s)
+  = \left[
+    x_0^{\beta}
+    + \beta K s
+  \right]^{1/\beta},
+  \qquad
+  K := \frac{k_{\mathrm{base}}}{\alpha}
+  \label{eq:xinfty_s}
+\end{equation}
+と書ける．
+
+この式から，パラメータ $\beta$ の値によって，
+「面白さ $s$ の変化が最終的な反応数にどう効くか」が大きく変わることが分かる．
+
+\subsubsection*{$\beta \to 0$ の極限（界隈を越えてバズりやすいツイート）}
+
+$\beta$ が十分小さいとき，$\log x_\infty(s)$ を $\beta$ について一次までで近似すると
+\[
+  \log x_\infty(s)
+  = \frac{1}{\beta}\log\bigl(x_0^{\beta} + \beta K s\bigr)
+  \approx \log x_0 + K s
+\]
+となる．従って
+\begin{equation}
+  x_\infty(s)
+  \approx x_0 \exp\!\bigl(K s\bigr)
+  \qquad (\beta \ll 1).
+  \label{eq:xinfty_beta_small}
+\end{equation}
+すなわち，$\beta$ が $0$ に近いツイート（界隈をまたいで受け入れられる，いわゆる一般受けするツイート）では，
+面白さ $s$ が 1 増えるごとに，最終的な反応数がほぼ指数関数的に増加する．
+この意味で，「面白さに対して指数的に効く」モードになっていると解釈できる．
+
+\subsubsection*{$\beta \to 1$ の極限（身内ネタ寄りのツイート）}
+
+一方，$\beta\to 1$ とすると
+\[
+  x_\infty(s)
+  = \left[x_0^{\beta} + \beta K s\right]^{1/\beta}
+  \xrightarrow[\beta \to 1]{} x_0 + K s
+\]
+となり，
+\begin{equation}
+  x_\infty(s)
+  \approx x_0 + K s
+  \qquad (\beta \approx 1)
+  \label{eq:xinfty_beta_one}
+\end{equation}
+とほぼ線形に増加する．
+これは，身内ネタや日常報告のように，ごく限られた界隈にしか届かないツイートでは，
+面白さ $s$ を上げても，反応数はほぼ比例程度しか増えないことを意味している．
+
+\subsubsection*{まとめ}
+
+以上より，パラメータ $\beta$ は
+\begin{itemize}
+  \item $\beta$ が $0$ に近いほど「界隈を越えて受け入れられやすい」ツイートであり，
+        面白さ $s$ に対して最終的な反応数 $x_\infty(s)$ は
+        式 \eqref{eq:xinfty_beta_small} のように \textbf{ほぼ指数関数的} に増加する．
+  \item $\beta$ が $1$ に近いほど「特定の界隈にしか刺さらない」ツイートであり，
+        $x_\infty(s)$ は式 \eqref{eq:xinfty_beta_one} のように
+        \textbf{ほぼ線形} にしか増加しない．
+\end{itemize}
+
+このように，常微分方程式 \eqref{eq:tweet_ivp_beta} の解の形を解析することで，
+\begin{quote}
+  一般受けするツイートほど，小さな「面白さ」の差が最終的なバズり具合を
+  非常に大きく変えうるのに対し，
+  身内ネタに近づくほど，面白さはほぼ線形にしか効かない
+\end{quote}
+という直感的な性質を，数学的に説明することができる．

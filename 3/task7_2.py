@@ -119,21 +119,38 @@ fe_vals_60 = np.array(fe_vals_60)
 # x軸をΔt（ステップ幅）に設定
 delta_t_values = [(100 - 0) / n for n in n_list]
 
-# プロット（x成分のみ、3つの時刻）
-fig, ax = plt.subplots(1, 1, figsize=(10, 6))
+# プロット（3つの時刻を別々のグラフに）
+fig, axes = plt.subplots(1, 3, figsize=(18, 5))
 
-ax.plot(delta_t_values, rk_vals_15[:, 0], 'o-', label='RK4 (t=15)', linewidth=2, markersize=4)
-ax.plot(delta_t_values, fe_vals_15[:, 0], 's--', label='Forward Euler (t=15)', linewidth=2, markersize=4)
-ax.plot(delta_t_values, rk_vals_30[:, 0], '^-', label='RK4 (t=30)', linewidth=2, markersize=4)
-ax.plot(delta_t_values, fe_vals_30[:, 0], 'v--', label='Forward Euler (t=30)', linewidth=2, markersize=4)
-ax.plot(delta_t_values, rk_vals_60[:, 0], 'd-', label='RK4 (t=60)', linewidth=2, markersize=4)
-ax.plot(delta_t_values, fe_vals_60[:, 0], 'x--', label='Forward Euler (t=60)', linewidth=2, markersize=4)
-ax.set_xlabel('Step Width (Δt)', fontsize=12)
-ax.set_ylabel('x Value', fontsize=12)
-ax.set_title('Lorenz System x-component vs Step Width', fontsize=14)
-ax.set_xscale('log')
-ax.legend()
-ax.grid(True, alpha=0.3)
+# t=15のグラフ
+axes[0].plot(delta_t_values, rk_vals_15[:, 0], 'o-', label='RK4', linewidth=2, markersize=4)
+axes[0].plot(delta_t_values, fe_vals_15[:, 0], 's--', label='Forward Euler', linewidth=2, markersize=4)
+axes[0].set_xlabel('Step Width (Δt)', fontsize=12)
+axes[0].set_ylabel('x Value', fontsize=12)
+axes[0].set_title('Lorenz System at t=15', fontsize=14)
+axes[0].set_xscale('log')
+axes[0].legend()
+axes[0].grid(True, alpha=0.3)
+
+# t=30のグラフ
+axes[1].plot(delta_t_values, rk_vals_30[:, 0], 'o-', label='RK4', linewidth=2, markersize=4)
+axes[1].plot(delta_t_values, fe_vals_30[:, 0], 's--', label='Forward Euler', linewidth=2, markersize=4)
+axes[1].set_xlabel('Step Width (Δt)', fontsize=12)
+axes[1].set_ylabel('x Value', fontsize=12)
+axes[1].set_title('Lorenz System at t=30', fontsize=14)
+axes[1].set_xscale('log')
+axes[1].legend()
+axes[1].grid(True, alpha=0.3)
+
+# t=60のグラフ
+axes[2].plot(delta_t_values, rk_vals_60[:, 0], 'o-', label='RK4', linewidth=2, markersize=4)
+axes[2].plot(delta_t_values, fe_vals_60[:, 0], 's--', label='Forward Euler', linewidth=2, markersize=4)
+axes[2].set_xlabel('Step Width (Δt)', fontsize=12)
+axes[2].set_ylabel('x Value', fontsize=12)
+axes[2].set_title('Lorenz System at t=60', fontsize=14)
+axes[2].set_xscale('log')
+axes[2].legend()
+axes[2].grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.savefig('lorenz_comparison.png', dpi=150, bbox_inches='tight')

@@ -1,0 +1,114 @@
+\documentclass[a4paper,11pt]{ltjsarticle}
+\usepackage{geometry}
+\geometry{top=25mm,bottom=25mm,left=25mm,right=25mm}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{physics}
+\usepackage[protrusion=false,expansion=false]{microtype}
+
+\hypersetup{
+  pdftitle={数理工学実験レポート},
+  pdfauthor={中塚一瑳},
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% -------------------------
+% ユーザ定義マクロ
+% -------------------------
+\newcommand{\StudentID}{1029366161}
+\newcommand{\AuthorName}{中塚一瑳}
+\newcommand{\CourseName}{数理工学実験}
+\newcommand{\ChapterTitle}{第4章（常微分方程式の数値的解法）}
+\newcommand{\ExperimentDate}{\today}
+
+% 図・表フォルダパス（必要なら変更）
+\newcommand{\graphdir}{graphs}
+
+% 数式用の簡易マクロ
+\newcommand{\R}{\mathbb{R}}
+% \newcommand{\norm}[1]{\left\lVert#1\right\rVert}  % physics パッケージで既に定義済み
+
+% listings 設定（python を例示）
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  language= Python,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+  showstringspaces=false
+}
+
+
+
+% キャプションのフォント調整
+\captionsetup{font=small,labelfont=bf}
+
+% -------------------------
+% 本文
+% -------------------------
+\title{数理工学実験レポート\\[4pt]\large \ChapterTitle}
+\author{学籍番号 1029366161 \quad 中塚一瑳}
+\date{\ExperimentDate}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+% 要旨をここに記述
+\end{abstract}
+
+\tableofcontents
+\clearpage
+
+% \section*{表記・略記}
+% 本レポートにおける表記と略記を示す。必要に応じて編集すること。
+% \begin{itemize}
+%   \item $\R$：実数全体
+%   \item $\|\cdot\|$：ユークリッドノルム（明示が必要な場合は添字を用いる）
+%   \item 各種パラメータや記号は本文中で定義する
+% \end{itemize}
+
+% ===== 例：実験テンプレート =====
+\section{はじめに}
+
+
+\section{課題1　身の回りの現象の定式化}
+\input{task1.tex}
+\section{課題2 4次のアダムス・バッシュフォース法とアダムス・ムルトン法の導出}
+\input{task2.tex}
+
+
+\section{結論}
+
+
+\appendix
+\section{使用コード一覧}
+
+\begin{itemize}
+
+  \item レポート作成、Pythonの実装の一部にGitHub Copilotの補完を使用
+\end{itemize}
+
+
+% ===== 参考文献 =====
+\section*{参考文献}
+\begin{thebibliography}{9}
+\bibitem{exp2025} 数理工学実験（2025年度配布資料）.
+\end{thebibliography}
+
+\end{document}

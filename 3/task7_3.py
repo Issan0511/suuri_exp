@@ -146,4 +146,28 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig('lorenz_x_t50_100.png', dpi=150)
 plt.show()
+
+# ε=0との誤差の最大値を計算してプロット
+fig3 = plt.figure(figsize=(10, 6))
+
+# ε=0の軌道(基準)
+ref_trajectory = trajectories_rk[0]  # epsilons[0] = 0.0
+
+for i, epsilon in enumerate(epsilons[1:], start=1):  # ε=0以外
+    # 全時刻の誤差を一度に計算
+    errors = np.linalg.norm(trajectories_rk[i] - ref_trajectory, axis=1)
+    
+    # 累積最大値を計算（各時刻tまでの最大誤差）
+    max_errors = np.maximum.accumulate(errors)
+    
+    plt.plot(t_values_list[i], max_errors, color=colors[i], label=f'ε={epsilon}', linewidth=1.5)
+
+plt.xlabel('Time t')
+plt.ylabel('Maximum error from ε=0')
+plt.title('Maximum error within time t for each ε')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig('lorenz_max_error_vs_time.png', dpi=150)
+plt.show()
     

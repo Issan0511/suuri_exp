@@ -1,0 +1,164 @@
+
+\subsection{原理,方法}
+ローレンツ方程式は，レイリー・ベナール対流の単純化モデルとして提案された
+3変数の非線形常微分方程式であり，パラメータの取り方によってカオス的挙動を示すことが知られている．
+本課題では
+\begin{align}
+  \frac{dx}{dt} &= \sigma (y - x), \\
+  \frac{dy}{dt} &= r x - y - x z, \\
+  \frac{dz}{dt} &= x y - b z
+  \label{eq:lorenz}
+\end{align}
+で与えられるローレンツ方程式を対象とし，パラメータ
+\[
+  \sigma = 10,\quad b = \frac{8}{3},\quad r = 28
+\]
+に固定した．初期条件は
+\[
+  x(0) = 1 + \varepsilon,\quad y(0) = 0,\quad z(0) = 0
+\]
+とし，$\varepsilon$ およびステップ幅 $\Delta t$ を変化させて数値解の挙動を比較することで，
+(1) 非周期的な長時間挙動（ローレンツ・アトラクタ），
+(2) 数値誤差の増幅，
+(3) 初期値に対する鋭敏な依存性
+を確認することを目的とする．
+
+時間区間は $t \in [0,100]$ とした．数値積分には前進オイラー法と4次のルンゲ・クッタ法（RK4）を用いた．
+各手法の実装は以下の通りである．
+課題(1)では $\varepsilon = 0$，ステップ幅 $\Delta t = 1.000\times 10^{-2}$（ステップ数 $n = 1.000\times 10^{4}$）として
+$t\in[0,100]$ を積分し，$x(t)$ の時間波形と $(x(t),y(t),z(t))$ の軌道を3次元空間で描画した．
+前進オイラー法と RK4 法それぞれについて軌道を可視化し，長時間挙動を比較した．
+
+課題(2)では，$\varepsilon = 0$ のままステップ幅を
+\begin{align}
+  \Delta t_i = 1.000\times 10^{-2} \times 2^{-i},\quad i=0,1,\dots,13
+\end{align}
+と変化させた（最小ステップ幅は $\Delta t_{13} = 1.221\times 10^{-6}$）．
+各 $\Delta t_i$ について $t\in[0,100]$ を積分し，$t=15,30,60$ における $x(t)$ の値を
+前進オイラー法と RK4 法それぞれで取得した．
+$t^\ast \in \{15,30,60\}$ ごとに，横軸を $\Delta t$，縦軸を $x(t^\ast)$ としてプロットすることで，
+ステップ幅に対する数値解の依存性を調べた．
+
+課題(3)では，初期値を
+\[
+  \varepsilon \in \{0,\ 0.1,\ 0.01,\ 0.001\}
+\]
+の4通りに変化させ，いずれも RK4 法を用いて
+\[
+  \Delta t = 1.000\times 10^{-3},\quad n = 1.000\times 10^{5}
+\]
+で $t\in[0,100]$ を積分した．
+まず $t\in[0,50]$ および $t\in[50,100]$ について $x(t)$ を重ね書きし，
+初期値の微小な違いが時間とともにどのように増幅されるかを視覚的に確認した．
+さらに基準として $\varepsilon=0$ の軌道 $u^{(0)}(t)$ を用意し，他の $\varepsilon$ に対して
+\[
+  e_\varepsilon(t_k) = \left\|u^{(\varepsilon)}(t_k) - u^{(0)}(t_k)\right\|_2
+\]
+を全時刻ステップで計算した．
+各 $\varepsilon$ について，時刻 $t$ までの最大誤差
+\[
+  E_\varepsilon(t_k) = \max_{j\le k} e_\varepsilon(t_j)
+\]
+をプロットし，誤差の時間発展を評価した．
+
+\subsection{結果}
+\paragraph{(1) ローレンツ・アトラクタの観測}
+RK4 法による $(x(t),y(t),z(t))$ の軌道を 3 次元空間にプロットした結果を図\ref{fig:lorenz_rk_traj}に示す．
+軌道は有限の領域内にとどまり，左右2つの「羽根」が重なったような特徴的なローレンツ・アトラクタが得られた．
+$x(t)$ の時間波形は，ほぼ有界な振動を繰り返すが，周期性は見られないことを確認した．
+
+一方，前進オイラー法による軌道を図\ref{fig:lorenz_fe_traj}に示す．
+短時間では RK4 法と類似した形状をとるが，$t$ が大きくなるにつれて
+軌道が外側にずれていき，アトラクタの形がRK4法と比べて徐々に歪む様子が見られた．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{lorenz_runge_kutta.png}
+  \caption{RK4 法によるローレンツ方程式の軌道 $(x(t),y(t),z(t))$．
+  パラメータは $\sigma=10,\ b=8/3,\ r=28$，初期値は $(1,0,0)$，$\Delta t = 1.000\times 10^{-2}$，$t\in[0,100]$．}
+  \label{fig:lorenz_rk_traj}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{lorenz_forward_euler.png}
+  \caption{前進オイラー法によるローレンツ方程式の軌道．条件は図\ref{fig:lorenz_rk_traj}と同一．
+  長時間積分ではアトラクタの形状が歪んでいくことが分かる．}
+  \label{fig:lorenz_fe_traj}
+\end{figure}
+
+\paragraph{(2) ステップ幅と数値誤差の関係}
+$t=15,30,60$ における $x(t)$ とステップ幅 $\Delta t$ の関係をプロットした結果を
+図\ref{fig:lorenz_comparison}に示す．
+横軸は $\Delta t$ を対数スケールでとっている．
+
+$t=15$ の場合，RK4 法では今回の範囲の $\Delta t$ で十分に収束しており，短期間であれば数値解が安定しているので、4次精度の手法として妥当な振る舞いが確認できる．
+一方，前進オイラー法では $\Delta t$ を小さくすると $x(t)$ の値は単調ではないものの
+ある値に近づくが，RK4 法と比べて収束が遅く，粗いステップ幅では誤差が顕著である．
+
+$t=30$ の場合，RK4 法では十分小さい$\Delta t$では十分に収束していたものの$\Delta t \lesssim 10^{-2.5}$ までステップ幅を大きくすると、徐々に値がぶれ始めた。これはRK法の正確に計算できる条件の限界と考えられることができる。
+一方前進オイラー法では$\Delta t$の値が収束しているとは言い難く、最小の$\Delta t$においてRK4法とほぼ同じ値なのも偶然の一致なのかどうか判断できない。
+
+
+$t=60$ になると，
+$\Delta t$ を十分小さくしても $x(t)$ の値が一意に収束しているとは言い難く，
+わずかなステップ幅の違いによって $x(t)$ が大きく変化する領域が現れる．
+RK4 法であっても $\Delta t$ の減少に伴って $x(t)$ が一定値に近づくというより，
+ある範囲内でばらつく様子が見られた．
+これはローレンツ方程式がカオス的であり，数値誤差が指数的に増幅されるため，
+十分に長時間になるとステップ幅の違いが軌道の違いとして顕在化することを示している．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\linewidth]{lorenz_comparison.png}
+  \caption{$t=15,30,60$ における $x(t)$ のステップ幅依存性．
+  左から順に $t=15,30,60$．実線が RK4 法，破線が前進オイラー法．横軸は $\Delta t$（対数スケール）．}
+  \label{fig:lorenz_comparison}
+\end{figure}
+
+\paragraph{(3) 初期値に対する鋭敏な依存性}
+初期値の違い $\varepsilon \in \{0,0.1,0.01,0.001\}$ を与えたときの $x(t)$ の時間波形を
+$t\in[0,50]$ および $t\in[50,100]$ について描画した結果を
+図\ref{fig:lorenz_eps_xt_0_50}, 図\ref{fig:lorenz_eps_xt_50_100}に示す．
+
+$t\lesssim 10$ の短時間では，$\varepsilon$ の違いにかかわらず $x(t)$ の波形はほとんど重なっており，
+初期値の違いが顕著には現れない．
+しかし，$t$ が増加するにつれて位相が徐々にずれ始め，
+$t\approx 30$ 以降では $\varepsilon=0.001$ のような非常に小さな擾乱でも，
+$x(t)$ の波形が基準解（$\varepsilon=0$）とほとんど無関係な挙動を示すようになる．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{lorenz_x_t0_50.png}
+  \caption{RK4 法による $x(t)$ の時間波形（$t\in[0,50]$）．
+  $\varepsilon=0,0.1,0.01,0.001$ の4通りを重ね書きしている．}
+  \label{fig:lorenz_eps_xt_0_50}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{lorenz_x_t50_100.png}
+  \caption{RK4 法による $x(t)$ の時間波形（$t\in[50,100]$）．
+  初期値のわずかな違いが長時間後には完全に異なる軌道として現れている．}
+  \label{fig:lorenz_eps_xt_50_100}
+\end{figure}
+
+図\ref{fig:lorenz_max_error}に，$\varepsilon=0$ を基準としたときの
+誤差の最大値 $E_\varepsilon(t)$ の時間発展を示す．
+いずれの $\varepsilon$ についても，初期段階では $E_\varepsilon(t)$ が指数関数的に増大し，
+その後はアトラクタの大きさに対応する $\mathcal{O}(10)$ 程度の値で飽和する挙動が見られる．
+初期誤差が小さいほど $E_\varepsilon(t)$ が飽和値に達するまでに時間がかかるが，
+十分長時間ではどの $\varepsilon$ に対しても同程度の誤差レベルに達している．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{lorenz_max_error_vs_time.png}
+  \caption{基準解（$\varepsilon=0$）からの誤差の最大値 $E_\varepsilon(t)$ の時間発展．
+  $\varepsilon=0.1,0.01,0.001$ についてプロットしている．}
+  \label{fig:lorenz_max_error}
+\end{figure}
+
+\subsection{考察}
+
+全体を通して,RK4法は前進オイラー法に比べて数値解の精度が高く、ローレンツ方程式のようなカオス的系に対してもある程度安定に振る舞うことが確認できた。長時間が経過したのちはば、RK4法であっても数値誤差の増幅が顕著となり、文字通り「カオス的」な挙動を示すことが分かった。
+課題7-2で示したように、t＝15あたりまではRK4法で安定的に収束していたことは、課題7-3のグラフからも確認できる。

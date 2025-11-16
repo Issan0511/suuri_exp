@@ -26,15 +26,25 @@
 \contentsline {subsection}{\numberline {4.2}結果}{15}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}考察}{15}{subsection.4.3}%
 \contentsline {section}{\numberline {5}課題4 各手法の安定性と安定性な領域の確認}{16}{section.5}%
-\contentsline {section}{\numberline {6}課題4}{16}{section.6}%
-\contentsline {subsection}{\numberline {6.1}原理・方法}{16}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}解析的結果のまとめ}{20}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}結果}{20}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}考察}{22}{subsection.6.4}%
-\contentsline {section}{\numberline {7}課題5　不安定性の確認}{23}{section.7}%
-\contentsline {subsection}{\numberline {7.1}問題設定}{23}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}差分スキームの形}{24}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}特性方程式による安定性解析}{24}{subsection.7.3}%
-\contentsline {subsection}{\numberline {7.4}数値解析による結果}{25}{subsection.7.4}%
-\contentsline {section}{\numberline {8}結論}{30}{section.8}%
-\contentsline {section}{\numberline {付録A}使用コード一覧}{30}{appendix.A}%
+\contentsline {subsection}{\numberline {5.1}原理・方法}{16}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}解析的結果のまとめ}{20}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}結果}{20}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}考察}{22}{subsection.5.4}%
+\contentsline {section}{\numberline {6}課題5　不安定性の確認}{23}{section.6}%
+\contentsline {subsection}{\numberline {6.1}問題設定}{23}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}差分スキームの形}{24}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}特性方程式による安定性解析}{24}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}数値解析による結果}{25}{subsection.6.4}%
+\contentsline {section}{\numberline {7}課題６　爆発解の数値計算と弧長パラメータによる変数変換}{27}{section.7}%
+\contentsline {subsection}{\numberline {7.1}原理と方法}{27}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}数値解法の実装}{27}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}結果}{28}{subsection.7.3}%
+\contentsline {section}{\numberline {8}課題7　ローレンツ方程式の数値解法とカオス現象の観察}{30}{section.8}%
+\contentsline {subsection}{\numberline {8.1}原理,方法}{30}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}結果}{31}{subsection.8.2}%
+\contentsline {paragraph}{(1) ローレンツ・アトラクタの観測}{31}{section*.35}%
+\contentsline {paragraph}{(2) ステップ幅と数値誤差の関係}{33}{section*.38}%
+\contentsline {paragraph}{(3) 初期値に対する鋭敏な依存性}{33}{section*.40}%
+\contentsline {subsection}{\numberline {8.3}考察}{35}{subsection.8.3}%
+\contentsline {section}{\numberline {9}結論}{35}{section.9}%
+\contentsline {section}{\numberline {付録A}使用コード一覧}{35}{appendix.A}%

@@ -1,5 +1,5 @@
 
-\subsubsection*{原理と方法}
+\subsection{原理と方法}
 
 生物個体群の増減を表す簡単なアリー効果モデルとして，次の常微分方程式を考える：
 \begin{equation}
@@ -41,7 +41,7 @@
 \]
 を新たな独立変数として用い，弧長方向に一様ステップで積分することで爆発近傍の解を追跡する。
 
-\subsubsection*{数値解法の実装}
+\subsection{数値解法の実装}
 
 教科書の弧長パラメータへの変数変換に従えば，$f(t,u)=(u-1)u$ に対して
 \begin{align}
@@ -91,7 +91,7 @@
 \]
 を通る直線で $\arctan u$ を近似し，この直線が $y=\pi/2$ と交わる $t$ を爆発時刻の数値的推定値 $\hat{T}_{\mathrm{b}}$ として求め，解析的な $T_{\mathrm{b}}$（式\eqref{eq:blowup-time-exact}）との比較を行った。
 
-\subsubsection*{結果}
+\subsection{結果}
 
 図\ref{fig:task5-trajectory} に $u(t)$ と $\arctan(u(t))$ の軌道を示す。上段は $u(t)$ を，下段は $\arctan(u(t))$ を時間 $t$ の関数として描いたものである。
 

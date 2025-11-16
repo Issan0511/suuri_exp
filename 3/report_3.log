@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  16 NOV 2025 15:42
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  16 NOV 2025 17:39
  restricted system commands enabled.
 **report_3.tex
 (./report_3.tex
@@ -1724,27 +1724,27 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 [18]
 
 [19]
-<task4_crank_nicolson.png, id=420, 433.62pt x 289.08pt>
+<task4_crank_nicolson.png, id=455, 433.62pt x 289.08pt>
 File: task4_crank_nicolson.png Graphic file (type png)
 <use task4_crank_nicolson.png>
-Package luatex.def Info: task4_crank_nicolson.png  used on input line 278.
+Package luatex.def Info: task4_crank_nicolson.png  used on input line 277.
 (luatex.def)             Requested size: 318.66948pt x 212.4558pt.
 
 
 [20]
-<task4_predictor_corrector.png, id=430, 433.62pt x 289.08pt>
+<task4_predictor_corrector.png, id=465, 433.62pt x 289.08pt>
 File: task4_predictor_corrector.png Graphic file (type png)
 <use task4_predictor_corrector.png>
-Package luatex.def Info: task4_predictor_corrector.png  used on input line 298.
+Package luatex.def Info: task4_predictor_corrector.png  used on input line 297.
 
 (luatex.def)             Requested size: 318.66948pt x 212.4558pt.
 
 
 [21<./task4_crank_nicolson.png><./task4_predictor_corrector.png>]
-<task4_heun.png, id=442, 433.62pt x 289.08pt>
+<task4_heun.png, id=477, 433.62pt x 289.08pt>
 File: task4_heun.png Graphic file (type png)
 <use task4_heun.png>
-Package luatex.def Info: task4_heun.png  used on input line 318.
+Package luatex.def Info: task4_heun.png  used on input line 317.
 (luatex.def)             Requested size: 318.66948pt x 212.4558pt.
 
 
@@ -1755,7 +1755,7 @@ Package luatex.def Info: task4_heun.png  used on input line 318.
 [24]
 
 [25]
-<task5_two_step.png, id=493, 433.62pt x 289.08pt>
+<task5_two_step.png, id=529, 433.62pt x 289.08pt>
 File: task5_two_step.png Graphic file (type png)
 <use task5_two_step.png>
 Package luatex.def Info: task5_two_step.png  used on input line 187.
@@ -1765,7 +1765,7 @@ Package luatex.def Info: task5_two_step.png  used on input line 187.
 [26<./task5_two_step.png>]
 
 [27]
-<task6_trajectory.png, id=522, 859.2903pt x 859.5312pt>
+<task6_trajectory.png, id=554, 859.2903pt x 859.5312pt>
 File: task6_trajectory.png Graphic file (type png)
 <use task6_trajectory.png>
 Package luatex.def Info: task6_trajectory.png  used on input line 100.
@@ -1774,9 +1774,54 @@ Package luatex.def Info: task6_trajectory.png  used on input line 100.
 
 [28]
 
-[29<./task6_trajectory.png>])
+[29<./task6_trajectory.png>]) (./task7.tex
 
-[30] (./report_3.aux)
+[30]
+<lorenz_runge_kutta.png, id=586, 517.6941pt x 532.1481pt>
+File: lorenz_runge_kutta.png Graphic file (type png)
+<use lorenz_runge_kutta.png>
+Package luatex.def Info: lorenz_runge_kutta.png  used on input line 76.
+(luatex.def)             Requested size: 273.14923pt x 280.77043pt.
+
+
+[31]
+<lorenz_forward_euler.png, id=597, 516.4896pt x 532.1481pt>
+File: lorenz_forward_euler.png Graphic file (type png)
+<use lorenz_forward_euler.png>
+Package luatex.def Info: lorenz_forward_euler.png  used on input line 84.
+(luatex.def)             Requested size: 273.14923pt x 281.43626pt.
+
+
+[32<./lorenz_runge_kutta.png><./lorenz_forward_euler.png>]
+<lorenz_comparison.png, id=608, 1292.1876pt x 350.7504pt>
+File: lorenz_comparison.png Graphic file (type png)
+<use lorenz_comparison.png>
+Package luatex.def Info: lorenz_comparison.png  used on input line 113.
+(luatex.def)             Requested size: 432.48051pt x 117.39105pt.
+<lorenz_x_t0_50.png, id=611, 867.24pt x 433.62pt>
+File: lorenz_x_t0_50.png Graphic file (type png)
+<use lorenz_x_t0_50.png>
+Package luatex.def Info: lorenz_x_t0_50.png  used on input line 132.
+(luatex.def)             Requested size: 273.14923pt x 136.57117pt.
+
+
+[33<./lorenz_comparison.png>]
+<lorenz_x_t50_100.png, id=623, 867.24pt x 433.62pt>
+File: lorenz_x_t50_100.png Graphic file (type png)
+<use lorenz_x_t50_100.png>
+Package luatex.def Info: lorenz_x_t50_100.png  used on input line 140.
+(luatex.def)             Requested size: 273.14923pt x 136.57117pt.
+<lorenz_max_error_vs_time.png, id=625, 722.7pt x 433.62pt>
+File: lorenz_max_error_vs_time.png Graphic file (type png)
+<use lorenz_max_error_vs_time.png>
+Package luatex.def Info: lorenz_max_error_vs_time.png  used on input line 155.
+(luatex.def)             Requested size: 273.14923pt x 163.8907pt.
+)
+
+[34<./lorenz_x_t0_50.png><./lorenz_x_t50_100.png><./lorenz_max_error_vs_time.png
+>]
+
+[35] (./report_3.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -1787,19 +1832,19 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
 Package rerunfilecheck Info: File `report_3.out' has not changed.
-(rerunfilecheck)             Checksum: 70103E5FB1DF0F930F1057BDEF342A72;3580.
+(rerunfilecheck)             Checksum: 077D074A8BF73561C3CA641D858D6685;4553.
 )
 
 Here is how much of LuaTeX's memory you used:
- 21992 strings out of 476291
+ 22089 strings out of 476291
  195704,1144653 words of node,token memory allocated
- 7601 words of node memory still in use:
+ 7745 words of node memory still in use:
    12 hlist, 2 vlist, 7 rule, 1 local_par, 5 glue, 4 kern, 2 penalty, 8 sub_mlis
-t, 3 glyph, 3144 attribute, 57 glue_spec, 299 attribute_list, 1 write, 15 user_d
+t, 3 glyph, 3210 attribute, 57 glue_spec, 305 attribute_list, 1 write, 15 user_d
 efined nodes
-   avail lists: 1:19,2:51444,3:542,4:715,5:462,6:119,7:5654,8:60,9:2071,10:29,11
+   avail lists: 1:20,2:51351,3:561,4:746,5:462,6:125,7:5572,8:59,9:2160,10:29,11
 :8
- 43529 multiletter control sequences out of 65536+600000
+ 43588 multiletter control sequences out of 65536+600000
  126 fonts using 98179119 bytes
  119i,12n,115p,1785b,1027s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/te
@@ -1829,10 +1874,10 @@ pe1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam1
 0.pfb>
-Output written on report_3.pdf (30 pages, 1075942 bytes).
+Output written on report_3.pdf (35 pages, 4337633 bytes).
 
-PDF statistics: 687 PDF objects out of 1000 (max. 8388607)
- 587 compressed objects within 6 object streams
- 244 named destinations out of 1000 (max. 131072)
- 225 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 778 PDF objects out of 1000 (max. 8388607)
+ 659 compressed objects within 7 object streams
+ 265 named destinations out of 1000 (max. 131072)
+ 281 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -129,6 +129,10 @@ ax1.set_title('Lorenz Attractor - Runge-Kutta Method', fontsize=14)
 ax1.legend()
 ax1.grid(True, alpha=0.3)
 
+# ルンゲ・クッタ法のプロットを保存
+fig1.savefig('lorenz_runge_kutta.png', dpi=300, bbox_inches='tight')
+print("ルンゲ・クッタ法のプロットを 'lorenz_runge_kutta.png' に保存しました")
+
 # 前進オイラー法の3次元プロット
 fig2 = plt.figure(figsize=(12, 9))
 ax2 = fig2.add_subplot(111, projection='3d')
@@ -143,6 +147,10 @@ ax2.set_zlabel('Z', fontsize=12)
 ax2.set_title('Lorenz Attractor - Forward Euler Method', fontsize=14)
 ax2.legend()
 ax2.grid(True, alpha=0.3)
+
+# 前進オイラー法のプロットを保存
+fig2.savefig('lorenz_forward_euler.png', dpi=300, bbox_inches='tight')
+print("前進オイラー法のプロットを 'lorenz_forward_euler.png' に保存しました")
 
 plt.tight_layout()
 plt.show()

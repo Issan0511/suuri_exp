@@ -1,0 +1,149 @@
+
+\subsubsection*{原理と方法}
+
+生物個体群の増減を表す簡単なアリー効果モデルとして，次の常微分方程式を考える：
+\begin{equation}
+  u'(t) = (u(t)-1)\,u(t), \qquad u(0) = u_0>0.
+  \label{eq:allee-ode}
+\end{equation}
+右辺は個体数 $u$ が多いほど増加率が大きくなること，さらに $u<1$ のときは右辺が負となり，個体群が減少に向かうことを表している。
+
+式\eqref{eq:allee-ode} の解は変数分離により解析的に求めることができる。$u'(t)=u(u-1)$ より
+\[
+  \frac{1}{u(u-1)}\,\mathrm{d}u = \mathrm{d}t
+\]
+を積分すると
+\[
+  \ln\left|\frac{u-1}{u}\right| = t + C
+\]
+を得る。初期条件 $u(0)=u_0$ を代入して $C$ を消去すると，解析解は
+\begin{equation}
+  u(t) =
+  \begin{cases}
+    0, & u_0 = 0,\\[3pt]
+    1, & u_0 = 1,\\[3pt]
+    \displaystyle \frac{u_0}{u_0 + (1-u_0)e^{t}}, & \text{それ以外}
+  \end{cases}
+  \label{eq:allee-analytic}
+\end{equation}
+と書ける。$0<u_0<1$ では $t\to\infty$ で $u(t)\to 0$，$u_0=1$ では $u(t)\equiv 1$，$u_0>1$ では有限時刻で分母が 0 となり，解は有限時間で爆発する。特に $u_0>1$ の場合の爆発時刻 $T_{\mathrm{b}}$ は
+\begin{equation}
+  u_0 + (1-u_0)e^{T_{\mathrm{b}}} = 0
+  \quad\Longrightarrow\quad
+  T_{\mathrm{b}} = \ln\frac{u_0}{u_0-1}
+  \label{eq:blowup-time-exact}
+\end{equation}
+と求まる。
+
+爆発解の数値計算では，$t$ のごく短い変化に対して $u$ が急激に増加するため，固定ステップ幅の手法では安定に追跡することが困難になることが多い。本課題では，解軌道 $(t,u(t))$ に沿った弧長
+\[
+  s(t) = \int_0^t \sqrt{1 + (u'(\tau))^2}\,\mathrm{d}\tau
+\]
+を新たな独立変数として用い，弧長方向に一様ステップで積分することで爆発近傍の解を追跡する。
+
+\subsubsection*{数値解法の実装}
+
+教科書の弧長パラメータへの変数変換に従えば，$f(t,u)=(u-1)u$ に対して
+\begin{align}
+  \frac{\mathrm{d}u}{\mathrm{d}s}
+  &= \frac{f(t,u)}{\sqrt{1+f(t,u)^2}}
+   = \frac{(u-1)u}{\sqrt{1 + (u-1)^2u^2}},\\
+  \frac{\mathrm{d}t}{\mathrm{d}s}
+  &= \frac{1}{\sqrt{1+f(t,u)^2}}
+   = \frac{1}{\sqrt{1 + (u-1)^2u^2}},
+\end{align}
+となり，$s$ を独立変数とする 2次元の常微分方程式系が得られる。
+
+実装では，この系をそのまま解く代わりに，ステップ幅 $\Delta t$ を
+\begin{equation}
+  \Delta s \approx \sqrt{1 + f(t,u)^2}\,\Delta t = \text{const.}
+\end{equation}
+とみなして更新する。具体的には，まず等間隔の基準幅
+\[
+  \Delta t_{\mathrm{default}} = \frac{t_{\mathrm{end}} - t_{\mathrm{start}}}{n}
+\]
+を定め，各ステップで
+\begin{equation}
+  \Delta t = \frac{\Delta t_{\mathrm{default}}}{\sqrt{1+f(t,u)^2}}
+\end{equation}
+と更新することで，解軌道に沿った弧長ステップ $\Delta s$ が概ね一定になるように制御した。
+
+従属変数の更新には 4 次のルンゲ・クッタ法を用いた。数値解が発散したかの判定には $|u|>10^5$ を閾値とし，この閾値を超えた時点で $u=\infty$ とみなして計算を打ち切った。計算は $t\in[0,5]$ とし，初期値 $u_0$ を
+\[
+  u_0 = 0.0, 0.2, 0.4, \dots, 2.0
+\]
+の 11 通りについて実行した。
+
+爆発解の評価では，$u$ 自体の誤差は爆発近傍で非常に大きくなり比較が困難であるため，値を圧縮するための変換として
+\[
+  v(t) = \arctan(u(t))
+\]
+を導入した。これにより $u\to\infty$ のときでも $v\to\pi/2$ で抑えられ，数値解と解析解の差
+\[
+  e_{\mathrm{atan}}(t) = \bigl|\arctan u_{\mathrm{num}}(t) - \arctan u_{\mathrm{exact}}(t)\bigr|
+\]
+を全時間区間で評価できる。
+
+さらに $u_0>1$ の場合については，最後の有限な 2 点
+\[
+  \bigl(t_{n-1},\arctan u_{n-1}\bigr),\quad
+  \bigl(t_n,\arctan u_n\bigr)
+\]
+を通る直線で $\arctan u$ を近似し，この直線が $y=\pi/2$ と交わる $t$ を爆発時刻の数値的推定値 $\hat{T}_{\mathrm{b}}$ として求め，解析的な $T_{\mathrm{b}}$（式\eqref{eq:blowup-time-exact}）との比較を行った。
+
+\subsubsection*{結果}
+
+図\ref{fig:task5-trajectory} に $u(t)$ と $\arctan(u(t))$ の軌道を示す。上段は $u(t)$ を，下段は $\arctan(u(t))$ を時間 $t$ の関数として描いたものである。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{task6_trajectory.png}
+  \caption{式\eqref{eq:allee-ode} の数値解（上：$u(t)$，下：$\arctan u(t)$）。
+  初期値 $u_0=0.0,0.2,\dots,2.0$ の結果を重ねて表示した。}
+  \label{fig:task5-trajectory}
+\end{figure}
+
+図より，$0<u_0<1$ のとき解は単調減少し $t\to\infty$ で $u(t)\to 0$ となること，$u_0=1$ では $u(t)\equiv 1$ の平衡解であること，$u_0>1$ では有限時間で爆発することが確認できる。$\arctan(u(t))$ をプロットした下段の図では，$u_0>1$ の場合に $\arctan(u(t))$ が $\pi/2$ に向かって滑らかに増加し，爆発時刻近傍の挙動を有限スケールで観察できている。
+
+数値解の精度評価として，$\arctan(u)$ 空間での平均絶対誤差 $\mathrm{mean}|e_{\mathrm{atan}}|$ と最大絶対誤差 $\max|e_{\mathrm{atan}}|$ を求めた結果の一部を表\ref{tab:task5-atan-error} に示す。$u_0\leq 1$ の範囲では
+\[
+  \mathrm{mean}|e_{\mathrm{atan}}| \lesssim 1.3\times 10^{-6},\qquad
+  \max|e_{\mathrm{atan}}| \lesssim 3.1\times 10^{-6}
+\]
+となっており，弧長パラメータを用いたルンゲ・クッタ法が高い精度で解析解を再現している。
+
+\begin{table}[htbp]
+  \centering
+  \caption{$\arctan(u)$ 空間での絶対誤差と爆発時刻推定値（抜粋）。}
+  \label{tab:task5-atan-error}
+  \begin{tabular}{cccccc}
+    \hline
+    $u_0$ & $\mathrm{mean}|e_{\mathrm{atan}}|$ & $\max|e_{\mathrm{atan}}|$
+          & $T_{\mathrm{b}}$ & $\hat{T}_{\mathrm{b}}$ & $\hat{T}_{\mathrm{b}}-T_{\mathrm{b}}$\\
+    \hline
+    0.2 & $9.38\times 10^{-8}$ & $9.65\times 10^{-7}$ & --- & --- & ---\\
+    0.4 & $4.80\times 10^{-7}$ & $2.86\times 10^{-6}$ & --- & --- & ---\\
+    0.6 & $9.52\times 10^{-7}$ & $3.03\times 10^{-6}$ & --- & --- & ---\\
+    0.8 & $1.23\times 10^{-6}$ & $3.03\times 10^{-6}$ & --- & --- & ---\\
+    1.0 & $0$                 & $0$                  & --- & --- & ---\\
+    \hline
+    1.2 & $4.92\times 10^{-4}$ & $4.99\times 10^{-4}$ & $1.791759$ & $1.791261$ & $-4.98\times 10^{-4}$\\
+    1.4 & $4.93\times 10^{-4}$ & $4.99\times 10^{-4}$ & $1.252763$ & $1.252265$ & $-4.98\times 10^{-4}$\\
+    1.6 & $4.93\times 10^{-4}$ & $4.99\times 10^{-4}$ & $0.980829$ & $0.980331$ & $-4.98\times 10^{-4}$\\
+    1.8 & $4.93\times 10^{-4}$ & $4.99\times 10^{-4}$ & $0.810930$ & $0.810432$ & $-4.98\times 10^{-4}$\\
+    2.0 & $4.94\times 10^{-4}$ & $4.99\times 10^{-4}$ & $0.693147$ & $0.692649$ & $-4.98\times 10^{-4}$\\
+    \hline
+  \end{tabular}
+\end{table}
+
+$u_0>1$ の場合，$\arctan(u)$ 空間での平均・最大誤差はいずれも約 $5\times 10^{-4}$ 程度であり，角度に換算するとおよそ $0.03^\circ$ に相当する。また，全ての $u_0>1$ について，爆発時刻の数値的推定値 $\hat{T}_{\mathrm{b}}$ は解析的な $T_{\mathrm{b}}$ より約 $4.98\times 10^{-4}$ だけ早い（負の差）というほぼ一定のバイアスを示し，相対誤差は最大でも $|\hat{T}_{\mathrm{b}}-T_{\mathrm{b}}|/T_{\mathrm{b}}\lesssim 7.2\times 10^{-4}$ に抑えられている。
+
+\subsubsection*{考察}
+
+式\eqref{eq:allee-ode} の右辺 $(u-1)u$ は $u=0$ および $u=1$ を平衡点として持ち，$0<u<1$ のとき負，$u>1$ のとき正である。このため，$0<u_0<1$ の解は単調減少して $u=0$ に収束し，$u_0=1$ は不動点として保たれる。一方 $u_0>1$ では $u(t)$ が単調増加し，有限時間で爆発することが解析的にも数値的にも確認された。
+
+固定ステップ幅の方法で爆発解を扱うと，$u'(t)$ が非常に大きくなる領域で解の変化を捉えるために極端に小さな $\Delta t$ が必要になる。本課題で用いた弧長に基づくステップ幅制御では，$|u'|$ が大きくなるにつれて $\Delta t$ が自動的に小さくなり，弧長方向にはほぼ一定の刻み幅で積分が進む。その結果，$u_0>1$ の場合にも爆発直前まで解の軌道を比較的少ないステップ数で追跡することができた。
+
+また，今回の変換の仕様上，値が無限に発散する爆発解であっても,1ステップで縦幅にて高々Δtの増分で更新されるため，数値解が十分大きくなるのに途方もない時間がかかるので，ループの回数の上限を設定し，閾値を超えた時点で計算を打ち切るようにした。このため，爆発直前の非常に大きな $u$ の値は数値的に得られなかったが，$\arctan(u)$ 空間に圧縮することにより，爆発近傍の挙動が有限スケールで観察でき，これによって関数uが無限大に相当する$v=\pi/2$に到達する時刻を推定できた。
+
+

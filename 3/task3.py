@@ -7,7 +7,6 @@ def analytical_solution (t, u0 = 1):
     return u0 * np.exp(t)
 
 def update_foward_euler (delta_t, u1, t1 ,f= f):
-
     return u1 + delta_t * f(u1, t1)
 
 def update_adam_bashforth2 (delta_t, u1,u2, t1 ,t2,f= f):

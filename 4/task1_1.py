@@ -43,12 +43,11 @@ plt.figure(figsize=(12, 6))
 for m in range(M):
     plt.plot(range(T), plot_MT[m, :], alpha=0.7, linewidth=0.8)
 
-plt.xlabel('Time step (t)', fontsize=12)
-plt.ylabel('Number of cells in state 1', fontsize=12)
+plt.xlabel('Time step (t)', fontsize=14)
+plt.ylabel('Cells in state 1', fontsize=14)
 plt.title(f'Evolution of Number of State-1 Cells (M={M} trials, N={N} cells, p={p})', fontsize=14)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('plot_MT.png', dpi=300, bbox_inches='tight')
-print('Saved plot to plot_MT.png')
+plt.savefig('task1_1.png', dpi=300, bbox_inches='tight')
 plt.show()
 

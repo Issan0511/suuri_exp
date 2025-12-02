@@ -52,14 +52,23 @@ for p in p_values:
     plt.plot(range(T), mean_m_t, label=f'p = {p}', linewidth=2)
     print(f'  Final mean m(T-1) = {mean_m_t[-1]:.2f}')
 
-plt.xlabel('Time step (t)', fontsize=12)
-plt.ylabel('Sample mean of m(t)', fontsize=12)
+plt.xlabel('Time step (t)', fontsize=14)
+plt.ylabel('Mean of m(t)', fontsize=14)
 plt.title(f'Sample Mean of m(t) for Different p Values (M={M} trials, N={N} cells)', fontsize=14)
 plt.legend(fontsize=11)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('task1_2_sample_mean.png', dpi=300, bbox_inches='tight')
-print('\nSaved plot to task1_2_sample_mean.png')
+
+# Save linear scale plot
+plt.savefig('task1_2_sample_mean_linear.png', dpi=300, bbox_inches='tight')
+print('\nSaved plot to task1_2_sample_mean_linear.png')
+
+# Switch to log scale and save
+plt.xscale('log')
+plt.yscale('log')
+plt.savefig('task1_2_sample_mean_log.png', dpi=300, bbox_inches='tight')
+print('Saved plot to task1_2_sample_mean_log.png')
+
 plt.show()
 
 

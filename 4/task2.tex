@@ -1,0 +1,149 @@
+\subsection{原理と方法}
+本節では，モンテカルロ法を用いて円周率 $\pi$ を推定する原理と，
+実際に用いる計算手順をまとめる．
+
+まず，次の定積分が成り立つことを用いる．
+\begin{equation}
+  \int_0^1 \frac{4}{1+x^2}\,\mathrm{d}x = \pi .
+  \label{eq:int-pi}
+\end{equation}
+区間 $[0,1]$ 上の一様分布に従う確率変数 $X$ を考えると，
+その確率密度関数は
+\[
+  p_X(x) =
+  \begin{cases}
+    1 & (0 \le x \le 1),\\
+    0 & (\text{それ以外})
+  \end{cases}
+\]
+である．このとき，任意の可積分関数 $g(x)$ に対して
+\[
+  \mathbb{E}[g(X)]
+  = \int_0^1 g(x)\,p_X(x)\,\mathrm{d}x
+  = \int_0^1 g(x)\,\mathrm{d}x
+\]
+が成り立つ．$g(x)=4/(1+x^2)$ とおけば，
+式 \eqref{eq:int-pi} は
+\begin{equation}
+  \pi
+  = \int_0^1 \frac{4}{1+x^2}\,\mathrm{d}x
+  = \mathbb{E}\!\left[\frac{4}{1+X^2}\right]
+  \label{eq:pi-as-expectation}
+\end{equation}
+と書き換えられる．したがって，
+$\pi$ は確率変数 $Y = 4/(1+X^2)$ の期待値として表される．
+
+ここで，$X$ の独立な標本 $X_1,\dots,X_N$ を
+一様分布 $\mathcal{U}(0,1)$ に従って生成し，
+対応する
+\[
+  Y_k = \frac{4}{1+X_k^2} \quad (k=1,\dots,N)
+\]
+を計算する．このとき，$Y_k$ は互いに独立同分布であり，
+その期待値は式 \eqref{eq:pi-as-expectation} より $\mathbb{E}[Y_k]=\pi$ である．
+よって，標本平均
+\begin{equation}
+  \hat{\pi}_N
+  = \frac{1}{N}\sum_{k=1}^N Y_k
+  = \frac{1}{N}\sum_{k=1}^N \frac{4}{1+X_k^2}
+  \label{eq:mc-estimator}
+\end{equation}
+は $\pi$ の推定量として用いることができる．
+大数の法則により，$N\to\infty$ の極限で
+\[
+  \hat{\pi}_N \to \pi \quad \text{(ほとんど確実に)}
+\]
+が成り立つため，式 \eqref{eq:mc-estimator} は
+モンテカルロ法による円周率の一貫した推定量になっている．
+さらに中心極限定理から，
+$N$ が十分大きいとき $\hat{\pi}_N$ は平均 $\pi$，
+分散が $O(N^{-1})$ の正規分布に近づき，
+推定誤差の大きさは概ね $N^{-1/2}$ のオーダーで減少する．
+
+本実験では，サンプル数 $N$ を
+\[
+  N \in \{10^2,\,10^3,\,10^5,\,10^7\}
+\]
+とし，各 $N$ について独立な試行を $10$ 回行う．
+各試行で一様乱数列 $\{X_k\}_{k=1}^N$ を生成し，
+式 \eqref{eq:mc-estimator} により推定値 $\hat{\pi}_N$ を求める．
+得られた $10$ 個の $\hat{\pi}_N$ から，$N$ ごとに
+\begin{itemize}
+  \item 推定値の平均（系統誤差の確認），
+  \item 推定値の標準偏差（統計誤差の大きさ）
+\end{itemize}
+を算出し，サンプル数 $N$ の増加に伴う精度向上の様子を評価する．
+
+\subsection{実装上の工夫}
+本実験ではサンプル数 $M$ を $10, 10^3, 10^5, 10^7$ と増加させながら，
+式 (5.10) に基づくモンテカルロ積分を行う．
+計算負荷が大きくなるため，以下の点に留意して実装した．
+
+\begin{itemize}
+  \item \textbf{完全ベクトル化による高速化}  
+  Python の for ループは極端に遅いため，
+  乱数生成から積分評価
+  \[
+    \frac{4}{1 + X^2}
+  \]
+  の計算までを NumPy の配列演算として一度に実行した．  
+  これにより Python レベルのループを排除し，
+  C 実装による高速な要素演算が可能になる．
+
+  \item \textbf{形状 (10, M) の乱数生成}  
+  10 回の独立試行を行うため，
+  毎回乱数を生成するのではなく，
+  あらかじめ形状 $(10, M)$ の乱数行列を生成した．  
+  これにより，
+  乱数生成コストを 1 回にまとめつつ，
+  同じ処理を 10 行に対して並列に実行できる．
+
+  \item \textbf{in-place 演算の利用}  
+  NumPy の in-place 演算（例：\verb|s *= s|, \verb|np.reciprocal(out=s)|）
+  を積極的に利用することで，
+  中間配列の生成を避け，  
+  メモリ消費とメモリアロケーション時間を削減した．  
+  特に $M = 10^7$ のような大規模計算では，
+  配列の再生成がボトルネックになるため有効である．
+
+  \item \textbf{標本平均の同時計算}  
+  10 行分の計算結果に対して，
+  NumPy の \verb|mean(axis=1)| を用いて
+  一度に標本平均を求めることで，
+  試行ごとのループ処理を回避した．
+\end{itemize}
+
+上記の工夫により，大規模サンプルに対しても
+純粋 Python 実装と比べて大幅に高速な実行が可能となった．
+
+
+\subsection{結果}
+本実験では，各サンプル数 $M$ について
+10 回の独立試行により推定値 $\hat{\pi}$ を求め，
+その平均と分散を算出した．  
+得られた結果を以下に示す．
+\begin{table}[h]
+    \centering
+    \caption{モンテカルロ法による円周率推定結果}
+    \label{tab:pi-estimation}
+    \begin{tabular}{cccc}
+        \hline
+        サンプル数 $M$ & 推定値の平均 & 分散 & 相対誤差 \\
+        \hline
+        $10$ & $3.1589$ & $1.3593 \times 10^{-2}$ & $0.55\%$ \\
+        $10^3$ & $3.1332$ & $4.3925 \times 10^{-4}$ & $0.27\%$ \\
+        $10^5$ & $3.1410$ & $3.6470 \times 10^{-6}$ & $0.02\%$ \\
+        $10^7$ & $3.1415$ & $2.6389 \times 10^{-8}$ & $0.003\%$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+以上の結果より，
+サンプル数 $M$ の増加に伴い推定値が真値 $\pi$ に収束し，
+分散が概ね $O(M^{-1})$ で減少している様子が確認できる．
+
+\subsubsection{考察}
+表{tab:pi-estimation}に示す通り，分散が概ね $O(M^{-1})$ で減少していることから，
+分散が $\displaystyle \frac{1}{M}\Bigl[\langle f^{2}(X)\rangle - \langle f(X)\rangle^{2}\Bigr]$ であることは裏付けられるが、$\Bigl[\langle f^{2}(X)\rangle - \langle f(X)\rangle^{2}\Bigr]$の値を求めるため、$f(X)=\frac{4}{1+X^{2}}$の2乗の平均値を求める必要がある。
+そこで、追加のコードを実装し、関数pi\_pi\_monte\_carlo\_integrationを実装し、M=10,000,000で2乗の平均値を求めた。
+その結果、 10.2826であり、真値$\pi^{2} \approx 9.8696$との差は0.4130であった。シミュレーションによる$\Bigl[\langle f^{2}(X)\rangle - \langle f(X)\rangle^{2}\Bigr]$の値はが0.3~0.5であったことから、確かに分散が$\displaystyle \frac{1}{M}\Bigl[\langle f^{2}(X)\rangle - \langle f(X)\rangle^{2}\Bigr]$であることが確かめられた。

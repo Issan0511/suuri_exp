@@ -41,11 +41,12 @@ def sweep(spins, beta, rng,itrations=100):
 ms = sweep(spins, beta, rng, itrations=10000)
 
 plt.plot(ms)
+plt.title('Magnetization vs Iteration(Heat Bath Method)')
 plt.xlabel('Iteration')
 plt.ylabel('Magnetization')
 plt.title('Magnetization vs Iteration')
+plt.savefig('task4_2_heat.png')
 plt.show()
-
 
 
 

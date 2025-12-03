@@ -1,0 +1,159 @@
+
+\subsection{1. メトロポリス法が詳細つり合い条件を満たすことの証明}
+
+メトロポリス法では，現状態 $X$ から次状態候補 $Y$ を
+対称な確率分布 $Q(X,Y)=Q(Y,X)$ に従って提案し，
+受理確率
+\[
+A(X\to Y)=\min\left(1,\frac{W(Y)}{W(X)}\right)
+\]
+で遷移する．
+したがって遷移確率は
+\[
+P(X\to Y)=Q(X,Y)A(X\to Y)
+\]
+である．
+
+詳細つり合い条件
+\[
+P(X\to Y)W(X)=P(Y\to X)W(Y)
+\tag{5.19}
+\label{eq:detbal}
+\]
+を示すため，$W(Y)\ge W(X)$ と $W(Y)< W(X)$ の場合に分ける．
+
+\paragraph{(i) $W(Y)\ge W(X)$ の場合}
+このとき
+\[
+A(X\to Y)=1,\qquad
+A(Y\to X)=\frac{W(X)}{W(Y)} .
+\]
+よって
+\[
+P(X\to Y)W(X)
+=Q(X,Y)\cdot 1\cdot W(X),
+\]
+\[
+P(Y\to X)W(Y)
+=Q(Y,X)\frac{W(X)}{W(Y)}W(Y)
+=Q(X,Y)W(X),
+\]
+となり \eqref{eq:detbal} が成り立つ．
+
+\paragraph{(ii) $W(Y)< W(X)$ の場合}
+このとき
+\[
+A(X\to Y)=\frac{W(Y)}{W(X)},\qquad
+A(Y\to X)=1 .
+\]
+したがって
+\[
+P(X\to Y)W(X)
+=Q(X,Y)\frac{W(Y)}{W(X)}W(X)
+=Q(X,Y)W(Y),
+\]
+\[
+P(Y\to X)W(Y)
+=Q(Y,X)\cdot 1\cdot W(Y)
+=Q(X,Y)W(Y),
+\]
+となる．
+
+以上より任意の $X,Y$ について
+\[
+P(X\to Y)W(X)=P(Y\to X)W(Y)
+\]
+が成立し，メトロポリス法は詳細つり合い条件を満たす．
+
+
+\subsection{2. 熱浴法が詳細つり合い条件を満たすことの証明}
+
+状態を $X=(x_1,x_2,\ldots)$ とし，時刻 $t$ において添字 $i$ が
+状態に依存しない確率 $p_i$ で選ばれるとする．
+熱浴更新では $i$ 番目の成分だけを更新し，
+それ以外は不変である．
+
+$X$ と $Y$ が 1 箇所だけ異なる場合
+\[
+X=(x_1,\ldots,x_i,\ldots),\qquad
+Y=(x_1,\ldots,y_i,\ldots)
+\]
+となる．このとき熱浴法の条件付き確率は
+\[
+P(x_i'=y_i)
+=
+\frac{W(Y)}{\sum_{x_i}W(x_1,\ldots,x_i,\ldots)}
+\equiv \frac{W(Y)}{Z_i},
+\]
+ここで $Z_i$ は $i$ 番目のみを動かしたときの重みの総和で，
+$X$ と $Y$ に対して共通である．
+
+よって遷移確率は
+\[
+P(X\to Y)=p_i\frac{W(Y)}{Z_i},\qquad
+P(Y\to X)=p_i\frac{W(X)}{Z_i}.
+\]
+
+したがって
+\[
+P(X\to Y)W(X)
+= p_i\frac{W(Y)}{Z_i}W(X),
+\]
+\[
+P(Y\to X)W(Y)
+= p_i\frac{W(X)}{Z_i}W(Y),
+\]
+より両辺は一致する．
+
+$X$ と $Y$ が 2 箇所以上異なる場合には
+熱浴法では 1 ステップで遷移できないため
+\[
+P(X\to Y)=P(Y\to X)=0
+\]
+となり，この場合も自明に詳細つり合いが成り立つ．
+
+以上より熱浴法の遷移確率は詳細つり合い条件
+\[
+P(X\to Y)W(X)=P(Y\to X)W(Y)
+\]
+を満たす．
+
+
+\subsection{3. 詳細つり合い条件 (5.19) からつり合い条件 (5.17) が従うことの証明}
+
+詳細つり合い条件
+\[
+P(X\to Y)W(X)=P(Y\to X)W(Y)
+\tag{5.19}
+\]
+がすべての $X,Y$ について成り立つと仮定する．
+
+このとき任意の $X$ について
+\[
+\sum_Y P(Y\to X)W(Y)
+\]
+を計算する：
+\[
+\sum_Y P(Y\to X)W(Y)
+=
+\sum_Y P(X\to Y)W(X),
+\]
+ここで右辺の等号は詳細つり合い (5.19) より従う．
+
+また遷移確率の和は $\sum_Y P(X\to Y)=1$ であるから，
+\[
+\sum_Y P(Y\to X)W(Y)
+=
+W(X)\sum_Y P(X\to Y)
+=
+W(X).
+\]
+
+よってつり合い条件
+\[
+W(X)=\sum_Y P(Y\to X)W(Y)
+\tag{5.17}
+\]
+が示された．
+詳細つり合いが成立すれば，$W$ はマルコフ過程の定常分布となる．
+

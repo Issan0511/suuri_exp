@@ -17,6 +17,6 @@ for M in Ms:
     print(f"M = {M}")
     for f in mean_fs:
         print(f"{f:.6f}")
-    print(f"Mean: {mean_fs.mean():.6f}")
+    print(f"Mean: {mean_fs.mean():.12f}")
     print(f"Variance: {mean_fs.var():.12f}")
     print()

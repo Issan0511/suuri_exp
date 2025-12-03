@@ -53,11 +53,7 @@
   showstringspaces=false
 }
 
-% 実験表題用コマンド
-\newcommand{\TaskSection}[2]{%
-  \section{#1}%
-  \textbf{目的：} #2\par\vspace{6pt}%
-}
+
 
 % キャプションのフォント調整
 \captionsetup{font=small,labelfont=bf}
@@ -79,13 +75,7 @@
 \tableofcontents
 \clearpage
 
-% \section*{表記・略記}
-% 本レポートにおける表記と略記を示す。必要に応じて編集すること。
-% \begin{itemize}
-%   \item $\R$：実数全体
-%   \item $\|\cdot\|$：ユークリッドノルム（明示が必要な場合は添字を用いる）
-%   \item 各種パラメータや記号は本文中で定義する
-% \end{itemize}
+
 
 % ===== 例：実験テンプレート =====
 \section*{はじめに}
@@ -95,15 +85,16 @@
 
 \input{task1.tex}
 
-% ===== 複数課題の繰り返し =====
-% 以下を必要数コピーして各課題を記述
-\TaskSection{課題2：LU分解}{目的を記載}
-% ... 同様に節を展開
 
-% ===== 総合比較 =====
-\section{アルゴリズム比較}
-表や図を用いて複数手法の比較を行う。計算量・精度・安定性・実行時間の観点でまとめる。
+\section{課題2：モンテカルロ法による円周率推定}
 
+\input{task2.tex}
+
+\section{課題3：熱よく法とメトロポリス法のつり合い条件の証明}
+\input{task3.tex}
+
+\section{課題4：熱よく法によるイジングモデルのシミュレーション}
+\input{task4.tex}
 % ===== 結論 =====
 \section{結論}
 本章での結論と今後の課題を箇条書きでまとめる。

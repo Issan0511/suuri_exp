@@ -79,7 +79,8 @@
 
 % ===== 例：実験テンプレート =====
 \section*{はじめに}
-今回は
+今回はモンテカルロ法を用いた数値計算手法について学ぶ。伝染モデルや円周率のモンテカルロ法シミュレーションを行い、さらにイジングモデルに対して熱浴法とメトロポリス法を実装し、その性能を比較する。問題の条件を満たしながら、pythonで効率的なコードを実装することを目指す。
+
 
 \section{課題1：疫病の確率的な伝染モデル}
 
@@ -96,14 +97,33 @@
 \section{課題4：熱よく法によるイジングモデルのシミュレーション}
 \input{task4.tex}
 % ===== 結論 =====
-\section{結論}
-本章での結論と今後の課題を箇条書きでまとめる。
+\section*{結論}
+本実験では、モンテカルロ法を用いた数値計算手法について学んだ。疫病の確率的な伝染モデルをシミュレーションし、感染拡大の様子を観察した。また、円周率のモンテカルロ法による推定を行い、サンプル数の増加に伴う推定精度の向上を確認した。さらに、イジングモデルに対して熱浴法とメトロポリス法を実装し、磁化の期待値と系サイズ・温度依存性を比較した。
+実装においては、Pythonのベクトル化やGPU並列計算を活用し、計算効率を大幅に改善した。これにより、大規模なシミュレーションが現実的な時間内で実行可能となった。今後は、さらに高度なモンテカルロ手法や他の物理モデルへの応用を検討したい。
 
 % ===== 付録 =====
 \appendix
-\section{使用コード一覧}
-主要スクリプトと入手先を列挙する。
+\section{ソースコード}
+コード作成、レポート作成の一部にGitHub Copilotを使用した。
+\subsection{課題1のコード}
+\subsubsection{小問1}
+\lstinputlisting[language=Python, caption=課題1-1のコード]{task1_1.py}
 
+\subsubsection{小問2}
+\lstinputlisting[language=Python, caption=課題1-2のコード]{task1_2.py}
+
+\subsection{課題2のコード}
+\lstinputlisting[language=Python, caption=課題2のコード]{task2_1.py}
+
+\subsection{課題4のコード}
+\subsubsection{熱浴法}
+\lstinputlisting[language=Python, caption=課題4-2 熱浴法のコード]{task4_2_heat.py}
+
+\subsubsection{メトロポリス法}
+\lstinputlisting[language=Python, caption=課題4-2 メトロポリス法のコード]{task4_2_metro.py}
+
+\subsubsection{複数温度の並列シミュレーション}
+\lstinputlisting[language=Python, caption=課題4-3のコード]{task4_3.py}
 
 
 % ===== 参考文献 =====

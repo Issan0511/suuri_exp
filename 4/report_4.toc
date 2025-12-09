@@ -1,0 +1,51 @@
+\contentsline {section}{\numberline {1}課題1：疫病の確率的な伝染モデル}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}原理と方法}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}実装上の工夫}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}小問1}{4}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}結果}{4}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}考察}{5}{subsubsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.4}小問2}{5}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}結果}{5}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.2}考察}{6}{subsubsection.1.4.2}%
+\contentsline {section}{\numberline {2}課題2：モンテカルロ法による円周率推定}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}原理と方法}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}実装上の工夫}{8}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}結果}{8}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}考察}{8}{subsubsection.2.3.1}%
+\contentsline {section}{\numberline {3}課題3：熱よく法とメトロポリス法のつり合い条件の証明}{9}{section.3}%
+\contentsline {subsection}{\numberline {3.1}1. メトロポリス法が詳細つり合い条件を満たすことの証明}{9}{subsection.3.1}%
+\contentsline {paragraph}{(i) $W(Y)\ge W(X)$ の場合}{9}{section*.8}%
+\contentsline {paragraph}{(ii) $W(Y)< W(X)$ の場合}{10}{section*.9}%
+\contentsline {subsection}{\numberline {3.2}2. 熱浴法が詳細つり合い条件を満たすことの証明}{10}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}3. 詳細つり合い条件 (5.19) からつり合い条件 (5.17) が従うことの証明}{11}{subsection.3.3}%
+\contentsline {section}{\numberline {4}課題4：熱よく法によるイジングモデルのシミュレーション}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}原理と方法}{11}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}イジングモデルの熱浴法（小問1）}{11}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}メトロポリス法}{12}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}実装上の工夫}{12}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Pythonによる実装例}{12}{subsubsection.4.2.1}%
+\contentsline {paragraph}{熱浴法：}{13}{section*.12}%
+\contentsline {paragraph}{メトロポリス法：}{13}{section*.13}%
+\contentsline {subsection}{\numberline {4.3}メトロポリス法、熱浴法によるイジングモデルのシミュレーション（小問2）}{14}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}シミュレーション条件}{14}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}磁化の時間発展（小問2）}{14}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}考察}{16}{subsubsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.4}磁化の期待値と系サイズ・温度依存性（小問3）}{16}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}サンプリング方法}{16}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}実装上の工夫}{17}{subsubsection.4.4.2}%
+\contentsline {paragraph}{(1) 系の並列化：$N=1000$ 系を同時に更新}{17}{section*.16}%
+\contentsline {paragraph}{(2) PyTorch による GPU 並列計算}{17}{section*.17}%
+\contentsline {paragraph}{(3) 温度点 $z$ の 12 個をひとまとめにして並列更新}{17}{section*.18}%
+\contentsline {paragraph}{(4) 実行速度の改善と $L=128$ への拡張}{17}{section*.19}%
+\contentsline {subsubsection}{\numberline {4.4.3}結果}{18}{subsubsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.4}考察}{18}{subsubsection.4.4.4}%
+\contentsline {section}{\numberline {5}結論}{19}{section.5}%
+\contentsline {section}{\numberline {付録A}ソースコード}{19}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}課題1のコード}{19}{subsection.A.1}%
+\contentsline {subsubsection}{\numberline {A.1.1}小問1}{19}{subsubsection.A.1.1}%
+\contentsline {subsubsection}{\numberline {A.1.2}小問2}{20}{subsubsection.A.1.2}%
+\contentsline {subsection}{\numberline {A.2}課題2のコード}{22}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}課題4のコード}{22}{subsection.A.3}%
+\contentsline {subsubsection}{\numberline {A.3.1}熱浴法}{22}{subsubsection.A.3.1}%
+\contentsline {subsubsection}{\numberline {A.3.2}メトロポリス法}{23}{subsubsection.A.3.2}%
+\contentsline {subsubsection}{\numberline {A.3.3}複数温度の並列シミュレーション}{24}{subsubsection.A.3.3}%

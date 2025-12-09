@@ -1,1 +1,383 @@
-\subsection{小問1}
+\subsection{原理と方法}
+
+本節では，二次元トーラス上の強磁性イジング模型
+\[
+H(s)= -J \sum_{\langle i,j\rangle} s_i s_j , \qquad s_i\in\{+1,-1\},\ J=1
+\]
+に対し，マルコフ連鎖モンテカルロ法（MCMC）を用いて平衡状態を生成する手法について述べる\cite{exp2025}．
+格子は $L\times L$ の正方格子とし，周期境界条件（トーラス）を課す．
+本問では特に，熱浴法（Heat Bath 法）とメトロポリス法（Metropolis 法）を比較し，
+初期状態依存性が消失する様子を磁化の時間発展から観察する。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{イジングモデルの熱浴法（小問1）}
+
+熱浴法は，選んだ格子点 $i$ のスピン $s_i$ を，
+その条件付き分布 $P(s_i\mid s_{\setminus i})$ から
+\emph{直接サンプリング}する更新法である\cite{exp2025}。
+スピン $i$ の近傍スピン（4 近傍）を $s_j$ とし，
+その和を
+\[
+h_i = \sum_{j\in\mathrm{nn}(i)} s_j
+\]
+と書くと，
+ハミルトニアンからエネルギーは
+\[
+E(s_i) = - J s_i h_i
+\]
+であるから，ボルツマン分布より
+\[
+P(s_i=+1)
+\propto e^{\beta h_i},\qquad
+P(s_i=-1)\propto e^{-\beta h_i}.
+\]
+よって正規化すれば
+\begin{align}
+P(s_i = +1 \mid s_{\setminus i})
+= \frac{1}{1+e^{-2\beta h_i}}, \qquad
+P(s_i=-1)=1-P(s_i=+1). 
+\end{align}
+
+以上より，熱浴法の 1 ステップは以下のように与えられる。
+
+\begin{enumerate}
+  \item 格子点 $i$ をランダムに 1 つ選ぶ。
+  \item 近傍和 $h_i=\sum_{j}s_j$ を計算する。
+  \item $P(s_i=+1)=1/(1+e^{-2\beta h_i})$ を求める。
+  \item 一様乱数 $r\in[0,1]$ を生成し，
+    \[
+    r < P(s_i=+1)\ \Rightarrow\ s_i\leftarrow +1,
+    \quad
+    r\ge P(s_i=+1)\ \Rightarrow\ s_i\leftarrow -1.
+    \]
+\end{enumerate}
+
+条件付き分布からの厳密サンプリングに基づくため，自動的に平衡分布を保つマルコフ連鎖が得られる。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{メトロポリス法}
+
+メトロポリス法では，スピン反転 $s_i\to -s_i$ を更新案とし，
+対応するエネルギー変化
+\[
+\Delta E = 2 s_i h_i
+\]
+を用いて採択判定を行う\cite{exp2025}。
+採択確率は
+\[
+P_{\mathrm{acc}}
+= \min\{1, e^{-\beta\Delta E}\}
+\]
+であり，$\Delta E\le 0$（エネルギーが下がる場合）は必ず採択され，
+$\Delta E>0$ の場合には確率的に採択される。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{実装上の工夫}
+
+周期境界条件の最近接スピンは NumPy の {\tt np.roll} を用いて
+\[
+\text{上， 下， 左， 右}
+\]
+の方向に周期的に配列をシフトすることで効率的に求めることができる。
+また，格子をチェッカーボード状に黒白に分割し，
+黒マス→白マスの順に更新することで，
+隣接点を同時更新することによる干渉を防ぎつつ，
+ベクトル化された高速な一括更新が可能となる。
+
+\subsubsection{Pythonによる実装例}
+
+以下では NumPy による簡潔な実装例を示す。
+
+\paragraph{熱浴法：}
+\begin{verbatim}
+def sweep_heatbath(spins, beta, rng, itrations=1500):
+    ms = []
+    for _ in range(itrations):
+        for mask in (mask_black, mask_white):
+
+            n  = np.roll(spins,  1, axis=0)
+            n += np.roll(spins, -1, axis=0)
+            n += np.roll(spins,  1, axis=1)
+            n += np.roll(spins, -1, axis=1)
+
+            p = 1.0 / (1.0 + np.exp(-2 * beta * n))
+            r = rng.random((L, L))
+
+            spins[mask] = np.where(r[mask] < p[mask], 1, -1)
+
+        ms.append(spins.mean())
+    return np.array(ms)
+\end{verbatim}
+
+\paragraph{メトロポリス法：}
+\begin{verbatim}
+def sweep_metropolis(spins, beta, rng, itrations=1500):
+    ms = []
+    for _ in range(itrations):
+        for mask in (mask_black, mask_white):
+
+            n  = np.roll(spins,  1, axis=0)
+            n += np.roll(spins, -1, axis=0)
+            n += np.roll(spins,  1, axis=1)
+            n += np.roll(spins, -1, axis=1)
+
+            s_sub = spins[mask]
+            n_sub = n[mask]
+            deltaE = 2.0 * s_sub * n_sub
+
+            r = rng.random(s_sub.shape)
+            accept = (deltaE <= 0) | (r < np.exp(-beta * deltaE))
+
+            s_sub[accept] *= -1
+            spins[mask] = s_sub
+
+        ms.append(spins.mean())
+    return np.array(ms)
+\end{verbatim}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{メトロポリス法、熱浴法によるイジングモデルのシミュレーション（小問2）}
+\subsubsection{シミュレーション条件}
+本問では，問題文の指定に従い以下の条件でシミュレーションを行う。
+
+\begin{itemize}
+  \item 系サイズ： $L = 64$。
+  \item 境界条件：トーラス境界。
+  \item 初期状態：全スピン $s_i(0)=+1$。
+  \item 観測量：逐次ステップにおける磁化
+  \[
+  m(t)=\frac{1}{L^2}\sum_{i} s_i(t).
+  \]
+  \item 温度：$z=\exp(2/T)-1=\sqrt{2}$ を満たす温度 $T$。
+\end{itemize}
+
+
+\subsubsection{磁化の時間発展（小問2）}
+
+初期状態 $s_i(0)=+1$ からスタートし，
+熱浴法およびメトロポリス法で $10000$ ステップの更新を行った。
+結果として得られた磁化 $m(t)$ の時間発展を比較したところ、以下の図のようになった。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{task4_2_heat.png}
+  \caption{熱よく法による磁化の時間発展}
+    \label{fig:ising-magnetization}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{task4_2_metro.png}
+  \caption{メトロポリス法による磁化の時間発展}
+    \label{fig:ising-magnetization-metropolis}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{考察}
+
+図\ref{fig:ising-magnetization},図\ref{fig:ising-magnetization-metropolis}から、いずれの方法でも初期の$+1$状態から出発して磁化の逆転を繰り返しながら平衡状態を中心に振動する様子が観察された。
+熱浴法とメトロポリス法の比較では、メトロポリス方法の方が磁化の振動が大きく、不安定であることがわかる。いずれの方法でも、500ステップたてば十分に初期の$+1$状態からの影響が消失しており、小問３で用いるburn-in期間として適切であると考えられる。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{磁化の期待値と系サイズ・温度依存性（小問3）}
+
+本問では，磁化の期待値
+\[
+\langle m\rangle(T,L)
+= \Bigl\langle \frac{1}{L^2}\sum_i s_i \Bigr\rangle
+\]
+の温度 $T$ および系サイズ $L$ への依存性を，
+モンテカルロ法により求める．
+ここで $\langle\cdot\rangle$ は平衡分布に関する期待値を表す。
+問題文の条件に従い，温度は
+\[
+z = \exp(2/T)-1
+\]
+が区間 $z\in(1.2,1.5]$ を等間隔に分割する $12$ 点以上を用いた。
+この区間には二次元イジング模型の臨界温度
+\[
+T_c = \frac{2}{\ln(1+\sqrt{2})}
+\quad\Longleftrightarrow\quad
+z_c = \sqrt{2}
+\]
+が含まれており，秩序–無秩序転移の挙動を観察できる。
+
+系サイズは
+\[
+L = 12,\,16,\,24,\,32,\,48,\,64
+\]
+の 6 通りについて計算した。
+各 $(L,z)$ ごとに，メトロポリス法と熱浴法のいずれかで
+マルコフ連鎖を構成し，十分に長いモンテカルロステップ (MCS) を回した。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{サンプリング方法}
+
+問題文の指示に従い，各条件 $(L,z)$ について
+総サンプリング数が $10^6$ MCS 以上となるように設定した。
+具体的には，以下のような方法で実装した。
+
+\begin{itemize}
+  \item それぞれの $(L,z)$ について独立なイジング系を $N=1000$ 個用意する。
+  \item 各系を同じ温度 $T$ のもとで $1500$ MCS だけ時間発展させる。
+  \item 初期値依存性を除くため，問題(2)の結果を参考に，
+        最初の $500$ ステップを burn-in として捨て，
+        残り $1000$ ステップのみを平均に用いる。
+\end{itemize}
+
+このとき，有効サンプル数は
+\[
+N_{\mathrm{sample}}
+= N \times (1500 - 500)
+= 1000 \times 1000
+= 10^6
+\]
+となり，問題文の条件を満たす。
+
+各ステップ $t$ における $k$ 番目の系の磁化を $m_k(t)$ と書くと，
+磁化の期待値の推定量は
+\[
+\langle m\rangle(T,L)
+\simeq
+\frac{1}{N_{\mathrm{sample}}}
+\sum_{k=1}^{N}\sum_{t=t_{\mathrm{burn}}+1}^{t_{\mathrm{max}}}
+m_k(t),
+\qquad
+t_{\mathrm{burn}}=500,\quad t_{\mathrm{max}}=1500.
+\]
+実装上は，まず各ステップごとに格子平均
+$m_k(t)=L^{-2}\sum_i s_i^{(k)}(t)$ を計算し，
+その後，$k$ と $t$ の二重和を取ることで $\langle m\rangle$ を求めた。
+
+\subsubsection{実装上の工夫}
+
+本問のシミュレーションでは，$L=64$ に対して $10^6$ サンプル以上を要求されるため，
+単純な Python ループに基づく逐次更新では計算量が膨大となり，
+実行時間が現実的でなくなる。
+そこで本研究では次の 3 点の最適化を施し，
+計算速度を大幅に改善した。
+
+\paragraph{(1) 系の並列化：$N=1000$ 系を同時に更新}
+
+問題文にある「$10^6$ MCS 以上」という条件を効率的に満たすために，
+1 つの温度に対して $N=1000$ 個の独立なイジング系を同時に生成し，
+これらを同一の温度で並列に時間発展させた。
+これにより，1 系あたり $1000$ ステップ進めるだけで
+\[
+N \times (1500 - 500)
+= 1000 \times 1000
+= 10^6
+\]
+という必要サンプル数を一度に確保でき，
+ループ回数を従来の $1000$ 分の 1 以下に削減できた。
+
+\paragraph{(2) PyTorch による GPU 並列計算}
+
+NumPy による CPU ベースの更新では，
+$N=1000$ 系を同時に扱うと計算量が急激に増大する。
+そこで本研究では PyTorch を用いて，
+スピン配列 $(K, N, L, L)$ を GPU メモリ上に展開し，
+以下のすべての処理を GPU 上で実行した。
+
+\begin{itemize}
+  \item 近傍和の計算（{\tt torch.roll} によるベクトル化）
+  \item 熱浴法の確率計算（{\tt torch.sigmoid} による高速化）
+  \item メトロポリス法の採択判定
+  \item 磁化の計算（空間平均の並列化）
+\end{itemize}
+
+これにより，CPU 実装では数十分を要する計算が，
+GPU ではわずか数十秒程度で完了するようになった。
+
+\paragraph{(3) 温度点 $z$ の 12 個をひとまとめにして並列更新}
+
+問題文にある ``$z\in(1.2,1.5]$ の範囲で 12 点以上'' という条件に対し，
+通常であれば温度を 1 つずつ変えて 12 回のシミュレーションを行う必要がある。
+しかし本研究では温度の逆温度 $\beta$ を 12 個まとめて
+\[
+\beta_k \quad (k=1,\dots,12)
+\]
+としてベクトル化し，
+スピン配列を
+\[
+\text{spins} \in \mathbb{R}^{K \times N \times L \times L}
+\]
+として $K=12$ 個の温度点を同時並列に扱った。
+これにより，12 回の独立な実行を 1 回にまとめることができ，
+計算時間をさらに 1/12 に短縮できた。
+
+\paragraph{(4) 実行速度の改善と $L=128$ への拡張}
+
+以上の最適化により，$L=64$ および 12 個の温度点に対する
+$10^6$ サンプルの磁化期待値計算が，
+\[
+\text{総実行時間} \approx 2\ \text{分}
+\]
+という高速な実行を達成した。
+
+計算速度に十分余裕が生まれたため，
+本問の指定にはないものの，
+\[
+L = 128
+\]
+についても同一コードで追加計算を行ったところ，
+GPU メモリの制約にも抵触せず，
+問題なく同様のシミュレーションを実行できた。
+
+\subsubsection{結果}
+
+前節で述べた方法により，
+$z=\exp(2/T)-1$ を $z\in(1.2,1.5]$ の範囲で 12 点とり，
+それぞれに対応する温度 $T$ において
+磁化の期待値 $\langle m\rangle(T,L)$ を計算した。
+図\ref{fig:ising-m-vs-T} に，横軸を温度 $T$，縦軸を磁化の期待値としたプロットを示す。
+各曲線は $L=12,16,24,32,48,64,128$ に対応しており，
+系サイズが大きくなるにつれて曲線がより急峻になる様子が見てとれる。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{task4_3_m_vs_T.png}
+  \caption{各系サイズ $L$ における磁化の期待値 $\langle m\rangle$ の
+    温度 $T$ 依存性．}
+  \label{fig:ising-m-vs-T}
+\end{figure}
+
+\subsubsection{考察}
+
+低温側（$T\lesssim 2.2$）では，大きな系サイズ $L\ge 24$ について
+$\langle m\rangle\approx 0.75$--$0.8$ の飽和した値をとり，
+強磁性秩序状態にあることが確認できる。
+温度を上げていくと，$T\approx 2.25$ 付近から
+$\langle m\rangle$ が急激に減少する領域が現れ，
+$T\approx 2.35$ 付近ではほとんどの系で
+$\langle m\rangle\approx 0$ となる。
+高温側（$T\gtrsim 2.4$）では，いずれの系サイズでも
+$\langle m\rangle$ は 0 近傍に張り付いており，
+常磁性状態にあることが分かる。
+
+また，系サイズ $L$ を変化させたときの詳細を見ると，
+小さい系サイズ ($L=12,16$) では
+$\langle m\rangle$ の減少がなだらかであるのに対し，
+$L=48,64,128$ では，
+$T\approx 2.25$～$2.3$ の狭い温度範囲で急峻に落ち込んでいる。
+これは有限サイズ系における相転移の丸め込みの典型的な挙動と一致する。
+
+
+
+
+図\ref{fig:ising-m-vs-T} から，
+二次元イジング模型の強磁性–常磁性転移の特徴的な振る舞いが
+数値的に再現されていることが分かる。
+低温側では系サイズに依らず大きな自発磁化が観測され，
+高温側では $\langle m\rangle\simeq 0$ に収束している。
+臨界温度近傍では，系サイズ $L$ が大きくなるほど
+$\langle m\rangle(T,L)$ の曲線がより急峻となり，
+転移がシャープになっていく。
+
+また，$L$ を大きくすると低温側および高温側の曲線が
+ほぼ重なってくる一方で，
+臨界付近のみ系サイズ依存性が強くなることも確認できる。
+$L < 64$においては$L$によってグラフが大きく変化していたのに対して $L = 64,128$においてはグラフがほぼ重なっていることから、$L=64$あたりで十分に大きな系サイズに達しており、臨界挙動の解析に適していると考えられる。
+

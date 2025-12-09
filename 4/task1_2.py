@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 
 N = 64
 M = 10000
-T = 256
-p_values = [0.64, 0.66, 0.68, 0.7]
+T = 1024
+p_values = [0.62, 0.625, 0.63, 0.635, 0.64, 0.645, 0.65, 0.66, 0.68, 0.7]
 
 def prob_from_s_n_batch(s, n, p):
     # 6 通りすべての α を p から計算しておく

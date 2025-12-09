@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  8 DEC 2025 01:00
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  9 DEC 2025 16:02
  restricted system commands enabled.
 **report_4.tex
 (./report_4.tex
@@ -1609,9 +1609,7 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 
 [1
 
-{c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-
-[2] (./task1.tex
+{c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./task1.tex
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
 (Font)              scaled to size 11.09656pt on input line 2.
 (load cache: extra_lmmono10-regular.luc)
@@ -1627,10 +1625,10 @@ LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 (Font)              scaled to size 4.62357pt on input line 59.
 
 
-[3
+[2
 
 ]
-<task1_1.png, id=154, 860.013pt x 426.393pt>
+<task1_1.png, id=144, 860.013pt x 426.393pt>
 File: task1_1.png Graphic file (type png)
 <use task1_1.png>
 Package luatex.def Info: task1_1.png  used on input line 105.
@@ -1681,26 +1679,25 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 4.16121pt on input line 106.
 
 
-[4]
-<task1_2_sample_mean_linear.png, id=165, 860.013pt x 426.393pt>
-File: task1_2_sample_mean_linear.png Graphic file (type png)
-<use task1_2_sample_mean_linear.png>
-Package luatex.def Info: task1_2_sample_mean_linear.png  used on input line 118
-.
-(luatex.def)             Requested size: 432.48051pt x 214.42564pt.
+[3]
+<task1_2_sample_mean_log.png, id=155, 864.3492pt x 426.393pt>
+File: task1_2_sample_mean_log.png Graphic file (type png)
+<use task1_2_sample_mean_log.png>
+Package luatex.def Info: task1_2_sample_mean_log.png  used on input line 117.
+(luatex.def)             Requested size: 432.48051pt x 213.34561pt.
 
 
-[5<./task1_1.png>]
-<mont_prob1_longtime.pdf, id=181, 864.22874pt x 554.07pt>
+[4<./task1_1.png>]
+<mont_prob1_longtime.pdf, id=171, 864.22874pt x 554.07pt>
 File: mont_prob1_longtime.pdf Graphic file (type pdf)
 <use mont_prob1_longtime.pdf>
-Package luatex.def Info: mont_prob1_longtime.pdf  used on input line 129.
+Package luatex.def Info: mont_prob1_longtime.pdf  used on input line 131.
 (luatex.def)             Requested size: 432.48051pt x 277.27104pt.
-)
 
-[6<./task1_2_sample_mean_linear.png><./mont_prob1_longtime.pdf>] (./task2.tex
 
-[7](load cache: extra_lmroman10-bold.luc)
+[5<./task1_2_sample_mean_log.png>]) (./task2.tex
+
+[6<./mont_prob1_longtime.pdf>](load cache: extra_lmroman10-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10> not available
 (Font)              Font shape `JT3/gt/m/n' tried instead on input line 63.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
@@ -1711,11 +1708,13 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 8.44485pt on input line 63.
 
 
-[8]) (./task3.tex
+[7]) (./task3.tex
 
-[9]
+[8]
 
-[10]) (./task4.tex(load cache: extra_lmroman10-italic.luc)
+[9]) (./task4.tex
+
+[10](load cache: extra_lmroman10-italic.luc)
 LaTeX Font Info:    Font shape `JT3/gt/m/it' in size <10> not available
 (Font)              Font shape `JT3/gt/m/n' tried instead on input line 17.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
@@ -1726,8 +1725,6 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 8.44485pt on input line 17.
 
 
-[11]
-
 Class ltjsarticle Warning: deprecated old font command `\tt' used.
 (ltjsarticle)              You should note, that since 1994 LaTeX2e provides a
 (ltjsarticle)              new font selection scheme called NFSS2 with several
@@ -1737,37 +1734,37 @@ Class ltjsarticle Warning: deprecated old font command `\tt' used.
 
 
 
-[12]
+[11]
 
-[13]
-<task4_2_heat.png, id=301, 462.528pt x 346.896pt>
+[12]
+<task4_2_heat.png, id=291, 462.528pt x 346.896pt>
 File: task4_2_heat.png Graphic file (type png)
 <use task4_2_heat.png>
 Package luatex.def Info: task4_2_heat.png  used on input line 164.
 (luatex.def)             Requested size: 409.71692pt x 307.302pt.
 
 
-[14]
-<task4_2_metro.png, id=308, 462.528pt x 346.896pt>
+[13]
+<task4_2_metro.png, id=298, 462.528pt x 346.896pt>
 File: task4_2_metro.png Graphic file (type png)
 <use task4_2_metro.png>
 Package luatex.def Info: task4_2_metro.png  used on input line 171.
 (luatex.def)             Requested size: 409.71692pt x 307.302pt.
 
 
-[15<./task4_2_heat.png><./task4_2_metro.png>]
+[14<./task4_2_heat.png><./task4_2_metro.png>]
+
+[15]
 
 [16]
-
-[17]
-<task4_3_m_vs_T.png, id=337, 691.58376pt x 491.8375pt>
+<task4_3_m_vs_T.png, id=327, 691.58376pt x 491.8375pt>
 File: task4_3_m_vs_T.png Graphic file (type png)
 <use task4_3_m_vs_T.png>
 Package luatex.def Info: task4_3_m_vs_T.png  used on input line 341.
 (luatex.def)             Requested size: 409.71692pt x 291.38237pt.
 
 
-[18<./task4_3_m_vs_T.png>])
+[17<./task4_3_m_vs_T.png>])
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 110.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
@@ -1778,16 +1775,16 @@ Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task1_1.py
 
-[19])
+[18])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task1_2.py
 
-[20])
+[19])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
-[21]
+[20]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task2_1.py)
@@ -1797,27 +1794,27 @@ Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task4_2_heat
 .py
 
-[22])
+[21])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task4_2_metr
 o.py
 
-[23])
+[22])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task4_3.py
 
+[23]
+
 [24]
 
-[25]
-
-[26])
+[25])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
-[27] (./report_4.aux)
+[26] (./report_4.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -1828,18 +1825,18 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
 Package rerunfilecheck Info: File `report_4.out' has not changed.
-(rerunfilecheck)             Checksum: D37C0903939FB056603504F45A4F90DD;3650.
+(rerunfilecheck)             Checksum: 60BCCCEA6729F903FB8EBF5C331FCCDE;3590.
 )
 
 Here is how much of LuaTeX's memory you used:
- 22625 strings out of 476291
- 1458221,1144653 words of node,token memory allocated
+ 22623 strings out of 476291
+ 1458235,1144653 words of node,token memory allocated
  3131 words of node memory still in use:
    12 hlist, 2 vlist, 7 rule, 1 local_par, 5 glue, 4 kern, 2 penalty, 3 glyph, 1
 107 attribute, 57 glue_spec, 113 attribute_list, 1 write, 15 user_defined nodes
-   avail lists: 1:36,2:202421,3:932,4:32604,5:23095,6:118,7:20607,8:62,9:45220,1
-0:44,11:1422
- 43874 multiletter control sequences out of 65536+600000
+   avail lists: 1:51,2:201390,3:937,4:33977,5:24360,6:118,7:21483,8:62,9:47256,1
+0:44,11:1498
+ 43873 multiletter control sequences out of 65536+600000
  130 fonts using 102341295 bytes
  119i,12n,115p,1785b,1838s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono8-regular.otf><c:/tex
@@ -1867,10 +1864,10 @@ exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:/texlive/2025/texmf-dist
 /fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/texlive/2025/texmf-dist/font
 s/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on report_4.pdf (27 pages, 2017681 bytes).
+Output written on report_4.pdf (26 pages, 2189817 bytes).
 
-PDF statistics: 953 PDF objects out of 1000 (max. 8388607)
- 837 compressed objects within 9 object streams
- 510 named destinations out of 1000 (max. 131072)
- 185 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 944 PDF objects out of 1000 (max. 8388607)
+ 829 compressed objects within 9 object streams
+ 509 named destinations out of 1000 (max. 131072)
+ 177 words of extra memory for PDF output out of 10000 (max. 100000000)
 

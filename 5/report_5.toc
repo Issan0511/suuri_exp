@@ -17,7 +17,13 @@
 \contentsline {section}{\numberline {3}課題17：勾配およびヘッセ行列の解析的導出と実装との対応}{5}{section.3}%
 \contentsline {subsection}{\numberline {3.1}微分結果}{6}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}コードとの対応}{6}{subsection.3.2}%
-\contentsline {section}{\numberline {付録A}ソースコード}{6}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}課題15のコード}{7}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}課題16のコード}{9}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}課題17のコード}{12}{subsection.A.3}%
+\contentsline {section}{\numberline {4}課題18：最急降下法およびニュートン法による2変数関数の最小化}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}原理と方法}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}実験方法}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}結果}{7}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}考察}{8}{subsection.4.4}%
+\contentsline {section}{\numberline {付録A}ソースコード}{8}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}課題15のコード}{8}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}課題16のコード}{11}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}課題17のコード}{14}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}課題18のコード}{15}{subsection.A.4}%

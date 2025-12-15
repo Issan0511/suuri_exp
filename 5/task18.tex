@@ -1,0 +1,84 @@
+
+\subsection{原理と方法}
+本課題では，2変数関数
+\begin{align}
+f(x_0,x_1)
+= x_0^2 + e^{x_0} + x_1^4 + x_1^2 - 2x_0x_1 + 3
+\end{align}
+を最小化する．勾配およびヘッセ行列は
+\begin{align}
+\nabla f(x)
+&=
+\begin{pmatrix}
+2x_0 + e^{x_0} - 2x_1\\
+4x_1^3 + 2x_1 - 2x_0
+\end{pmatrix},\\
+\nabla^2 f(x)
+&=
+\begin{pmatrix}
+2+e^{x_0} & -2\\
+-2 & 12x_1^2+2
+\end{pmatrix}
+\end{align}
+である．更新は
+\begin{align}
+x_{k+1}=x_k+t_k d_k
+\end{align}
+とし，方向 $d_k$ は (a) 最急降下法 $d_k=-\nabla f(x_k)$，
+(b) ニュートン法 $\nabla^2 f(x_k)d_k=-\nabla f(x_k)$ の解として定める．
+
+ステップ幅 $t_k$ はバックトラック法（Armijo 条件）で決定した．すなわち，
+$t\leftarrow t_{\mathrm{init}}$ から開始し，
+\begin{align}
+f(x_k+t d_k)\le f(x_k)+\xi t\,\langle \nabla f(x_k), d_k\rangle
+\end{align}
+を満たすまで $t\leftarrow \rho t$ により縮小する．
+
+\subsection{実験方法}
+初期点は $x_0=(1,1)^{\mathsf T}$ とし，共通パラメータを
+\begin{align}
+\xi=1.0\times 10^{-4},\qquad
+\rho=0.5,\qquad
+t_{\mathrm{init}}=1
+\end{align}
+とした．停止条件は $\|\nabla f(x_k)\|\le 1.0\times 10^{-6}$ とし，
+最大反復回数は $1000$ とした．
+各反復で $(x_k,f(x_k))$ を保存し，$x_0$--$x_1$ 平面上の等高線図に反復点列を重ねて可視化した
+（図\ref{fig:task18_traj}）．
+
+\subsection{結果}
+(a) バックトラック法付き最急降下法および (b) バックトラック法付きニュートン法の収束結果を
+表\ref{tab:task18_result}に示す．両手法は同一の解に収束し，
+ニュートン法の方が少ない反復回数で収束した．
+
+\begin{table}[h]
+\centering
+\caption{課題18の計算結果（初期点 $x_0=(1,1)^{\mathsf T}$）}
+\label{tab:task18_result}
+\begin{tabular}{lcccc}
+\hline
+手法 & $x^\ast_0$ & $x^\ast_1$ & $f(x^\ast)$ & 反復回数 $k$ \\
+\hline
+最急降下法+BT & $-0.7335$ & $-0.4933$ & $3.597$ & $31$ \\
+ニュートン法+BT & $-0.7335$ & $-0.4933$ & $3.597$ & $6$ \\
+\hline
+\end{tabular}
+\end{table}
+
+table\ref{tab:task18_result}より，ニュートン法は最急降下法に比べて訳5分の1の反復回数で収束している．
+\\
+\\
+反復点列を等高線図上に重ねた結果を図\ref{fig:task18_traj}に示す．
+
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.75\linewidth]{task18.png}
+ \caption{$x_0$--$x_1$ 平面における等高線図と反復点列．
+ 〇が最急降下法+BT，□がニュートン法+BTの反復点列を表す．}
+ \label{fig:task18_traj}
+\end{figure}
+
+\subsection{考察}
+図\ref{fig:task18_traj}より，最急降下法では反復点同士を結ぶ線分が等高線に対して直交しているのに対し，ニュートン法では直交していないものの、あたかも低い場所を知っているかのように、等高線の谷に沿って効率的に移動している様子がわかる．
+これは，ニュートン法がヘッセ行列を用いて関数の曲率を考慮しているためであり，その結果として少ない反復回数で収束していると考えられる．

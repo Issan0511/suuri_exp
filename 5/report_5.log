@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  15 DEC 2025 15:50
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  15 DEC 2025 16:04
  restricted system commands enabled.
 **report_5.tex
 (./report_5.tex
@@ -1603,7 +1603,7 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 {c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./task15.tex
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
 (Font)              scaled to size 11.09656pt on input line 10.
-<task15.png, id=101, 462.528pt x 346.896pt>
+<task15.png, id=131, 462.528pt x 346.896pt>
 File: task15.png Graphic file (type png)
 <use task15.png>
 Package luatex.def Info: task15.png  used on input line 49.
@@ -1667,7 +1667,7 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<task16.png, id=137, 462.528pt x 346.896pt>
+<task16.png, id=167, 462.528pt x 346.896pt>
 File: task16.png Graphic file (type png)
 <use task16.png>
 Package luatex.def Info: task16.png  used on input line 58.
@@ -1703,39 +1703,78 @@ Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'.)
+Removing  `ltj.listings_unicode' from `process_input_buffer'.) (./task18.tex
 
 [6]
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmss' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4.5> not available
+(Font)              size <5> substituted on input line 56.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<task18.png, id=222, 505.89pt x 433.62pt>
+File: task18.png Graphic file (type png)
+<use task18.png>
+Package luatex.def Info: task18.png  used on input line 76.
+(luatex.def)             Requested size: 341.43307pt x 292.66103pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+)
+
+[7]
+
+[8<./task18.png>]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 108.
+nput line 111.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task15.py
 
-[7]
+[9]
 
-[8])
+[10])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task16.py
 
-[9]
+[11]
 
-[10]
+[12]
 
-[11])
+[13])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task17.py
 
-[12])
+[14])
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task18.py
+
+[15]
+
+[16]
+
+[17]
+
+[18]
+
+[19]
+
+[20])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
-[13]
-
-[14] (./report_5.aux)
+[21] (./report_5.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -1746,20 +1785,21 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
 Package rerunfilecheck Info: File `report_5.out' has not changed.
-(rerunfilecheck)             Checksum: CB8B788F4A8758E9CFD9DE5F5139ACF2;2073.
+(rerunfilecheck)             Checksum: B2C1DCFB08CE0D555D64B01221B33B2F;2809.
 )
 
 Here is how much of LuaTeX's memory you used:
- 22462 strings out of 476291
- 1166597,1144653 words of node,token memory allocated
- 1553 words of node memory still in use:
-   12 hlist, 2 vlist, 7 rule, 1 local_par, 5 glue, 4 kern, 2 penalty, 3 glyph, 3
-83 attribute, 57 glue_spec, 48 attribute_list, 1 write, 15 user_defined nodes
-   avail lists: 1:23,2:174391,3:872,4:28288,5:19894,6:118,7:16701,8:26,9:39155,1
-0:41,11:1198
- 43786 multiletter control sequences out of 65536+600000
- 124 fonts using 101561663 bytes
- 119i,15n,115p,1785b,1712s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 22881 strings out of 476291
+ 1458255,1144653 words of node,token memory allocated
+ 1433 words of node memory still in use:
+   12 hlist, 2 vlist, 5 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 1 margin_k
+ern, 3 glyph, 339 attribute, 57 glue_spec, 44 attribute_list, 1 write, 15 user_d
+efined nodes
+   avail lists: 1:22,2:216977,3:944,4:35243,5:24894,6:119,7:20021,8:28,9:49534,1
+0:41,11:1540
+ 43885 multiletter control sequences out of 65536+600000
+ 129 fonts using 101873407 bytes
+ 119i,15n,115p,1785b,1778s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono8-regular.otf><c:/tex
 live/2025/texmf-dist/fonts/opentype/public/lm/lmroman5-regular.otf><c:/texlive/2
 025/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/texlive/2025/te
@@ -1778,13 +1818,14 @@ ive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2025/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2025/texmf-dist/font
 s/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmr9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.p
-fb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texl
-ive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on report_5.pdf (14 pages, 374665 bytes).
+cm/cmss8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texl
+ive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
+Output written on report_5.pdf (21 pages, 671140 bytes).
 
-PDF statistics: 739 PDF objects out of 1000 (max. 8388607)
- 669 compressed objects within 7 object streams
- 463 named destinations out of 1000 (max. 131072)
- 137 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1120 PDF objects out of 1200 (max. 8388607)
+ 1036 compressed objects within 11 object streams
+ 771 named destinations out of 1000 (max. 131072)
+ 185 words of extra memory for PDF output out of 10000 (max. 100000000)
 

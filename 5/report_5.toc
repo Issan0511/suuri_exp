@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}課題15：}{2}{section.1}%
+\contentsline {section}{\numberline {2}課題15}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}原理と方法}{2}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}二分法}{2}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}ニュートン法}{2}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}実験方法}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}結果}{3}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}関数のグラフ}{3}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}零点}{3}{subsubsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.4}考察}{3}{subsection.2.4}%
+\contentsline {section}{\numberline {3}課題16：}{4}{section.3}%
+\contentsline {section}{\numberline {付録A}ソースコード}{4}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}課題15のコード}{4}{subsection.A.1}%

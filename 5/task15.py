@@ -36,13 +36,14 @@ def plot_function():
     plt.title("Graph of f(x) = x^3 + 2x^2 - 5x - 6")
     plt.grid(True)
     plt.show()
+    plt.savefig("task15.png")
 
 
 # -------------------------
 # (b) 二分法
 # -------------------------
 
-def bisection(f, a, b, eps=1e-8, max_iter=1000):
+def bisection(f, a, b, eps=1e-10, max_iter=1000):
     """[a, b] で二分法により f(x) = 0 の解を求める.
        f(a) と f(b) の符号は異なることが前提。
     """
@@ -90,7 +91,7 @@ def solve_with_bisection():
 # (c) ニュートン法
 # -------------------------
 
-def newton(f, df, x0, eps=1e-8, max_iter=1000):
+def newton(f, df, x0, eps=1e-10, max_iter=1000):
     """ニュートン法: f(x) = 0 の解を初期値 x0 から探索."""
     x = x0
     for _ in range(max_iter):

@@ -8,13 +8,16 @@
 \contentsline {subsubsection}{\numberline {1.3.2}零点}{3}{subsubsection.1.3.2}%
 \contentsline {subsection}{\numberline {1.4}考察}{3}{subsection.1.4}%
 \contentsline {section}{\numberline {2}課題16：最急降下法およびニュートン法による停留点計算}{4}{section.2}%
-\contentsline {section}{\numberline {3}課題16}{4}{section.3}%
-\contentsline {subsection}{\numberline {3.1}原理と方法}{4}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}(a) 最急降下法}{4}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}(b) ニュートン法}{4}{subsubsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.2}実装}{4}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}結果}{4}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}考察}{5}{subsection.3.4}%
-\contentsline {section}{\numberline {付録A}ソースコード}{5}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}課題15のコード}{5}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}課題16のコード}{8}{subsection.A.2}%
+\contentsline {subsection}{\numberline {2.1}原理と方法}{4}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}(a) 最急降下法}{4}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}(b) ニュートン法}{4}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}実装}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}結果}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}考察}{5}{subsection.2.4}%
+\contentsline {section}{\numberline {3}課題17：勾配およびヘッセ行列の解析的導出と実装との対応}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}微分結果}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}コードとの対応}{6}{subsection.3.2}%
+\contentsline {section}{\numberline {付録A}ソースコード}{6}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}課題15のコード}{7}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}課題16のコード}{9}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}課題17のコード}{12}{subsection.A.3}%

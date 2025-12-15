@@ -1,0 +1,78 @@
+
+本課題では，次の関数
+\begin{align}
+f(x_0,x_1)
+= x_0^2 + e^{x_0} + x_1^4 + x_1^2 - 2x_0x_1 + 3
+\end{align}
+について，勾配およびヘッセ行列を解析的に求め，それを実装したコードとの対応を示す．
+
+\subsection{微分結果}
+
+まず，各変数による1階微分は
+\begin{align}
+\frac{\partial f}{\partial x_0}
+&= 2x_0 + e^{x_0} - 2x_1, \\
+\frac{\partial f}{\partial x_1}
+&= 4x_1^3 + 2x_1 - 2x_0
+\end{align}
+である．従って勾配ベクトルは
+\begin{align}
+\nabla f(x)
+=
+\begin{pmatrix}
+2x_0 + e^{x_0} - 2x_1 \\
+4x_1^3 + 2x_1 - 2x_0
+\end{pmatrix}
+\end{align}
+と表される．
+
+次に，2階微分よりヘッセ行列は
+\begin{align}
+\nabla^2 f(x)
+=
+\begin{pmatrix}
+\displaystyle \frac{\partial^2 f}{\partial x_0^2}
+&
+\displaystyle \frac{\partial^2 f}{\partial x_0 \partial x_1}
+\\[6pt]
+\displaystyle \frac{\partial^2 f}{\partial x_1 \partial x_0}
+&
+\displaystyle \frac{\partial^2 f}{\partial x_1^2}
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 + e^{x_0} & -2 \\
+-2 & 12x_1^2 + 2
+\end{pmatrix}
+\end{align}
+となる．
+
+\subsection{コードとの対応}
+
+上記の解析結果は，以下の Python コードとして実装されている．
+
+\begin{itemize}
+ \item 目的関数
+\begin{lstlisting}[language=Python]
+f = x0**2 + exp(x0) + x1**4 + x1**2 - 2*x0*x1 + 3
+\end{lstlisting}
+
+ \item 勾配
+\begin{lstlisting}[language=Python]
+g0 = 2*x0 + exp(x0) - 2*x1
+g1 = 4*x1**3 + 2*x1 - 2*x0
+g  = [g0, g1]
+\end{lstlisting}
+
+ \item ヘッセ行列
+\begin{lstlisting}[language=Python]
+h00 = 2 + exp(x0)
+h01 = -2
+h10 = -2
+h11 = 12*x1**2 + 2
+H = [[h00, h01],
+     [h10, h11]]
+\end{lstlisting}
+\end{itemize}
+
+これにより，関数値・勾配・ヘッセ行列が理論式と一致して計算されていることが確認できる．

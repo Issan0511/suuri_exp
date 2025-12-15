@@ -35,7 +35,7 @@ def plot_function():
     plt.ylabel("f(x)")
     plt.title("Graph of f(x) = x^3 + 2x^2 - 5x - 6")
     plt.grid(True)
-    plt.savefig("graphs/task15.png")
+    plt.savefig("task15.png")
     plt.show()
 
 

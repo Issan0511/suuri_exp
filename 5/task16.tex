@@ -1,0 +1,71 @@
+\section{課題16}
+
+\subsection{原理と方法}
+本課題では，次の関数
+\begin{align}
+f(x) := \frac{1}{3}x^3 - x^2 - 3x + \frac{5}{3}
+\end{align}
+の停留点（$f'(x)=0$ を満たす点）を，(a) 最急降下法，(b) ニュートン法により数値的に求める．
+まず微分は
+\begin{align}
+f'(x) &= x^2 - 2x - 3 = (x-3)(x+1),\\
+f''(x) &= 2x - 2
+\end{align}
+である．従って停留点は解析的には $x=-1,\,3$ の2点である．
+
+\subsubsection{(a) 最急降下法}
+1次元では勾配 $\nabla f(x)$ は $f'(x)$ に一致するため，最急降下法は
+\begin{align}
+x_{k+1} = x_k - t_k f'(x_k), \qquad t_k = \frac{1}{k+1}
+\end{align}
+で与えられる．初期点は $x_0=1/2$ とする．停止判定は $|f'(x_k)|\le \varepsilon$（$\varepsilon=10^{-8}$）とし，最大反復回数も設ける．
+
+\subsubsection{(b) ニュートン法}
+停留点探索（$f'(x)=0$ の零点探索）としてのニュートン法は
+\begin{align}
+x_{k+1} = x_k - t_k\frac{f'(x_k)}{f''(x_k)}, \qquad t_k=1
+\end{align}
+で与えられる．初期点は $x_0=5$ とし，(a) と同様に $|f'(x_k)|\le \varepsilon$ を停止判定とした．なお，本問題では $f''(x)=0$（すなわち $x=1$）で更新が不能となるため，実装では $f''(x_k)=0$ の場合を例外として扱う．
+
+\subsection{実装}
+Python により $f,f',f''$ をそれぞれ関数として実装し，(a) と (b) の更新式をそのまま反復した．
+各反復で $(x_k, f(x_k), |f'(x_k)|)$ を履歴として保存し，収束挙動の可視化に用いた．
+
+\subsection{結果}
+(a) 最急降下法（$x_0=0.5,\ t_k=1/(k+1)$）および (b) ニュートン法（$x_0=5,\ t_k=1$）の結果を表\ref{tab:task16_result}に示す．
+両手法とも停留点 $x^\ast=3$ に収束した（もう一つの停留点 $x=-1$ には到達しなかった）．\\
+\\
+
+
+
+\begin{table}[h]
+\centering
+\caption{課題16の計算結果（$\varepsilon=10^{-8}$）}
+\label{tab:task16_result}
+\begin{tabular}{lcccc}
+\hline
+手法 & 初期値 $x_0$ & 近似解 $x^\ast$ & $f(x^\ast)$ & 反復回数 $k$ \\
+\hline
+最急降下法 & 0.5000 & 3.000 & -7.333 & 193 \\
+ニュートン法 & 5.000 & 3.000 & -7.333 & 5 \\
+\hline
+\end{tabular}
+\end{table}
+
+両方法による反復点の推移を，関数 $y=f(x)$ 上に重ねて図\ref{fig:task16_iter}に示す．
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.7\linewidth]{task16.png}
+ \caption{関数 $y=f(x)$ 上における反復点の推移．
+ 青丸は最急降下法，橙四角はニュートン法による反復点を表す．}
+ \label{fig:task16_iter}
+\end{figure}
+
+\subsection{考察}
+図\ref{fig:task16_iter}より，最急降下法では反復点が谷に沿って
+緩やかに移動しており，ステップサイズ $t_k=1/(k+1)$ が減少することで
+後半の収束が遅くなっていることが視覚的に確認できる．
+一方，ニュートン法では局所的な2次近似に基づき更新が行われるため，
+停留点近傍では大きなジャンプを伴い，極めて高速に収束している．
+

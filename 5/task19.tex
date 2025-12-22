@@ -1,0 +1,76 @@
+
+\subsection{原理と方法}
+本課題では，$x=(x_0,x_1)^{\mathsf T}\in\mathbb{R}^2$ に対し
+\begin{align}
+f(x)=\sum_{i=0}^{2} f_i(x)^2,\qquad
+f_i(x)=y_i-x_0\left(1-x_1^{i+1}\right)
+\end{align}
+を最小化する．定数は $y_0=1.5,\ y_1=2.25,\ y_2=2.625$ とする（最適値は $0$，最適解は $x^\ast=(3,0.5)^{\mathsf T}$）．
+
+$f_i$ の勾配およびヘッセ行列は
+\begin{align}
+\nabla f_i(x)
+&=
+\begin{pmatrix}
+-1+x_1^{i+1}\\
+x_0(i+1)x_1^i
+\end{pmatrix},\\
+\nabla^2 f_0(x)
+&=
+\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix},\qquad
+\nabla^2 f_i(x)
+=
+\begin{pmatrix}
+0 & (i+1)x_1^i\\
+(i+1)x_1^i & x_0(i+1)i\,x_1^{i-1}
+\end{pmatrix}\ (i=1,2)
+\end{align}
+である．よって，勾配・ヘッセ行列は課題18と同様に
+\begin{align}
+\nabla f(x) &= 2\sum_{i=0}^{2} f_i(x)\nabla f_i(x),\\
+\nabla^2 f(x) &= 2\sum_{i=0}^{2}\left( f_i(x)\nabla^2 f_i(x)+\nabla f_i(x)\nabla f_i(x)^{\mathsf T}\right)
+\end{align}
+より計算できる．更新式 $x_{k+1}=x_k+t_k d_k$，方向の選び方（最急降下法／ニュートン法），およびバックトラック法（Armijo 条件）によるステップ幅決定は課題18と同様である．
+
+\subsection{実験方法}
+初期点は $x_0=(2,0)^{\mathsf T}$ とし，共通パラメータを
+\begin{align}
+\xi=1.0\times 10^{-4},\qquad
+\rho=0.5,\qquad
+t_{\mathrm{init}}=1
+\end{align}
+とした．停止条件は $\|\nabla f(x_k)\|\le 1.0\times 10^{-6}$ とし，
+最大反復回数は $1000$ とした．各反復で $(x_k,f(x_k))$ を保存し，$x_0$--$x_1$ 平面上の等高線図に反復点列を重ねて可視化した（図\ref{fig:task19_traj}）．
+
+\subsection{結果}
+(a) バックトラック法付き最急降下法および (b) バックトラック法付きニュートン法の収束結果を表\ref{tab:task19_result}に示す．両手法はほぼ同一の解に収束し，ニュートン法の方が少ない反復回数で収束した．
+
+\begin{table}[h]
+\centering
+\caption{課題19の計算結果（初期点 $x_0=(2,0)^{\mathsf T}$）}
+\label{tab:task19_result}
+\begin{tabular}{lcccc}
+\hline
+手法 & $x^\ast_0$ & $x^\ast_1$ & $f(x^\ast)$ & 反復回数 $k$ \\
+\hline
+最急降下法+BT & $2.99999781$ & $0.49999946$ & $7.68\times 10^{-13}$ & $791$ \\
+ニュートン法+BT & $3.00000013$ & $0.50000005$ & $9.47\times 10^{-15}$ & $5$ \\
+\hline
+\end{tabular}
+\end{table}
+
+表\ref{tab:task19_result}より，ニュートン法は最急降下法に比べて大幅に少ない反復回数で収束している．反復点列を等高線図上に重ねた結果を図\ref{fig:task19_traj}に示す．
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.75\linewidth]{task19.png}
+ \caption{$x_0$--$x_1$ 平面における等高線図と反復点列．
+ 〇が最急降下法+BT，□がニュートン法+BTの反復点列を表す．}
+ \label{fig:task19_traj}
+\end{figure}
+
+\subsection{考察}
+図\ref{fig:task19_traj}より，最急降下法では最適解近傍でジグザグに進む傾向が見られ，収束までに多くの反復を要した．一方，ニュートン法はヘッセ行列により曲率情報を用いるため，より適切な方向・スケールで更新でき，少ない反復回数で効率的に収束したと考えられる．

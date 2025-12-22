@@ -1,0 +1,114 @@
+
+\[
+\min_{x\in\mathbb{R}^n}\ \frac12 x^\top Qx + c^\top x
+\quad \text{subject to}\quad Ax \le b,
+\]
+ただし $Q$ は対称半正定値行列とする。
+
+\subsection{課題1}
+
+\subsection{課題2}
+
+\subsection{課題3}
+
+
+本課題では， University of California, Irvine の\href{https://www.math.uci.edu/~qnie/Publications/NumericalOptimization.pdf}{Numerical Optimization} のチャプター16.6 "INTERIOR-POINT METHODS"を参考に，内点法を実装した。
+文献で扱われている $Ax\ge b$ の形式に合わせるため，
+\[
+Ax\le b \;\;\Longleftrightarrow\;\; (-A)x \ge (-b)
+\]
+と左右反転し，$\tilde A=-A,\ \tilde b=-b$ を用いて
+\[
+\tilde A x \ge \tilde b
+\]
+として以下を進める（記号の簡略化のため，再び $A,b$ と書く）。
+
+制約 $Ax\ge b$ に対し，スラック変数 $y\ge0$ を導入すると，
+\[
+Ax-y-b=0
+\]
+と書ける。これに対する KKT 条件は
+\[
+\begin{cases}
+Qx-A^\top\lambda+c=0,\\
+Ax-y-b=0,\\
+y_i\lambda_i=0\quad (i=1,\dots,m),\\
+y\ge0,\ \lambda\ge0
+\end{cases}
+\]
+である。問題は凸であるため，これらの条件は必要十分である。
+
+相補性条件 $y_i\lambda_i=0$ は境界条件であり直接扱いにくいため，
+補完性の平均尺度
+\[
+\mu=\dfrac{y^\top\lambda}{m}
+\]
+を導入し，摂動 KKT 系
+\[
+F(x,y,\lambda;\sigma\mu)=
+\begin{pmatrix}
+Qx-A^\top\lambda+c\\
+Ax-y-b\\
+Y\Lambda e-\sigma\mu e
+\end{pmatrix}
+=0
+\]
+を考える。ここで
+$Y=\mathrm{diag}(y_1,\dots,y_m)$，
+$\Lambda=\mathrm{diag}(\lambda_1,\dots,\lambda_m)$，
+$e=(1,\dots,1)^\top$，
+$\sigma\in(0,1)$ は固定定数である。
+$\sigma\mu>0$ の解は central path を成し，$\sigma\mu\to0$ により
+元の KKT 解（最適解）に収束する。
+
+現在の反復点 $z=(x,y,\lambda)$ において，
+Newton 法により
+\[
+F(z+\Delta z)\approx F(z)+J_F(z)\Delta z=0
+\]
+を解く。ヤコビ行列は
+\[
+J_F(z)=
+\begin{pmatrix}
+Q & 0 & -A^\top\\
+A & -I & 0\\
+0 & \Lambda & Y
+\end{pmatrix}
+\]
+であり，Newton 方程式は
+\[
+\begin{pmatrix}
+Q & 0 & -A^\top\\
+A & -I & 0\\
+0 & 0 & Y
+\end{pmatrix}
+\begin{pmatrix}
+\Delta x\\
+\Delta y\\
+\Delta\lambda
+\end{pmatrix}
+=
+\begin{pmatrix}
+-r_d\\
+-r_p\\
+-\Lambda Y e+\sigma\mu e
+\end{pmatrix}
+\]
+となる。ここで
+\[
+r_d=Qx-A^\top\lambda+c,\qquad
+r_p=Ax-y-b
+\]
+はそれぞれ双対残差および主残差である。
+
+得られた方向に対して
+\[
+(x^+,y^+,\lambda^+)=(x,y,\lambda)+\alpha(\Delta x,\Delta y,\Delta\lambda)
+\]
+と更新する。ただし $y^+>0,\ \lambda^+>0$ を保つように
+$\alpha\in(0,1]$ を選ぶ。
+
+以上を反復し，
+$\|r_p\|,\ \|r_d\|,\ \mu$ が十分小さくなった時点で停止する。
+凸性より，停止点 $x$ は元の制約 $Ax\le b$ を満たす
+二次計画問題の最適解である。

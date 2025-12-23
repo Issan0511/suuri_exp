@@ -25,9 +25,9 @@ f(x_0,x_1)
 x_{k+1}=x_k+t_k d_k
 \end{align}
 とし，方向 $d_k$ は (a) 最急降下法 $d_k=-\nabla f(x_k)$，
-(b) ニュートン法 $\nabla^2 f(x_k)d_k=-\nabla f(x_k)$ の解として定める．
+(b) ニュートン法 $\nabla^2 f(x_k)d_k=-\nabla f(x_k)$ の解として定める\cite{exp2025}．
 
-ステップ幅 $t_k$ はバックトラック法（Armijo 条件）で決定した．すなわち，
+ステップ幅 $t_k$ はバックトラック法（Armijo 条件）で決定した\cite{exp2025}．すなわち，
 $t\leftarrow t_{\mathrm{init}}$ から開始し，
 \begin{align}
 f(x_k+t d_k)\le f(x_k)+\xi t\,\langle \nabla f(x_k), d_k\rangle

@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  22 DEC 2025 23:10
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  4 JAN 2026 16:24
  restricted system commands enabled.
 **report_5.tex
 (./report_5.tex
@@ -1756,7 +1756,7 @@ LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 
 [13]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 115.
+nput line 114.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task15.py
@@ -1773,10 +1773,10 @@ Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task16.py
 
 [17]
 
-[18])
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
+[18]
 
-[19]
+[19])
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task17.py
@@ -1811,26 +1811,28 @@ Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task19.py
 
 [30])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
+
+[31]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./addtask.py
-
-[31]
 
 [32])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.(load cache: extra_
 lmroman10-italic.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/it' in size <10> not available
-(Font)              Font shape `JT3/mc/m/n' tried instead on input line 140.
+(Font)              Font shape `JT3/mc/m/n' tried instead on input line 139.
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 8.44485pt on input line 140.
+(Font)              scaled to size 8.44485pt on input line 139.
 LaTeX Font Info:    Font shape `JY3/mc/m/it' in size <10> not available
-(Font)              Font shape `JY3/mc/m/n' tried instead on input line 140.
+(Font)              Font shape `JY3/mc/m/n' tried instead on input line 139.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 8.44485pt on input line 140.
+(Font)              scaled to size 8.44485pt on input line 139.
 
 
-[33] (./report_5.aux)
+[33]
+
+[34] (./report_5.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -1845,17 +1847,17 @@ Package rerunfilecheck Info: File `report_5.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 23458 strings out of 476291
- 1458269,1144653 words of node,token memory allocated
+ 23459 strings out of 476291
+ 1458290,1144653 words of node,token memory allocated
  1955 words of node memory still in use:
    12 hlist, 2 vlist, 5 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 1 margin_k
 ern, 3 glyph, 579 attribute, 57 glue_spec, 65 attribute_list, 1 write, 15 user_d
 efined nodes
-   avail lists: 1:22,2:215453,3:878,4:35142,5:25351,6:126,7:24506,8:58,9:49447,1
-0:41,11:1560
+   avail lists: 1:21,2:212965,3:862,4:34871,5:24864,6:127,7:26583,8:58,9:49124,1
+0:41,11:1536
  43993 multiletter control sequences out of 65536+600000
  131 fonts using 102137103 bytes
- 119i,15n,115p,1785b,1740s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 119i,15n,115p,1785b,1772s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf><c:/te
 xlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono8-regular.otf><c:/texlive/2
 025/texmf-dist/fonts/opentype/public/lm/lmroman5-regular.otf><c:/texlive/2025/te
@@ -1883,10 +1885,10 @@ ype1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmsy9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbol
 s/msbm7.pfb>
-Output written on report_5.pdf (33 pages, 1015458 bytes).
+Output written on report_5.pdf (34 pages, 1016142 bytes).
 
-PDF statistics: 1720 PDF objects out of 1728 (max. 8388607)
- 1609 compressed objects within 17 object streams
- 1218 named destinations out of 1440 (max. 131072)
+PDF statistics: 1724 PDF objects out of 1728 (max. 8388607)
+ 1612 compressed objects within 17 object streams
+ 1219 named destinations out of 1440 (max. 131072)
  281 words of extra memory for PDF output out of 10000 (max. 100000000)
 

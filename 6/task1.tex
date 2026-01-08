@@ -1,0 +1,67 @@
+\subsection{課題の概要}
+
+有向グラフ $G=(V,E)$、始点 $s$、終点 $t$、各有向枝 $(u,v)\in E$ の長さ $d(u,v)$ が与えられたとき、\textbf{単純路（同一節点を2回通らない路）}に限定して、$s$ から $t$ へ至る路のうち路長の総和が最小となるもの（最短路）を求める。
+
+本課題では、単純路を列挙する再帰アルゴリズム（アルゴリズム1）を基礎として、\textbf{探索木を分枝（branching）により生成し、葉（$t$ 到達）で解を評価して最良解を更新する}厳密解法を設計する。
+
+\subsection{アルゴリズム設計（分枝の考え方）}
+
+アルゴリズム1は「現在の単純路 $P$ の末尾に節点を追加し、到達可能な次節点へ再帰的に進む」ことで、始点から終点へ至る\textbf{すべての単純路}を列挙する。\cite{exp2025} これを最短路探索に拡張するため、以下を追加する。
+
+\begin{itemize}
+\item 探索中の経路 $P$ をスタックとして保持する（\texttt{P.push}, \texttt{P.pop}）。
+\item 現在までの累積路長を $L$ として引数で持ち回る。
+\item $u=t$ に到達した時点で、累積路長 $L$ を用いて暫定最良値（incumbent）を更新する。
+\item 全探索終了時点で保持している最良経路が最短単純路となる。
+\end{itemize}
+
+本課題1では限定操作（枝刈り）を要求していないため、\textbf{分枝により探索木を全て生成する}（＝全単純路列挙に基づく）設計とする。
+
+\subsection{擬似コード}
+
+以下に、最短路を求める手続き \texttt{ShortestSimplePath} と、再帰探索手続き \texttt{Explore} を示す。
+
+\begin{quote}
+\textbf{Algorithm: ShortestSimplePath}($G = (V, E)$, $d$, $s$, $t$)
+
+\textbf{Input:} 有向グラフ $G = (V, E)$, 枝長 $d : E \to \mathbb{R}$, 始点 $s$, 終点 $t$\\
+\textbf{Output:} $s$ から $t$ への最短単純路 \texttt{bestPath} とその長さ \texttt{bestValue}
+\begin{enumerate}
+\item $P := \emptyset$
+\item $\texttt{bestValue} := +\infty$
+\item $\texttt{bestPath} := \emptyset$
+\item $\texttt{Explore}(P, s, 0)$
+\item \textbf{return} $(\texttt{bestPath}, \texttt{bestValue})$
+\end{enumerate}
+\end{quote}
+
+\begin{quote}
+\textbf{Procedure: Explore}($P$, $u$, $L$)
+
+\textbf{Input:} 単純路 $P$, 現在節点 $u \in V \setminus P$, 現在までの累積長 $L$\\
+\textbf{Effect:} $P$ を前置として $u$ から始める分枝探索を行い、最良解を更新する
+\begin{enumerate}
+\item $P.\texttt{push}(u)$
+\item \textbf{if} $u = t$ \textbf{then}
+\begin{enumerate}
+\item[(a)] \textbf{if} $L < \texttt{bestValue}$ \textbf{then}
+\begin{enumerate}
+\item[(i)] $\texttt{bestValue} := L$
+\item[(ii)] $\texttt{bestPath} := \texttt{Copy}(P)$
+\end{enumerate}
+\end{enumerate}
+\item \textbf{else}
+\begin{enumerate}
+\item[(a)] \textbf{for each} $(u, v) \in E$, $v \notin P$ \textbf{do}
+\begin{enumerate}
+\item[(i)] $\texttt{Explore}(P, v, L + d(u, v))$
+\end{enumerate}
+\end{enumerate}
+\item $P.\texttt{pop}()$
+\item \textbf{return}
+\end{enumerate}
+\end{quote}
+
+ここで \texttt{Copy}$(P)$ は、探索中に $P$ が変更されても最良経路を保持できるように \textbf{$P$ の複製}を作る操作を表す。
+\texttt{output} は本アルゴリズムでは用いず、関数の出力は \texttt{return} により行う（規則に従う）。
+

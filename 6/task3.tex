@@ -1,0 +1,150 @@
+% =========================
+% 課題3（修正版）：限定操作（下界値テスト）の導入
+%  ※ 課題4で実装した「残り辺数に応じたLB（反復途中結果の保存）」に合わせて整合を取った版
+% =========================
+
+\subsection{限定操作の方針}
+課題1で設計した全単純路探索（分枝）に対し，本課題では限定操作として \textbf{下界値テスト}を導入する。
+すなわち，探索途中の部分問題（探索木の節点）に対して，下界が暫定最良値（incumbent）以上であるとき，
+その部分問題の子孫探索を省略（終端）することで探索木を縮小する。\cite{exp2025}
+
+\subsection{下界（LB）の定義：事前計算による弱い下界（辺数制限付き）}
+単純路では同一節点を2回訪れないため，始点から終点までに使用できる辺数は高々 $|V|-1$ である。
+この点を下界にも反映させるため，本課題では各節点 $v\in V$ に対し
+\[
+\mathrm{LB}_k[v] \quad (k=0,1,\dots,|V|-1)
+\]
+を次の意味で定義する：
+\begin{quote}
+\textbf{$\mathrm{LB}_k[v]$：} 「\textbf{単純路制約を無視}した緩和問題において，
+$v$ から $t$ へ \textbf{高々 $k$ 本の辺}で到達する歩道（頂点重複を許す）を考えたときの最短距離」。
+\end{quote}
+単純路制約を無視することは制約緩和であるため，任意の単純路の残余コストは $\mathrm{LB}_k[v]$ 以上となり，
+$\mathrm{LB}_k$ は元の問題に対する下界として安全である。
+
+\subsubsection{（正規の Bellman--Ford 法との違い：負閉路検出の省略）}
+本課題では枝の長さが負でもよいので，$\mathrm{LB}_k$ の計算は Bellman--Ford 法の反復緩和と同型の手続きで行える。
+ただし \textbf{正規の Bellman--Ford 法が行う負閉路検出は本実装では省略する}。理由は以下の通りである。
+\begin{itemize}
+\item 元問題は単純路であり，使用可能な辺数は高々 $|V|-1$ である。本課題の下界も $\mathrm{LB}_k$ として
+\textbf{辺数を $k$ で制限して定義}しているため，閉路を何度でも回って距離を無限に下げる状況（$-\infty$）は，
+この $k$ 制限の枠内では本質的に問題になりにくい。
+\item 下界値テストで必要なのは「過小評価（楽観的）な下界」である。負閉路検出は「さらに反復すれば距離が下がり続け得る」
+ことを示すが，本課題では $k$ を固定して $\mathrm{LB}_k$ を用いるため，負閉路検出の追加ステップを入れても
+枝刈り効果の改善には直結しにくい（むしろ下界が過度に小さくなる方向に働き得る）。
+\end{itemize}
+以上より，本課題では \textbf{$k=0,1,\dots,|V|-1$ の範囲での緩和結果}を下界として利用し，負閉路検出は省略する。
+
+\subsection{下界値テストの妥当性}
+探索中，現在節点を $u$，始点 $s$ から $u$ までの累積路長を $L$ とする。
+現在までに訪れた節点数が $|P|$ のとき，単純路制約の下で今後使用できる辺数は高々
+\[
+r := |V| - |P|
+\]
+である（これ以上進むと必ず頂点重複が生じるため）。
+よって，$u$ から $t$ への任意の単純路の追加コストは，
+制約を緩めた緩和問題の「高々 $r$ 本の辺での最短距離」$\mathrm{LB}_r[u]$ 以上である。
+したがって，この部分問題から得られる任意の $s\to t$ 単純路の長さは
+\[
+L+\mathrm{LB}_r[u]
+\]
+以上である。ここで暫定最良値（上界）を $\texttt{bestValue}$ とすると，
+\[
+L+\mathrm{LB}_r[u]\ \ge\ \texttt{bestValue}
+\]
+が成り立つ場合，この部分問題の子孫をどれだけ探索しても $\texttt{bestValue}$ より良い解は得られない。
+よってこの条件を満たすとき探索を終端してよい（下界値テスト）。
+また $\mathrm{LB}_r[u]=+\infty$（$r$ 本以内では $u$ から $t$ に到達不能）の場合も実行可能解が存在しないため，
+同様に終端してよい。
+
+\subsection{擬似コード}
+
+\subsubsection{前処理：下界配列 $\mathrm{LB}_k$ の計算（負閉路検出は省略）}
+以下は Bellman--Ford 法と同様に緩和を反復するが，
+\textbf{各反復 $k$ の結果を保存}し，$\mathrm{LB}_k$ を得る手続きである。
+
+\begin{quote}
+\textbf{Algorithm: PrecomputeLBSteps}($G=(V,E)$, $d$, $t$)
+
+\textbf{Input:} 有向グラフ $G=(V,E)$, 枝長 $d:E\to\mathbb{R}$, 終点 $t$\\
+\textbf{Output:} 下界配列 $\mathrm{LB}_k[v]$（$k=0,\dots,|V|-1$）
+\begin{enumerate}
+\item \textbf{for each} $v \in V$ \textbf{do} $\mathrm{LB}_0[v] := +\infty$
+\item $\mathrm{LB}_0[t] := 0$
+\item \textbf{for} $k := 1$ \textbf{to} $|V|-1$ \textbf{do}
+\begin{enumerate}
+\item[(a)] \textbf{for each} $v \in V$ \textbf{do} $\mathrm{LB}_k[v] := \mathrm{LB}_{k-1}[v]$
+\item[(b)] \textbf{for each} $(u,v)\in E$ \textbf{do}
+\begin{enumerate}
+\item[(i)] \textbf{if} $\mathrm{LB}_{k-1}[v] \neq +\infty$ \textbf{and}
+$\; d(u,v) + \mathrm{LB}_{k-1}[v] < \mathrm{LB}_k[u]$ \textbf{then}
+\begin{enumerate}
+\item $\mathrm{LB}_k[u] := d(u,v) + \mathrm{LB}_{k-1}[v]$
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\item // 注：正規の Bellman--Ford 法の負閉路検出（追加の緩和チェック）は省略する
+\item \textbf{return} $\{\mathrm{LB}_k\}_{k=0}^{|V|-1}$
+\end{enumerate}
+\end{quote}
+
+\subsubsection{限定操作：下界値テスト}
+\begin{quote}
+\textbf{Procedure: LowerBoundTest}($u$, $L$, $r$)
+
+\textbf{Input:} 現在節点 $u$, 累積長 $L$, 残り許容辺数 $r$\\
+\textbf{Output:} 枝刈りするなら \textbf{true}，続行するなら \textbf{false}
+\begin{enumerate}
+\item \textbf{if} $\mathrm{LB}_r[u] = +\infty$ \textbf{then return true}
+\item \textbf{if} $L + \mathrm{LB}_r[u] \ge \texttt{bestValue}$ \textbf{then return true}
+\item \textbf{return false}
+\end{enumerate}
+\end{quote}
+
+\subsubsection{全体：限定操作込み探索}
+\begin{quote}
+\textbf{Algorithm: ShortestSimplePathBB}($G=(V,E)$, $d$, $s$, $t$)
+
+\textbf{Input:} $G=(V,E)$, $d:E\to\mathbb{R}$, 始点 $s$, 終点 $t$\\
+\textbf{Output:} 最短単純路 \texttt{bestPath} と長さ \texttt{bestValue}
+\begin{enumerate}
+\item $\{\mathrm{LB}_k\} := \texttt{PrecomputeLBSteps}(G,d,t)$
+\item $P := \emptyset$
+\item $\texttt{bestValue} := +\infty$
+\item $\texttt{bestPath} := \emptyset$
+\item $\texttt{ExploreBB}(P, s, 0)$
+\item \textbf{return} $(\texttt{bestPath}, \texttt{bestValue})$
+\end{enumerate}
+\end{quote}
+
+\begin{quote}
+\textbf{Procedure: ExploreBB}($P$, $u$, $L$)
+
+\textbf{Input:} 単純路 $P$, 現在節点 $u \in V\setminus P$, 累積長 $L$
+\begin{enumerate}
+\item $P.\texttt{push}(u)$
+\item $r := |V| - |P|$ \quad // 残り許容辺数
+\item \textbf{if} $\texttt{LowerBoundTest}(u, L, r)$ \textbf{then}
+\begin{enumerate}
+\item[(a)] $P.\texttt{pop}()$
+\item[(b)] \textbf{return}
+\end{enumerate}
+\item \textbf{if} $u = t$ \textbf{then}
+\begin{enumerate}
+\item[(a)] \textbf{if} $L < \texttt{bestValue}$ \textbf{then}
+\begin{enumerate}
+\item[(i)] $\texttt{bestValue} := L$
+\item[(ii)] $\texttt{bestPath} := \texttt{Copy}(P)$
+\end{enumerate}
+\end{enumerate}
+\item \textbf{else}
+\begin{enumerate}
+\item[(a)] \textbf{for each} $(u,v)\in E$, $v \notin P$ \textbf{do}
+\begin{enumerate}
+\item[(i)] $\texttt{ExploreBB}(P, v, L + d(u,v))$
+\end{enumerate}
+\end{enumerate}
+\item $P.\texttt{pop}()$
+\item \textbf{return}
+\end{enumerate}
+\end{quote}

@@ -119,6 +119,7 @@ for idx, t in enumerate(output_times_original):
     ax.set_ylabel('$P(x,t)$')
     ax.set_title(f'$t = {t}$')
     ax.set_xlim(-L/2, L/2)
+    ax.set_ylim(0, 1.2)
     ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
@@ -139,6 +140,7 @@ for idx, (t, label) in enumerate(zip(output_times_pi, pi_labels)):
     ax.set_ylabel('$P(x,t)$')
     ax.set_title(f'$t = {label}$')
     ax.set_xlim(-L/2, L/2)
+    ax.set_ylim(0, 1.2)
     ax.grid(True, alpha=0.3)
 
 plt.tight_layout()

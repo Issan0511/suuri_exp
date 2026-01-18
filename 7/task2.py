@@ -1,7 +1,24 @@
 import math
 import matplotlib.pyplot as plt
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Optional
+
+def find_u_half_point(x_vals: List[float], u_vals: List[float]) -> Optional[float]:
+    """
+    u = 0.5 となる x 座標を線形補間で求める。
+    複数ある場合は最初に見つかったものを返す。
+    """
+    for i in range(len(u_vals) - 1):
+        # u が 0.5 を跨ぐ点を探す
+        if (u_vals[i] - 0.5) * (u_vals[i+1] - 0.5) <= 0:
+            # 線形補間で x 座標を求める
+            if u_vals[i+1] != u_vals[i]:
+                t = (0.5 - u_vals[i]) / (u_vals[i+1] - u_vals[i])
+                x_half = x_vals[i] + t * (x_vals[i+1] - x_vals[i])
+                return x_half
+            else:
+                return x_vals[i]
+    return None
 
 def u0_fisher(x: float, b: float) -> float:
     """
@@ -142,13 +159,15 @@ def main():
             x_vals, u_vals = all_results[b][t]
             plt.plot(x_vals, u_vals, color=colors[str(b)], label=f'b = {b}', linewidth=1.5)
         
-        plt.xlabel('x')
-        plt.ylabel('u')
-        plt.title(f'Fisher Equation (t = {t})')
-        plt.legend()
+        plt.xlabel('x', fontsize=14)
+        plt.ylabel('u', fontsize=14)
+        plt.title(f'Fisher Equation (t = {t})', fontsize=16)
+        plt.legend(fontsize=12)
         plt.grid(True, alpha=0.3)
         plt.xlim(0, 200)
         plt.ylim(-0.1, 1.1)
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
         
         plt.savefig(output_dir / f"fisher_t{t}.png", dpi=150, bbox_inches='tight')
         plt.close()
@@ -159,17 +178,35 @@ def main():
         plt.figure(figsize=(10, 6))
         time_colors = {0: 'black', 10: 'blue', 20: 'green', 30: 'orange', 40: 'red'}
         
-        for t in times:
+        for idx, t in enumerate(times):
             x_vals, u_vals = all_results[b][t]
             plt.plot(x_vals, u_vals, color=time_colors[t], label=f't = {t}', linewidth=1.5)
+            
+            # u = 0.5 となる点を探してプロット
+            x_half = find_u_half_point(x_vals, u_vals)
+            if x_half is not None:
+                plt.plot(x_half, 0.5, 'o', color='black', markersize=8)
+                # 上下交互に配置（偶数インデックスは上、奇数インデックスは下）
+                if idx % 2 == 0:
+                    y_offset = 0.15
+                else:
+                    y_offset = -0.15
+                plt.annotate(f'({x_half:.2f}, 0.5)', 
+                           xy=(x_half, 0.5), 
+                           xytext=(x_half + 5, 0.5 + y_offset),
+                           fontsize=12,
+                           color='black',
+                           arrowprops=dict(arrowstyle='->', color='black', lw=0.5))
         
-        plt.xlabel('x')
-        plt.ylabel('u')
-        plt.title(f'Fisher Equation (b = {b})')
-        plt.legend()
+        plt.xlabel('x', fontsize=14)
+        plt.ylabel('u', fontsize=14)
+        plt.title(f'Fisher Equation (b = {b})', fontsize=16)
+        plt.legend(fontsize=12)
         plt.grid(True, alpha=0.3)
         plt.xlim(0, 200)
         plt.ylim(-0.1, 1.1)
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
         
         plt.savefig(output_dir / f"fisher_b{str(b).replace('.', '_')}.png", dpi=150, bbox_inches='tight')
         plt.close()

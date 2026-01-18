@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Literal, List, Tuple
 
 import math
+import matplotlib.pyplot as plt
 
 BCType = Literal["dirichlet", "neumann"]
 MethodType = Literal["euler", "cn"]
@@ -201,9 +202,10 @@ def run_case(
     dx: float,
     N: int,
     outdir: Path,
-) -> None:
+) -> dict:
     """
     1ケースを n=0..500 まで回し、n=100,200,300,400,500 (t=1..5) を出力する。
+    結果を辞書形式で返す（グラフ作成用）。
     """
     outdir.mkdir(parents=True, exist_ok=True)
 
@@ -228,6 +230,9 @@ def run_case(
     if method == "cn":
         alpha, beta = precompute_cn_lu(N, c, bc)
 
+    # 結果を保存する辞書
+    results = {}
+
     # 時間発展
     for n in range(T):
         if method == "euler":
@@ -241,7 +246,14 @@ def run_case(
         if step in snap_steps:
             t = step * dt  # t=1,2,3,4,5
             t_int = int(round(t))  # ファイル名用（1..5）
+            # データをテキストファイルにも保存
             write_profile(outdir / f"{case_name}_t{t_int}.dat", u, dx, t)
+            # グラフ用にデータを保存
+            x_vals = [x_for_plot(j, dx) for j in range(1, N + 1)]
+            u_vals = u[1:N+1]
+            results[t_int] = (x_vals, u_vals)
+    
+    return results
 
 
 def main() -> None:
@@ -253,7 +265,7 @@ def main() -> None:
       3) CN    + Dirichlet, dt=0.01, dx=0.05, N=200
       4) CN    + Neumann,  dt=0.01, dx=0.05, N=200
     出力：
-      t=1..5 (n=100..500) の u(x,t)
+      t=1..5 (n=100..500) の u(x,t) のグラフ
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", type=str, default="out_problem1", help="出力先ディレクトリ")
@@ -269,8 +281,10 @@ def main() -> None:
         ("case4_cn_neumann",      "cn",    "neumann",   0.01, 0.05, 200),
     ]
 
+    # 各ケースを実行してデータを保存
+    results_dict = {}
     for name, method, bc, dt, dx, N in cases:
-        run_case(
+        results = run_case(
             case_name=name,
             method=method,
             bc=bc,
@@ -279,6 +293,39 @@ def main() -> None:
             N=N,
             outdir=base / name,
         )
+        results_dict[name] = results
+    
+    # Dirichlet条件とNeumann条件について、EulerとCNを重ね合わせたグラフを作成
+    for bc_type in ["dirichlet", "neumann"]:
+        euler_name = f"case1_euler_{bc_type}" if bc_type == "dirichlet" else f"case2_euler_{bc_type}"
+        cn_name = f"case3_cn_{bc_type}" if bc_type == "dirichlet" else f"case4_cn_{bc_type}"
+        
+        euler_results = results_dict[euler_name]
+        cn_results = results_dict[cn_name]
+        
+        # 各時刻についてグラフを作成
+        for t in [1, 2, 3, 4, 5]:
+            plt.figure(figsize=(10, 6))
+            
+            # Eulerを背面に描画
+            x_euler, u_euler = euler_results[t]
+            plt.plot(x_euler, u_euler, 'ro-', label=f'Euler ({bc_type.capitalize()})', linewidth=2, markersize=6, alpha=0.7)
+            
+            # CNを前面に描画
+            x_cn, u_cn = cn_results[t]
+            plt.plot(x_cn, u_cn, 'b-', label=f'CN ({bc_type.capitalize()})', linewidth=1.5)
+            
+            plt.xlabel('x')
+            plt.ylabel('u')
+            plt.title(f't = {t} ({bc_type.capitalize()} BC)')
+            plt.legend()
+            plt.grid(True, alpha=0.3)
+            
+            # グラフを保存
+            graph_dir = base / f"graphs_{bc_type}"
+            graph_dir.mkdir(parents=True, exist_ok=True)
+            plt.savefig(graph_dir / f"comparison_t{t}.png", dpi=150, bbox_inches='tight')
+            plt.close()
 
 
 if __name__ == "__main__":

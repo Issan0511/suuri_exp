@@ -1,0 +1,52 @@
+\subsection{問題設定}
+1次元シュレディンガー方程式
+\begin{equation}
+  i\hbar\frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2 \psi}{\partial x^2} + V(x)\psi
+\end{equation}
+を、調和振動子ポテンシャル $V(x) = \frac{1}{2}kx^2$ のもとで解く。$\hbar = m = k = 1$ とし、$\psi = R + iI$（$R$, $I$は実数）と分解して計算を行った。
+
+初期条件は
+\begin{equation}
+  R_j^0 = \frac{\sqrt{2}}{\pi^{1/4}} \exp(-2(x_j - 5)^2), \quad I_j^0 = 0
+\end{equation}
+とした。
+
+\subsection{数値解法}
+実部 $R$ と虚部 $I$ に分離した差分スキーム：
+\begin{align}
+  R_j^{n+1} &= R_j^n + \Delta t \left( -\frac{1}{2} \frac{I_{j-1}^n - 2I_j^n + I_{j+1}^n}{(\Delta x)^2} + \frac{1}{2}x_j^2 I_j^n \right) \\
+  I_j^{n+1} &= I_j^n - \Delta t \left( -\frac{1}{2} \frac{R_{j-1}^{n+1} - 2R_j^{n+1} + R_{j+1}^{n+1}}{(\Delta x)^2} + \frac{1}{2}x_j^2 R_j^{n+1} \right)
+\end{align}
+周期境界条件を適用した。
+
+\subsection{計算結果}
+計算パラメータは $N=400$, $\Delta x = 0.05$, $\Delta t = 0.001$ とした。
+
+図\ref{fig:schrodinger}に確率密度 $P = R^2 + I^2$ の時間発展を示す。調和振動子ポテンシャル中で波束が振動する様子が観察できる。振動周期は $T = 2\pi$（$\omega = 1$）であり、$t = 0, \pi, 2\pi$ では波束が元の位置に戻っている。
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_schrodinger/probability_density.png}
+    \caption{確率密度の時間発展（$t=1,2,\ldots,8$）}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_schrodinger/probability_density_pi.png}
+    \caption{確率密度の時間発展（$t=0,\pi/2,\pi,\ldots$）}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_schrodinger/P_max_evolution.png}
+    \caption{確率密度最大値の時間発展}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_schrodinger/probability_density_contour.png}
+    \caption{確率密度の等高線図}
+  \end{subfigure}
+  \caption{シュレディンガー方程式の数値解}
+  \label{fig:schrodinger}
+\end{figure}
+
+\subsection{考察}
+調和振動子ポテンシャル中の波束は、古典的な調和振動子と同様に振動運動を行う。初期位置 $x_0 = 5$ から出発した波束は、$t = \pi/2$ で原点を通過し、$t = \pi$ で $x = -5$ に達する。その後、$t = 3\pi/2$ で再び原点を通過し、$t = 2\pi$ で元の位置に戻る。
+
+確率密度の総和（規格化）は計算を通じてほぼ1に保たれており、使用した差分スキームが確率保存の性質を持つことが確認できた。確率密度の最大値は振動中に変化するが、これは波束の拡がりが振動中に変化するためである。

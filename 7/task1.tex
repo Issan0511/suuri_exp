@@ -1,0 +1,83 @@
+\subsection{問題設定}
+1次元拡散方程式
+\begin{equation}
+  \frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2}
+\end{equation}
+を、区間 $[0,L]$（$L=10$）上で数値的に解く。初期条件は
+\begin{equation}
+  u_0(x) = \frac{1}{\sqrt{2\pi}} \exp\left( -\frac{1}{2}(x-5)^2 \right)
+\end{equation}
+とし、Dirichlet境界条件（$u(0,t)=u(L,t)=0$）およびNeumann境界条件（$\partial u/\partial x |_{x=0} = \partial u/\partial x |_{x=L} = 0$）の両方について計算を行った。
+
+\subsection{数値解法}
+\subsubsection{オイラー陽解法}
+時間微分を前進差分、空間2階微分を中心差分で近似すると、オイラー陽解法が得られる：
+\begin{equation}
+  u_j^{n+1} = u_j^n + c(u_{j-1}^n - 2u_j^n + u_{j+1}^n), \quad c = \frac{\Delta t}{(\Delta x)^2}
+\end{equation}
+この解法は $c \leq 1/2$ のとき安定である。
+
+\subsubsection{クランク-ニコルソン法}
+時間微分を中心差分、空間2階微分を $n$ ステップと $n+1$ ステップの平均で近似すると、クランク-ニコルソン法が得られる：
+\begin{equation}
+  -\frac{c}{2}u_{j-1}^{n+1} + (1+c)u_j^{n+1} - \frac{c}{2}u_{j+1}^{n+1} = \frac{c}{2}u_{j-1}^n + (1-c)u_j^n + \frac{c}{2}u_{j+1}^n
+\end{equation}
+この解法は無条件安定であり、各ステップで三重対角行列の連立方程式を解く必要がある。
+
+\subsection{計算結果}
+計算パラメータは $N=100$, $\Delta x = 0.1$, $\Delta t = 0.004$（$c=0.4$）とした。
+
+\subsubsection{Dirichlet境界条件}
+図\ref{fig:dirichlet}にDirichlet境界条件における計算結果を示す。オイラー陽解法とクランク-ニコルソン法の結果はほぼ一致しており、初期のガウス分布が時間とともに拡散し、境界条件により最終的に消滅していく様子が観察できる。
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_dirichlet/comparison_t1.png}
+    \caption{$t=1$}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_dirichlet/comparison_t2.png}
+    \caption{$t=2$}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_dirichlet/comparison_t3.png}
+    \caption{$t=3$}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_dirichlet/comparison_t5.png}
+    \caption{$t=5$}
+  \end{subfigure}
+  \caption{Dirichlet境界条件における拡散方程式の数値解}
+  \label{fig:dirichlet}
+\end{figure}
+
+\subsubsection{Neumann境界条件}
+図\ref{fig:neumann}にNeumann境界条件における計算結果を示す。Neumann境界条件では流束がゼロであるため、初期のガウス分布が境界で反射され、最終的には一様分布に近づいていく。
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_neumann/comparison_t1.png}
+    \caption{$t=1$}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_neumann/comparison_t2.png}
+    \caption{$t=2$}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_neumann/comparison_t3.png}
+    \caption{$t=3$}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_neumann/comparison_t5.png}
+    \caption{$t=5$}
+  \end{subfigure}
+  \caption{Neumann境界条件における拡散方程式の数値解}
+  \label{fig:neumann}
+\end{figure}
+
+\subsection{考察}
+オイラー陽解法とクランク-ニコルソン法の結果を比較すると、同じパラメータでほぼ同一の解が得られた。これは、使用した $c=0.4 < 0.5$ がオイラー陽解法の安定条件を満たしており、十分小さな時間刻みを使用していることによる。クランク-ニコルソン法は無条件安定であるため、より大きな時間刻みを使用できるという利点がある。
+
+境界条件の違いについては、Dirichlet境界条件では境界で$u=0$が課されるため、物質が境界から流出し最終的に消滅する。一方、Neumann境界条件では境界での流束がゼロであるため、物質は保存され、最終的に一様分布に近づく。

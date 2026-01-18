@@ -1,0 +1,111 @@
+\documentclass[a4paper,11pt]{ltjsarticle}
+\usepackage{geometry}
+\geometry{top=25mm,bottom=25mm,left=25mm,right=25mm}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{physics}
+\usepackage{microtype}
+\usepackage{multirow}
+\hypersetup{
+  pdftitle={数理工学実験レポート},
+  pdfauthor={中塚一瑳},
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% -------------------------
+% ユーザ定義マクロ
+% -------------------------
+\newcommand{\StudentID}{1029366161}
+\newcommand{\AuthorName}{中塚一瑳}
+\newcommand{\CourseName}{数理工学実験}
+\newcommand{\ChapterTitle}{第8章（偏微分方程式）}
+\newcommand{\ExperimentDate}{\today}
+
+% 図・表フォルダパス（必要なら変更）
+\newcommand{\graphdir}{graphs}
+
+% 数式用の簡易マクロ
+\newcommand{\R}{\mathbb{R}}
+
+% listings 設定
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  language=Python,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+  showstringspaces=false
+}
+
+% キャプションのフォント調整
+\captionsetup{font=small,labelfont=bf}
+
+% -------------------------
+% 本文
+% -------------------------
+\title{数理工学実験レポート\\[4pt]\large \ChapterTitle}
+\author{学籍番号 1029366161 \quad 中塚一瑳}
+\date{\ExperimentDate}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\clearpage
+
+% ===== はじめに =====
+\section*{はじめに}
+今回は、偏微分方程式の数値解法について学習した。課題1では拡散方程式に対するオイラー陽解法とクランク-ニコルソン法を実装し、Dirichlet境界条件およびNeumann境界条件のもとで数値解を求めた。課題2ではFisher方程式（反応拡散方程式）の数値解を求め、進行波解の振る舞いを観察した。課題3ではシュレディンガー方程式の数値解法を実装し、調和振動子ポテンシャル中の波束の時間発展を追跡した。
+
+\section{課題1：拡散方程式の数値解法}
+\input{task1.tex}
+
+\section{課題2：Fisher方程式の数値解法}
+\input{task2.tex}
+
+\section{課題3：シュレディンガー方程式の数値解法}
+\input{task3.tex}
+
+\section*{結論}
+本実験により、偏微分方程式の数値解法について理解を深めることができた。拡散方程式に対してはオイラー陽解法とクランク-ニコルソン法を比較し、安定性と精度のトレードオフについて学んだ。Fisher方程式では反応拡散方程式の進行波解を観察し、シュレディンガー方程式では量子力学的な波束の振動運動をシミュレートした。これらの経験を通じて、偏微分方程式の離散化手法と境界条件の取り扱いについて実践的な知識を得ることができた。
+
+% ===== 付録 =====
+\appendix
+\section{ソースコード}
+コード作成、レポート作成の一部にGitHub Copilotを使用した。
+
+\subsection{課題1の実装コード}
+\lstinputlisting[language=Python,caption={課題1：拡散方程式の実装コード}]{task1.py}
+
+\subsection{課題2の実装コード}
+\lstinputlisting[language=Python,caption={課題2：Fisher方程式の実装コード}]{task2.py}
+
+\subsection{課題3の実装コード}
+\lstinputlisting[language=Python,caption={課題3：シュレディンガー方程式の実装コード}]{task3.py}
+
+% ===== 参考文献 =====
+\section*{参考文献}
+\begin{thebibliography}{9}
+
+\bibitem{exp2025}
+数理工学実験（2025年度配布資料）.
+
+\end{thebibliography}
+
+\end{document}

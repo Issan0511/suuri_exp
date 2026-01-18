@@ -1,0 +1,42 @@
+\subsection{問題設定}
+Fisher方程式
+\begin{equation}
+  \frac{\partial u}{\partial t} = f(u) + \frac{\partial^2 u}{\partial x^2}, \quad f(u) = u(1-u)
+\end{equation}
+を、区間 $[0,L]$（$L=40$）上で解く。境界条件は $u(0,t)=1$, $u(L,t)=0$ とし、初期条件は
+\begin{equation}
+  u_0(x) = \frac{1}{(1 + e^{bx-5})^2}
+\end{equation}
+とした。パラメータ $b$ を変化させて進行波解の速度を調べた。
+
+\subsection{数値解法}
+反応項を含むオイラー陽解法を用いた：
+\begin{equation}
+  u_j^{n+1} = u_j^n + \Delta t \cdot f(u_j^n) + c(u_{j-1}^n - 2u_j^n + u_{j+1}^n)
+\end{equation}
+
+\subsection{計算結果}
+計算パラメータは $\Delta x = 0.1$, $\Delta t = 0.004$ とし、$b = 0.25, 0.5, 1.0$ の3ケースについて計算を行った。
+
+図\ref{fig:fisher}に各ケースの計算結果を示す。いずれのケースでも、初期条件の階段状の分布が時間とともに右方向に進行する進行波解に収束していく様子が観察できる。
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.32\textwidth}
+    \includegraphics[width=\textwidth]{graphs_fisher/fisher_b0_25.png}
+    \caption{$b=0.25$}
+  \end{subfigure}
+  \begin{subfigure}{0.32\textwidth}
+    \includegraphics[width=\textwidth]{graphs_fisher/fisher_b0_5.png}
+    \caption{$b=0.5$}
+  \end{subfigure}
+  \begin{subfigure}{0.32\textwidth}
+    \includegraphics[width=\textwidth]{graphs_fisher/fisher_b1_0.png}
+    \caption{$b=1.0$}
+  \end{subfigure}
+  \caption{Fisher方程式の数値解（異なる$b$での進行波）}
+  \label{fig:fisher}
+\end{figure}
+
+\subsection{考察}
+Fisher方程式の進行波解の速度 $v$ は、理論的には $v \geq 2$ であることが知られている。初期条件のパラメータ $b$ によって進行波の初期形状が変化するが、十分時間が経過すると $v = 2$ に収束する。本計算でも、$u = 0.5$ となる点の移動速度を追跡することで、進行波速度が約2に収束することを確認できた。

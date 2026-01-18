@@ -201,13 +201,11 @@ def run_case(
     dt: float,
     dx: float,
     N: int,
-    outdir: Path,
 ) -> dict:
     """
-    1ケースを n=0..500 まで回し、n=100,200,300,400,500 (t=1..5) を出力する。
+    1ケースを n=0..500 まで回し、n=100,200,300,400,500 (t=1..5) を計算する。
     結果を辞書形式で返す（グラフ作成用）。
     """
-    outdir.mkdir(parents=True, exist_ok=True)
 
     T = 500
     snap_steps = {100, 200, 300, 400, 500}
@@ -246,8 +244,6 @@ def run_case(
         if step in snap_steps:
             t = step * dt  # t=1,2,3,4,5
             t_int = int(round(t))  # ファイル名用（1..5）
-            # データをテキストファイルにも保存
-            write_profile(outdir / f"{case_name}_t{t_int}.dat", u, dx, t)
             # グラフ用にデータを保存
             x_vals = [x_for_plot(j, dx) for j in range(1, N + 1)]
             u_vals = u[1:N+1]
@@ -267,12 +263,6 @@ def main() -> None:
     出力：
       t=1..5 (n=100..500) の u(x,t) のグラフ
     """
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--out", type=str, default="out_problem1", help="出力先ディレクトリ")
-    args = parser.parse_args()
-
-    base = Path(args.out)
-    base.mkdir(parents=True, exist_ok=True)
 
     cases: List[Tuple[str, MethodType, BCType, float, float, int]] = [
         ("case1_euler_dirichlet", "euler", "dirichlet", 0.01, 0.5, 20),
@@ -291,7 +281,6 @@ def main() -> None:
             dt=dt,
             dx=dx,
             N=N,
-            outdir=base / name,
         )
         results_dict[name] = results
     
@@ -318,11 +307,12 @@ def main() -> None:
             plt.xlabel('x')
             plt.ylabel('u')
             plt.title(f't = {t} ({bc_type.capitalize()} BC)')
+            plt.ylim(0, 0.25)
             plt.legend()
             plt.grid(True, alpha=0.3)
             
             # グラフを保存
-            graph_dir = base / f"graphs_{bc_type}"
+            graph_dir = Path(f"graphs_{bc_type}")
             graph_dir.mkdir(parents=True, exist_ok=True)
             plt.savefig(graph_dir / f"comparison_t{t}.png", dpi=150, bbox_inches='tight')
             plt.close()

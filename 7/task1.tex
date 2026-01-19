@@ -1,34 +1,125 @@
 \subsection{問題設定}
 1次元拡散方程式
 \begin{equation}
-  \frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2}
+  \frac{\partial u}{\partial t}(x,t) = \frac{\partial^2 u}{\partial x^2}(x,t)
 \end{equation}
-を、区間 $[0,L]$（$L=10$）上で数値的に解く。初期条件は
+を、区間 $[0,L]$（$L=10$）上で数値的に解く。ここで$u(x,t)$は位置$x$・時刻$t$における濃度を表す。初期条件は
 \begin{equation}
   u_0(x) = \frac{1}{\sqrt{2\pi}} \exp\left( -\frac{1}{2}(x-5)^2 \right)
 \end{equation}
-とし、Dirichlet境界条件（$u(0,t)=u(L,t)=0$）およびNeumann境界条件（$\partial u/\partial x |_{x=0} = \partial u/\partial x |_{x=L} = 0$）の両方について計算を行った。
+とし、Dirichlet境界条件およびNeumann境界条件の両方について計算を行った。
 
-\subsection{数値解法}
+\subsection{原理と方法}
+
+\subsubsection{離散化と無次元パラメータ$c$の導出}
+空間区間$[0,L]$を幅$\Delta x$で分割し、$L=N\Delta x$とする。時間も刻み幅$\Delta t$で離散化する。
+区間$[(j-1)\Delta x, j\Delta x]$における平均値として
+\begin{equation}
+  u_j^n = \frac{1}{\Delta x} \int_{(j-1)\Delta x}^{j\Delta x} u(y, n\Delta t) \, dy
+\end{equation}
+を定義する。\cite{exp2025}
+
+拡散方程式を時間区間$[n\Delta t, (n+1)\Delta t]$で積分すると、
+\begin{equation}
+  u(x,(n+1)\Delta t) - u(x,n\Delta t) = \int_{n\Delta t}^{(n+1)\Delta t} \frac{\partial^2 u}{\partial x^2}(x,s) \, ds
+\end{equation}
+を得る。右辺を時刻$n\Delta t$の値で近似すると、
+\begin{equation}
+  u(x,(n+1)\Delta t) - u(x,n\Delta t) \simeq \Delta t \frac{\partial^2 u}{\partial x^2}(x,n\Delta t)
+\end{equation}
+となる。さらに空間微分を中心差分で近似すると、
+\begin{equation}
+  \frac{\partial^2 u}{\partial x^2}(x,n\Delta t) \simeq \frac{u_{j-1}^n - 2u_j^n + u_{j+1}^n}{\Delta x^2}
+\end{equation}
+である。これらをまとめると、
+\begin{equation}
+  u_j^{n+1} - u_j^n = \frac{\Delta t}{\Delta x^2} \left( u_{j-1}^n - 2u_j^n + u_{j+1}^n \right)
+\end{equation}
+を得る。ここで
+\begin{equation}
+  \boxed{c \equiv \frac{\Delta t}{\Delta x^2}}
+\end{equation}
+と定義する。この$c$は時間刻みと空間刻みの比を表し、数値安定性を支配する重要な無次元量である。
+
 \subsubsection{オイラー陽解法}
-時間微分を前進差分、空間2階微分を中心差分で近似すると、オイラー陽解法が得られる：
+差分方程式をそのまま用いると、
 \begin{equation}
-  u_j^{n+1} = u_j^n + c(u_{j-1}^n - 2u_j^n + u_{j+1}^n), \quad c = \frac{\Delta t}{(\Delta x)^2}
+  u_j^{n+1} = u_j^n + c\left( u_{j-1}^n - 2u_j^n + u_{j+1}^n \right)
 \end{equation}
-この解法は $c \leq 1/2$ のとき安定である。
+となる。これは既知の時刻$n$の値から直接$n+1$を計算できるため、オイラー陽解法と呼ばれる。\cite{exp2025}
 
-\subsubsection{クランク-ニコルソン法}
-時間微分を中心差分、空間2階微分を $n$ ステップと $n+1$ ステップの平均で近似すると、クランク-ニコルソン法が得られる：
+\paragraph{特徴}
+\begin{itemize}
+  \item 実装が非常に簡単
+  \item ただし安定性条件$c \le 1/2$を満たさないと数値解が発散する
+  \item $\Delta x$を小さくすると$\Delta t$も強く制限される
+\end{itemize}
+
+\subsubsection{クランク–ニコルソン法}
+時間積分を台形公式で近似すると、
 \begin{equation}
-  -\frac{c}{2}u_{j-1}^{n+1} + (1+c)u_j^{n+1} - \frac{c}{2}u_{j+1}^{n+1} = \frac{c}{2}u_{j-1}^n + (1-c)u_j^n + \frac{c}{2}u_{j+1}^n
+  u_j^{n+1} - u_j^n = \frac{c}{2} \left[ (u_{j-1}^{n+1} - 2u_j^{n+1} + u_{j+1}^{n+1}) + (u_{j-1}^{n} - 2u_j^{n} + u_{j+1}^{n}) \right]
 \end{equation}
-この解法は無条件安定であり、各ステップで三重対角行列の連立方程式を解く必要がある。
+を得る。整理すると、
+\begin{equation}
+  -\frac{c}{2}u_{j-1}^{n+1} + (1+c)u_j^{n+1} - \frac{c}{2}u_{j+1}^{n+1} = (1-c)u_j^n + \frac{c}{2}(u_{j-1}^n + u_{j+1}^n)
+  \label{eq:cn}
+\end{equation}
+となる。未知数$u_j^{n+1}$が連立方程式として現れるため、陰解法に分類される。\cite{exp2025}
+
+\paragraph{行列表示と三重対角構造}
+内部格子点$j=1,\dots,N$に対して、未知ベクトル$\mathbf{x} = (u_1^{n+1}, u_2^{n+1}, \dots, u_N^{n+1})^T$を定義すると、式\eqref{eq:cn}は
+\begin{equation}
+  A\mathbf{x} = \mathbf{z}
+\end{equation}
+と書ける。係数行列$A$は三重対角行列となる。
+
+\paragraph{LU分解による解法}
+三重対角行列$A$を
+\begin{equation}
+  A = LU
+\end{equation}
+と下三角行列$L$と上三角行列$U$の積に分解する。$L$と$U$の係数は漸化式により前処理として一度だけ計算できる。
+
+連立方程式$A\mathbf{x} = \mathbf{z}$は、$LU\mathbf{x} = \mathbf{z}$とおき、
+\begin{enumerate}
+  \item 前進代入：$L\mathbf{y} = \mathbf{z}$を解く
+  \item 後退代入：$U\mathbf{x} = \mathbf{y}$を解く
+\end{enumerate}
+により効率的に求まる。各時間ステップの計算量は$O(N)$であり、係数行列$A$は時間に依存しないため、LU分解は最初に1回だけ行えばよい。\cite{exp2025}
+
+\paragraph{特徴}
+\begin{itemize}
+  \item 全ての$c > 0$に対して安定（無条件安定）
+  \item オイラー法より高精度
+  \item LU分解により効率的に解ける
+\end{itemize}
+
+\subsubsection{境界条件の扱い}
+
+\paragraph{Dirichlet境界条件}
+境界での値を直接指定する：\cite{exp2025}
+\begin{equation}
+  u_0^n = u_L, \quad u_{N+1}^n = u_R
+\end{equation}
+物理的には「境界の温度（濃度）が固定されている」状況を表す。本課題では$u_L = u_R = 0$とした。
+
+\paragraph{Neumann境界条件}
+境界での微分（流束）を指定する：\cite{exp2025}
+\begin{equation}
+  \frac{\partial u}{\partial x}(0,t) = J_L, \quad \frac{\partial u}{\partial x}(L,t) = J_R
+\end{equation}
+これを差分化すると、
+\begin{equation}
+  u_0^n = u_1^n - J_L \Delta x, \quad u_{N+1}^n = u_N^n + J_R \Delta x
+\end{equation}
+となる。本課題では$J_L = J_R = 0$としており、境界での流束がゼロ、すなわち外へ物質が流出しない条件を表す。
 
 \subsection{計算結果}
 計算パラメータは $N=100$, $\Delta x = 0.1$, $\Delta t = 0.004$（$c=0.4$）とした。
 
 \subsubsection{Dirichlet境界条件}
-図\ref{fig:dirichlet}にDirichlet境界条件における計算結果を示す。オイラー陽解法とクランク-ニコルソン法の結果はほぼ一致しており、初期のガウス分布が時間とともに拡散し、境界条件により最終的に消滅していく様子が観察できる。
+図\ref{fig:dirichlet}にDirichlet境界条件における計算結果を示す。オイラー陽解法とクランク-ニコルソン法の結果はほぼ一致しており、初期のガウス分布が時間とともに拡散し、境界条件により最終的に消滅していくと予想される。
 
 \begin{figure}[H]
   \centering
@@ -45,6 +136,10 @@
     \caption{$t=3$}
   \end{subfigure}
   \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_dirichlet/comparison_t4.png}
+    \caption{$t=4$}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=\textwidth]{graphs_dirichlet/comparison_t5.png}
     \caption{$t=5$}
   \end{subfigure}
@@ -53,7 +148,7 @@
 \end{figure}
 
 \subsubsection{Neumann境界条件}
-図\ref{fig:neumann}にNeumann境界条件における計算結果を示す。Neumann境界条件では流束がゼロであるため、初期のガウス分布が境界で反射され、最終的には一様分布に近づいていく。
+図\ref{fig:neumann}にNeumann境界条件における計算結果を示す。Neumann境界条件では流束がゼロであるため、初期のガウス分布が境界で反射され、最終的には一様分布に近づいていくと予想される。
 
 \begin{figure}[H]
   \centering
@@ -68,6 +163,10 @@
   \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=\textwidth]{graphs_neumann/comparison_t3.png}
     \caption{$t=3$}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_neumann/comparison_t4.png}
+    \caption{$t=4$}
   \end{subfigure}
   \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=\textwidth]{graphs_neumann/comparison_t5.png}

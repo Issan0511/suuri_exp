@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  19 JAN 2026 02:20
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.10.18)  19 JAN 2026 15:25
  restricted system commands enabled.
 **report_7.tex
 (./report_7.tex
@@ -1615,157 +1615,175 @@ LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
 [2
 
 ]
-<graphs_dirichlet/comparison_t1.png, id=131, 617.1858pt x 393.6306pt>
+
+[3]
+<graphs_dirichlet/comparison_t1.png, id=162, 617.1858pt x 393.6306pt>
 File: graphs_dirichlet/comparison_t1.png Graphic file (type png)
 <use graphs_dirichlet/comparison_t1.png>
 Package luatex.def Info: graphs_dirichlet/comparison_t1.png  used on input line
- 36.
+ 127.
 (luatex.def)             Requested size: 204.85846pt x 130.65529pt.
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 37.
+(Font)              scaled to size 8.32242pt on input line 128.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 37.
+(Font)              scaled to size 8.32242pt on input line 128.
 (load cache: extra_lmroman8-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <8> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 37.
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 128.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 6.75587pt on input line 37.
+(Font)              scaled to size 6.75587pt on input line 128.
 LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <8> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 37.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 128.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 6.75587pt on input line 37.
-LaTeX Font Info:    Calculating math sizes for size <8.76001> on input line 37.
-
+(Font)              scaled to size 6.75587pt on input line 128.
+LaTeX Font Info:    Calculating math sizes for size <8.76001> on input line 128
+.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <5.59996> not available
-(Font)              size <6> substituted on input line 37.
+(Font)              size <6> substituted on input line 128.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4> not available
-(Font)              size <5> substituted on input line 37.
+(Font)              size <5> substituted on input line 128.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <5.59996> not available
-(Font)              size <6> substituted on input line 37.
+(Font)              size <6> substituted on input line 128.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4> not available
-(Font)              size <5> substituted on input line 37.
+(Font)              size <5> substituted on input line 128.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <5.59996> not available
-(Font)              size <6> substituted on input line 37.
+(Font)              size <6> substituted on input line 128.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4> not available
-(Font)              size <5> substituted on input line 37.
+(Font)              size <5> substituted on input line 128.
 
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 5.17834pt on input line 37.
+(Font)              scaled to size 5.17834pt on input line 128.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 3.69885pt on input line 37.
+(Font)              scaled to size 3.69885pt on input line 128.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 7.3977pt on input line 128.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 5.17834pt on input line 128.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 3.69885pt on input line 128.
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <5.59996> not available
-(Font)              size <6> substituted on input line 37.
+(Font)              size <6> substituted on input line 128.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4> not available
-(Font)              size <5> substituted on input line 37.
+(Font)              size <5> substituted on input line 128.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <5.59996> not available
-(Font)              size <6> substituted on input line 37.
+(Font)              size <6> substituted on input line 128.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4> not available
-(Font)              size <5> substituted on input line 37.
+(Font)              size <5> substituted on input line 128.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <5.59996> not available
-(Font)              size <6> substituted on input line 37.
+(Font)              size <6> substituted on input line 128.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4> not available
-(Font)              size <5> substituted on input line 37.
+(Font)              size <5> substituted on input line 128.
 
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 7.3977pt on input line 37.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 5.17834pt on input line 37.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 3.69885pt on input line 37.
-<graphs_dirichlet/comparison_t2.png, id=132, 617.1858pt x 393.6306pt>
+<graphs_dirichlet/comparison_t2.png, id=163, 617.1858pt x 393.6306pt>
 File: graphs_dirichlet/comparison_t2.png Graphic file (type png)
 <use graphs_dirichlet/comparison_t2.png>
 Package luatex.def Info: graphs_dirichlet/comparison_t2.png  used on input line
- 40.
+ 131.
 (luatex.def)             Requested size: 204.85846pt x 130.65529pt.
-<graphs_dirichlet/comparison_t3.png, id=133, 617.1858pt x 393.6306pt>
+<graphs_dirichlet/comparison_t3.png, id=164, 617.1858pt x 393.6306pt>
 File: graphs_dirichlet/comparison_t3.png Graphic file (type png)
 <use graphs_dirichlet/comparison_t3.png>
 Package luatex.def Info: graphs_dirichlet/comparison_t3.png  used on input line
- 44.
+ 135.
 (luatex.def)             Requested size: 204.85846pt x 130.65529pt.
-<graphs_dirichlet/comparison_t5.png, id=134, 617.1858pt x 393.6306pt>
+<graphs_dirichlet/comparison_t4.png, id=165, 617.1858pt x 393.6306pt>
+File: graphs_dirichlet/comparison_t4.png Graphic file (type png)
+<use graphs_dirichlet/comparison_t4.png>
+Package luatex.def Info: graphs_dirichlet/comparison_t4.png  used on input line
+ 139.
+(luatex.def)             Requested size: 204.85846pt x 130.65529pt.
+<graphs_dirichlet/comparison_t5.png, id=166, 617.1858pt x 393.6306pt>
 File: graphs_dirichlet/comparison_t5.png Graphic file (type png)
 <use graphs_dirichlet/comparison_t5.png>
 Package luatex.def Info: graphs_dirichlet/comparison_t5.png  used on input line
- 48.
+ 143.
 (luatex.def)             Requested size: 204.85846pt x 130.65529pt.
 (load cache: extra_lmroman9-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <9> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 51.
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 146.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 7.60036pt on input line 51.
+(Font)              scaled to size 7.60036pt on input line 146.
 LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <9> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 51.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 146.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 7.60036pt on input line 51.
-<graphs_neumann/comparison_t1.png, id=136, 617.1858pt x 393.6306pt>
+(Font)              scaled to size 7.60036pt on input line 146.
+
+
+[4]
+<graphs_neumann/comparison_t1.png, id=182, 617.1858pt x 393.6306pt>
 File: graphs_neumann/comparison_t1.png Graphic file (type png)
 <use graphs_neumann/comparison_t1.png>
-Package luatex.def Info: graphs_neumann/comparison_t1.png  used on input line 6
-1.
+Package luatex.def Info: graphs_neumann/comparison_t1.png  used on input line 1
+56.
 (luatex.def)             Requested size: 204.85846pt x 130.65529pt.
-<graphs_neumann/comparison_t2.png, id=137, 617.1858pt x 393.6306pt>
+<graphs_neumann/comparison_t2.png, id=183, 617.1858pt x 393.6306pt>
 File: graphs_neumann/comparison_t2.png Graphic file (type png)
 <use graphs_neumann/comparison_t2.png>
-Package luatex.def Info: graphs_neumann/comparison_t2.png  used on input line 6
-5.
+Package luatex.def Info: graphs_neumann/comparison_t2.png  used on input line 1
+60.
 (luatex.def)             Requested size: 204.85846pt x 130.65529pt.
-<graphs_neumann/comparison_t3.png, id=138, 617.1858pt x 393.6306pt>
+<graphs_neumann/comparison_t3.png, id=184, 617.1858pt x 393.6306pt>
 File: graphs_neumann/comparison_t3.png Graphic file (type png)
 <use graphs_neumann/comparison_t3.png>
-Package luatex.def Info: graphs_neumann/comparison_t3.png  used on input line 6
-9.
+Package luatex.def Info: graphs_neumann/comparison_t3.png  used on input line 1
+64.
 (luatex.def)             Requested size: 204.85846pt x 130.65529pt.
-<graphs_neumann/comparison_t5.png, id=139, 617.1858pt x 393.6306pt>
+<graphs_neumann/comparison_t4.png, id=185, 617.1858pt x 393.6306pt>
+File: graphs_neumann/comparison_t4.png Graphic file (type png)
+<use graphs_neumann/comparison_t4.png>
+Package luatex.def Info: graphs_neumann/comparison_t4.png  used on input line 1
+68.
+(luatex.def)             Requested size: 204.85846pt x 130.65529pt.
+<graphs_neumann/comparison_t5.png, id=186, 617.1858pt x 393.6306pt>
 File: graphs_neumann/comparison_t5.png Graphic file (type png)
 <use graphs_neumann/comparison_t5.png>
-Package luatex.def Info: graphs_neumann/comparison_t5.png  used on input line 7
-3.
+Package luatex.def Info: graphs_neumann/comparison_t5.png  used on input line 1
+72.
 (luatex.def)             Requested size: 204.85846pt x 130.65529pt.
 
 
-[3<./graphs_dirichlet/comparison_t1.png><./graphs_dirichlet/comparison_t2.png><.
-/graphs_dirichlet/comparison_t3.png><./graphs_dirichlet/comparison_t5.png>])
-(./task2.tex
+[5<./graphs_dirichlet/comparison_t1.png><./graphs_dirichlet/comparison_t2.png><.
+/graphs_dirichlet/comparison_t3.png><./graphs_dirichlet/comparison_t4.png><./gra
+phs_dirichlet/comparison_t5.png>]) (./task2.tex
 
-[4<./graphs_neumann/comparison_t1.png><./graphs_neumann/comparison_t2.png><./gra
-phs_neumann/comparison_t3.png><./graphs_neumann/comparison_t5.png>]
-<graphs_fisher/fisher_b0_25.png, id=169, 629.7126pt x 402.7848pt>
+[6<./graphs_neumann/comparison_t1.png><./graphs_neumann/comparison_t2.png><./gra
+phs_neumann/comparison_t3.png><./graphs_neumann/comparison_t4.png><./graphs_neum
+ann/comparison_t5.png>]
+<graphs_fisher/fisher_b0_25.png, id=216, 629.7126pt x 402.7848pt>
 File: graphs_fisher/fisher_b0_25.png Graphic file (type png)
 <use graphs_fisher/fisher_b0_25.png>
 Package luatex.def Info: graphs_fisher/fisher_b0_25.png  used on input line 26.
 
 (luatex.def)             Requested size: 145.68144pt x 93.1794pt.
-<graphs_fisher/fisher_b0_5.png, id=170, 629.7126pt x 402.7848pt>
+<graphs_fisher/fisher_b0_5.png, id=217, 629.7126pt x 402.7848pt>
 File: graphs_fisher/fisher_b0_5.png Graphic file (type png)
 <use graphs_fisher/fisher_b0_5.png>
 Package luatex.def Info: graphs_fisher/fisher_b0_5.png  used on input line 30.
 (luatex.def)             Requested size: 145.68144pt x 93.1794pt.
-<graphs_fisher/fisher_b1_0.png, id=171, 629.7126pt x 402.7848pt>
+<graphs_fisher/fisher_b1_0.png, id=218, 629.7126pt x 402.7848pt>
 File: graphs_fisher/fisher_b1_0.png Graphic file (type png)
 <use graphs_fisher/fisher_b1_0.png>
 Package luatex.def Info: graphs_fisher/fisher_b1_0.png  used on input line 34.
@@ -1789,6 +1807,12 @@ LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 5.82565pt on input line 37.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 4.16121pt on input line 37.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 8.32242pt on input line 37.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 5.82565pt on input line 37.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 4.16121pt on input line 37.
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.5> not available
 (Font)              size <5> substituted on input line 37.
@@ -1801,47 +1825,98 @@ LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4.5> not available
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.5> not available
 (Font)              size <5> substituted on input line 37.
 
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 37.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 5.82565pt on input line 37.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 4.16121pt on input line 37.
-) (./task3.tex
+<graphs_fisher/fisher_t0.png, id=220, 629.7126pt x 402.7848pt>
+File: graphs_fisher/fisher_t0.png Graphic file (type png)
+<use graphs_fisher/fisher_t0.png>
+Package luatex.def Info: graphs_fisher/fisher_t0.png  used on input line 46.
+(luatex.def)             Requested size: 145.68144pt x 93.1794pt.
+<graphs_fisher/fisher_t10.png, id=221, 629.7126pt x 402.7848pt>
+File: graphs_fisher/fisher_t10.png Graphic file (type png)
+<use graphs_fisher/fisher_t10.png>
+Package luatex.def Info: graphs_fisher/fisher_t10.png  used on input line 50.
+(luatex.def)             Requested size: 145.68144pt x 93.1794pt.
+<graphs_fisher/fisher_t20.png, id=222, 629.7126pt x 402.7848pt>
+File: graphs_fisher/fisher_t20.png Graphic file (type png)
+<use graphs_fisher/fisher_t20.png>
+Package luatex.def Info: graphs_fisher/fisher_t20.png  used on input line 54.
+(luatex.def)             Requested size: 145.68144pt x 93.1794pt.
+<graphs_fisher/fisher_t30.png, id=223, 629.7126pt x 402.7848pt>
+File: graphs_fisher/fisher_t30.png Graphic file (type png)
+<use graphs_fisher/fisher_t30.png>
+Package luatex.def Info: graphs_fisher/fisher_t30.png  used on input line 59.
+(luatex.def)             Requested size: 145.68144pt x 93.1794pt.
+<graphs_fisher/fisher_t40.png, id=224, 629.7126pt x 402.7848pt>
+File: graphs_fisher/fisher_t40.png Graphic file (type png)
+<use graphs_fisher/fisher_t40.png>
+Package luatex.def Info: graphs_fisher/fisher_t40.png  used on input line 63.
+(luatex.def)             Requested size: 145.68144pt x 93.1794pt.
 
-[5<./graphs_fisher/fisher_b0_25.png><./graphs_fisher/fisher_b0_5.png><./graphs_f
-isher/fisher_b1_0.png>]
-<graphs_schrodinger/probability_density.png, id=188, 1011.78pt x 505.89pt>
+
+[7<./graphs_fisher/fisher_b0_25.png><./graphs_fisher/fisher_b0_5.png><./graphs_f
+isher/fisher_b1_0.png>](load cache: extra_lmroman10-bold.luc)
+LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10> not available
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 84.
+LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
+(Font)              scaled to size 8.44485pt on input line 84.
+LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <10> not available
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 84.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 8.44485pt on input line 84.
+
+
+[8<./graphs_fisher/fisher_t0.png><./graphs_fisher/fisher_t10.png><./graphs_fishe
+r/fisher_t20.png><./graphs_fisher/fisher_t30.png><./graphs_fisher/fisher_t40.png
+>]) (./task3.tex
+
+[9]
+<graphs_schrodinger/probability_density.png, id=274, 1011.78pt x 505.89pt>
 File: graphs_schrodinger/probability_density.png Graphic file (type png)
 <use graphs_schrodinger/probability_density.png>
 Package luatex.def Info: graphs_schrodinger/probability_density.png  used on in
-put line 30.
+put line 32.
 (luatex.def)             Requested size: 204.85846pt x 102.42671pt.
-<graphs_schrodinger/probability_density_pi.png, id=189, 867.24pt x 505.89pt>
+<graphs_schrodinger/probability_density_pi.png, id=275, 867.24pt x 505.89pt>
 File: graphs_schrodinger/probability_density_pi.png Graphic file (type png)
 <use graphs_schrodinger/probability_density_pi.png>
 Package luatex.def Info: graphs_schrodinger/probability_density_pi.png  used on
- input line 34.
+ input line 36.
 (luatex.def)             Requested size: 204.85846pt x 119.49397pt.
-<graphs_schrodinger/P_max_evolution.png, id=190, 722.7pt x 433.62pt>
+<graphs_schrodinger/P_max_evolution.png, id=276, 722.7pt x 433.62pt>
 File: graphs_schrodinger/P_max_evolution.png Graphic file (type png)
 <use graphs_schrodinger/P_max_evolution.png>
 Package luatex.def Info: graphs_schrodinger/P_max_evolution.png  used on input 
-line 38.
+line 40.
 (luatex.def)             Requested size: 204.85846pt x 122.91472pt.
-<graphs_schrodinger/probability_density_contour.png, id=191, 722.7pt x 433.62pt
+<graphs_schrodinger/P_max_inv_evolution.png, id=277, 722.7pt x 433.62pt>
+File: graphs_schrodinger/P_max_inv_evolution.png Graphic file (type png)
+<use graphs_schrodinger/P_max_inv_evolution.png>
+Package luatex.def Info: graphs_schrodinger/P_max_inv_evolution.png  used on in
+put line 44.
+(luatex.def)             Requested size: 204.85846pt x 122.91472pt.
+<graphs_schrodinger/probability_density_contour.png, id=278, 722.7pt x 433.62pt
 >
 File: graphs_schrodinger/probability_density_contour.png Graphic file (type png
 )
 <use graphs_schrodinger/probability_density_contour.png>
 Package luatex.def Info: graphs_schrodinger/probability_density_contour.png  us
-ed on input line 42.
+ed on input line 48.
 (luatex.def)             Requested size: 204.85846pt x 122.91472pt.
+
+
+[10]
+
+[11<./graphs_schrodinger/probability_density.png><./graphs_schrodinger/probabili
+ty_density_pi.png><./graphs_schrodinger/P_max_evolution.png><./graphs_schrodinge
+r/P_max_inv_evolution.png><./graphs_schrodinger/probability_density_contour.png>
+](load cache: extra_lmroman7-regular.luc)
+LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
+(Font)              scaled to size 6.47295pt on input line 85.
+(load cache: extra_lmroman5-regular.luc)
+LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
+(Font)              scaled to size 4.62357pt on input line 85.
 )
 
-[6<./graphs_schrodinger/probability_density.png><./graphs_schrodinger/probabilit
-y_density_pi.png><./graphs_schrodinger/P_max_evolution.png><./graphs_schrodinger
-/probability_density_contour.png>]
+[12]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 94.
 (load cache: extra_lmmono10-regular.luc)
@@ -1854,27 +1929,7 @@ LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
 (Font)              scaled to size 7.3977pt on input line 94.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task1.py(load
- cache: extra_lmroman5-regular.luc)
-LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 4.62357pt on input line 1.
-
-
-[7]
-
-[8]
-
-[9]
-
-[10]
-
-[11]
-
-[12])
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task2.py
+Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task1.py
 
 [13]
 
@@ -1882,22 +1937,38 @@ Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task2.py
 
 [15]
 
-[16])
+[16]
+
+[17]
+
+[18])
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task2.py
+
+[19]
+
+[20]
+
+[21]
+
+[22])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' in `process_input_buffer'. (./task3.py
 
-[17]
+[23]
 
-[18]
+[24]
 
-[19]
+[25]
 
-[20])
+[26])
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 
-[21] (./report_7.aux)
+[27] (./report_7.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -1908,46 +1979,47 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
 Package rerunfilecheck Info: File `report_7.out' has not changed.
-(rerunfilecheck)             Checksum: 488940E069D44327F03C95A9B197EC50;2021.
+(rerunfilecheck)             Checksum: EA316A1A472E5B42763DA5059ED54090;2029.
 )
 
 Here is how much of LuaTeX's memory you used:
- 23212 strings out of 476291
- 1458199,1144653 words of node,token memory allocated
- 1691 words of node memory still in use:
+ 23376 strings out of 476291
+ 1458222,1144653 words of node,token memory allocated
+ 3137 words of node memory still in use:
    12 hlist, 2 vlist, 5 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 1 margin_k
-ern, 3 glyph, 458 attribute, 57 glue_spec, 54 attribute_list, 1 write, 15 user_d
-efined nodes
-   avail lists: 1:31,2:198301,3:902,4:35056,5:26009,6:118,7:27610,8:75,9:49395,1
-0:59,11:1608
- 44083 multiletter control sequences out of 65536+600000
- 139 fonts using 121177975 bytes
+ern, 3 glyph, 1120 attribute, 57 glue_spec, 115 attribute_list, 1 write, 15 user
+_defined nodes
+   avail lists: 1:35,2:202598,3:902,4:35644,5:26400,6:118,7:27886,8:80,9:50151,1
+0:59,11:1634
+ 44158 multiletter control sequences out of 65536+600000
+ 141 fonts using 121441671 bytes
  119i,11n,115p,1785b,1894s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono8-regular.otf><c:/tex
 live/2025/texmf-dist/fonts/opentype/public/lm/lmroman5-regular.otf><c:/texlive/2
-025/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/texlive/2025/te
-xmf-dist/fonts/opentype/public/lm/lmroman9-bold.otf><c:/texlive/2025/texmf-dist/
-fonts/opentype/public/lm/lmroman8-bold.otf><c:/texlive/2025/texmf-dist/fonts/ope
-ntype/public/lm/lmsans12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/
-public/lm/lmroman10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/publi
-c/lm/lmsans10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/hara
-noaji/HaranoAjiGothic-Medium.otf><c:/texlive/2025/texmf-dist/fonts/opentype/publ
-ic/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/ha
-ranoaji/HaranoAjiMincho-Regular.otf><c:/texlive/2025/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7
-.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/te
-xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2025/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
-b>
-Output written on report_7.pdf (21 pages, 1320787 bytes).
+025/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf><c:/texlive/2025/te
+xmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/texlive/2025/texmf-di
+st/fonts/opentype/public/lm/lmroman9-bold.otf><c:/texlive/2025/texmf-dist/fonts/
+opentype/public/lm/lmroman8-bold.otf><c:/texlive/2025/texmf-dist/fonts/opentype/
+public/lm/lmsans12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public
+/lm/lmroman10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/l
+msans10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/
+HaranoAjiGothic-Medium.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/
+lmroman12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/haranoaj
+i/HaranoAjiMincho-Regular.otf><c:/texlive/2025/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmbx10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+<c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive
+/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2025/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2025/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texli
+ve/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on report_7.pdf (27 pages, 1799157 bytes).
 
-PDF statistics: 1219 PDF objects out of 1440 (max. 8388607)
- 1110 compressed objects within 12 object streams
- 870 named destinations out of 1000 (max. 131072)
+PDF statistics: 1348 PDF objects out of 1440 (max. 8388607)
+ 1212 compressed objects within 13 object streams
+ 935 named destinations out of 1000 (max. 131072)
  153 words of extra memory for PDF output out of 10000 (max. 100000000)
 

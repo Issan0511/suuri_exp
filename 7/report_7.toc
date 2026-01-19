@@ -1,23 +1,44 @@
 \contentsline {section}{\numberline {1}課題1：拡散方程式の数値解法}{2}{section.1}%
 \contentsline {subsection}{\numberline {1.1}問題設定}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}数値解法}{2}{subsection.1.2}%
-\contentsline {subsubsection}{\numberline {1.2.1}オイラー陽解法}{2}{subsubsection.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.2.2}クランク-ニコルソン法}{2}{subsubsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.3}計算結果}{2}{subsection.1.3}%
-\contentsline {subsubsection}{\numberline {1.3.1}Dirichlet境界条件}{3}{subsubsection.1.3.1}%
-\contentsline {subsubsection}{\numberline {1.3.2}Neumann境界条件}{3}{subsubsection.1.3.2}%
-\contentsline {subsection}{\numberline {1.4}考察}{4}{subsection.1.4}%
-\contentsline {section}{\numberline {2}課題2：Fisher方程式の数値解法}{4}{section.2}%
-\contentsline {subsection}{\numberline {2.1}問題設定}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}数値解法}{5}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}計算結果}{5}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}考察}{5}{subsection.2.4}%
-\contentsline {section}{\numberline {3}課題3：シュレディンガー方程式の数値解法}{5}{section.3}%
-\contentsline {subsection}{\numberline {3.1}問題設定}{5}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}数値解法}{6}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}計算結果}{6}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}考察}{6}{subsection.3.4}%
-\contentsline {section}{\numberline {付録A}ソースコード}{7}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}課題1の実装コード}{7}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}課題2の実装コード}{13}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}課題3の実装コード}{17}{subsection.A.3}%
+\contentsline {subsection}{\numberline {1.2}原理と方法}{2}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}離散化と無次元パラメータ$c$の導出}{2}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}オイラー陽解法}{3}{subsubsection.1.2.2}%
+\contentsline {paragraph}{特徴}{3}{section*.3}%
+\contentsline {subsubsection}{\numberline {1.2.3}クランク–ニコルソン法}{3}{subsubsection.1.2.3}%
+\contentsline {paragraph}{行列表示と三重対角構造}{3}{section*.4}%
+\contentsline {paragraph}{LU分解による解法}{3}{section*.5}%
+\contentsline {paragraph}{特徴}{4}{section*.6}%
+\contentsline {subsubsection}{\numberline {1.2.4}境界条件の扱い}{4}{subsubsection.1.2.4}%
+\contentsline {paragraph}{Dirichlet境界条件}{4}{section*.7}%
+\contentsline {paragraph}{Neumann境界条件}{4}{section*.8}%
+\contentsline {subsection}{\numberline {1.3}計算結果}{4}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Dirichlet境界条件}{4}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Neumann境界条件}{5}{subsubsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.4}考察}{6}{subsection.1.4}%
+\contentsline {section}{\numberline {2}課題2：Fisher方程式の数値解法}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}問題設定}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}数値解法}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}計算結果}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}考察}{8}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}初期条件の数学的意味}{8}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}拡散と反応のバランス}{8}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}数学的導出：進行波解の条件}{8}{subsubsection.2.4.3}%
+\contentsline {paragraph}{導関数の計算}{9}{section*.13}%
+\contentsline {paragraph}{方程式への代入}{9}{section*.14}%
+\contentsline {paragraph}{パラメータの決定}{9}{section*.15}%
+\contentsline {subsubsection}{\numberline {2.4.4}シミュレーション結果との対応}{9}{subsubsection.2.4.4}%
+\contentsline {section}{\numberline {3}課題3：シュレディンガー方程式の数値解法}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}問題設定}{10}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}数値解法}{10}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}計算結果}{10}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}考察}{11}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}数値解から解析解の推測}{11}{subsubsection.3.4.1}%
+\contentsline {paragraph}{ガウス分布の仮定}{12}{section*.17}%
+\contentsline {paragraph}{幅の推測}{12}{section*.18}%
+\contentsline {paragraph}{推測される解析解}{12}{section*.19}%
+\contentsline {paragraph}{理論値との比較}{12}{section*.20}%
+\contentsline {paragraph}{初期条件との整合性}{12}{section*.21}%
+\contentsline {section}{\numberline {付録A}ソースコード}{13}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}課題1の実装コード}{13}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}課題2の実装コード}{19}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}課題3の実装コード}{23}{subsection.A.3}%

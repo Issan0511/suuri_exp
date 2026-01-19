@@ -3,7 +3,7 @@
 \begin{equation}
   i\hbar\frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2 \psi}{\partial x^2} + V(x)\psi
 \end{equation}
-を、調和振動子ポテンシャル $V(x) = \frac{1}{2}kx^2$ のもとで解く。$\hbar = m = k = 1$ とし、$\psi = R + iI$（$R$, $I$は実数）と分解して計算を行った。
+を、調和振動子ポテンシャル $V(x) = \frac{1}{2}kx^2$ のもとで解く。$\hbar = m = k = 1$ とし、$\psi = R + iI$（$R$, $I$は実数）と分解して計算を行った。\cite{exp2025}
 
 初期条件は
 \begin{equation}
@@ -23,6 +23,8 @@
 計算パラメータは $N=400$, $\Delta x = 0.05$, $\Delta t = 0.001$ とした。
 
 図\ref{fig:schrodinger}に確率密度 $P = R^2 + I^2$ の時間発展を示す。調和振動子ポテンシャル中で波束が振動する様子が観察できる。振動周期は $T = 2\pi$（$\omega = 1$）であり、$t = 0, \pi, 2\pi$ では波束が元の位置に戻っている。
+確率密度最大値の時間発展を見ると、周期的に変動しているものの、$P$が小さい値ではなだらかで、大きい値では急峻に変化していることから、波形が三角関数の逆数のような形状で振動していると考え、確率密度最大値の逆数の時間発展も示した結果確かに調和的に振動していることがわかる。\\
+また確率密度最大値の最大値は$1.130446$,最小値は$0.282716$あった。
 
 \begin{figure}[H]
   \centering
@@ -39,6 +41,10 @@
     \caption{確率密度最大値の時間発展}
   \end{subfigure}
   \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{graphs_schrodinger/P_max_inv_evolution.png}
+    \caption{確率密度最大値の逆数の時間発展}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=\textwidth]{graphs_schrodinger/probability_density_contour.png}
     \caption{確率密度の等高線図}
   \end{subfigure}
@@ -47,6 +53,68 @@
 \end{figure}
 
 \subsection{考察}
+
 調和振動子ポテンシャル中の波束は、古典的な調和振動子と同様に振動運動を行う。初期位置 $x_0 = 5$ から出発した波束は、$t = \pi/2$ で原点を通過し、$t = \pi$ で $x = -5$ に達する。その後、$t = 3\pi/2$ で再び原点を通過し、$t = 2\pi$ で元の位置に戻る。
 
 確率密度の総和（規格化）は計算を通じてほぼ1に保たれており、使用した差分スキームが確率保存の性質を持つことが確認できた。確率密度の最大値は振動中に変化するが、これは波束の拡がりが振動中に変化するためである。
+
+\subsubsection{数値解から解析解の推測}
+
+得られた数値解とグラフから解析解を推測する。グラフから以下の2点が観察できる：
+\begin{enumerate}
+  \item $P(x,t)$ はガウス形を保つ
+  \item ピーク位置と $1/P_{\max}(t)$ が調和振動し、$1/P_{\max}$ の方が2倍の振動数を持つ
+\end{enumerate}
+
+\paragraph{ガウス分布の仮定}
+確率密度がガウス形を保つなら、
+\begin{equation}
+  P(x,t) = \frac{1}{\sqrt{2\pi}\sigma_x(t)} \exp\left(-\frac{(x-\mu(t))^2}{2\sigma_x^2(t)}\right)
+\end{equation}
+と書ける。このときピーク値は
+\begin{equation}
+  P_{\max}(t) = \frac{1}{\sqrt{2\pi}\sigma_x(t)} \quad \Rightarrow \quad \sigma_x(t) = \frac{1}{\sqrt{2\pi}P_{\max}(t)}
+\end{equation}
+となり、$P_{\max}$ から幅 $\sigma_x(t)$ が求まる。
+
+\paragraph{幅の推測}
+数値解から得られた $P_{\max}$ の最大値 $1.130446$ と最小値 $0.282716$ を用いて、$\sigma_x^2$ の極値を計算する：
+\begin{align}
+  \sigma_x^2 \text{の最小値} &= \frac{1}{2\pi \times (1.130446)^2} \approx \frac{1}{8} \quad (t = 0, \pi, \ldots) \\
+  \sigma_x^2 \text{の最大値} &= \frac{1}{2\pi \times (0.282716)^2} \approx 2 \quad (t = \pi/2, 3\pi/2, \ldots)
+\end{align}
+グラフから $1/P_{\max}$ が2倍周波数で調和振動していることから、$\sigma_x^2(t)$ も調和振動すると考えられる。$\sigma_x^2(t) = A\cos^2 t + B\sin^2 t$ の形を仮定すると、$t=0$ で最小値 $A = 1/8$、$t=\pi/2$ で最大値 $B = 2$ となるので、
+\begin{equation}
+  \sigma_x^2(t) = \frac{1}{8}\cos^2 t + 2\sin^2 t = \frac{\cos^2 t + 16\sin^2 t}{8}
+\end{equation}
+と推測できる。また、ピーク位置は $\mu(t) = 5\cos t$ と振動している。
+
+\paragraph{推測される解析解}
+以上をガウス形に代入すると、
+\begin{equation}
+  \boxed{P(x,t) = \frac{2}{\sqrt{\pi}\sqrt{\cos^2 t + 16\sin^2 t}} \exp\left[-\frac{4(x - 5\cos t)^2}{\cos^2 t + 16\sin^2 t}\right]}
+\end{equation}
+が得られる。
+
+\paragraph{理論値との比較}
+この解析解から、$P_{\max}$ の理論的な極値は
+\begin{equation}
+  P_{\max}^{\text{(th)}} = \frac{2}{\sqrt{\pi}} \approx 1.12838 \quad (t = n\pi), \qquad
+  P_{\min}^{\text{(th)}} = \frac{1}{2\sqrt{\pi}} \approx 0.282095 \quad (t = \tfrac{\pi}{2} + n\pi)
+\end{equation}
+となる。数値解で得られた最大値 $1.130446$ と最小値 $0.282716$ は、理論値と約0.2\%の誤差で整合しており、推測した解析解の妥当性が確認できた。
+
+\paragraph{初期条件との整合性}
+推測した解析解に $t = 0$ を代入すると、$\cos 0 = 1$, $\sin 0 = 0$ より
+\begin{equation}
+  P(x,0) = \frac{2}{\sqrt{\pi}} \exp\left[-4(x - 5)^2\right]
+\end{equation}
+となる。一方、与えられた初期条件は
+\begin{equation}
+  R_j^0 = \frac{\sqrt{2}}{\pi^{1/4}} \exp(-2(x_j - 5)^2), \quad I_j^0 = 0
+\end{equation}
+であるから、確率密度は
+\begin{equation}
+  P(x,0) = |R_j^0|^2 = \frac{2}{\sqrt{\pi}} \exp(-4(x - 5)^2)
+\end{equation}
+となり、推測した解析解と完全に一致する。これにより、解析解の推測が正しいことが確認できた。
